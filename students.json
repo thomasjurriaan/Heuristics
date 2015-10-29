@@ -1,0 +1,5730 @@
+[
+ {
+  "lastName": "Achternaam", 
+  "nr": "Stud.Nr.", 
+  "firstName": "Voornaam", 
+  "courses": [
+   "Stud.Nr.", 
+   "Vak1", 
+   "Vak2", 
+   "Vak3", 
+   "Vak4", 
+   "Vak5"
+  ]
+ }, 
+ {
+  "lastName": "Abbing", 
+  "nr": "52311353", 
+  "firstName": "Yanick", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Data Mining", 
+   "Lineaire Algebra", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Adam", 
+  "nr": "76903244", 
+  "firstName": "Roelof", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Agema", 
+  "nr": "6709529", 
+  "firstName": "Willibrordus", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Anker", 
+  "nr": "70015932", 
+  "firstName": "Servaas", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Ankone", 
+  "nr": "82066165", 
+  "firstName": "Wissal", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Apeldoorn", 
+  "nr": "1886996", 
+  "firstName": "Herman", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Appel", 
+  "nr": "13534377", 
+  "firstName": "Evi", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Appelhof", 
+  "nr": "54395877", 
+  "firstName": "Wilmer", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Arendse", 
+  "nr": "53512831", 
+  "firstName": "Benjamin", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Aslan", 
+  "nr": "56348773", 
+  "firstName": "Diny", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Autar", 
+  "nr": "13218321", 
+  "firstName": "Chesney", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Avci", 
+  "nr": "13284244", 
+  "firstName": "Martin", 
+  "courses": [
+   "Compilerbouw", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Baetsen", 
+  "nr": "36748818", 
+  "firstName": "Gidon", 
+  "courses": [
+   "Informatie- en organsatieontwerp", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Bakkum", 
+  "nr": "50184318", 
+  "firstName": "Rhona", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Bart", 
+  "nr": "64296965", 
+  "firstName": "Wafa", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Baselmans", 
+  "nr": "42778953", 
+  "firstName": "Sharan", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw", 
+   "Lineaire Algebra", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Bastings", 
+  "nr": "82689818", 
+  "firstName": "Edin", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Architectuur en computerorganisatie", 
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Baudoin", 
+  "nr": "81385263", 
+  "firstName": "Mattijs", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Compilerbouw", 
+   "Interactie-ontwerp", 
+   "Lineaire Algebra", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Bauer", 
+  "nr": "51741554", 
+  "firstName": "Ravi", 
+  "courses": [
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Becht", 
+  "nr": "63939720", 
+  "firstName": "Wiert", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Bekkema", 
+  "nr": "70844780", 
+  "firstName": "Kyllian", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Netwerken en systeembeveiliging", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Bekker", 
+  "nr": "97135019", 
+  "firstName": "Marrie", 
+  "courses": [
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Netwerken en systeembeveiliging", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Berentsen", 
+  "nr": "78136904", 
+  "firstName": "Ang\u00e8le", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Algoritmen en complexiteit", 
+   "Kansrekenen 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Bergmans", 
+  "nr": "8522855", 
+  "firstName": "Emil", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Berkers", 
+  "nr": "27064249", 
+  "firstName": "Tian", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Calculus 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Berrevoets", 
+  "nr": "82872148", 
+  "firstName": "Annique", 
+  "courses": [
+   "Netwerken en systeembeveiliging", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Besemer", 
+  "nr": "93023961", 
+  "firstName": "Theadora", 
+  "courses": [
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "Beulen", 
+  "nr": "22871048", 
+  "firstName": "Abdallah", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Autonomous Agents 2", 
+   "Heuristieken 1", 
+   "Reflectie op de digitale cultuur", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Beunen", 
+  "nr": "96554914", 
+  "firstName": "Eltjo", 
+  "courses": [
+   "Reflectie op de digitale cultuur", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Bhaggoe", 
+  "nr": "41585485", 
+  "firstName": "Saba", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Bischoff", 
+  "nr": "46052388", 
+  "firstName": "Ella", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Blijleven", 
+  "nr": "34691309", 
+  "firstName": "Perry", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Blik", 
+  "nr": "54074680", 
+  "firstName": "Thyrza", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Blikman", 
+  "nr": "81200278", 
+  "firstName": "Jarik", 
+  "courses": [
+   "Bioinformatica", 
+   "Data Mining", 
+   "Heuristieken 2", 
+   "Interactie-ontwerp", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Blikman", 
+  "nr": "18266644", 
+  "firstName": "Monika", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Informatie- en organsatieontwerp", 
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Bloemert", 
+  "nr": "1075391", 
+  "firstName": "Marco", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Bloemsma", 
+  "nr": "44151631", 
+  "firstName": "Anjana", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Blomsma", 
+  "nr": "69459473", 
+  "firstName": "Guilliano", 
+  "courses": [
+   "Project Genetic Algorithms", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Boateng", 
+  "nr": "40791377", 
+  "firstName": "Lenne", 
+  "courses": [
+   "Compilerbouw", 
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Boekema", 
+  "nr": "5368702", 
+  "firstName": "Amadou", 
+  "courses": [
+   "Compilerbouw", 
+   "Interactie-ontwerp", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Bol", 
+  "nr": "88737765", 
+  "firstName": "Armin", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Bolding", 
+  "nr": "27916487", 
+  "firstName": "Rayn", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Bontenbal", 
+  "nr": "20239127", 
+  "firstName": "Jeremey", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Bood", 
+  "nr": "28943658", 
+  "firstName": "Tariq", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Boogert", 
+  "nr": "70939718", 
+  "firstName": "Hiba", 
+  "courses": [
+   "Calculus 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Borg", 
+  "nr": "73893840", 
+  "firstName": "Kely", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Borsboom", 
+  "nr": "51415617", 
+  "firstName": "Ken", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Boshuis", 
+  "nr": "19540225", 
+  "firstName": "Narin", 
+  "courses": [
+   "Algoritmen en complexiteit"
+  ]
+ }, 
+ {
+  "lastName": "Bosman", 
+  "nr": "93361408", 
+  "firstName": "Rudolph", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Boutkan", 
+  "nr": "59220392", 
+  "firstName": "Jael", 
+  "courses": [
+   "Calculus 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Braamhaar", 
+  "nr": "82233873", 
+  "firstName": "Resi", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Brans", 
+  "nr": "36785409", 
+  "firstName": "Hanne", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Reflectie op de digitale cultuur", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Brasser", 
+  "nr": "77831658", 
+  "firstName": "Cyrina", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Bioinformatica", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Brink", 
+  "nr": "45556081", 
+  "firstName": "Femia", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Brink", 
+  "nr": "5615125", 
+  "firstName": "Renze", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Brinks", 
+  "nr": "44940353", 
+  "firstName": "Nyncke", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Brinksma", 
+  "nr": "49922855", 
+  "firstName": "Wulfert", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Broeks", 
+  "nr": "56815156", 
+  "firstName": "Ilyass", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Bioinformatica", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Broer", 
+  "nr": "14671406", 
+  "firstName": "Ethan", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Kansrekenen 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Broerse", 
+  "nr": "62872965", 
+  "firstName": "Tarah", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Bronsema", 
+  "nr": "23257088", 
+  "firstName": "Devlin", 
+  "courses": [
+   "Databases 2", 
+   "Informatie- en organsatieontwerp", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Bruijnes", 
+  "nr": "91196968", 
+  "firstName": "Sayfeddine", 
+  "courses": [
+   "Data Mining", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Brunsveld", 
+  "nr": "5517869", 
+  "firstName": "Virginie", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Lineaire Algebra", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Brusse", 
+  "nr": "62736669", 
+  "firstName": "Angus", 
+  "courses": [
+   "Databases 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Budel", 
+  "nr": "87602030", 
+  "firstName": "Allan", 
+  "courses": [
+   "Calculus 2", 
+   "Heuristieken 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Buining", 
+  "nr": "86988337", 
+  "firstName": "Wytske", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Compilerbouw", 
+   "Databases 2", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Buizer", 
+  "nr": "77636749", 
+  "firstName": "Rika", 
+  "courses": [
+   "Informatie- en organsatieontwerp", 
+   "Kansrekenen 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Buter", 
+  "nr": "86807027", 
+  "firstName": "Vivianne", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Calculus 2", 
+   "Heuristieken 1", 
+   "Programmeren in Java 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Buth", 
+  "nr": "29718115", 
+  "firstName": "Abd\u00fcl", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Buurma", 
+  "nr": "54569540", 
+  "firstName": "Donn\u00e9", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Caris", 
+  "nr": "12077419", 
+  "firstName": "Lucienne", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Compilerbouw", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "\u00c7etin", 
+  "nr": "22826928", 
+  "firstName": "Samyra", 
+  "courses": [
+   "Bioinformatica", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Charit\u00e9", 
+  "nr": "60661905", 
+  "firstName": "Liana", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Christiaens", 
+  "nr": "96054456", 
+  "firstName": "Yde", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Databases 2", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Claassen", 
+  "nr": "13718298", 
+  "firstName": "Hailey", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Reflectie op de digitale cultuur", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Cleven", 
+  "nr": "52304977", 
+  "firstName": "Seyit", 
+  "courses": [
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Coenen", 
+  "nr": "7957843", 
+  "firstName": "Jorike", 
+  "courses": [
+   "Compilerbouw", 
+   "Netwerken en systeembeveiliging", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Cooijmans", 
+  "nr": "33760909", 
+  "firstName": "Laurentia", 
+  "courses": [
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Corten", 
+  "nr": "15911353", 
+  "firstName": "Mitzi", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Corvers", 
+  "nr": "24891081", 
+  "firstName": "Jildou", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Cramer", 
+  "nr": "5590289", 
+  "firstName": "Abdelouahid", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Cramer", 
+  "nr": "27582862", 
+  "firstName": "Hananja", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Crombach", 
+  "nr": "65003379", 
+  "firstName": "Jonas", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Curfs", 
+  "nr": "27370083", 
+  "firstName": "G\u00fcven", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Curvers", 
+  "nr": "17496687", 
+  "firstName": "Everhard", 
+  "courses": [
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Daams", 
+  "nr": "15249775", 
+  "firstName": "Am\u00e9lie", 
+  "courses": [
+   "Heuristieken 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Dams", 
+  "nr": "66701209", 
+  "firstName": "Gradus", 
+  "courses": [
+   "Compilerbouw", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Dane", 
+  "nr": "41644639", 
+  "firstName": "Goos", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Project Genetic Algorithms", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "de Boon", 
+  "nr": "46701583", 
+  "firstName": "Manu\u00ebl", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Calculus 2", 
+   "Machine Learning", 
+   "Programmeren in Java 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "de Hoogh", 
+  "nr": "58565406", 
+  "firstName": "Albertien", 
+  "courses": [
+   "Software engineering", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "de Jongste", 
+  "nr": "19214659", 
+  "firstName": "Kathryn", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "de Kanter", 
+  "nr": "96082155", 
+  "firstName": "Anes", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "de Kreij", 
+  "nr": "33946407", 
+  "firstName": "Krijna", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "de Kuijer", 
+  "nr": "63573738", 
+  "firstName": "Farhad", 
+  "courses": [
+   "Netwerken en systeembeveiliging", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "de Leest", 
+  "nr": "66433883", 
+  "firstName": "Janniek", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "de Leest", 
+  "nr": "90743504", 
+  "firstName": "Wieke", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "de Looff", 
+  "nr": "3727435", 
+  "firstName": "Yana", 
+  "courses": [
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "de Olde", 
+  "nr": "16011419", 
+  "firstName": "Alexandre", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "de Olde", 
+  "nr": "3678531", 
+  "firstName": "M\u00fcsl\u00fcm", 
+  "courses": [
+   "Calculus 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "de Smit", 
+  "nr": "82968410", 
+  "firstName": "Ziggy", 
+  "courses": [
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "de Snoo", 
+  "nr": "51673172", 
+  "firstName": "\u00c7a?la", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "de Vreeze", 
+  "nr": "64393888", 
+  "firstName": "Marije", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "de Zoete", 
+  "nr": "39919665", 
+  "firstName": "Linne", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Deniz", 
+  "nr": "93566383", 
+  "firstName": "Quido", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Diallo", 
+  "nr": "50143947", 
+  "firstName": "Brigitta", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Collectieve Intelligentie", 
+   "Compilerbouw practicum", 
+   "Data Mining", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Dibbets", 
+  "nr": "670011", 
+  "firstName": "Boy", 
+  "courses": [
+   "Databases 2", 
+   "Heuristieken 2", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Dielen", 
+  "nr": "65978354", 
+  "firstName": "Marjory", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Dieperink", 
+  "nr": "76487754", 
+  "firstName": "Pietro", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Dieters", 
+  "nr": "57467488", 
+  "firstName": "Andr\u00e9", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Databases 2", 
+   "Heuristieken 1", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Doedens", 
+  "nr": "47932106", 
+  "firstName": "Kelly", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Doeve", 
+  "nr": "37419523", 
+  "firstName": "Winfried", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Donselaar", 
+  "nr": "19958553", 
+  "firstName": "Oumaima", 
+  "courses": [
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Doppenberg", 
+  "nr": "53267490", 
+  "firstName": "Maruschka", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Dr\u00f6ge", 
+  "nr": "40911986", 
+  "firstName": "Siri", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Droog", 
+  "nr": "3168419", 
+  "firstName": "S?la", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Bioinformatica", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Droste", 
+  "nr": "26260141", 
+  "firstName": "Ko", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Calculus 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Duiveman", 
+  "nr": "68315599", 
+  "firstName": "Doede", 
+  "courses": [
+   "Compilerbouw", 
+   "Informatie- en organsatieontwerp", 
+   "Moderne Databases", 
+   "Technology for games", 
+   "Zoeken", 
+   " sturen en bewegen\n"
+  ]
+ }, 
+ {
+  "lastName": "Dumoulin", 
+  "nr": "78822885", 
+  "firstName": "Rintje", 
+  "courses": [
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Eeltink", 
+  "nr": "75599734", 
+  "firstName": "Brecht", 
+  "courses": [
+   "Compilerbouw", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Eggens", 
+  "nr": "4529208", 
+  "firstName": "Wissal", 
+  "courses": [
+   "Databases 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Eggermont", 
+  "nr": "31103066", 
+  "firstName": "Catharinus", 
+  "courses": [
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Eisinga", 
+  "nr": "59075181", 
+  "firstName": "Mattie", 
+  "courses": [
+   "Heuristieken 1", 
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Eissens", 
+  "nr": "59544049", 
+  "firstName": "Ludovicus", 
+  "courses": [
+   "Bioinformatica", 
+   "Kansrekenen 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Elberse", 
+  "nr": "59397895", 
+  "firstName": "Pearl", 
+  "courses": [
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Elissen", 
+  "nr": "33930505", 
+  "firstName": "Raven", 
+  "courses": [
+   "Bioinformatica", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Elschot", 
+  "nr": "79033175", 
+  "firstName": "Bauke", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Elschot", 
+  "nr": "31633723", 
+  "firstName": "Geerten", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Ensink", 
+  "nr": "7492204", 
+  "firstName": "Dinah", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Essink", 
+  "nr": "1181560", 
+  "firstName": "Hande", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Essink", 
+  "nr": "54772132", 
+  "firstName": "Jaro", 
+  "courses": [
+   "Compilerbouw", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Ester", 
+  "nr": "74131924", 
+  "firstName": "Herwin", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Bioinformatica", 
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "Fekkes", 
+  "nr": "27298319", 
+  "firstName": "Jurrian", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Autonomous Agents 2", 
+   "Calculus 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Fennis", 
+  "nr": "66621166", 
+  "firstName": "Nurcan", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Fleming", 
+  "nr": "65852230", 
+  "firstName": "Antonius", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Florijn", 
+  "nr": "14941752", 
+  "firstName": "Belle", 
+  "courses": [
+   "Heuristieken 1", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Fokkens", 
+  "nr": "85335143", 
+  "firstName": "Diemer", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Moderne Databases", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Freriks", 
+  "nr": "37830626", 
+  "firstName": "Ynze", 
+  "courses": [
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Geboers", 
+  "nr": "45414528", 
+  "firstName": "Nordin", 
+  "courses": [
+   "Data Mining", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Geelen", 
+  "nr": "93041523", 
+  "firstName": "Bahattin", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Geers", 
+  "nr": "87758823", 
+  "firstName": "Sohrab", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Lineaire Algebra", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Geluk", 
+  "nr": "67073567", 
+  "firstName": "Patric", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Gerritse", 
+  "nr": "18477924", 
+  "firstName": "Eddy", 
+  "courses": [
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Gielissen", 
+  "nr": "11915563", 
+  "firstName": "Deacon", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Compilerbouw", 
+   "Kansrekenen 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Giesen", 
+  "nr": "14637758", 
+  "firstName": "Richenel", 
+  "courses": [
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Gijbels", 
+  "nr": "48308205", 
+  "firstName": "Abdelkader", 
+  "courses": [
+   "Compilerbouw", 
+   "Lineaire Algebra", 
+   "Project Numerical Recipes", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Gilsing", 
+  "nr": "49219163", 
+  "firstName": "Marco", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "G\u00f6k", 
+  "nr": "78243495", 
+  "firstName": "Maritte", 
+  "courses": [
+   "Heuristieken 2", 
+   "Moderne Databases", 
+   "Software engineering", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Goor", 
+  "nr": "19337738", 
+  "firstName": "Rivelino", 
+  "courses": [
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "Grift", 
+  "nr": "70113753", 
+  "firstName": "Umar", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Groote", 
+  "nr": "4546613", 
+  "firstName": "Rijkje", 
+  "courses": [
+   "Calculus 2", 
+   "Interactie-ontwerp", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Grooteman", 
+  "nr": "7106649", 
+  "firstName": "\u00dcnal", 
+  "courses": [
+   "Heuristieken 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Grootenboer", 
+  "nr": "72895450", 
+  "firstName": "Yalda", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Compilerbouw", 
+   "Project Numerical Recipes", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Haalboom", 
+  "nr": "13132925", 
+  "firstName": "Faruk", 
+  "courses": [
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Haanstra", 
+  "nr": "53139134", 
+  "firstName": "Jetty", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Haarman", 
+  "nr": "77264363", 
+  "firstName": "Gabe", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Haas", 
+  "nr": "58332004", 
+  "firstName": "Eylem", 
+  "courses": [
+   "Databases 2", 
+   "Informatie- en organsatieontwerp", 
+   "Kansrekenen 2", 
+   "Moderne Databases", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Hamelink", 
+  "nr": "51593625", 
+  "firstName": "Virgill", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Hamers", 
+  "nr": "14383795", 
+  "firstName": "Judi", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Hamhuis", 
+  "nr": "51472074", 
+  "firstName": "Olle", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Hamstra", 
+  "nr": "71839156", 
+  "firstName": "Sahar", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Heuristieken 1", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Hartevelt", 
+  "nr": "20095994", 
+  "firstName": "Ervin", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Heijman", 
+  "nr": "14398123", 
+  "firstName": "Berdina", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Heijnen", 
+  "nr": "6939933", 
+  "firstName": "Guus", 
+  "courses": [
+   "Calculus 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Heikoop", 
+  "nr": "1048485", 
+  "firstName": "Rosali", 
+  "courses": [
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Heller", 
+  "nr": "99453514", 
+  "firstName": "Mahmud", 
+  "courses": [
+   "Data Mining", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Hijdra", 
+  "nr": "38179241", 
+  "firstName": "Sergio", 
+  "courses": [
+   "Calculus 2", 
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Hilhorst", 
+  "nr": "36508571", 
+  "firstName": "Bo", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Hoeksema", 
+  "nr": "49683101", 
+  "firstName": "Dana", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Compilerbouw", 
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Hoenderdos", 
+  "nr": "58480929", 
+  "firstName": "Sverre", 
+  "courses": [
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Hofman", 
+  "nr": "49908313", 
+  "firstName": "Anne-Jet", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Holstein", 
+  "nr": "535689", 
+  "firstName": "Johanne", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Holt", 
+  "nr": "5526560", 
+  "firstName": "Nesrin", 
+  "courses": [
+   "Databases 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Holtkamp", 
+  "nr": "34900967", 
+  "firstName": "Florus", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Hoogerbrugge", 
+  "nr": "43460038", 
+  "firstName": "Christal", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Software engineering", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Hooijmaijers", 
+  "nr": "62356458", 
+  "firstName": "Esm\u00e9e", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Project Numerical Recipes", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Hooiveld", 
+  "nr": "87314964", 
+  "firstName": "Michal", 
+  "courses": [
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "Hoornstra", 
+  "nr": "10149535", 
+  "firstName": "Catherine", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Calculus 2", 
+   "Lineaire Algebra", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Horstink", 
+  "nr": "2317551", 
+  "firstName": "Tea", 
+  "courses": [
+   "Compilerbouw", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Hospers", 
+  "nr": "31416266", 
+  "firstName": "Wichard", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Huibers", 
+  "nr": "41790793", 
+  "firstName": "Kyra", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Hunting", 
+  "nr": "5298748", 
+  "firstName": "Paulette", 
+  "courses": [
+   "Bioinformatica", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Hup", 
+  "nr": "87210640", 
+  "firstName": "Ytje", 
+  "courses": [
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "IJkema", 
+  "nr": "77376714", 
+  "firstName": "Fr\u00e9d\u00e9ric", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Moderne Databases", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Imthorn", 
+  "nr": "88597745", 
+  "firstName": "Marnik", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Jackson", 
+  "nr": "45660925", 
+  "firstName": "Geartsje", 
+  "courses": [
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Jacob", 
+  "nr": "91139627", 
+  "firstName": "Rino", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Jagersma", 
+  "nr": "73823548", 
+  "firstName": "Faya", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Jak", 
+  "nr": "54540997", 
+  "firstName": "Paulo", 
+  "courses": [
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Jama", 
+  "nr": "28359697", 
+  "firstName": "Owen", 
+  "courses": [
+   "Bioinformatica", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Janga", 
+  "nr": "84524083", 
+  "firstName": "Le", 
+  "courses": [
+   "Compilerbouw", 
+   "Heuristieken 2", 
+   "Kansrekenen 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Jankie", 
+  "nr": "66122625", 
+  "firstName": "Kyan", 
+  "courses": [
+   "Data Mining", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Jansema", 
+  "nr": "21192048", 
+  "firstName": "Nikolas", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Jongbloed", 
+  "nr": "94467156", 
+  "firstName": "Tamar", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Machine Learning", 
+   "Programmeren in Java 2", 
+   "Project Genetic Algorithms", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Jongejan", 
+  "nr": "15902055", 
+  "firstName": "Jenske", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Jonkergouw", 
+  "nr": "92496780", 
+  "firstName": "Aradhna", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Joris", 
+  "nr": "75585647", 
+  "firstName": "Gerritjan", 
+  "courses": [
+   "Calculus 2", 
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Joseph", 
+  "nr": "80709893", 
+  "firstName": "Ma\u00efssae", 
+  "courses": [
+   "Lineaire Algebra", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Kalpoe", 
+  "nr": "10702778", 
+  "firstName": "Miko", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Kalshoven", 
+  "nr": "38499176", 
+  "firstName": "Chrystel", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Kamp", 
+  "nr": "6249823", 
+  "firstName": "Yaro", 
+  "courses": [
+   "Technology for games", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Kampers", 
+  "nr": "92778619", 
+  "firstName": "Riana", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Kant", 
+  "nr": "75005528", 
+  "firstName": "Juli\u00ebtte", 
+  "courses": [
+   "Databases 2", 
+   "Lineaire Algebra", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Karim", 
+  "nr": "3685034", 
+  "firstName": "Esm\u00e9", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Machine Learning", 
+   "Project Numerical Recipes", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Keijser", 
+  "nr": "69634191", 
+  "firstName": "Devon", 
+  "courses": [
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Kemps", 
+  "nr": "58083680", 
+  "firstName": "Enya", 
+  "courses": [
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Kentie", 
+  "nr": "33776961", 
+  "firstName": "Ceciel", 
+  "courses": [
+   "Moderne Databases", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Kersten", 
+  "nr": "11459236", 
+  "firstName": "Thys", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Kesteloo", 
+  "nr": "34773179", 
+  "firstName": "Kimmy", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Keuken", 
+  "nr": "1766560", 
+  "firstName": "Lysbeth", 
+  "courses": [
+   "Compilerbouw", 
+   "Moderne Databases", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Kienhuis", 
+  "nr": "99272880", 
+  "firstName": "Rahim", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Kivits", 
+  "nr": "59887191", 
+  "firstName": "Sezen", 
+  "courses": [
+   "Netwerken en systeembeveiliging", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Klarenbeek", 
+  "nr": "62701040", 
+  "firstName": "Ylse", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Informatie- en organsatieontwerp", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Klop", 
+  "nr": "58040377", 
+  "firstName": "Adil", 
+  "courses": [
+   "Calculus 2", 
+   "Heuristieken 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Knibbe", 
+  "nr": "16097870", 
+  "firstName": "Danique", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Autonomous Agents 2", 
+   "Calculus 2", 
+   "Heuristieken 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Knuiman", 
+  "nr": "43689934", 
+  "firstName": "George", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Koelemij", 
+  "nr": "10792879", 
+  "firstName": "Evelyn", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Kol", 
+  "nr": "43680781", 
+  "firstName": "Djura", 
+  "courses": [
+   "Bioinformatica", 
+   "Moderne Databases", 
+   "Reflectie op de digitale cultuur", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Koning", 
+  "nr": "48601268", 
+  "firstName": "Matz", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Kooijmans", 
+  "nr": "75997788", 
+  "firstName": "Nuriye", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Analysemethoden en -technieken", 
+   "Calculus 2", 
+   "Heuristieken 1", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Kooyman", 
+  "nr": "88855695", 
+  "firstName": "Thijn", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Koppers", 
+  "nr": "81155296", 
+  "firstName": "Yee", 
+  "courses": [
+   "Calculus 2", 
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Kops", 
+  "nr": "47260040", 
+  "firstName": "Eveline", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Korbee", 
+  "nr": "86291592", 
+  "firstName": "Titia", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Korpershoek", 
+  "nr": "27241113", 
+  "firstName": "Djuri", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Korte", 
+  "nr": "13798030", 
+  "firstName": "Gineke", 
+  "courses": [
+   "Architectuur en computerorganisatie"
+  ]
+ }, 
+ {
+  "lastName": "Kortlever", 
+  "nr": "51542218", 
+  "firstName": "Sharen", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Databases 2", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Kost", 
+  "nr": "87900893", 
+  "firstName": "Remon", 
+  "courses": [
+   "Calculus 2", 
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "Koudijs", 
+  "nr": "96118484", 
+  "firstName": "Cherissa", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Krabbe", 
+  "nr": "21677389", 
+  "firstName": "Fynn", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Kreijkes", 
+  "nr": "34588570", 
+  "firstName": "Nikie", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Krikke", 
+  "nr": "1695839", 
+  "firstName": "Do?ukan", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Kroonen", 
+  "nr": "247918", 
+  "firstName": "Corry", 
+  "courses": [
+   "Bioinformatica", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Kropman", 
+  "nr": "38329455", 
+  "firstName": "Ngoc", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Kros", 
+  "nr": "22699561", 
+  "firstName": "Vincent", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Kuijpers", 
+  "nr": "54026378", 
+  "firstName": "Resul", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Bioinformatica", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Kwantes", 
+  "nr": "97417002", 
+  "firstName": "Machteld", 
+  "courses": [
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Kwee", 
+  "nr": "79366078", 
+  "firstName": "Esperanza", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Lagendijk", 
+  "nr": "78735049", 
+  "firstName": "Nadeem", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Laman", 
+  "nr": "14303208", 
+  "firstName": "Christianus", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw practicum", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Lamme", 
+  "nr": "31897288", 
+  "firstName": "Mathyn", 
+  "courses": [
+   "Heuristieken 1", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Lantinga", 
+  "nr": "23547619", 
+  "firstName": "Buck", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Collectieve Intelligentie", 
+   "Interactie-ontwerp", 
+   "Technology for games", 
+   "Zoeken", 
+   " sturen en bewegen\n"
+  ]
+ }, 
+ {
+  "lastName": "Lathouwers", 
+  "nr": "11068043", 
+  "firstName": "Hanan", 
+  "courses": [
+   "Bioinformatica", 
+   "Compilerbouw practicum", 
+   "Project Numerical Recipes", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Lathouwers", 
+  "nr": "29526540", 
+  "firstName": "Mouna", 
+  "courses": [
+   "Bioinformatica", 
+   "Databases 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Lau", 
+  "nr": "79937969", 
+  "firstName": "Yvan", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Laurijssen", 
+  "nr": "62613937", 
+  "firstName": "Seyed", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Leemburg", 
+  "nr": "47477884", 
+  "firstName": "Mellisa", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Calculus 2", 
+   "Databases 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Leidelmeijer", 
+  "nr": "36527838", 
+  "firstName": "Rein", 
+  "courses": [
+   "Lineaire Algebra", 
+   "Moderne Databases", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Leijen", 
+  "nr": "3233378", 
+  "firstName": "Bj\u00f6rn", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Leijenaar", 
+  "nr": "25994016", 
+  "firstName": "Jory", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Lemaire", 
+  "nr": "44868097", 
+  "firstName": "Haroun", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Lems", 
+  "nr": "77960666", 
+  "firstName": "Nad\u00e8ge", 
+  "courses": [
+   "Databases 2", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Lentz", 
+  "nr": "40434933", 
+  "firstName": "Sanne", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Databases 2", 
+   "Technology for games", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Levels", 
+  "nr": "13911001", 
+  "firstName": "Federico", 
+  "courses": [
+   "Compilerbouw", 
+   "Compilerbouw practicum", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Liebregts", 
+  "nr": "88596522", 
+  "firstName": "Chi", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Lima", 
+  "nr": "74361881", 
+  "firstName": "Maurice", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Lindhout", 
+  "nr": "1696500", 
+  "firstName": "Hetty", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Heuristieken 1", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Loeffen", 
+  "nr": "16912993", 
+  "firstName": "Dingenus", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Lohuis", 
+  "nr": "76802764", 
+  "firstName": "Wannes", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Looij", 
+  "nr": "56872729", 
+  "firstName": "Malcolm", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Lopez", 
+  "nr": "21095566", 
+  "firstName": "Fredrika", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Lugthart", 
+  "nr": "77306636", 
+  "firstName": "Sherwin", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Luten", 
+  "nr": "63634350", 
+  "firstName": "Yi", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw practicum", 
+   "Heuristieken 2", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Luth", 
+  "nr": "97838175", 
+  "firstName": "Math\u00e9", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Machielsen", 
+  "nr": "51186803", 
+  "firstName": "Pim", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Majoor", 
+  "nr": "58522654", 
+  "firstName": "Val\u00e9ry", 
+  "courses": [
+   "Bioinformatica", 
+   "Collectieve Intelligentie", 
+   "Compilerbouw", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Malestein", 
+  "nr": "42115591", 
+  "firstName": "Dorenda", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Melis", 
+  "nr": "55480737", 
+  "firstName": "Noelle", 
+  "courses": [
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Menke", 
+  "nr": "44391517", 
+  "firstName": "Noud", 
+  "courses": [
+   "Compilerbouw", 
+   "Programmeren in Java 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Metselaar", 
+  "nr": "24613625", 
+  "firstName": "Bodie", 
+  "courses": [
+   "Bioinformatica", 
+   "Compilerbouw", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Metzelaar", 
+  "nr": "86000192", 
+  "firstName": "Miquel", 
+  "courses": [
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Meulmeester", 
+  "nr": "68409833", 
+  "firstName": "Roan", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Lineaire Algebra", 
+   "Project Genetic Algorithms", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Middel", 
+  "nr": "72683344", 
+  "firstName": "Myron", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Architectuur en computerorganisatie"
+  ]
+ }, 
+ {
+  "lastName": "Miedema", 
+  "nr": "99283252", 
+  "firstName": "Maron", 
+  "courses": [
+   "Moderne Databases", 
+   "Project Genetic Algorithms", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Mijnheer", 
+  "nr": "4783858", 
+  "firstName": "Marcellus", 
+  "courses": [
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Heuristieken 1", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Milder", 
+  "nr": "75623387", 
+  "firstName": "Eyup", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Milder", 
+  "nr": "27925117", 
+  "firstName": "Oliver", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Calculus 2", 
+   "Heuristieken 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Modderkolk", 
+  "nr": "56749879", 
+  "firstName": "Jo-Anne", 
+  "courses": [
+   "Bioinformatica", 
+   "Databases 2", 
+   "Heuristieken 1", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Modderkolk", 
+  "nr": "72577292", 
+  "firstName": "Jorren", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Architectuur en computerorganisatie", 
+   "Collectieve Intelligentie", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Moes", 
+  "nr": "53585410", 
+  "firstName": "Lisse", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Calculus 2", 
+   "Compilerbouw practicum", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Moeskops", 
+  "nr": "26857113", 
+  "firstName": "Antonetta", 
+  "courses": [
+   "Machine Learning", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Mok", 
+  "nr": "84110134", 
+  "firstName": "Lamia", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Project Numerical Recipes", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Mol", 
+  "nr": "44671041", 
+  "firstName": "Sonny", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Mullenders", 
+  "nr": "54310617", 
+  "firstName": "Shannon", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Munsters", 
+  "nr": "10872825", 
+  "firstName": "Doetje", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Mutsaers", 
+  "nr": "64418623", 
+  "firstName": "Callista", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Nagel", 
+  "nr": "63096281", 
+  "firstName": "Claudine", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Neve", 
+  "nr": "70336464", 
+  "firstName": "Fauve", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Nieman", 
+  "nr": "4697362", 
+  "firstName": "Randell", 
+  "courses": [
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Nieuwenhuizen", 
+  "nr": "1137946", 
+  "firstName": "Jurrit", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Niezen", 
+  "nr": "67817269", 
+  "firstName": "Inas", 
+  "courses": [
+   "Algoritmen en complexiteit"
+  ]
+ }, 
+ {
+  "lastName": "Nijs", 
+  "nr": "51650744", 
+  "firstName": "Vesna", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Noordhuis", 
+  "nr": "72586808", 
+  "firstName": "Harry", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Noordzij", 
+  "nr": "46570285", 
+  "firstName": "Juli\u00ebt", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Noot", 
+  "nr": "88519892", 
+  "firstName": "Henricus", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Notermans", 
+  "nr": "13092455", 
+  "firstName": "Inger", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Project Numerical Recipes", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Nuiten", 
+  "nr": "61060652", 
+  "firstName": "Geurt", 
+  "courses": [
+   "Heuristieken 1", 
+   "Lineaire Algebra", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Numan", 
+  "nr": "40141996", 
+  "firstName": "Lee", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Odijk", 
+  "nr": "30658799", 
+  "firstName": "Rieke", 
+  "courses": [
+   "Compilerbouw", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Okkerse", 
+  "nr": "90067329", 
+  "firstName": "Seb", 
+  "courses": [
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Ooijen", 
+  "nr": "86180471", 
+  "firstName": "Steijn", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Oosterbeek", 
+  "nr": "13116738", 
+  "firstName": "Rins", 
+  "courses": [
+   "Data Mining", 
+   "Informatie- en organsatieontwerp", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Oosterbroek", 
+  "nr": "13210212", 
+  "firstName": "Lilly", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Oostvogels", 
+  "nr": "22731474", 
+  "firstName": "Romaisa", 
+  "courses": [
+   "Bioinformatica", 
+   "Heuristieken 2", 
+   "Kansrekenen 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Overbeeke", 
+  "nr": "17575088", 
+  "firstName": "Casimir", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Paauwe", 
+  "nr": "30195935", 
+  "firstName": "Shakir", 
+  "courses": [
+   "Bioinformatica", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Paijmans", 
+  "nr": "75664412", 
+  "firstName": "Redouane", 
+  "courses": [
+   "Compilerbouw", 
+   "Netwerken en systeembeveiliging", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Panman", 
+  "nr": "79888156", 
+  "firstName": "Loulou", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Pastoor", 
+  "nr": "3407554", 
+  "firstName": "Farah", 
+  "courses": [
+   "Compilerbouw", 
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Pater", 
+  "nr": "34765676", 
+  "firstName": "Vincentius", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Heuristieken 2", 
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Paulissen", 
+  "nr": "1665980", 
+  "firstName": "Solane", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Collectieve Intelligentie", 
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Peijs", 
+  "nr": "96104167", 
+  "firstName": "Xander", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Pelders", 
+  "nr": "75680261", 
+  "firstName": "Heba", 
+  "courses": [
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Pereira", 
+  "nr": "23798155", 
+  "firstName": "Luca", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Architectuur en computerorganisatie", 
+   "Kansrekenen 2", 
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Philippi", 
+  "nr": "58866007", 
+  "firstName": "Ilana", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Philips", 
+  "nr": "20883994", 
+  "firstName": "Kaoutar", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Bioinformatica", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Piek", 
+  "nr": "5976174", 
+  "firstName": "R\u00e9my", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Heuristieken 2", 
+   "Machine Learning", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Plaizier", 
+  "nr": "85284256", 
+  "firstName": "Wijntje", 
+  "courses": [
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Planken", 
+  "nr": "47605891", 
+  "firstName": "Giedo", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Plasman", 
+  "nr": "2416751", 
+  "firstName": "Nathana\u00ebl", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Pleiter", 
+  "nr": "77240949", 
+  "firstName": "Matthijs", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Kansrekenen 2", 
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Poepjes", 
+  "nr": "31247305", 
+  "firstName": "Zahir", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Poldervaart", 
+  "nr": "58253841", 
+  "firstName": "Gustaaf", 
+  "courses": [
+   "Calculus 2", 
+   "Project Genetic Algorithms", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Polfliet", 
+  "nr": "72665524", 
+  "firstName": "Rafaela", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Calculus 2", 
+   "Compilerbouw practicum", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Popma", 
+  "nr": "34872117", 
+  "firstName": "Stephano", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Compilerbouw", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Postuma", 
+  "nr": "36903574", 
+  "firstName": "Timo", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Heuristieken 1", 
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Potgieter", 
+  "nr": "64947290", 
+  "firstName": "Desire\u00e9", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Databases 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Pothuizen", 
+  "nr": "27950803", 
+  "firstName": "Aart", 
+  "courses": [
+   "Compilerbouw", 
+   "Project Genetic Algorithms", 
+   "Reflectie op de digitale cultuur", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Pothuizen", 
+  "nr": "85236626", 
+  "firstName": "Mink", 
+  "courses": [
+   "Heuristieken 2", 
+   "Machine Learning", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Potman", 
+  "nr": "123355", 
+  "firstName": "Genesis", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Prevoo", 
+  "nr": "27805666", 
+  "firstName": "Hendrik-Jan", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Prinssen", 
+  "nr": "3883025", 
+  "firstName": "Annigje", 
+  "courses": [
+   "Moderne Databases", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Pruijmboom", 
+  "nr": "82412626", 
+  "firstName": "Javier", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Putters", 
+  "nr": "37110913", 
+  "firstName": "Andr\u00e9", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Data Mining", 
+   "Heuristieken 1", 
+   "Reflectie op de digitale cultuur", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Putters", 
+  "nr": "61611295", 
+  "firstName": "Luciana", 
+  "courses": [
+   "Autonomous Agents 2"
+  ]
+ }, 
+ {
+  "lastName": "Quik", 
+  "nr": "32044893", 
+  "firstName": "Semiha", 
+  "courses": [
+   "Project Numerical Recipes", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Raaijmakers", 
+  "nr": "38296757", 
+  "firstName": "Haiko", 
+  "courses": [
+   "Calculus 2", 
+   "Machine Learning", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Ramcharan", 
+  "nr": "25077484", 
+  "firstName": "Erdal", 
+  "courses": [
+   "Databases 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Reek", 
+  "nr": "20618153", 
+  "firstName": "Adisa", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Regeling", 
+  "nr": "4353500", 
+  "firstName": "Jarik", 
+  "courses": [
+   "Heuristieken 1", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Reintjes", 
+  "nr": "29474737", 
+  "firstName": "Romello", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Remijn", 
+  "nr": "25557516", 
+  "firstName": "Nadir", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Renes", 
+  "nr": "23215240", 
+  "firstName": "Taeke", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Reuvekamp", 
+  "nr": "3474870", 
+  "firstName": "Cheyenna", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Lineaire Algebra", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Richardson", 
+  "nr": "58699305", 
+  "firstName": "L\u00e9onie", 
+  "courses": [
+   "Calculus 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Ridderhof", 
+  "nr": "37279234", 
+  "firstName": "Abdeslam", 
+  "courses": [
+   "Calculus 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Rienks", 
+  "nr": "62105897", 
+  "firstName": "Kimm", 
+  "courses": [
+   "Calculus 2", 
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Rijkens", 
+  "nr": "27123462", 
+  "firstName": "Lorraine", 
+  "courses": [
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Rinkel", 
+  "nr": "41527759", 
+  "firstName": "Karam", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Kansrekenen 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Rodenburg", 
+  "nr": "7308727", 
+  "firstName": "Fatime", 
+  "courses": [
+   "Bioinformatica", 
+   "Collectieve Intelligentie", 
+   "Netwerken en systeembeveiliging", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Roest", 
+  "nr": "18144425", 
+  "firstName": "Yarah", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Roeterdink", 
+  "nr": "22168693", 
+  "firstName": "Tori", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Rokx", 
+  "nr": "60352393", 
+  "firstName": "Shan", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Databases 2", 
+   "Netwerken en systeembeveiliging", 
+   "Reflectie op de digitale cultuur", 
+   "Zoeken", 
+   " sturen en bewegen\n"
+  ]
+ }, 
+ {
+  "lastName": "Rombout", 
+  "nr": "65408517", 
+  "firstName": "Krijntje", 
+  "courses": [
+   "Calculus 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Roodbeen", 
+  "nr": "76123484", 
+  "firstName": "Karolina", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Webprogrammeren en databases", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Rooijmans", 
+  "nr": "43902015", 
+  "firstName": "Ziya", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Databases 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Roozendaal", 
+  "nr": "72547110", 
+  "firstName": "Jennie", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Rosenbrand", 
+  "nr": "72526473", 
+  "firstName": "Jake", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Rotgans", 
+  "nr": "88176729", 
+  "firstName": "Roma", 
+  "courses": [
+   "Bioinformatica", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Rothuizen", 
+  "nr": "40343779", 
+  "firstName": "Tevfik", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Netwerken en systeembeveiliging", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Rottier", 
+  "nr": "17222374", 
+  "firstName": "Sivar", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Rovers", 
+  "nr": "92665222", 
+  "firstName": "Eleanora", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Rust", 
+  "nr": "19662602", 
+  "firstName": "Jannette", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Rutte", 
+  "nr": "76393508", 
+  "firstName": "Tea", 
+  "courses": [
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Sarikaya", 
+  "nr": "52552718", 
+  "firstName": "Angelica", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Databases 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Scheffers", 
+  "nr": "48357272", 
+  "firstName": "Imran", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2", 
+   "Heuristieken 1", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Schellevis", 
+  "nr": "80188025", 
+  "firstName": "Albertine", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Scheltema", 
+  "nr": "73302736", 
+  "firstName": "Minoesch", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Scherpenzeel", 
+  "nr": "94955328", 
+  "firstName": "Jackson", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Schijvenaars", 
+  "nr": "33252501", 
+  "firstName": "Xiao", 
+  "courses": [
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Schoneveld", 
+  "nr": "12091019", 
+  "firstName": "Elbertha", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Schoonderwoerd", 
+  "nr": "72652638", 
+  "firstName": "Jaiden", 
+  "courses": [
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Schoutens", 
+  "nr": "90296821", 
+  "firstName": "Nassira", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Schrader", 
+  "nr": "14179347", 
+  "firstName": "Arif", 
+  "courses": [
+   "Calculus 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Schrama", 
+  "nr": "44901052", 
+  "firstName": "Emrah", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Heuristieken 1", 
+   "Informatie- en organsatieontwerp", 
+   "Netwerken en systeembeveiliging", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Schrauwen", 
+  "nr": "4709948", 
+  "firstName": "Silvy", 
+  "courses": [
+   "Moderne Databases", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Schuiling", 
+  "nr": "64246605", 
+  "firstName": "Thom", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Selten", 
+  "nr": "58469172", 
+  "firstName": "Levien", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Selten", 
+  "nr": "34173695", 
+  "firstName": "Marianka", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Sieben", 
+  "nr": "83443653", 
+  "firstName": "Mich\u00e8l", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Siemonsma", 
+  "nr": "35330349", 
+  "firstName": "Enes", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Sier", 
+  "nr": "73236988", 
+  "firstName": "Patricia", 
+  "courses": [
+   "Bioinformatica", 
+   "Compilerbouw", 
+   "Project Numerical Recipes", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Siero", 
+  "nr": "68601184", 
+  "firstName": "Christiana", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Sijmons", 
+  "nr": "40633534", 
+  "firstName": "Servet", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Sikking", 
+  "nr": "14072826", 
+  "firstName": "Saif", 
+  "courses": [
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Sips", 
+  "nr": "64228258", 
+  "firstName": "Jimi", 
+  "courses": [
+   "Calculus 2", 
+   "Collectieve Intelligentie", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Slangen", 
+  "nr": "92977271", 
+  "firstName": "No\u00eb", 
+  "courses": [
+   "Heuristieken 1", 
+   "Informatie- en organsatieontwerp", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Slob", 
+  "nr": "80998260", 
+  "firstName": "Xanne", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Smallegange", 
+  "nr": "9287708", 
+  "firstName": "Rachell", 
+  "courses": [
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Snelder", 
+  "nr": "19858730", 
+  "firstName": "Shaya", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Snippe", 
+  "nr": "57419039", 
+  "firstName": "Dolf", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Soekhai", 
+  "nr": "77392404", 
+  "firstName": "Marck", 
+  "courses": [
+   "Netwerken en systeembeveiliging", 
+   "Reflectie op de digitale cultuur", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Sonnemans", 
+  "nr": "91527663", 
+  "firstName": "Logan", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Speelman", 
+  "nr": "76924297", 
+  "firstName": "Marrit", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Kansrekenen 2", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Spronck", 
+  "nr": "42297781", 
+  "firstName": "Kenan", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Steeman", 
+  "nr": "37804282", 
+  "firstName": "Ya", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Stegink", 
+  "nr": "26207525", 
+  "firstName": "Sharief", 
+  "courses": [
+   "Databases 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Sterenberg", 
+  "nr": "79167252", 
+  "firstName": "Or\u00e7un", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Stienen", 
+  "nr": "55412918", 
+  "firstName": "Wichard", 
+  "courses": [
+   "Calculus 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Stokkel", 
+  "nr": "74182182", 
+  "firstName": "Tom", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Stoppels", 
+  "nr": "64554442", 
+  "firstName": "Franke", 
+  "courses": [
+   "Algoritmen en complexiteit"
+  ]
+ }, 
+ {
+  "lastName": "Streefland", 
+  "nr": "17823206", 
+  "firstName": "Kamil", 
+  "courses": [
+   "Data Mining", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Stroo", 
+  "nr": "39905995", 
+  "firstName": "Gonca", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Stuurman", 
+  "nr": "56121590", 
+  "firstName": "Franklin", 
+  "courses": [
+   "Databases 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Swiers", 
+  "nr": "4921119", 
+  "firstName": "Chaimae", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Databases 2", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "'t Jong", 
+  "nr": "83415514", 
+  "firstName": "Christoffel", 
+  "courses": [
+   "Calculus 2", 
+   "Moderne Databases", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "'t Lam", 
+  "nr": "47982619", 
+  "firstName": "Jorg", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Talhaoui", 
+  "nr": "89985072", 
+  "firstName": "Nermin", 
+  "courses": [
+   "Bioinformatica", 
+   "Compilerbouw practicum", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Tamis", 
+  "nr": "39659121", 
+  "firstName": "Elbertus", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Tap", 
+  "nr": "88263855", 
+  "firstName": "Olof", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Tas", 
+  "nr": "95631564", 
+  "firstName": "Sanja", 
+  "courses": [
+   "Compilerbouw", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Tas", 
+  "nr": "49631542", 
+  "firstName": "Skye", 
+  "courses": [
+   "Databases 2", 
+   "Kansrekenen 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "te Braak", 
+  "nr": "83266686", 
+  "firstName": "Nanette", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Teekens", 
+  "nr": "37399898", 
+  "firstName": "Xiao", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur", 
+   "Zoeken", 
+   " sturen en bewegen\n"
+  ]
+ }, 
+ {
+  "lastName": "ten Pas", 
+  "nr": "20331158", 
+  "firstName": "Maan", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Heuristieken 1", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "ten Pas", 
+  "nr": "94686490", 
+  "firstName": "Tjalle", 
+  "courses": [
+   "Calculus 2", 
+   "Databases 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "ter Heide", 
+  "nr": "4568018", 
+  "firstName": "Pleun", 
+  "courses": [
+   "Bioinformatica", 
+   "Compilerbouw practicum", 
+   "Heuristieken 1", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Terpstra", 
+  "nr": "82854435", 
+  "firstName": "Aboubakr", 
+  "courses": [
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Tettero", 
+  "nr": "64053722", 
+  "firstName": "Arianna", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Teuben", 
+  "nr": "53202517", 
+  "firstName": "Jonah", 
+  "courses": [
+   "Bioinformatica", 
+   "Compilerbouw", 
+   "Webprogrammeren en databases", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Thielen", 
+  "nr": "34262212", 
+  "firstName": "Rochelle", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Thoma", 
+  "nr": "57595888", 
+  "firstName": "Silvie", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Tielemans", 
+  "nr": "21964491", 
+  "firstName": "Ard", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Bioinformatica", 
+   "Collectieve Intelligentie", 
+   "Data Mining", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Tijhof", 
+  "nr": "36213792", 
+  "firstName": "Raja", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Tip", 
+  "nr": "19058315", 
+  "firstName": "Bilal", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Tjeerdsma", 
+  "nr": "14591033", 
+  "firstName": "Sarena", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Heuristieken 1", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Toetenel", 
+  "nr": "66034145", 
+  "firstName": "Hedwich", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Toren", 
+  "nr": "24875739", 
+  "firstName": "Samentha", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "Traa", 
+  "nr": "83869542", 
+  "firstName": "Liza", 
+  "courses": [
+   "Databases 2", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Truijen", 
+  "nr": "9067939", 
+  "firstName": "Tom", 
+  "courses": [
+   "Compilerbouw", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Tun\u00e7", 
+  "nr": "82390428", 
+  "firstName": "Jacey", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Twigt", 
+  "nr": "78544592", 
+  "firstName": "Annamaria", 
+  "courses": [
+   "Calculus 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Ubbink", 
+  "nr": "57701414", 
+  "firstName": "Arina", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Udo", 
+  "nr": "42171678", 
+  "firstName": "Emme", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Heuristieken 1", 
+   "Moderne Databases", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Uitslag", 
+  "nr": "43027916", 
+  "firstName": "Felien", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "Ursem", 
+  "nr": "14816774", 
+  "firstName": "Keely", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Databases 2", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Vaatstra", 
+  "nr": "14309255", 
+  "firstName": "Nygel", 
+  "courses": [
+   "Compilerbouw", 
+   "Moderne Databases", 
+   "Software engineering", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Valster", 
+  "nr": "20830477", 
+  "firstName": "Dineke", 
+  "courses": [
+   "Heuristieken 1", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Aaken", 
+  "nr": "24167153", 
+  "firstName": "Shairon", 
+  "courses": [
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Aalderen", 
+  "nr": "63408522", 
+  "firstName": "Sa\u00efd", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "van Amelsvoort", 
+  "nr": "97019450", 
+  "firstName": "Cherilyn", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Heuristieken 1", 
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Amerongen", 
+  "nr": "73196865", 
+  "firstName": "Leo", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Amersfoort", 
+  "nr": "65318664", 
+  "firstName": "Peter-Jan", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van Apeldoorn", 
+  "nr": "28055464", 
+  "firstName": "Jacky", 
+  "courses": [
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van Baaren", 
+  "nr": "87830198", 
+  "firstName": "Nika", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Netwerken en systeembeveiliging", 
+   "Project Genetic Algorithms", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van Barneveld", 
+  "nr": "90474003", 
+  "firstName": "Cemil", 
+  "courses": [
+   "Databases 2", 
+   "Reflectie op de digitale cultuur", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Bavel", 
+  "nr": "81022997", 
+  "firstName": "Johannus", 
+  "courses": [
+   "Data Mining", 
+   "Heuristieken 2", 
+   "Netwerken en systeembeveiliging", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Bentem", 
+  "nr": "21070547", 
+  "firstName": "Lody", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Berkom", 
+  "nr": "99975346", 
+  "firstName": "Ynte", 
+  "courses": [
+   "Heuristieken 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van Bezooijen", 
+  "nr": "28357474", 
+  "firstName": "Liedeke", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van de Bunt", 
+  "nr": "75759231", 
+  "firstName": "Emircan", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "van de Geijn", 
+  "nr": "70193386", 
+  "firstName": "Robbie", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van de Kraats", 
+  "nr": "63111000", 
+  "firstName": "Patryk", 
+  "courses": [
+   "Machine Learning", 
+   "Moderne Databases", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van de Kruijs", 
+  "nr": "81116418", 
+  "firstName": "Kamila", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van de Kruijs", 
+  "nr": "27187154", 
+  "firstName": "Rayen", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Kansrekenen 2", 
+   "Machine Learning", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van de Kuilen", 
+  "nr": "32183908", 
+  "firstName": "Roswitha", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van de Pavert", 
+  "nr": "31306819", 
+  "firstName": "Rudy", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van de Pol", 
+  "nr": "42196732", 
+  "firstName": "Shawny", 
+  "courses": [
+   "Bioinformatica", 
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "van de Ridder", 
+  "nr": "6913074", 
+  "firstName": "Leida", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Programmeren in Java 2", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van de Sanden", 
+  "nr": "66120270", 
+  "firstName": "Jurre", 
+  "courses": [
+   "Bioinformatica", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "van de Wardt", 
+  "nr": "61518436", 
+  "firstName": "Paulette", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Machine Learning", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van den Berg", 
+  "nr": "67625383", 
+  "firstName": "Nanke", 
+  "courses": [
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "van den Boer", 
+  "nr": "97371272", 
+  "firstName": "Btissam", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van den Born", 
+  "nr": "32204977", 
+  "firstName": "Enrique", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Informatie- en organsatieontwerp", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van den Eijnde", 
+  "nr": "81218347", 
+  "firstName": "Cyrano", 
+  "courses": [
+   "Heuristieken 1", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "van den Engel", 
+  "nr": "8464817", 
+  "firstName": "Ceren", 
+  "courses": [
+   "Compilerbouw", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van den Ham", 
+  "nr": "51791169", 
+  "firstName": "Cyrille", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van den Hoogen", 
+  "nr": "55530367", 
+  "firstName": "L\u00e9on", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van den Oord", 
+  "nr": "79858178", 
+  "firstName": "Amos", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Doelen", 
+  "nr": "57086672", 
+  "firstName": "Chelly", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Heuristieken 2", 
+   "Reflectie op de digitale cultuur", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van der Drift", 
+  "nr": "55103073", 
+  "firstName": "Tamar", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "van der Gaag", 
+  "nr": "15187217", 
+  "firstName": "Lakshmi", 
+  "courses": [
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Geer", 
+  "nr": "51566595", 
+  "firstName": "Deejay", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Autonomous Agents 2", 
+   "Data Mining", 
+   "Databases 2", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Gulik", 
+  "nr": "41489515", 
+  "firstName": "Ferhan", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "van der Klei", 
+  "nr": "77896638", 
+  "firstName": "Daisy", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw", 
+   "Databases 2", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Leek", 
+  "nr": "59111489", 
+  "firstName": "Pearl", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "van der Marel", 
+  "nr": "51509565", 
+  "firstName": "Ay?eg\u00fcl", 
+  "courses": [
+   "Algoritmen en complexiteit"
+  ]
+ }, 
+ {
+  "lastName": "van der Meer", 
+  "nr": "23983476", 
+  "firstName": "A\u00efcha", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Informatie- en organsatieontwerp", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Meeren", 
+  "nr": "64600457", 
+  "firstName": "Abdul", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Moderne Databases", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Meij", 
+  "nr": "60312776", 
+  "firstName": "Geerte", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw", 
+   "Project Numerical Recipes", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van der Niet", 
+  "nr": "41578612", 
+  "firstName": "Maritha", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Lineaire Algebra", 
+   "Project Genetic Algorithms", 
+   "Reflectie op de digitale cultuur", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van der Plaats", 
+  "nr": "22288615", 
+  "firstName": "Johannes", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van der Plas", 
+  "nr": "32705005", 
+  "firstName": "Graciella", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Steege", 
+  "nr": "23391676", 
+  "firstName": "Darian", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Ster", 
+  "nr": "23628642", 
+  "firstName": "Tos", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Stoel", 
+  "nr": "94687383", 
+  "firstName": "Scotty", 
+  "courses": [
+   "Compilerbouw", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van der Vleuten", 
+  "nr": "8557857", 
+  "firstName": "Yun", 
+  "courses": [
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van der Wiel", 
+  "nr": "48678993", 
+  "firstName": "Josef", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Heuristieken 2", 
+   "Netwerken en systeembeveiliging", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "van der Zwet", 
+  "nr": "6723948", 
+  "firstName": "Jos", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Programmeren in Java 2", 
+   "Zoeken", 
+   " sturen en bewegen\n"
+  ]
+ }, 
+ {
+  "lastName": "van Dieten", 
+  "nr": "5739011", 
+  "firstName": "George", 
+  "courses": [
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "van Dinther", 
+  "nr": "11593163", 
+  "firstName": "Ilayda", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van Eert", 
+  "nr": "55474917", 
+  "firstName": "Naciye", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van Eeuwijk", 
+  "nr": "13996448", 
+  "firstName": "Jayme", 
+  "courses": [
+   "Data Mining", 
+   "Programmeren in Java 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Eijndhoven", 
+  "nr": "42406214", 
+  "firstName": "Juan", 
+  "courses": [
+   "Project Numerical Recipes", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van Geest", 
+  "nr": "82688900", 
+  "firstName": "Wytse", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "van Gerwen", 
+  "nr": "76661016", 
+  "firstName": "Carmela", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Interactie-ontwerp", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "van Groeningen", 
+  "nr": "5595824", 
+  "firstName": "Joshi", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "van Hall", 
+  "nr": "37744525", 
+  "firstName": "Ouidad", 
+  "courses": [
+   "Data Mining", 
+   "Machine Learning", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van Halteren", 
+  "nr": "69086548", 
+  "firstName": "Walther", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van Herten", 
+  "nr": "88627897", 
+  "firstName": "Tamimount", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Hezik", 
+  "nr": "63955238", 
+  "firstName": "Shauny", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Ierland", 
+  "nr": "76648468", 
+  "firstName": "Nalinie", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van Ingen", 
+  "nr": "3707829", 
+  "firstName": "Berit", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Interactie-ontwerp", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Iwaarden", 
+  "nr": "80135353", 
+  "firstName": "Aidan", 
+  "courses": [
+   "Compilerbouw", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Kalsbeek", 
+  "nr": "25330192", 
+  "firstName": "Ciske", 
+  "courses": [
+   "Data Mining", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "van Kasteel", 
+  "nr": "45915482", 
+  "firstName": "Y\u00fccel", 
+  "courses": [
+   "Calculus 2", 
+   "Software engineering", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Kessel", 
+  "nr": "75446434", 
+  "firstName": "Romany", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van Kommer", 
+  "nr": "79617364", 
+  "firstName": "Demelza", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "van Leussen", 
+  "nr": "68286356", 
+  "firstName": "Seval", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "van Lingen", 
+  "nr": "28618400", 
+  "firstName": "Ruveyda", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Architectuur en computerorganisatie", 
+   "Netwerken en systeembeveiliging", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Lingen", 
+  "nr": "68360259", 
+  "firstName": "Touraya", 
+  "courses": [
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "van Loon", 
+  "nr": "26406342", 
+  "firstName": "Harwin", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw practicum", 
+   "Databases 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van Loveren", 
+  "nr": "39459642", 
+  "firstName": "Lammigje", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Compilerbouw", 
+   "Databases 2", 
+   "Machine Learning", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Luttikhuizen", 
+  "nr": "56544130", 
+  "firstName": "Fae", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van Maarseveen", 
+  "nr": "78821918", 
+  "firstName": "Micha", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Databases 2", 
+   "Moderne Databases", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "van Marle", 
+  "nr": "34243356", 
+  "firstName": "Meta", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Compilerbouw", 
+   "Kansrekenen 2", 
+   "Lineaire Algebra", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "van Maurik", 
+  "nr": "88752563", 
+  "firstName": "L\u00e9on", 
+  "courses": [
+   "Calculus 2", 
+   "Compilerbouw", 
+   "Databases 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Mierlo", 
+  "nr": "89180944", 
+  "firstName": "Abram", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Moderne Databases", 
+   "Software engineering", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van Montfort", 
+  "nr": "59753700", 
+  "firstName": "Ans", 
+  "courses": [
+   "Data Mining", 
+   "Reflectie op de digitale cultuur", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Mourik", 
+  "nr": "33877725", 
+  "firstName": "Yuri", 
+  "courses": [
+   "Bioinformatica", 
+   "Software engineering", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van Munster", 
+  "nr": "90103047", 
+  "firstName": "Yang", 
+  "courses": [
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Oss", 
+  "nr": "12170832", 
+  "firstName": "Miguel", 
+  "courses": [
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "van Osta", 
+  "nr": "2550487", 
+  "firstName": "Nanet", 
+  "courses": [
+   "Interactie-ontwerp", 
+   "Programmeren in Java 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "van Plateringen", 
+  "nr": "11741347", 
+  "firstName": "Sien", 
+  "courses": [
+   "Compilerbouw", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "van Poorten", 
+  "nr": "21029457", 
+  "firstName": "Fedoua", 
+  "courses": [
+   "Bioinformatica", 
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "van Putten", 
+  "nr": "70878567", 
+  "firstName": "Jetty", 
+  "courses": [
+   "Bioinformatica", 
+   "Data Mining", 
+   "Informatie- en organsatieontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van Ravesteijn", 
+  "nr": "20374340", 
+  "firstName": "Jersey", 
+  "courses": [
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van Riel", 
+  "nr": "58592894", 
+  "firstName": "Jodi", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Calculus 2", 
+   "Databases 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "van Rietschoten", 
+  "nr": "79879876", 
+  "firstName": "Cleo", 
+  "courses": [
+   "Heuristieken 1", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Roemburg", 
+  "nr": "7386961", 
+  "firstName": "Caressa", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "van Rosmalen", 
+  "nr": "26172512", 
+  "firstName": "El", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "van Rossem", 
+  "nr": "58736785", 
+  "firstName": "Georgia", 
+  "courses": [
+   "Heuristieken 1", 
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "van Ruitenbeek", 
+  "nr": "34110913", 
+  "firstName": "Dragana", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "van Ruler", 
+  "nr": "37498675", 
+  "firstName": "Borre", 
+  "courses": [
+   "Kansrekenen 2"
+  ]
+ }, 
+ {
+  "lastName": "van Santen", 
+  "nr": "16333449", 
+  "firstName": "Maril\u00e8ne", 
+  "courses": [
+   "Lineaire Algebra", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van Sleeuwen", 
+  "nr": "9332762", 
+  "firstName": "Sanne", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Programmeren in Java 2", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van Sommeren", 
+  "nr": "10698627", 
+  "firstName": "Dalila", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "van Suijlekom", 
+  "nr": "11996292", 
+  "firstName": "Elske", 
+  "courses": [
+   "Databases 2", 
+   "Heuristieken 1", 
+   "Moderne Databases", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van 't Oever", 
+  "nr": "47462856", 
+  "firstName": "Samah", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "van Teeffelen", 
+  "nr": "96453361", 
+  "firstName": "Julot", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Bioinformatica", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "van Triest", 
+  "nr": "46989508", 
+  "firstName": "Enrico", 
+  "courses": [
+   "Compilerbouw", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "van Vloten", 
+  "nr": "83210352", 
+  "firstName": "Tarik", 
+  "courses": [
+   "Lineaire Algebra", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van Voorden", 
+  "nr": "29640619", 
+  "firstName": "Priscillia", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van Waardenburg", 
+  "nr": "56191333", 
+  "firstName": "Anne-Jan", 
+  "courses": [
+   "Databases 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "van Walsum", 
+  "nr": "37701751", 
+  "firstName": "Maggy", 
+  "courses": [
+   "Databases 2", 
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van Wanrooij", 
+  "nr": "65675896", 
+  "firstName": "Maran", 
+  "courses": [
+   "Compilerbouw practicum", 
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van Weel", 
+  "nr": "89338938", 
+  "firstName": "Renco", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Project Numerical Recipes", 
+   "Software engineering", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "van Wensen", 
+  "nr": "35315956", 
+  "firstName": "Hazel", 
+  "courses": [
+   "Heuristieken 2"
+  ]
+ }, 
+ {
+  "lastName": "van Wiggen", 
+  "nr": "32595335", 
+  "firstName": "Sanna", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "van Zeijl", 
+  "nr": "14138904", 
+  "firstName": "Hui", 
+  "courses": [
+   "Architectuur en computerorganisatie", 
+   "Compilerbouw practicum", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "van Zijderveld", 
+  "nr": "41153310", 
+  "firstName": "Jorian", 
+  "courses": [
+   "Programmeren in Java 2", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "van Zoelen", 
+  "nr": "64768422", 
+  "firstName": "Anthonius", 
+  "courses": [
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "van Zon", 
+  "nr": "66570705", 
+  "firstName": "Christiaan", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Veeke", 
+  "nr": "48198668", 
+  "firstName": "Neele", 
+  "courses": [
+   "Moderne Databases"
+  ]
+ }, 
+ {
+  "lastName": "Veldhuis", 
+  "nr": "61443567", 
+  "firstName": "Bobby", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Heuristieken 2", 
+   "Programmeren in Java 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Velt", 
+  "nr": "17092717", 
+  "firstName": "Vinod", 
+  "courses": [
+   "Databases 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Vendel", 
+  "nr": "91250534", 
+  "firstName": "Nadja", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Verhorst", 
+  "nr": "88636924", 
+  "firstName": "Solomon", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Verkuijl", 
+  "nr": "5085194", 
+  "firstName": "Yuki", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Compilerbouw practicum", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Vermanen", 
+  "nr": "23565001", 
+  "firstName": "Chloe", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2", 
+   "Lineaire Algebra"
+  ]
+ }, 
+ {
+  "lastName": "Vermeeren", 
+  "nr": "97136582", 
+  "firstName": "Talha", 
+  "courses": [
+   "Data Mining", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Versantvoort", 
+  "nr": "70072978", 
+  "firstName": "Maureen", 
+  "courses": [
+   "Databases 2", 
+   "Moderne Databases", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Versteeg", 
+  "nr": "22323043", 
+  "firstName": "Kavish", 
+  "courses": [
+   "Data Mining", 
+   "Heuristieken 1", 
+   "Software engineering", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Vervaart", 
+  "nr": "12430748", 
+  "firstName": "Sherman", 
+  "courses": [
+   "Project Numerical Recipes", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Vingerhoets", 
+  "nr": "98105190", 
+  "firstName": "Karim", 
+  "courses": [
+   "Compilerbouw", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Vinke", 
+  "nr": "73980360", 
+  "firstName": "Jiri", 
+  "courses": [
+   "Collectieve Intelligentie"
+  ]
+ }, 
+ {
+  "lastName": "Vinken", 
+  "nr": "73350019", 
+  "firstName": "Kamiel", 
+  "courses": [
+   "Analysemethoden en -technieken"
+  ]
+ }, 
+ {
+  "lastName": "Visch", 
+  "nr": "95007221", 
+  "firstName": "Arnela", 
+  "courses": [
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Voesten", 
+  "nr": "13658563", 
+  "firstName": "Tjesse", 
+  "courses": [
+   "Heuristieken 1", 
+   "Informatie- en organsatieontwerp", 
+   "Reflectie op de digitale cultuur", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Voigt", 
+  "nr": "62363761", 
+  "firstName": "Edwinus", 
+  "courses": [
+   "Calculus 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Volman", 
+  "nr": "31194811", 
+  "firstName": "Nadien", 
+  "courses": [
+   "Compilerbouw", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Vooijs", 
+  "nr": "5892092", 
+  "firstName": "Annemarie", 
+  "courses": [
+   "Compilerbouw practicum"
+  ]
+ }, 
+ {
+  "lastName": "Voskuilen", 
+  "nr": "78443067", 
+  "firstName": "Dax", 
+  "courses": [
+   "Calculus 2", 
+   "Moderne Databases", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Vries", 
+  "nr": "9731271", 
+  "firstName": "Jort", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2", 
+   "Netwerken en systeembeveiliging", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Vromans", 
+  "nr": "34806836", 
+  "firstName": "Rhona", 
+  "courses": [
+   "Autonomous Agents 2"
+  ]
+ }, 
+ {
+  "lastName": "Vullings", 
+  "nr": "53775014", 
+  "firstName": "Zhen", 
+  "courses": [
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Wallenburg", 
+  "nr": "44828429", 
+  "firstName": "Laurent", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Interactie-ontwerp"
+  ]
+ }, 
+ {
+  "lastName": "Waninge", 
+  "nr": "15051051", 
+  "firstName": "Vasco", 
+  "courses": [
+   "Bioinformatica", 
+   "Machine Learning", 
+   "Moderne Databases", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Warsame", 
+  "nr": "65960683", 
+  "firstName": "Reduan", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw"
+  ]
+ }, 
+ {
+  "lastName": "Weij", 
+  "nr": "37770881", 
+  "firstName": "Matisse", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Compilerbouw", 
+   "Project Genetic Algorithms"
+  ]
+ }, 
+ {
+  "lastName": "Welling", 
+  "nr": "25106480", 
+  "firstName": "Jos", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Project Genetic Algorithms", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Wensing", 
+  "nr": "56988998", 
+  "firstName": "Evelina", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Wesselink", 
+  "nr": "28957789", 
+  "firstName": "Djamilla", 
+  "courses": [
+   "Calculus 2", 
+   "Kansrekenen 2", 
+   "Zoeken", 
+   " sturen en bewegen"
+  ]
+ }, 
+ {
+  "lastName": "Wesselman", 
+  "nr": "58074656", 
+  "firstName": "Eyup", 
+  "courses": [
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Wester", 
+  "nr": "53107172", 
+  "firstName": "Harke", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Heuristieken 1"
+  ]
+ }, 
+ {
+  "lastName": "Westera", 
+  "nr": "2079771", 
+  "firstName": "Yunus", 
+  "courses": [
+   "Compilerbouw", 
+   "Machine Learning"
+  ]
+ }, 
+ {
+  "lastName": "Westgeest", 
+  "nr": "61520025", 
+  "firstName": "Keshia", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Westra", 
+  "nr": "12782624", 
+  "firstName": "Mies", 
+  "courses": [
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Wiegmans", 
+  "nr": "84449005", 
+  "firstName": "Maryam", 
+  "courses": [
+   "Moderne Databases", 
+   "Project Genetic Algorithms", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Wielenga", 
+  "nr": "19717077", 
+  "firstName": "Maris", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Wiersema", 
+  "nr": "72796858", 
+  "firstName": "Filipe", 
+  "courses": [
+   "Autonomous Agents 2", 
+   "Compilerbouw", 
+   "Databases 2"
+  ]
+ }, 
+ {
+  "lastName": "Wijers", 
+  "nr": "39429093", 
+  "firstName": "Vigo", 
+  "courses": [
+   "Advanced Heuristics"
+  ]
+ }, 
+ {
+  "lastName": "Wijnands", 
+  "nr": "48503689", 
+  "firstName": "Heiltje", 
+  "courses": [
+   "Compilerbouw", 
+   "Programmeren in Java 2", 
+   "Project Numerical Recipes"
+  ]
+ }, 
+ {
+  "lastName": "Wijngaarden", 
+  "nr": "24277163", 
+  "firstName": "Marck", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Databases 2", 
+   "Moderne Databases", 
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Wijnsma", 
+  "nr": "72456780", 
+  "firstName": "Alexandra", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Databases 2", 
+   "Netwerken en systeembeveiliging"
+  ]
+ }, 
+ {
+  "lastName": "Wind", 
+  "nr": "51052738", 
+  "firstName": "Ihsane", 
+  "courses": [
+   "Reflectie op de digitale cultuur"
+  ]
+ }, 
+ {
+  "lastName": "Winkelaar", 
+  "nr": "23652927", 
+  "firstName": "Yuna", 
+  "courses": [
+   "Algoritmen en complexiteit"
+  ]
+ }, 
+ {
+  "lastName": "Wobbes", 
+  "nr": "30050930", 
+  "firstName": "Jacko", 
+  "courses": [
+   "Bioinformatica"
+  ]
+ }, 
+ {
+  "lastName": "Woertman", 
+  "nr": "75521763", 
+  "firstName": "Ay\u00e7a", 
+  "courses": [
+   "Collectieve Intelligentie", 
+   "Heuristieken 1", 
+   "Informatie- en organsatieontwerp", 
+   "Moderne Databases", 
+   "Technology for games"
+  ]
+ }, 
+ {
+  "lastName": "Wolswijk", 
+  "nr": "28358060", 
+  "firstName": "Sayfeddine", 
+  "courses": [
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Wullink", 
+  "nr": "33672995", 
+  "firstName": "Frederikus", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Yazici", 
+  "nr": "52715680", 
+  "firstName": "Gabri\u00eblla", 
+  "courses": [
+   "Algoritmen en complexiteit", 
+   "Compilerbouw practicum", 
+   "Reflectie op de digitale cultuur", 
+   "Software engineering"
+  ]
+ }, 
+ {
+  "lastName": "Yusuf", 
+  "nr": "10609762", 
+  "firstName": "Vanita", 
+  "courses": [
+   "Calculus 2"
+  ]
+ }, 
+ {
+  "lastName": "Zaaijer", 
+  "nr": "94930277", 
+  "firstName": "Juno", 
+  "courses": [
+   "Heuristieken 1", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Zagers", 
+  "nr": "39230359", 
+  "firstName": "Fransiscus", 
+  "courses": [
+   "Kansrekenen 2", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Zhang", 
+  "nr": "23658570", 
+  "firstName": "Mellanie", 
+  "courses": [
+   "Analysemethoden en -technieken", 
+   "Calculus 2", 
+   "Databases 2", 
+   "Programmeren in Java 2"
+  ]
+ }, 
+ {
+  "lastName": "Zondag", 
+  "nr": "14847953", 
+  "firstName": "Malte", 
+  "courses": [
+   "Advanced Heuristics", 
+   "Interactie-ontwerp", 
+   "Webprogrammeren en databases"
+  ]
+ }, 
+ {
+  "lastName": "Zonneveld", 
+  "nr": "98780382", 
+  "firstName": "Marise", 
+  "courses": [
+   "Data Mining"
+  ]
+ }, 
+ {
+  "lastName": "Zwarts", 
+  "nr": "59289233", 
+  "firstName": "Chico", 
+  "courses": [
+   "Architectuur en computerorganisatie"
+  ]
+ }, 
+ {
+  "lastName": "Zweekhorst", 
+  "nr": "21311067", 
+  "firstName": "Stein", 
+  "courses": [
+   "Lineaire Algebra"
+  ]
+ }
+]
