@@ -1,18 +1,5 @@
 [
  {
-  "lastName": "Achternaam", 
-  "nr": "Stud.Nr.", 
-  "firstName": "Voornaam", 
-  "courses": [
-   "Stud.Nr.", 
-   "Vak1", 
-   "Vak2", 
-   "Vak3", 
-   "Vak4", 
-   "Vak5"
-  ]
- }, 
- {
   "lastName": "Abbing", 
   "nr": "52311353", 
   "firstName": "Yanick", 

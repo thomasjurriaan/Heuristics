@@ -1,0 +1,58 @@
+import json
+
+FILE = 'students.json'
+OUTPUTFILE = 'courses.json'
+            
+def makeCoursesDict(filename):
+    """
+    Leest de csv-file met de rooster data
+    Zet de data om in een lijst van dictionaries
+    """
+    json_data=open(filename).read()
+    f = json.loads(json_data)[1:]
+    coursesDict = {}
+    for student in f:
+        for course in student["courses"]:
+            if course not in coursesDict.keys():
+                coursesDict[course]=[]
+            for c in student["courses"]:
+                if c != course: coursesDict[course].append(c)
+    return coursesDict
+    
+def makeGraphData(filename):
+    graphData = []
+    for course in filename.keys():
+        graphData.append({
+            "name":course,
+            "size":1,
+            "imports":filename[course]
+        })
+    return graphData
+
+def makeJSON(dataList, filename):
+    '''
+    Slaat JSON bestand op met een dictionary voor elke student.
+
+    Elke dictionary bevat de naam, het studentennummer en de
+    vakken die de student volgt. De vakken staan in een lijst van
+    strings. De andere keys verwijzen naar strings.
+
+    De bijbehorende keys zijn "lastName","firstName","nr" en "courses"
+    '''
+    with open(filename, 'wb') as f:
+        json.dump(dataList, f, indent=True, encoding='latin1')
+        
+if __name__ == '__main__':
+    print "Sorting courses data..."
+    coursesDict = makeCoursesDict(FILE)
+    print "Resorting data for graph..."
+    graphData = makeGraphData(coursesDict)
+    courses = [course for course in coursesDict.keys()]
+    for course in coursesDict.keys():
+        L = []
+        for e in courses:
+            if e not in coursesDict[course]:
+                L.append(e)
+        print course + " is not connected with "+str(len(L))+" courses."
+    print "Compiling JSON..."
+    makeJSON(graphData, OUTPUTFILE)
