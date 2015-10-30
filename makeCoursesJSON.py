@@ -1,4 +1,6 @@
 import json
+#import matplotlib.pyplot as plt
+#import numpy as np
 
 FILE = 'students.json'
 OUTPUTFILE = 'courses.json'
@@ -29,6 +31,13 @@ def makeGraphData(filename):
         })
     return graphData
 
+def plotBar(L):
+    hist, bins = np.histogram(L, bins=7)
+    width = 0.7 * (bins[1] - bins[0])
+    center = (bins[:-1] + bins[1:]) / 2
+    plt.bar(center, hist, align='center', width=width)
+    plt.show()
+
 def makeJSON(dataList, filename):
     '''
     Slaat JSON bestand op met een dictionary voor elke student.
@@ -48,11 +57,14 @@ if __name__ == '__main__':
     print "Resorting data for graph..."
     graphData = makeGraphData(coursesDict)
     courses = [course for course in coursesDict.keys()]
+    barL = []
     for course in coursesDict.keys():
         L = []
         for e in courses:
-            if e not in coursesDict[course]:
+            if e in coursesDict[course]:
                 L.append(e)
-        print course + " is not connected with "+str(len(L))+" courses."
+        print course, "connected with courses: ",len(L)
+#        barL.append(len(L))
+#    plotBar(barL)
     print "Compiling JSON..."
-    makeJSON(graphData, OUTPUTFILE)
+    #makeJSON(graphData, OUTPUTFILE)
