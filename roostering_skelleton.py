@@ -36,8 +36,11 @@ class Student(object):
 class TimeTable(object):
     def __init__(self):
         #include 4 empty time slots for every day of the week.
-        #True means available timeslot
-        self.timeSlots = [TimeSlot(i) for i in range(20)]
+        l = []
+        for d in ['mo','tu','we','th','fr']:
+            for t in range(4):
+                l.append(TimeSlot(d,t))
+        self.timeSlots = l
     def resetTimeSlot(self,i):
         #When removing a booking from the schedual
         self.timeSlots[i] = TimeSlot(i)
@@ -70,15 +73,26 @@ class TimeSlot(object):
         for r in self.roomSlots:
             if r['name'] == room:
                 r['course'] = False
+    def getTime(self):
+        
 
 class Course(object):
     def __init__(self, courseName,lectures,psp):
         self.timeTable = TimeTable()
         self.students = []
-        self.lectures = lectures
-        self.psp = psp #Problem Solving/Practicum
+        self.lectures = [Activity("lecture",self) for i in range(lectures)]
+        self.psp = [Activity("psp",self) for i in range(lectures)]
     def addStudent(self,student):
         self.students.append(student)
+    def getActivities(self):
+        return [i for i in self.lectures, self.psp]
+
+class Activity(object):
+    def __init__(self, workType, course):
+        # Worktype is 'lecture' or 'psp'
+        self.type = workType
+        self.course = course
+    
 
 
 def getData(filename):
@@ -97,10 +111,10 @@ if __name__ == '__main__':
     students = []
     courses = []
     for course in courseData:
-        # Functie thta makes a list 'courses' with all the names,
+        # Function that makes a list 'courses' with all the names,
         # number of lectures and number of PS-classes+praktica of every course
         #courses.append(Course(course))
         pass
     for s in studentData:
-        #Functie that makes student-instances
+        #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"]))
