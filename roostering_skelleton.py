@@ -19,7 +19,7 @@ class Student(object):
         self.lastName = lastName
         self.nr = studntNr
         # self.courses is een lijst van course class-instanties
-        self.courses = [Course(i) for i in courses]
+        self.courses = [Course(i,1,1) for i in courses]
         self.timeTable = TimeTable()
         
     def getName(self):
@@ -51,7 +51,7 @@ class TimeSlot(object):
         self.day = i #te maken functie D(i)
         self.roomSlots = []
         for r in rooms:
-            self.roomSLots.append({
+            self.roomSlots.append({
                 "name":r,
                 "size":rooms[r],
                 "course":False
@@ -103,5 +103,4 @@ if __name__ == '__main__':
         pass
     for s in studentData:
         #Functie that makes student-instances
-        #students.append(Student(s["firstName"],s["lastName"].....))
-        pass
+        students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"]))
