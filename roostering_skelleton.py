@@ -21,11 +21,19 @@ for r in ROOMDICT:
         })
 
 class Student(object):
-    def __init__(self, firstName, lastName, studntNr, courses):
+    def __init__(self, firstName, lastName, studntNr, courses, courseList):
         self.firstName = firstName
         self.lastName = lastName
         self.nr = studntNr
         # self.courses is een lijst van course class-instanties
+        self.courses = []
+        for c in courses:
+            for e in courseList:
+                if c == e.getName():
+                    self.courses.append(e)
+                    e.addStudent(self)
+                    break
+            else: raise StandardError("Course does not exist")
         self.courses = [Course(i,1,1,1,1,1) for i in courses]
     def getName(self):
         return self.firstName+' '+self.lastName
@@ -93,6 +101,8 @@ class Course(object):
         return self.lectures+self.PS+self.practica
     def getStudents(self):
         return self.students
+    def getName(self):
+        return self.courseName
 
 class Activity(object):
     def __init__(self, workType, course, maxStudents=None):
@@ -129,7 +139,7 @@ if __name__ == '__main__':
         pass
     for s in studentData:
         #Function that makes student-instances
-        students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"]))
+        students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -160,7 +170,9 @@ def bookRoom(timeTable,activity,day):
                 l.book(course,r)
                 break
         break
-    else: raise StandardError
+    else: raise StandardError("No room can be found for "
+                              +activity.getCourse().getName()
+                              +" on day "+day)
 
 def generateAllChildren(parent, activity):
     # Returns a max of 5 timeTable indices
