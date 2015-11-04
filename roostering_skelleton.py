@@ -26,7 +26,7 @@ class Student(object):
         self.lastName = lastName
         self.nr = studntNr
         # self.courses is een lijst van course class-instanties
-        self.courses = [Course(i,1,1) for i in courses]
+        self.courses = [Course(i,1,1,1,1,1) for i in courses]
     def getName(self):
         return self.firstName+' '+self.lastName
     def getNr(self):
@@ -86,6 +86,7 @@ class Course(object):
         self.lectures = [Activity("lecture",self) for i in range(lectures)]
         self.PS = [Activity("PS", self, maxPS) for i in range(PS)]
         self.practica = [Activity("practicum", self, maxPractica) for i in range(practica)]
+        self.courseName = courseName
     def addStudent(self,student):
         self.students.append(student)
     def getActivities(self):
@@ -103,6 +104,8 @@ class Activity(object):
         return self.course
     def getMaxStudents(self):
         return self.maxStudents
+    def getType(self):
+        return self.type
     
 
 def getData(filename):
