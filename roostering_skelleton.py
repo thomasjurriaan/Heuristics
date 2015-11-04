@@ -89,16 +89,16 @@ class TimeSlot(object):
         return self.roomSlots
 
 class Course(object):
-    def __init__(self, courseName, lectures, PS, maxPS, practica, maxPractica):
+    def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
         self.students = []
         self.lectures = [Activity("lecture",self) for i in range(lectures)]
-        self.PS = [Activity("PS", self, maxPS) for i in range(PS)]
+        self.seminar = [Activity("seminar", self, maxseminar) for i in range(seminar)]
         self.practica = [Activity("practicum", self, maxPractica) for i in range(practica)]
         self.courseName = courseName
     def addStudent(self,student):
         self.students.append(student)
     def getActivities(self):
-        return self.lectures+self.PS+self.practica
+        return self.lectures+self.seminar+self.practica
     def getStudents(self):
         return self.students
     def getName(self):
@@ -106,7 +106,7 @@ class Course(object):
 
 class Activity(object):
     def __init__(self, workType, course, maxStudents=None):
-        # Worktype is 'lecture', 'PS' or 'practicum'
+        # Worktype is 'lecture', 'seminar' or 'practicum'
         self.type = workType
         self.course = course
         self.maxStudents = maxStudents
@@ -134,7 +134,7 @@ if __name__ == '__main__':
     courses = []
     for course in courseData:
         # Function that makes a list 'courses' with all the names,
-        # number of lectures and number of PS-classes+praktica of every course
+        # number of lectures and number of seminar-classes+praktica of every course
         #courses.append(Course(course))
         pass
     for s in studentData:
