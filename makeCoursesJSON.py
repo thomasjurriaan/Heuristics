@@ -67,4 +67,4 @@ if __name__ == '__main__':
 #        barL.append(len(L))
 #    plotBar(barL)
     print "Compiling JSON..."
-    #makeJSON(graphData, OUTPUTFILE)
+    makeJSON(graphData, OUTPUTFILE)

@@ -173,7 +173,7 @@ def generateAllChildren(parent, activity):
 
 MAXPOINTS=0
 def roosterVolgendeActiviteit(activities,parentTimeTable):
-    # The iteratieve function
+    # The recursive function
     timeTables = generateAllChildren(parentTimeTable,activities[0])
     for t in timeTables:
         if len(activities)==0:
