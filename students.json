@@ -1,5 +1,18 @@
 [
  {
+  "lastName": "Achternaam", 
+  "nr": "Stud.Nr.", 
+  "firstName": "Voornaam", 
+  "courses": [
+   "Stud.Nr.", 
+   "Vak1", 
+   "Vak2", 
+   "Vak3", 
+   "Vak4", 
+   "Vak5"
+  ]
+ }, 
+ {
   "lastName": "Abbing", 
   "nr": "52311353", 
   "firstName": "Yanick", 
@@ -202,8 +215,7 @@
    "Calculus 2", 
    "Collectieve Intelligentie", 
    "Netwerken en systeembeveiliging", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -458,8 +470,7 @@
   "firstName": "Jael", 
   "courses": [
    "Calculus 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -467,8 +478,7 @@
   "nr": "82233873", 
   "firstName": "Resi", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -533,8 +543,7 @@
   "courses": [
    "Analysemethoden en -technieken", 
    "Bioinformatica", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -822,8 +831,7 @@
   "courses": [
    "Compilerbouw practicum", 
    "Project Genetic Algorithms", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -869,8 +877,7 @@
   "nr": "33946407", 
   "firstName": "Krijna", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1088,8 +1095,7 @@
    "Informatie- en organsatieontwerp", 
    "Moderne Databases", 
    "Technology for games", 
-   "Zoeken", 
-   " sturen en bewegen\n"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1115,8 +1121,7 @@
   "firstName": "Wissal", 
   "courses": [
    "Databases 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1226,8 +1231,7 @@
    "Algoritmen en complexiteit", 
    "Autonomous Agents 2", 
    "Calculus 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1299,8 +1303,7 @@
   "courses": [
    "Collectieve Intelligentie", 
    "Lineaire Algebra", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1703,8 +1706,7 @@
   "firstName": "Marnik", 
   "courses": [
    "Programmeren in Java 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1747,8 +1749,7 @@
   "firstName": "Owen", 
   "courses": [
    "Bioinformatica", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1864,8 +1865,7 @@
   "courses": [
    "Programmeren in Java 2", 
    "Reflectie op de digitale cultuur", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -1959,8 +1959,7 @@
   "firstName": "Sezen", 
   "courses": [
    "Netwerken en systeembeveiliging", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -2239,8 +2238,7 @@
    "Collectieve Intelligentie", 
    "Interactie-ontwerp", 
    "Technology for games", 
-   "Zoeken", 
-   " sturen en bewegen\n"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -2299,8 +2297,7 @@
   "courses": [
    "Lineaire Algebra", 
    "Moderne Databases", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -2451,8 +2448,7 @@
   "firstName": "Math\u00e9", 
   "courses": [
    "Analysemethoden en -technieken", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -2500,8 +2496,7 @@
   "courses": [
    "Compilerbouw", 
    "Programmeren in Java 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -2810,8 +2805,7 @@
   "courses": [
    "Data Mining", 
    "Informatie- en organsatieontwerp", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -2819,8 +2813,7 @@
   "nr": "13210212", 
   "firstName": "Lilly", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3008,8 +3001,7 @@
   "courses": [
    "Calculus 2", 
    "Project Genetic Algorithms", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3292,8 +3284,7 @@
    "Databases 2", 
    "Netwerken en systeembeveiliging", 
    "Reflectie op de digitale cultuur", 
-   "Zoeken", 
-   " sturen en bewegen\n"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3313,8 +3304,7 @@
    "Collectieve Intelligentie", 
    "Databases 2", 
    "Webprogrammeren en databases", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3644,8 +3634,7 @@
   "nr": "57419039", 
   "firstName": "Dolf", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3690,8 +3679,7 @@
   "nr": "37804282", 
   "firstName": "Ya", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3863,8 +3851,7 @@
    "Lineaire Algebra", 
    "Programmeren in Java 2", 
    "Reflectie op de digitale cultuur", 
-   "Zoeken", 
-   " sturen en bewegen\n"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -3922,8 +3909,7 @@
    "Bioinformatica", 
    "Compilerbouw", 
    "Webprogrammeren en databases", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4017,8 +4003,7 @@
   "firstName": "Tom", 
   "courses": [
    "Compilerbouw", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4043,8 +4028,7 @@
   "nr": "57701414", 
   "firstName": "Arina", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4055,8 +4039,7 @@
    "Collectieve Intelligentie", 
    "Heuristieken 1", 
    "Moderne Databases", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4106,8 +4089,7 @@
   "nr": "24167153", 
   "firstName": "Shairon", 
   "courses": [
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4172,8 +4154,7 @@
   "courses": [
    "Databases 2", 
    "Reflectie op de digitale cultuur", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4578,8 +4559,7 @@
    "Calculus 2", 
    "Compilerbouw", 
    "Programmeren in Java 2", 
-   "Zoeken", 
-   " sturen en bewegen\n"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4683,8 +4663,7 @@
   "firstName": "Tamimount", 
   "courses": [
    "Autonomous Agents 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4693,8 +4672,7 @@
   "firstName": "Shauny", 
   "courses": [
    "Kansrekenen 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4712,8 +4690,7 @@
   "courses": [
    "Algoritmen en complexiteit", 
    "Interactie-ontwerp", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4741,8 +4718,7 @@
   "courses": [
    "Calculus 2", 
    "Software engineering", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -4874,8 +4850,7 @@
   "courses": [
    "Data Mining", 
    "Reflectie op de digitale cultuur", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -5066,8 +5041,7 @@
   "courses": [
    "Algoritmen en complexiteit", 
    "Bioinformatica", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -5333,8 +5307,7 @@
    "Heuristieken 1", 
    "Informatie- en organsatieontwerp", 
    "Reflectie op de digitale cultuur", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -5417,8 +5390,7 @@
    "Bioinformatica", 
    "Machine Learning", 
    "Moderne Databases", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
@@ -5466,8 +5438,7 @@
   "courses": [
    "Calculus 2", 
    "Kansrekenen 2", 
-   "Zoeken", 
-   " sturen en bewegen"
+   "Zoeken sturen en bewegen"
   ]
  }, 
  {
