@@ -14,15 +14,19 @@ def makeDatalist(filename):
         # itertools open alleen de eerste 10 regels
         for row in f:
             e = row.split(',')
+            if e[3]== "nvt": a = float('inf')
+            else: a = int(e[3])
+            if e[5]== "nvt": b = float('inf')
+            else: b = int(e[5])
             # Verwijderen van lege inputs
             #if any(c.isalpha() for c in i)
             dataList.append({
                 "courseName": e[0],
-                "lectures": e[1],
-                "PS":e[2],
-                "maxStudPS":e[3],
-                "practica": e[4],
-                "MaxStudPractica": e[5]
+                "lectures": int(e[1]),
+                "seminar":int(e[2]),
+                "maxStudSeminar": a,
+                "practica": int(e[4]),
+                "maxStudPractica": b
                 })
     return dataList
 
