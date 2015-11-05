@@ -137,7 +137,7 @@ if __name__ == '__main__':
         # number of lectures and number of seminar-classes+praktica of every course
         #courses.append(Course(course))
         pass
-    for s in studentData:
+    for s in studentData[1:]:
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
 
