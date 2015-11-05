@@ -45,7 +45,7 @@ def makeJSON(dataList, filename):
 
 
 if __name__ == '__main__':
-    print "Sorting student data..."
+    print "Sorting course data..."
     dataList = makeDatalist(FILE)
     print "compiling JSON..."
     makeJSON(dataList, OUTPUTFILE)
