@@ -1,0 +1,234 @@
+[
+ {
+  "lectures": "2", 
+  "PS": "0", 
+  "courseName": "Advanced Heuristics", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "10"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Algoritmen en complexiteit", 
+  "maxStudPS": "25", 
+  "practica": "1", 
+  "MaxStudPractica": "25"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "0", 
+  "courseName": "Analysemethoden en -technieken", 
+  "maxStudPS": "nvt", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "0", 
+  "courseName": "Architectuur en computerorganisatie", 
+  "maxStudPS": "nvt", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Autonomous Agents 2", 
+  "maxStudPS": "10", 
+  "practica": "1", 
+  "MaxStudPractica": "10"
+ }, 
+ {
+  "lectures": "3", 
+  "PS": "1", 
+  "courseName": "Bioinformatica", 
+  "maxStudPS": "20", 
+  "practica": "1", 
+  "MaxStudPractica": "20"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Calculus 2", 
+  "maxStudPS": "40", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "3", 
+  "PS": "1", 
+  "courseName": "Collectieve Intelligentie", 
+  "maxStudPS": "20", 
+  "practica": "1", 
+  "MaxStudPractica": "20"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Compilerbouw", 
+  "maxStudPS": "40", 
+  "practica": "1", 
+  "MaxStudPractica": "40"
+ }, 
+ {
+  "lectures": "0", 
+  "PS": "0", 
+  "courseName": "Compilerbouw (practicum)", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "15"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Data Mining", 
+  "maxStudPS": "10", 
+  "practica": "1", 
+  "MaxStudPractica": "10"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Databases 2", 
+  "maxStudPS": "40", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Heuristieken 1", 
+  "maxStudPS": "25", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Heuristieken 2", 
+  "maxStudPS": "20", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Informatie- en organisatieontwerp", 
+  "maxStudPS": "15", 
+  "practica": "1", 
+  "MaxStudPractica": "15"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "0", 
+  "courseName": "Interactie-ontwerp", 
+  "maxStudPS": "nvt", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "0", 
+  "courseName": "Kansrekenen 2", 
+  "maxStudPS": "nvt", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "0", 
+  "courseName": "Lineaire Algebra", 
+  "maxStudPS": "nvt", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "0", 
+  "courseName": "Machine Learning", 
+  "maxStudPS": "nvt", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Moderne Databases", 
+  "maxStudPS": "20", 
+  "practica": "1", 
+  "MaxStudPractica": "20"
+ }, 
+ {
+  "lectures": "0", 
+  "PS": "0", 
+  "courseName": "Netwerken en systeembeveiliging", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "20"
+ }, 
+ {
+  "lectures": "0", 
+  "PS": "0", 
+  "courseName": "Programmeren in Java 2", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "20"
+ }, 
+ {
+  "lectures": "0", 
+  "PS": "0", 
+  "courseName": "Project Genetic Algorithms", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "15"
+ }, 
+ {
+  "lectures": "0", 
+  "PS": "0", 
+  "courseName": "Project Numerical Recipes", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "15"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Reflectie op de digitale cultuur", 
+  "maxStudPS": "20", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "1", 
+  "PS": "1", 
+  "courseName": "Software engineering", 
+  "maxStudPS": "40", 
+  "practica": "1", 
+  "MaxStudPractica": "40"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Technology for games", 
+  "maxStudPS": "20", 
+  "practica": "0", 
+  "MaxStudPractica": "nvt"
+ }, 
+ {
+  "lectures": "2", 
+  "PS": "1", 
+  "courseName": "Webprogrammeren en databases", 
+  "maxStudPS": "20", 
+  "practica": "1", 
+  "MaxStudPractica": "20"
+ }, 
+ {
+  "lectures": "0", 
+  "PS": "0", 
+  "courseName": "Zoeken sturen en bewegen", 
+  "maxStudPS": "nvt", 
+  "practica": "1", 
+  "MaxStudPractica": "15"
+ }
+]
