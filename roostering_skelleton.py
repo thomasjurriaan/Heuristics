@@ -129,7 +129,7 @@ def getData(filename):
     """
     json_data=open(filename).read()
     return json.loads(json_data)
-    
+ 
 if __name__ == '__main__':
     mainTimeTable = TimeTable()
     studentData = getData(STUDENTS)
@@ -139,6 +139,8 @@ if __name__ == '__main__':
     for c in courseData:
         courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
                               c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
+
+
     for s in studentData[1:]:
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
@@ -197,3 +199,7 @@ def roosterVolgendeActiviteit(activities,parentTimeTable):
                 bestTimeTable = t
         else: roosterVolgendeActiviteit(activities[1:],t)
     return bestTimeTable
+
+def randomAlgorithm():
+    print(courseList)
+
