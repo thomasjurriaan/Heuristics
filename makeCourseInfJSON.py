@@ -1,8 +1,9 @@
 import json
+import itertools
 
-FILE = 'studenten_roostering.csv'
-OUTPUTFILE = 'students.json'
-            
+FILE = 'courseInf.csv'
+OUTPUTFILE = 'coursesInf.json'
+
 def makeDatalist(filename):
     """
     Leest de csv-file met de rooster data
@@ -10,23 +11,25 @@ def makeDatalist(filename):
     """
     with open(filename, 'r') as f:
         dataList = []
+        # itertools open alleen de eerste 10 regels
         for row in f:
             e = row.split(',')
+            if e[3]== "nvt": a = float('inf')
+            else: a = int(e[3])
+            if e[5]== "nvt": b = float('inf')
+            else: b = int(e[5])
             # Verwijderen van lege inputs
-            d = [i.rstrip().decode('ascii','ignore') for i in e if any(c.isalpha() for c in i)]
-            for n, i in enumerate(d):
-                if i == "Zoeken":
-                    s = d[n]+d[n+1]
-                    d = d[:n]+[s]+d[(n+2):]
-                    break
+            #if any(c.isalpha() for c in i)
             dataList.append({
-                "lastName": e[0],
-                "firstName": e[1],
-                "nr":e[2],
-                "courses":[i for i in d[2:]]
+                "courseName": e[0],
+                "lectures": int(e[1]),
+                "seminar":int(e[2]),
+                "maxStudSeminar": a,
+                "practica": int(e[4]),
+                "maxStudPractica": b
                 })
     return dataList
-    
+
 def makeJSON(dataList, filename):
     '''
     Slaat JSON bestand op met een dictionary voor elke student.
@@ -38,10 +41,11 @@ def makeJSON(dataList, filename):
     De bijbehorende keys zijn "lastName","firstName","nr" en "courses"
     '''
     with open(filename, 'wb') as f:
-        json.dump(dataList, f, indent=True, encoding="latin1")
-        
+        json.dump(dataList, f, indent=True, encoding='latin1')
+
+
 if __name__ == '__main__':
     print "Sorting student data..."
     dataList = makeDatalist(FILE)
-    print "Compiling JSON..."
+    print "compiling JSON..."
     makeJSON(dataList, OUTPUTFILE)
