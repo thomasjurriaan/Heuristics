@@ -1,7 +1,7 @@
 import json
 
 STUDENTS = 'students.json'
-COURSES = 'courses.json'
+COURSES = 'coursesInf.json'
 ROOMDICT = {
     #Room name, room for nr students"
     "A1.04":41,
@@ -132,11 +132,9 @@ if __name__ == '__main__':
     courseData = getData(COURSES)
     students = []
     courses = []
-    for course in courseData:
-        # Function that makes a list 'courses' with all the names,
-        # number of lectures and number of seminar-classes+praktica of every course
-        #courses.append(Course(course))
-        pass
+    for c in courseData:
+        courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
+                              c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
     for s in studentData[1:]:
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
