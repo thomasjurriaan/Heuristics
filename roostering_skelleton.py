@@ -34,7 +34,6 @@ class Student(object):
                     e.addStudent(self)
                     break
             else: raise StandardError("Course "+c+" for student "+self.getName()+" does not exist")
-        self.courses = [Course(i,1,1,1,1,1) for i in courses]
         self.activities = []
     def getName(self):
         return self.firstName+' '+self.lastName
