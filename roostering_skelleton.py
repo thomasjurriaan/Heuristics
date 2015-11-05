@@ -35,6 +35,7 @@ class Student(object):
                     break
             else: raise StandardError("Course "+c+" for student "+self.getName()+" does not exist")
         self.courses = [Course(i,1,1,1,1,1) for i in courses]
+        self.activities = []
     def getName(self):
         return self.firstName+' '+self.lastName
     def getNr(self):
@@ -45,6 +46,9 @@ class Student(object):
     def doesCourse(self, course):
         #check of course wel een class-instance is?
         return course in self.courses
+    def addActivity(self, activity):
+        self.activities.append(activity)
+
 
 class TimeTable(object):
     def __init__(self):
@@ -161,7 +165,7 @@ def bookRoom(timeTable,activity,day):
     for t in l:
         for r in rooms:
             if {
-                (not r['course'])&
+                (not r['course']) &
                 (r['size'] <= activity.getMaxStudents()) &
                 (r['size'] >= len(course.getStudents()))
                  } :
