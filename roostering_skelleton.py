@@ -176,7 +176,7 @@ def bookRoom(timeTable,activity,day):
 
 def generateAllChildren(parent, activity):
     # Returns a max of 5 timeTable indices
-    days = [mo,tu,we,th,fr]
+    days = ['mo','tu','we','th','fr']
     timeTables = []
     for d in days:
         try: timeTables.append(bookRoom(parent,activity,d))
