@@ -53,8 +53,8 @@ class TimeTable(object):
     def __init__(self):
         #include 4 empty time slots for every day of the week.
         l = []
-        days = ['mo','tu','we','th','fr']
-        for d in days:
+        self.days = ['mo','tu','we','th','fr']
+        for d in self.days:
             for t in range(4):
                 l.append(TimeSlot(d,t))
         self.timeSlots = l
@@ -62,7 +62,7 @@ class TimeTable(object):
         #When removing a booking from the schedual
         self.timeSlots[i] = TimeSlot(i)
     def getTimeSlots(self, day):
-        for n, d in enumerate(days):
+        for n, d in enumerate(self.days):
             if day==d:
                 return self.timeSlots[(4*n):(4*n+4)]
 
@@ -73,7 +73,7 @@ class TimeSlot(object):
         self.time = t
         self.day = d
         self.roomSlots = ROOMS
-    def isFullyBooked(self, room):
+    def isFullyBooked(self):
         #Returns True if all rooms are booked. False otherwise
         return all([r['course'] for r in self.roomSlots])
     def book(self, course, room):
