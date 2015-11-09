@@ -18,7 +18,7 @@ for r in ROOMDICT:
     ROOMS.append({
         "name":r,
         "size":ROOMDICT[r],
-        "course":False
+        "course":None
         })
 
 class Student(object):
@@ -201,27 +201,27 @@ def bookRandomRoom(activity, timeslot):
     break
 
 
-def generateAllChildren(parent, activity):
-    # Returns a max of 5 timeTable indices
-    days = ['mo','tu','we','th','fr']
-    timeTables = []
-    for d in days:
-        try: timeTables.append(bookRoom(parent,activity,d))
-        except: continue
-    return timeTables
-
-MAXPOINTS=0
-def roosterVolgendeActiviteit(activities,parentTimeTable):
-    # The recursive function
-    timeTables = generateAllChildren(parentTimeTable,activities[0])
-    for t in timeTables:
-        if len(activities)==0:
-            points = getPoints(t)
-            if points > maxPoints:
-                maxPoints = points
-                bestTimeTable = t
-        else: roosterVolgendeActiviteit(activities[1:],t)
-    return bestTimeTable
+##def generateAllChildren(parent, activity):
+##    # Returns a max of 5 timeTable indices
+##    days = ['mo','tu','we','th','fr']
+##    timeTables = []
+##    for d in days:
+##        try: timeTables.append(bookRoom(parent,activity,d))
+##        except: continue
+##    return timeTables
+##
+##MAXPOINTS=0
+##def roosterVolgendeActiviteit(activities,parentTimeTable):
+##    # The recursive function
+##    timeTables = generateAllChildren(parentTimeTable,activities[0])
+##    for t in timeTables:
+##        if len(activities)==0:
+##            points = getPoints(t)
+##            if points > maxPoints:
+##                maxPoints = points
+##                bestTimeTable = t
+##        else: roosterVolgendeActiviteit(activities[1:],t)
+##    return bestTimeTable
 
 def randomAlgorithm():
     # Make list of random activities
