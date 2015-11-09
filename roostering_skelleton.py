@@ -187,6 +187,20 @@ def bookRoom(timeTable,activity,day):
                               +activity.getCourse().getName()
                               +" on day "+day)
 
+def bookRandomRoom(activity, timeslot):
+    rooms = timeslot.getRoomSlots()
+    for r in rooms:
+        if 
+        {
+            (not r['course']) &
+            (r['size'] <= activity.getMaxStudents()) &
+            (r['size'] >= len(course.getStudents()))
+        }:
+            l.book(course,r)
+            break
+    break
+
+
 def generateAllChildren(parent, activity):
     # Returns a max of 5 timeTable indices
     days = ['mo','tu','we','th','fr']
@@ -223,9 +237,12 @@ def randomAlgorithm():
     random.shuffle(random_timeslots)
 
     # Use bookRandomRoom to go from activities to groups and book those groups
-
-    for a in random_activities:
-        bookRoom
+    int i = 0
+    while(i < len(random_activities)):
+    {
+        bookRandomRoom(random_activities[i], random_timeslots[i])
+        i++
+    }
 
     return timeTable
 
