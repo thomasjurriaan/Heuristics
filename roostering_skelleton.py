@@ -208,32 +208,28 @@ def bookRoom(timeTable,activity,day):
                               +" on day " + day)
 
 '''
-def bookRandomRoom(activity, ):
-
-    # Make list of random timeslots
-    randomTimeSlots = mainTimeTable.getAllTimeSlots()
-    for r in randomTimeSlots:
+def bookRandomRoom(activity, randomTimeSlots):
 
     # Dit zijn de arguments van groups:(self, activity, students, maxstudents, roomslot, timeslot)
-    rooms = r.getRoomSlots()
 
-
-    random.shuffle(randomTimeSlots)
-    for r in rooms:
-        if 
-        {
-            (r['course']==None) &
-            (r['size'] <= activity.getMaxStudents()) &
-            (r['size'] >= len(course.getStudents()))
-        }:
-            thisGroup = Group(activity, course.getStudents(), activity.getMaxStudents(), r, timeslot
-            groups.append(thisGroup)
-            l.book(thisGroup,r)
-            break
-        else:
-            raise StandardError("No room can be found for "
-                              + activity.getCourse().getName()
-                              +" on " + timeslot.day + " at " timeslot.time)
+    for t in randomTimeSlots:
+        rooms = t.getRoomSlots()
+        for r in rooms:
+            if 
+            {
+                (r['course']==None) &
+                (r['size'] <= activity.getMaxStudents()) &
+                (r['size'] >= len(course.getStudents()))
+            }:
+                thisGroup = Group(activity, course.getStudents(), activity.getMaxStudents(), r, t)
+                groups.append(thisGroup)
+                l.book(thisGroup,r)
+                break
+        break
+    else:
+        raise StandardError("No room can be found for " + 
+            activity.getCourse().getName() + 
+            " on " + timeslot.day + " at " timeslot.time)
 
 
     
@@ -270,9 +266,14 @@ def randomAlgorithm():
 
     random.shuffle(randomActivities)
 
+    randomRoomSlots = []
+    # Make list of random timeslots
+    randomTimeSlots = mainTimeTable.getAllTimeSlots()
+    random.shuffle(randomTimeSlots)
+
     # Use bookRandomRoom to go from activities to groups and book those groups
-    for activity in enumerate(randomActivities):
-        try: bookRandomRoom(random_activities[i])
+    for activity, i in enumerate(randomActivities):
+        try: bookRandomRoom(random_activities[i], randomTimeSlots)
         except: pass
     return timeTable
 
