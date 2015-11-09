@@ -13,7 +13,7 @@ def makeDatalist(filename):
         for row in f:
             e = row.split(',')
             # Verwijderen van lege inputs
-            d = [i.rstrip().decode('ascii','ignore') for i in e if any(c.isalpha() for c in i)]
+            d = [i.rstrip() for i in e if any(c.isalpha() for c in i)]
             for n, i in enumerate(d):
                 if i == "Zoeken":
                     s = d[n]+d[n+1]
