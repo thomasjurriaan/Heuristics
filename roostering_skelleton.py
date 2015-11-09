@@ -181,6 +181,7 @@ if __name__ == '__main__':
     students = []
     courses = []
     groups = []
+    allCoursesSchudeled = True # May be a bit tricky
     for c in courseData:
         courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
                               c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
@@ -198,6 +199,16 @@ if __name__ == '__main__':
 """ Poging tot recursieve functie om activiteiten in dagen in te delen """
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+# This function uses the Boolean allCoursesScheduled. 
+# It is instantiated as 'True' and set to 'False' when 
+# an activity cannot be scheduled in randomAlgorithm(). 
+
+def allCoursesSchudeled():
+    if(allCoursesSchudeled == True):
+        return 1000
+
+def coursesMaximallySpread
+
 def getPoints(timeTable):
     # Calculates the points of the timeTable
     # Looks for bonus points(20 for each maximally spreaded course)
@@ -205,7 +216,7 @@ def getPoints(timeTable):
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
     points = 0
     points += allCoursesSheduled()
-    points += coursesMaximallySpreaded()
+    points += coursesMaximallySpread()
     points -= activityConflict()
     points -= overbooked()
     points -= personalScheduleConflict
@@ -305,7 +316,8 @@ def randomAlgorithm():
     # Use bookRandomRoom to go from activities to groups and book those groups
     for activity, i in enumerate(randomActivities):
         try: bookRandomRoom(random_activities[i], randomTimeSlots)
-        except: pass
+        except: allCoursesSchudeled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
+            pass
     return timeTable
 
 
