@@ -14,6 +14,7 @@ ROOMDICT = {
     "C1.112":60
     }
 ROOMS = []
+roomSlots = []
 for r in ROOMDICT:
     ROOMS.append({
         "name":r,
@@ -150,6 +151,20 @@ class Group(object):
     def getTimeSlot(self):
         return self.timeSlot
     
+class Roomslot(object):
+    def __init__(self, room, timeSlot, group):
+        self.room = room
+        self.timeSlot = timeSlot
+        self.group = group
+    def getRoom(self):
+        return self.room
+    def getTimeslot(self):
+        return self.timeSlot
+    def getGroup(self):
+        return self.group
+    def getStudents(self):
+        students = group.getStudents()
+        return students
 
 def getData(filename):
     """
@@ -173,6 +188,10 @@ if __name__ == '__main__':
     for s in studentData[1:]:
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
+
+    rooster = randomAlgorithm()
+    rooster.getAllTimeSlots()
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -221,8 +240,11 @@ def bookRandomRoom(activity, randomTimeSlots):
                 (r['size'] <= activity.getMaxStudents()) &
                 (r['size'] >= len(course.getStudents()))
             }:
+
                 thisGroup = Group(activity, course.getStudents(), activity.getMaxStudents(), r, t)
                 groups.append(thisGroup)
+                thisRoomSlot = Roomslot(r, t, thisGroup)
+                roomSlots.append(thisRoomSlot)
                 l.book(thisGroup,r)
                 break
         break
