@@ -195,12 +195,13 @@ def bookRandomRoom(activity, timeslot):
     for r in rooms:
         if 
         {
-            (not r['course']) &
+            (r['course']==None) &
             (r['size'] <= activity.getMaxStudents()) &
             (r['size'] >= len(course.getStudents()))
         }:
-            groups.append(Group()
-            l.book(group,r)
+            thisGroup = Group(activity, course.getStudents(), activity.getMaxStudents(), r, timeslot
+            groups.append(thisGroup)
+            l.book(thisGroup,r)
             break
     break
 
