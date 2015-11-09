@@ -18,7 +18,7 @@ for r in ROOMDICT:
     ROOMS.append({
         "name":r,
         "size":ROOMDICT[r],
-        "course":None
+        "group":None
         })
 
 class Student(object):
@@ -35,7 +35,7 @@ class Student(object):
                     e.addStudent(self)
                     break
             else: raise StandardError("Course "+c+" for student "+self.getName()+" does not exist")
-        self.activities = []
+        self.groups = []
     def getName(self):
         return self.firstName+' '+self.lastName
     def getNr(self):
@@ -46,8 +46,8 @@ class Student(object):
     def doesCourse(self, course):
         #check of course wel een class-instance is?
         return course in self.courses
-    def addActivity(self, activity):
-        self.activities.append(activity)
+    def addGroup(self, group):
+        self.groups.append(group)
 
 
 class TimeTable(object):
@@ -79,7 +79,7 @@ class TimeSlot(object):
         self.roomSlots = ROOMS
     def isFullyBooked(self):
         #Returns True if all rooms are booked. False otherwise
-        return all([r['course'] for r in self.roomSlots])
+        return all([r['course'] != None for r in self.roomSlots])
     def book(self, group, room):
         #Books a course in a specific room
         for r in self.roomSlots:
@@ -89,11 +89,12 @@ class TimeSlot(object):
         #Resets a specific room in the timeslot
         for r in self.roomSlots:
             if r['name'] == room:
-                r['course'] = False
+                r['course'] = None
     def getTime(self):
         return str(2*self.time+9)+"h till "+str(2*self.time+11)+"h."
     def getRoomSlots(self):
         return self.roomSlots
+
 
 class Course(object):
     def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
@@ -117,18 +118,37 @@ class Activity(object):
         self.type = workType
         self.course = course
         self.maxStudents = maxStudents
+        self.groups = []
     def getCourse(self):
         return self.course
     def getMaxStudents(self):
         return self.maxStudents
     def getType(self):
         return self.type
-   # def split(self):
+    def addGroup(self,group):
+        self.groups.append(group)
 
 
 class Group(object):
-    def __init__(self, activity, students, maxstudents, roomslot, timeslot):
-
+    def __init__(self, activity, students, maxStudents, roomSlot, timeSlot):
+        self.activity = activity
+        self.students = students
+        self.maxStudents = maxStudents
+        self.roomSlot = roomSlot
+        self.timeSlot = timeSlot
+        for s in students:
+            s.addGroup(self)
+        activity.addGroup(self)
+    def getActivity(self):
+        return self.activity
+    def getStudents(self):
+        return self.students
+    def isValid(self):
+        return len(students)<=maxStudents
+    def getRoomSlot(self):
+        return self.roomSlot
+    def getTimeSlot(self):
+        return self.timeSlot
     
 
 def getData(filename):
@@ -149,7 +169,6 @@ if __name__ == '__main__':
     for c in courseData:
         courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
                               c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
-
 
     for s in studentData[1:]:
         #Function that makes student-instances
