@@ -80,7 +80,7 @@ class TimeSlot(object):
     def isFullyBooked(self):
         #Returns True if all rooms are booked. False otherwise
         return all([r['course'] for r in self.roomSlots])
-    def book(self, course, room):
+    def book(self, group, room):
         #Books a course in a specific room
         for r in self.roomSlots:
             if r['name'] == room:
@@ -145,6 +145,7 @@ if __name__ == '__main__':
     courseData = getData(COURSES)
     students = []
     courses = []
+    groups = []
     for c in courseData:
         courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
                               c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
@@ -180,14 +181,16 @@ def bookRoom(timeTable,activity,day):
                 (r['size'] <= activity.getMaxStudents()) &
                 (r['size'] >= len(course.getStudents()))
                  } :
-                l.book(course,r)
+                l.book(course,r) #book neemt nu group en timeslot als arguments
                 break
         break
     else: raise StandardError("No room can be found for "
-                              +activity.getCourse().getName()
-                              +" on day "+day)
+                              + activity.getCourse().getName()
+                              +" on day " + day)
 
 def bookRandomRoom(activity, timeslot):
+
+    # Dit zijn de arguments van groups:(self, activity, students, maxstudents, roomslot, timeslot)
     rooms = timeslot.getRoomSlots()
     for r in rooms:
         if 
@@ -196,7 +199,8 @@ def bookRandomRoom(activity, timeslot):
             (r['size'] <= activity.getMaxStudents()) &
             (r['size'] >= len(course.getStudents()))
         }:
-            l.book(course,r)
+            groups.append(Group()
+            l.book(group,r)
             break
     break
 
