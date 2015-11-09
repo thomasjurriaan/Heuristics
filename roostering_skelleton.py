@@ -167,7 +167,7 @@ def getPoints(timeTable):
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
     return 1000
     
-
+'''
 def bookRoom(timeTable,activity,day):
     # Tries to book a room. Is no room suits the needs of the specific
     # course and activity, an Error is raised
@@ -188,10 +188,18 @@ def bookRoom(timeTable,activity,day):
                               + activity.getCourse().getName()
                               +" on day " + day)
 
-def bookRandomRoom(activity, timeslot):
+'''
+def bookRandomRoom(activity, ):
+
+    # Make list of random timeslots
+    randomTimeSlots = mainTimeTable.getAllTimeSlots()
+    for r in randomTimeSlots:
 
     # Dit zijn de arguments van groups:(self, activity, students, maxstudents, roomslot, timeslot)
-    rooms = timeslot.getRoomSlots()
+    rooms = r.getRoomSlots()
+
+
+    random.shuffle(randomTimeSlots)
     for r in rooms:
         if 
         {
@@ -203,7 +211,14 @@ def bookRandomRoom(activity, timeslot):
             groups.append(thisGroup)
             l.book(thisGroup,r)
             break
-    break
+        else:
+            raise StandardError("No room can be found for "
+                              + activity.getCourse().getName()
+                              +" on " + timeslot.day + " at " timeslot.time)
+
+
+    
+
 
 
 ##def generateAllChildren(parent, activity):
@@ -234,21 +249,12 @@ def randomAlgorithm():
     for c in courses:
         random_activities.append(c.getActivities())
 
-    random.shuffle(random_activities)
-
-    # Make list of random timeslots
-    random_timeslots = mainTimeTable.getAllTimeSlots()
-
-    random.shuffle(random_timeslots)
+    random.shuffle(randomActivities)
 
     # Use bookRandomRoom to go from activities to groups and book those groups
-    int i = 0
-    while(i < len(random_activities)):
-    {
-        bookRandomRoom(random_activities[i], random_timeslots[i])
-        i++
-    }
-
+    for activity in enumerate(randomActivities):
+        try: bookRandomRoom(random_activities[i])
+        except: pass
     return timeTable
 
 
