@@ -203,7 +203,16 @@ def getPoints(timeTable):
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
-    return 1000
+    points = 0
+    points += allCoursesSheduled()
+    points += coursesMaximallySpreaded()
+    points -= activityConflict()
+    points -= overbooked()
+    points -= personalScheduleConflict
+
+    # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + personalScheduleConflict())
+
+    return points
     
 '''
 def bookRoom(timeTable,activity,day):
