@@ -1,4 +1,5 @@
 import json
+import random
 
 STUDENTS = 'students.json'
 COURSES = 'coursesInf.json'
@@ -65,13 +66,16 @@ class TimeTable(object):
         for n, d in enumerate(self.days):
             if day==d:
                 return self.timeSlots[(4*n):(4*n+4)]
+    def getAllTimeSlots(self):
+        return self.timeSlots
+
 
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
-    def __init__(self, d, t):
+    def __init__(self, day, time):
         # 'i' is a number in range 20.
-        self.time = t
-        self.day = d
+        self.time = time
+        self.day = day
         self.roomSlots = ROOMS
     def isFullyBooked(self):
         #Returns True if all rooms are booked. False otherwise
@@ -119,6 +123,12 @@ class Activity(object):
         return self.maxStudents
     def getType(self):
         return self.type
+   # def split(self):
+
+
+class Group(object):
+    def __init__(self, activity, students, maxstudents, roomslot, timeslot):
+
     
 
 def getData(filename):
@@ -177,6 +187,20 @@ def bookRoom(timeTable,activity,day):
                               +activity.getCourse().getName()
                               +" on day "+day)
 
+def bookRandomRoom(activity, timeslot):
+    rooms = timeslot.getRoomSlots()
+    for r in rooms:
+        if 
+        {
+            (not r['course']) &
+            (r['size'] <= activity.getMaxStudents()) &
+            (r['size'] >= len(course.getStudents()))
+        }:
+            l.book(course,r)
+            break
+    break
+
+
 def generateAllChildren(parent, activity):
     # Returns a max of 5 timeTable indices
     days = ['mo','tu','we','th','fr']
@@ -200,5 +224,26 @@ def roosterVolgendeActiviteit(activities,parentTimeTable):
     return bestTimeTable
 
 def randomAlgorithm():
-    print(courseList)
+    # Make list of random activities
+    random_activities = []
+    for c in courses:
+        random_activities.append(c.getActivities())
+
+    random.shuffle(random_activities)
+
+    # Make list of random timeslots
+    random_timeslots = mainTimeTable.getAllTimeSlots()
+
+    random.shuffle(random_timeslots)
+
+    # Use bookRandomRoom to go from activities to groups and book those groups
+    int i = 0
+    while(i < len(random_activities)):
+    {
+        bookRandomRoom(random_activities[i], random_timeslots[i])
+        i++
+    }
+
+    return timeTable
+
 
