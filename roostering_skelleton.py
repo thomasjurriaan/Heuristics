@@ -1,9 +1,15 @@
 import json
 import random
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 STUDENTS = 'students.json'
 COURSES = 'coursesInf.json'
-ROOMDICT = {
+ROOMS = {
     #Room name, room for nr students"
     "A1.04":41,
     "A1.06":22,
@@ -13,14 +19,10 @@ ROOMDICT = {
     "C0.110":117,
     "C1.112":60
     }
-ROOMS = []
-roomSlots = []
-for r in ROOMDICT:
-    ROOMS.append({
-        "name":r,
-        "size":ROOMDICT[r],
-        "group":None
-        })
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 class Student(object):
     def __init__(self, firstName, lastName, studntNr, courses, courseList):
@@ -51,6 +53,7 @@ class Student(object):
         self.groups.append(group)
 
 
+
 class TimeTable(object):
     def __init__(self):
         #include 4 empty time slots for every day of the week.
@@ -70,31 +73,60 @@ class TimeTable(object):
     def getAllTimeSlots(self):
         return self.timeSlots
 
-
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
     def __init__(self, day, time):
         # 'i' is a number in range 20.
         self.time = time
         self.day = day
-        self.roomSlots = ROOMS
+        self.roomSlots = []
+        for r in ROOMS:
+            self.roomSlots.append(RoomSlot(r,ROOMS[r],self))
     def isFullyBooked(self):
         #Returns True if all rooms are booked. False otherwise
-        return all([r['course'] != None for r in self.roomSlots])
+        return all([r.hasGroup for r in self.roomSlots])
+    """ Misschien kunnen book() en resetRoomSlot() hier weggelaten worden,
+        omdat deze in RoomSlot object opgenomen kunnen worden? """
     def book(self, group, room):
         #Books a course in a specific room
         for r in self.roomSlots:
-            if r['name'] == room:
-                r['course'] = course
+            if r.getRoom() == room:
+                if not r.hadGroup():
+                    r.appointGroup(group)
+        else: raise ValueError("Room "+r.getRoom()+" not free to appoint")
     def resetRoomSlot(self,room):
         #Resets a specific room in the timeslot
         for r in self.roomSlots:
-            if r['name'] == room:
-                r['course'] = None
+            if r.getRoom() == room:
+                r.appointGroup(None)
     def getTime(self):
+        return self.time
+    def getDay(self):
+        return self.day
+    def printTime(self):
         return str(2*self.time+9)+"h till "+str(2*self.time+11)+"h."
     def getRoomSlots(self):
         return self.roomSlots
+    
+class RoomSlot(object):
+    def __init__(self, room, size, timeSlot):
+        self.room = room
+        self.size = size
+        self.timeSlot = timeSlot
+        self.group = None
+    def getRoom(self):
+        return self.room
+    def getTimeslot(self):
+        return self.timeSlot
+    def hasGroup(self):
+        return self.group != None
+    def appointGroup(self, group):
+        self.group = group
+    def getStudents(self):
+        if self.group == None:
+            return None
+        else: return self.group.getStudents()
+
 
 
 class Course(object):
@@ -129,7 +161,6 @@ class Activity(object):
     def addGroup(self,group):
         self.groups.append(group)
 
-
 class Group(object):
     def __init__(self, activity, students, maxStudents, roomSlot, timeSlot):
         self.activity = activity
@@ -150,21 +181,11 @@ class Group(object):
         return self.roomSlot
     def getTimeSlot(self):
         return self.timeSlot
+
     
-class Roomslot(object):
-    def __init__(self, room, timeSlot, group):
-        self.room = room
-        self.timeSlot = timeSlot
-        self.group = group
-    def getRoom(self):
-        return self.room
-    def getTimeslot(self):
-        return self.timeSlot
-    def getGroup(self):
-        return self.group
-    def getStudents(self):
-        students = group.getStudents()
-        return students
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
 def getData(filename):
     """
@@ -196,7 +217,7 @@ if __name__ == '__main__':
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Poging tot recursieve functie om activiteiten in dagen in te delen """
+"""""""""""""""  Scheduling algorithms """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # This function uses the Boolean allCoursesScheduled. 
@@ -205,48 +226,28 @@ if __name__ == '__main__':
 
 def allCoursesSchudeled():
     if(allCoursesSchudeled == True):
-        return 1000
+        return True
 
-def coursesMaximallySpread
+def coursesMaximallySpread():
+    pass
 
 def getPoints(timeTable):
     # Calculates the points of the timeTable
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
-    points = 0
-    points += allCoursesSheduled()
-    points += coursesMaximallySpread()
-    points -= activityConflict()
-    points -= overbooked()
-    points -= personalScheduleConflict
+    if AllCoursesScheduled():
+        points = 1000
+        points += coursesMaximallySpread()
+        points -= activityConflict()
+        points -= overbooked()
+        points -= personalScheduleConflict
+    else: points = None
 
     # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + personalScheduleConflict())
 
     return points
-    
-'''
-def bookRoom(timeTable,activity,day):
-    # Tries to book a room. Is no room suits the needs of the specific
-    # course and activity, an Error is raised
-    l = timeTable.getTimeSlots(day)
-    rooms = l.getRoomSlots()
-    course = activity.getCourse()
-    for t in l:
-        for r in rooms:
-            if {
-                (not r['course']) &
-                (r['size'] <= activity.getMaxStudents()) &
-                (r['size'] >= len(course.getStudents()))
-                 } :
-                l.book(course,r) #book neemt nu group en timeslot als arguments
-                break
-        break
-    else: raise StandardError("No room can be found for "
-                              + activity.getCourse().getName()
-                              +" on day " + day)
 
-'''
 def bookRandomRoom(activity, randomTimeSlots):
 
     # Dit zijn de arguments van groups:(self, activity, students, maxstudents, roomslot, timeslot)
@@ -254,8 +255,7 @@ def bookRandomRoom(activity, randomTimeSlots):
     for t in randomTimeSlots:
         rooms = t.getRoomSlots()
         for r in rooms:
-            if 
-            {
+            if {
                 (r['course']==None) &
                 (r['size'] <= activity.getMaxStudents()) &
                 (r['size'] >= len(course.getStudents()))
@@ -269,14 +269,31 @@ def bookRandomRoom(activity, randomTimeSlots):
                 break
         break
     else:
-        raise StandardError("No room can be found for " + 
-            activity.getCourse().getName() + 
-            " on " + timeslot.day + " at " timeslot.time)
+        raise StandardError("No room can be found for " +
+                            activity.getCourse().getName() +
+                            " on " + timeslot.day + " at " timeslot.time)
 
 
-    
+def randomAlgorithm():
+    # Make list of random activities
+    random_activities = []
+    for c in courses:
+        random_activities.append(c.getActivities())
 
+    print random_activities[15]
+    random.shuffle(randomActivities)
 
+    randomRoomSlots = []
+    # Make list of random timeslots
+    randomTimeSlots = mainTimeTable.getAllTimeSlots()
+    random.shuffle(randomTimeSlots)
+
+    # Use bookRandomRoom to go from activities to groups and book those groups
+    for activity, i in enumerate(randomActivities):
+        try: bookRandomRoom(random_activities[i], randomTimeSlots)
+        except: allCoursesSchudeled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
+            pass
+    return timeTable
 
 ##def generateAllChildren(parent, activity):
 ##    # Returns a max of 5 timeTable indices
@@ -299,25 +316,25 @@ def bookRandomRoom(activity, randomTimeSlots):
 ##                bestTimeTable = t
 ##        else: roosterVolgendeActiviteit(activities[1:],t)
 ##    return bestTimeTable
-
-def randomAlgorithm():
-    # Make list of random activities
-    random_activities = []
-    for c in courses:
-        random_activities.append(c.getActivities())
-
-    random.shuffle(randomActivities)
-
-    randomRoomSlots = []
-    # Make list of random timeslots
-    randomTimeSlots = mainTimeTable.getAllTimeSlots()
-    random.shuffle(randomTimeSlots)
-
-    # Use bookRandomRoom to go from activities to groups and book those groups
-    for activity, i in enumerate(randomActivities):
-        try: bookRandomRoom(random_activities[i], randomTimeSlots)
-        except: allCoursesSchudeled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
-            pass
-    return timeTable
-
-
+##
+##def bookRoom(timeTable,activity,day):
+##    # Tries to book a room. Is no room suits the needs of the specific
+##    # course and activity, an Error is raised
+##    l = timeTable.getTimeSlots(day)
+##    rooms = l.getRoomSlots()
+##    course = activity.getCourse()
+##    for t in l:
+##        for r in rooms:
+##            if {
+##                (not r['course']) &
+##                (r['size'] <= activity.getMaxStudents()) &
+##                (r['size'] >= len(course.getStudents()))
+##                 } :
+##                l.book(course,r) #book neemt nu group en timeslot als arguments
+##                break
+##        break
+##    else: raise StandardError("No room can be found for "
+##                              + activity.getCourse().getName()
+##                              +" on day " + day)
+##
+##
