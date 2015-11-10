@@ -212,8 +212,8 @@ if __name__ == '__main__':
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
 
-    rooster = randomAlgorithm()
-    rooster.getAllTimeSlots()
+    allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
+    getPoints(mainTimeTable, allCoursesScheduled)
 
 
 
@@ -225,19 +225,15 @@ if __name__ == '__main__':
 # It is instantiated as 'True' and set to 'False' when 
 # an activity cannot be scheduled in randomAlgorithm(). 
 
-def allCoursesSchudeled():
-    if(allCoursesSchudeled == True):
-        return True
-
 def coursesMaximallySpread():
     pass
 
-def getPoints(timeTable):
+def getPoints(timeTable, allCoursesScheduled):
     # Calculates the points of the timeTable
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
-    if AllCoursesScheduled():
+    if AllCoursesScheduled:
         points = 1000
         points += coursesMaximallySpread()
         points -= activityConflict()
@@ -269,13 +265,11 @@ def bookRandomRoom(activity, randomTimeSlots, groups):
                             " on " + timeslot.day + " at " timeslot.time)
 
 
-def randomAlgorithm():
+def randomAlgorithm(courses, mainTimeTable):
     # Make list of random activities
     random_activities = []
     for c in courses:
         random_activities.append(c.getActivities())
-
-    print random_activities[15]
     random.shuffle(randomActivities)
 
     randomRoomSlots = []
@@ -286,8 +280,8 @@ def randomAlgorithm():
     # Use bookRandomRoom to go from activities to groups and book those groups
     for activity in randomActivities:
         try: groups = bookRandomRoom(activity, randomTimeSlots, groups)
-        except: pass #allCoursesSchudeled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
-    return timeTable
+        except: allCoursesScheduled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
+    return allCoursesScheduled
 
 ##def generateAllChildren(parent, activity):
 ##    # Returns a max of 5 timeTable indices
