@@ -241,7 +241,7 @@ def getPoints(timeTable):
         points += coursesMaximallySpread()
         points -= activityConflict()
         points -= overbooked()
-        points -= personalScheduleConflict
+        points -= personalScheduleConflict()
     else: points = None
 
     # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + personalScheduleConflict())
