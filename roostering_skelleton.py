@@ -19,6 +19,7 @@ ROOMS = {
     "C0.110":117,
     "C1.112":60
     }
+OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
@@ -248,26 +249,20 @@ def getPoints(timeTable):
 
     return points
 
-def bookRandomRoom(activity, randomTimeSlots):
-
-    # Dit zijn de arguments van groups:(self, activity, students, maxstudents, roomslot, timeslot)
-
+def bookRandomRoom(activity, randomTimeSlots, groups):
+    # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot, timeSlot)
     for t in randomTimeSlots:
         rooms = t.getRoomSlots()
         for r in rooms:
             if {
-                (r['course']==None) &
-                (r['size'] <= activity.getMaxStudents()) &
-                (r['size'] >= len(course.getStudents()))
+                (r.hasGroup()==None) &
+                (r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents()))
             }:
 
-                thisGroup = Group(activity, course.getStudents(), activity.getMaxStudents(), r, t)
-                groups.append(thisGroup)
-                thisRoomSlot = Roomslot(r, t, thisGroup)
-                roomSlots.append(thisRoomSlot)
-                l.book(thisGroup,r)
-                break
-        break
+                group = Group(activity, activity.getCourse().getStudents(), activity.getMaxStudents(), r, t)
+                groups.append(group)
+                r.appointGroup(group)
+                return groups
     else:
         raise StandardError("No room can be found for " +
                             activity.getCourse().getName() +
@@ -289,10 +284,9 @@ def randomAlgorithm():
     random.shuffle(randomTimeSlots)
 
     # Use bookRandomRoom to go from activities to groups and book those groups
-    for activity, i in enumerate(randomActivities):
-        try: bookRandomRoom(random_activities[i], randomTimeSlots)
-        except: allCoursesSchudeled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
-            pass
+    for activity in randomActivities:
+        try: groups = bookRandomRoom(activity, randomTimeSlots, groups)
+        except: pass #allCoursesSchudeled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
     return timeTable
 
 ##def generateAllChildren(parent, activity):
