@@ -67,10 +67,8 @@ class TimeTable(object):
     def resetTimeSlot(self,i):
         #When removing a booking from the schedual
         self.timeSlots[i] = TimeSlot(i)
-    def getTimeSlots(self, day):
-        for n, d in enumerate(self.days):
-            if day==d:
-                return self.timeSlots[(4*n):(4*n+4)]
+    def getTimeSlots(self):
+        return self.timeSlots
     def getAllTimeSlots(self):
         return self.timeSlots
 
@@ -86,20 +84,6 @@ class TimeSlot(object):
     def isFullyBooked(self):
         #Returns True if all rooms are booked. False otherwise
         return all([r.hasGroup for r in self.roomSlots])
-    """ Misschien kunnen book() en resetRoomSlot() hier weggelaten worden,
-        omdat deze in RoomSlot object opgenomen kunnen worden? """
-    def book(self, group, room):
-        #Books a course in a specific room
-        for r in self.roomSlots:
-            if r.getRoom() == room:
-                if not r.hadGroup():
-                    r.appointGroup(group)
-        else: raise ValueError("Room "+r.getRoom()+" not free to appoint")
-    def resetRoomSlot(self,room):
-        #Resets a specific room in the timeslot
-        for r in self.roomSlots:
-            if r.getRoom() == room:
-                r.appointGroup(None)
     def getTime(self):
         return self.time
     def getDay(self):
@@ -117,12 +101,18 @@ class RoomSlot(object):
         self.group = None
     def getRoom(self):
         return self.room
-    def getTimeslot(self):
+    def getTimeSlot(self):
         return self.timeSlot
+    def getSize(self):
+        return self.size
     def hasGroup(self):
         return self.group != None
     def appointGroup(self, group):
         self.group = group
+    def reset(self):
+        self.group = None
+    def getGroup(self):
+        return self.group
     def getStudents(self):
         if self.group == None:
             return None
@@ -163,12 +153,11 @@ class Activity(object):
         self.groups.append(group)
 
 class Group(object):
-    def __init__(self, activity, students, maxStudents, roomSlot, timeSlot):
+    def __init__(self, activity, students, maxStudents, roomSlot):
         self.activity = activity
         self.students = students
         self.maxStudents = maxStudents
         self.roomSlot = roomSlot
-        self.timeSlot = timeSlot
         for s in students:
             s.addGroup(self)
         activity.addGroup(self)
@@ -177,43 +166,9 @@ class Group(object):
     def getStudents(self):
         return self.students
     def isValid(self):
-        return len(students)<=maxStudents
+        return len(self.students) <= self.maxStudents
     def getRoomSlot(self):
         return self.roomSlot
-    def getTimeSlot(self):
-        return self.timeSlot
-
-    
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
-
-def getData(filename):
-    """
-    Leest de json-file met de rooster data
-    Returnt een lijst van dictionaries
-    """
-    json_data=open(filename).read()
-    return json.loads(json_data)
- 
-if __name__ == '__main__':
-    mainTimeTable = TimeTable()
-    studentData = getData(STUDENTS)
-    courseData = getData(COURSES)
-    students = []
-    courses = []
-    groups = []
-    allCoursesSchudeled = True # May be a bit tricky
-    for c in courseData:
-        courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
-                              c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
-
-    for s in studentData[1:]:
-        #Function that makes student-instances
-        students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
-
-    allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
-    getPoints(mainTimeTable, allCoursesScheduled)
 
 
 
@@ -242,47 +197,84 @@ def getPoints(timeTable, allCoursesScheduled):
     else: points = None
 
     # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + personalScheduleConflict())
-
     return points
 
-def bookRandomRoom(activity, randomTimeSlots, groups):
+def bookRandomRoom(activity, randomRoomSlots):
     # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot, timeSlot)
-    for t in randomTimeSlots:
-        rooms = t.getRoomSlots()
-        for r in rooms:
-            if {
-                (r.hasGroup()==None) &
-                (r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents()))
-            }:
-
-                group = Group(activity, activity.getCourse().getStudents(), activity.getMaxStudents(), r, t)
+    for r in randomRoomSlots:
+        if not r.hasGroup():
+            if r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents()):
+                group = Group(activity, activity.getCourse().getStudents(),
+                              activity.getMaxStudents(), r)
                 groups.append(group)
                 r.appointGroup(group)
                 return groups
-    else:
-        raise StandardError("No room can be found for " +
-                            activity.getCourse().getName() +
-                            " on " + timeslot.day + " at " timeslot.time)
+    else: raise StandardError("No room can be found for " +
+                              activity.getCourse().getName())
 
 
-def randomAlgorithm(courses, mainTimeTable):
+def randomAlgorithm(courses, timeTable):
     # Make list of random activities
-    random_activities = []
+    randomActivities = []
     for c in courses:
-        random_activities.append(c.getActivities())
+        randomActivities += c.getActivities()
     random.shuffle(randomActivities)
 
-    randomRoomSlots = []
     # Make list of random timeslots
-    randomTimeSlots = mainTimeTable.getAllTimeSlots()
-    random.shuffle(randomTimeSlots)
-
+    randomRoomSlots = []
+    for t in timeTable.getAllTimeSlots():
+        randomRoomSlots += t.getRoomSlots()
+    random.shuffle(randomRoomSlots)
+    
     # Use bookRandomRoom to go from activities to groups and book those groups
+    allCoursesScheduled = True
     for activity in randomActivities:
-        try: groups = bookRandomRoom(activity, randomTimeSlots, groups)
-        except: allCoursesScheduled = False # Ik weet niet zeker of ik 'except' zo kan gebruiken
-    return allCoursesScheduled
+        groups = bookRandomRoom(activity, randomRoomSlots)
+        #except: allCoursesScheduled = False
 
+    # The timeTable is updated and doesn't have to be returned explicitly
+    # allCoursesScheduled only returns False when bookRandomRoom returned an error
+    return groups#allCoursesScheduled 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
+
+def getData(filename):
+    """
+    Leest de json-file met de rooster data
+    Returnt een lijst van dictionaries
+    """
+    json_data=open(filename).read()
+    return json.loads(json_data)
+ 
+if __name__ == '__main__':
+    mainTimeTable = TimeTable()
+    studentData = getData(STUDENTS)
+    courseData = getData(COURSES)
+    students = []
+    courses = []
+    groups = []
+    for c in courseData:
+        courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
+                              c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
+
+    for s in studentData[1:]:
+        #Function that makes student-instances
+        students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
+
+    allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
+    #getPoints(mainTimeTable, allCoursesScheduled)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+def exportTimeTable(timeTable):
+    pass
+    
+    
 ##def generateAllChildren(parent, activity):
 ##    # Returns a max of 5 timeTable indices
 ##    days = ['mo','tu','we','th','fr']
