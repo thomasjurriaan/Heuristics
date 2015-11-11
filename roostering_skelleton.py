@@ -69,8 +69,10 @@ class TimeTable(object):
         self.timeSlots[i] = TimeSlot(i)
     def getTimeSlots(self):
         return self.timeSlots
-    def getAllTimeSlots(self):
-        return self.timeSlots
+    def getDayTimeslots(self, day):
+        for n, d in enumerate(self.days):
+            if day==d:
+                return self.timeSlots[(4*n):(4*n+4)] 
 
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
@@ -223,7 +225,7 @@ def randomAlgorithm(courses, timeTable):
 
     # Make list of random timeslots
     randomRoomSlots = []
-    for t in timeTable.getAllTimeSlots():
+    for t in timeTable.getTimeSlots():
         randomRoomSlots += t.getRoomSlots()
     random.shuffle(randomRoomSlots)
     
