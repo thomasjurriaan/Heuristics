@@ -229,12 +229,12 @@ def randomAlgorithm(courses, timeTable):
     # Use bookRandomRoom to go from activities to groups and book those groups
     allCoursesScheduled = True
     for activity in randomActivities:
-        groups = bookRandomRoom(activity, randomRoomSlots)
-        #except: allCoursesScheduled = False
+        try: groups = bookRandomRoom(activity, randomRoomSlots)
+        except: allCoursesScheduled = False
 
     # The timeTable is updated and doesn't have to be returned explicitly
     # allCoursesScheduled only returns False when bookRandomRoom returned an error
-    return groups#allCoursesScheduled 
+    return allCoursesScheduled 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
