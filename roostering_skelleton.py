@@ -137,7 +137,7 @@ class Course(object):
         return self.courseName
 
 class Activity(object):
-    def __init__(self, workType, course, maxStudents=None):
+    def __init__(self, workType, course, maxStudents=float('inf')):
         # Worktype is 'lecture', 'seminar' or 'practicum'
         self.type = workType
         self.course = course
@@ -199,11 +199,12 @@ def getPoints(timeTable, allCoursesScheduled):
     # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + personalScheduleConflict())
     return points
 
-def bookRandomRoom(activity, randomRoomSlots):
+def bookRandomRoom(activity, randomRoomSlots, groups):
     # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot, timeSlot)
     for r in randomRoomSlots:
-        if not r.hasGroup():
-            if r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents()):
+        if ((not r.hasGroup()) and
+            r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents())
+            ):
                 group = Group(activity, activity.getCourse().getStudents(),
                               activity.getMaxStudents(), r)
                 groups.append(group)
@@ -228,13 +229,14 @@ def randomAlgorithm(courses, timeTable):
     
     # Use bookRandomRoom to go from activities to groups and book those groups
     allCoursesScheduled = True
+    groups = []
     for activity in randomActivities:
-        try: groups = bookRandomRoom(activity, randomRoomSlots)
+        try: groups = bookRandomRoom(activity, randomRoomSlots, groups)
         except: allCoursesScheduled = False
 
     # The timeTable is updated and doesn't have to be returned explicitly
     # allCoursesScheduled only returns False when bookRandomRoom returned an error
-    return allCoursesScheduled 
+    return groups, allCoursesScheduled 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -255,7 +257,6 @@ if __name__ == '__main__':
     courseData = getData(COURSES)
     students = []
     courses = []
-    groups = []
     for c in courseData:
         courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
                               c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
@@ -264,15 +265,43 @@ if __name__ == '__main__':
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
 
-    allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
+    groups, allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
     #getPoints(mainTimeTable, allCoursesScheduled)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
+""""""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def exportTimeTable(timeTable):
-    pass
+def objectToList(timeTable):
+    timeTableList = []
+    for t in timeTable.getTimeSlots():
+        for r in t.getRoomSlots():
+            if r.hasGroup():
+                group = r.getGroup()
+                students = [(s.getName(),s.getNr()) for s in group.getStudents()]
+                timeTableList.append({
+                    "startTime": 2*t.getTime(), #int of number of houres after 9 
+                    "day": t.getDay(),
+                    #"students": students, #Erg lange dictionary met dit erbij..
+                    "course": group.getActivity().getCourse().getName(),
+                    "workType": group.getActivity().getType(),
+                    "validity": group.isValid(),
+                    "roomName": r.getRoom(),
+                    "roomSize": r.getSize()
+                    })
+    return timeTableList
+                    
+
+def exportTimeTable(timeTable, filename):
+    data = objectToList(timeTable)
+    with open("Data/"+filename, 'wb') as f:
+        json.dump(data, f, indent=True, encoding='latin1')
+    return
+
+def saveTimeTable(timeTable):
+    filename = raw_input("Name your timetable json: ")+".json"
+    exportTimeTable(timeTable, filename)
+    return
     
     
 ##def generateAllChildren(parent, activity):
