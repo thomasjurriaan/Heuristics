@@ -182,8 +182,26 @@ class Group(object):
 # It is instantiated as 'True' and set to 'False' when 
 # an activity cannot be scheduled in randomAlgorithm(). 
 
+
+
+def allCoursesScheduled():
+    activitiesToSchedule = []
+    for c in courses:
+        activitiesToSchedule.append(c.getActivities)
+
+    activitiesScheduled = []
+    for d in timetable.days:
+        activitiesScheduled += getActivitiesPerDay(d)
+
+    for a in activitiesToSchedule:
+        if a not in activitiesScheduled:
+            return False
+
+    return True
+
 def coursesMaximallySpread():
-    pass
+    for c in courses:
+        if len(c.getActivities) is in range (2:4)
 
 def getPoints(timeTable, allCoursesScheduled):
     # Calculates the points of the timeTable
