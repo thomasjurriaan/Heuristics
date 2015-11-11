@@ -69,7 +69,7 @@ class TimeTable(object):
         self.timeSlots[i] = TimeSlot(i)
     def getTimeSlots(self):
         return self.timeSlots
-    def getDayTimeslots(self, day):
+    def getDayTimeSlots(self, day):
         for n, d in enumerate(self.days):
             if day==d:
                 return self.timeSlots[(4*n):(4*n+4)] 
@@ -202,6 +202,15 @@ def allCoursesScheduled():
 def coursesMaximallySpread():
     for c in courses:
         if len(c.getActivities) is in range (2:4)
+
+#haalt alle activities per dag op
+def getActivitiesPerDag(day):
+    dayList = []
+    for timeslot in range(4):
+        for roomslot in range(7):
+            dayList.append(mainTimeTable.getDayTimeSlots(day)[1].getRoomSlots()[2].getGroup().getActivity().getCourse())
+
+    return dayList
 
 def getPoints(timeTable, allCoursesScheduled):
     # Calculates the points of the timeTable
