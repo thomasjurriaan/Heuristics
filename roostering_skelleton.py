@@ -187,11 +187,11 @@ class Group(object):
 def allCoursesScheduled():
     activitiesToSchedule = []
     for c in courses:
-        activitiesToSchedule.append(c.getActivities)
+        activitiesToSchedule.append(c.getActivities())
 
     activitiesScheduled = []
-    for d in timetable.days:
-        activitiesScheduled += getActivitiesPerDay(d)
+    for d in mainTimeTable.days():
+        activitiesScheduled += mainTimeTable.getActivitiesPerDay(d)
 
     for a in activitiesToSchedule:
         if a not in activitiesScheduled:
@@ -222,6 +222,22 @@ def coursesMaximallySpread():
                     count[i] += 1
         if checkCount(count, len(act)):
             bonus += 20
+
+def overbooked():
+    malus = 0
+    ts = mainTimeTable.getTimeSlots
+    rs = []
+    for t in ts:
+        try: rs.append(t.getRoomSlots)
+        except: pass
+    for r in rs:
+        saldo = len(r.getStudents) - r.getSize()
+        if saldo > 0:
+            malus += saldo
+    return malus
+
+def personalScheduleConflict:
+    pass
 
 
 #haalt alle activities per dag op
