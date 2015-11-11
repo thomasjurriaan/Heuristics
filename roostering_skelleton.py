@@ -199,9 +199,30 @@ def allCoursesScheduled():
 
     return True
 
+def checkCount(count, numberOfActivities):
+    if numberOfActivities == 2:
+        if count == [1,0,0,1,0] or count == [0,1,0,0,1]:
+            return True
+    elif numberOfActivities == 3:
+        if count == [1,0,1,0,1]:
+            return True
+    elif: numberOfActivities == 4:
+        if count == [1,1,0,1,1]:
+            return True
+    return False
+
 def coursesMaximallySpread():
+    bonus = 0
     for c in courses:
-        if len(c.getActivities) is in range (2:4)
+        act = c.getActivities()
+        count = [0,0,0,0,0]
+        for a in act:
+            for d, i in enumerate allActivities:
+                if a in d:
+                    count[i] += 1
+        if checkCount(count, len(act)):
+            bonus += 20
+
 
 #haalt alle activities per dag op
 def getActivitiesPerDag(day):
