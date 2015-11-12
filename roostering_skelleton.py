@@ -368,6 +368,7 @@ def getData(filename):
     return json.loads(json_data)
  
 if __name__ == '__main__':
+    print "Creating data structure..."
     mainTimeTable = TimeTable()
     studentData = getData(STUDENTS)
     courseData = getData(COURSES)
@@ -381,6 +382,7 @@ if __name__ == '__main__':
         #Function that makes student-instances
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
 
+    print "Creating random schedule, stored as 'mainTimeTable'."
     groups, allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
     #getPoints(mainTimeTable, allCoursesScheduled)
 
@@ -410,12 +412,12 @@ def tableToList():
 def studentToList(student):
     data = []
     for g in student.getGroups():
-        t = g.getTimeSlot()
         r = g.getRoomSlot()
+        t = r.getTimeSlot()
         data.append({
             "startTime": 2*t.getTime(), #int of number of houres after 9 
             "day": t.getDay(),
-            "students": student,
+            "students": [student.getName()],
             "course": g.getActivity().getCourse().getName(),
             "workType": g.getActivity().getType(),
             "validity": str(g.isValid()),
@@ -428,12 +430,13 @@ def courseToList(course):
     data = []
     for a in course.getActivities():
         for g in a.getGroups():
-            t = g.getTimeSlot()
             r = g.getRoomSlot()
+            t = r.getTimeSlot()
+            students = [(s.getName(),s.getNr()) for s in g.getStudents()]
             data.append({
                 "startTime": 2*t.getTime(), #int of number of houres after 9 
                 "day": t.getDay(),
-                "students": course.getStudents(),
+                "students": students,
                 "course": course.getName(),
                 "workType": a.getType(),
                 "validity": str(g.isValid()),
@@ -444,24 +447,29 @@ def courseToList(course):
 
 
 def exportData(students, courses):
+    print "Data is stored in .../visualisation/Data/."
+    print "Saving main timetable..."
     data = tableToList()
     with open("Visualisatie/Data/main.json", 'wb') as f:
-        json.dump(data, f, indent=True, encoding='latin1')
+        json.dump(data, f, encoding='latin1')
+    print "Saving timetables of "+str(len(students))+" students..."
     for i, s in enumerate(students):
         data = studentToList(s)
-        filename = "student"+str(i)
+        filename = "student"+str(i)+".json"
         with open("Visualisatie/Data/"+filename, 'wb') as f:
-            json.dump(data, f, indent=True, encoding='latin1')
+            json.dump(data, f, encoding='latin1')
+    print "Saving timetables of "+str(len(courses))+" courses..."
     for i, c in enumerate(courses):
         data = courseToList(c)
-        filename = "course"+str(i)
+        filename = "course"+str(i)+".json"
         with open("Visualisatie/Data/"+filename, 'wb') as f:
-            json.dump(data, f, indent=True, encoding='latin1')
+            json.dump(data, f, encoding='latin1')
                 
     return
 
 def saveTimeTable(timeTable):
     filename = raw_input("Name your timetable json: ")+".json"
+    print "Data is stored in .../visualisation/Data/"+filename+"..."
     data = tableToList(timeTable)
     with open("Visualisatie/"+filename, 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')

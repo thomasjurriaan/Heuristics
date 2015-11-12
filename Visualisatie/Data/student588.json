@@ -1,0 +1,1 @@
+[{"roomName": "C0.110", "course": "Calculus 2", "roomSize": 117, "startTime": 6, "students": ["Maris Wielenga"], "day": "tu", "validity": "True", "workType": "lecture"}, {"roomName": "C0.110", "course": "Calculus 2", "roomSize": 117, "startTime": 4, "students": ["Maris Wielenga"], "day": "fr", "validity": "False", "workType": "seminar"}]
