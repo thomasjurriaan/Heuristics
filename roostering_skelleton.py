@@ -38,7 +38,7 @@ class Student(object):
                     self.courses.append(e)
                     e.addStudent(self)
                     break
-            else: raise StandardError("Course "+c+" for student "+self.getName()+" does not exist")
+            else: raise StandardError("Course " + c + " for student " + self.getName() + " does not exist")
         self.groups = []
     def getName(self):
         return self.firstName+' '+self.lastName
@@ -52,6 +52,8 @@ class Student(object):
         return course in self.courses
     def addGroup(self, group):
         self.groups.append(group)
+    def getGroup(self):
+        return self.groups
 
 
 
