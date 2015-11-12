@@ -245,22 +245,57 @@ def overbooked():
 def personalScheduleConflict():
     pass
 
+<<<<<<< HEAD
+#haalt alle activities per dag op. Input vb. ("mo")
+def getActivitiesPerDay(day):
+=======
 
 #haalt alle activities per dag op
 def getActivitiesPerDag(day):
+>>>>>>> 0ce4665846b60a7db86cdaf1e9291cb1d0b95692
     dayList = []
     for timeslot in range(4):
         for roomslot in range(7):
-            dayList.append(mainTimeTable.getDayTimeSlots(day)[1].getRoomSlots()[2].getGroup().getActivity().getCourse())
-
+            try:dayList.append(mainTimeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity().getCourse())
+            except: pass
     return dayList
+
+
+
+"""
+mondayActivities = getActivitiesPerDay("mo")
+tuesdayActivities = getActivitiesPerDay("tu")
+wensdayActivities = getActivitiesPerDay("we")
+thursdayActivities = getActivitiesPerDay("th")
+fridayActivities = getActivitiesPerDay("fr")
+allActivities = getActivitiesPerDay("mo"), getActivitiesPerDay("tu"), getActivitiesPerDay("we"), getActivitiesPerDay("th"), getActivitiesPerDay("fr")
+"""
+
+"""
+def activityConflict():
+    days = ["mo", "tu", "we", "th", "fr"]
+    
+    for day in days:
+        
+ """   
 
 def getPoints(timeTable, allCoursesScheduled):
     # Calculates the points of the timeTable
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
+<<<<<<< HEAD
+    
+    mondayActivities = getActivitiesPerDay("mo")
+    tuesdayActivities = getActivitiesPerDay("tu")
+    wensdayActivities = getActivitiesPerDay("we")
+    thursdayActivities = getActivitiesPerDay("th")
+    fridayActivities = getActivitiesPerDay("fr")
+    
+    if AllCoursesScheduled:
+=======
     if allCoursesScheduled:
+>>>>>>> 0ce4665846b60a7db86cdaf1e9291cb1d0b95692
         points = 1000
         points += coursesMaximallySpread()
         print points
