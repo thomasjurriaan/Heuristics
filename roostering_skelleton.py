@@ -153,6 +153,8 @@ class Activity(object):
         return self.type
     def addGroup(self,group):
         self.groups.append(group)
+    def getGroups(self):
+        return self.groups
 
 class Group(object):
     def __init__(self, activity, students, maxStudents, roomSlot):
@@ -182,11 +184,75 @@ class Group(object):
 # It is instantiated as 'True' and set to 'False' when 
 # an activity cannot be scheduled in randomAlgorithm(). 
 
+
+
+##def allCoursesScheduled():
+##    # Deze functie wordt nu niet gebruikt..
+##    activitiesToSchedule = []
+##    for c in courses:
+##        activitiesToSchedule.append(c.getActivities())
+##
+##    activitiesScheduled = []
+##    for d in mainTimeTable.days():
+##        activitiesScheduled += mainTimeTable.getActivitiesPerDay(d)
+##
+##    for a in activitiesToSchedule:
+##        if a not in activitiesScheduled:
+##            return False
+##
+##    return True
+
+def checkCount(count, numberOfActivities):
+    if numberOfActivities == 2:
+        if count == [1,0,0,1,0] or count == [0,1,0,0,1] or count == [1,0,0,0,1]:
+            return True
+    elif numberOfActivities == 3:
+        if count == [1,0,1,0,1]:
+            return True
+    elif numberOfActivities == 4:
+        if count == [1,1,0,1,1]:
+            return True
+    return False
+
 def coursesMaximallySpread():
+    bonus = 0
+    for c in courses:
+        act = c.getActivities()
+        count = [0,0,0,0,0]
+        for a in act:
+            for g in a.getGroups():
+                timeSlot = g.getRoomSlot().getTimeSlot()
+                for i, d in enumerate(['mo','tu','we','th','fr']):
+                    if timeSlot.getDay() == d:
+                        count[i] += 1
+        if checkCount(count, sum(count)):
+            bonus += 20
+    return bonus
+
+def overbooked():
+    malus = 0
+    ts = mainTimeTable.getTimeSlots
+    rs = []
+    for t in ts:
+        try: rs.append(t.getRoomSlots)
+        except: pass
+    for r in rs:
+        saldo = len(r.getStudents) - r.getSize()
+        if saldo > 0:
+            malus += saldo
+    return malus
+
+def personalScheduleConflict():
     pass
 
+<<<<<<< HEAD
 #haalt alle activities per dag op. Input vb. ("mo")
 def getActivitiesPerDay(day):
+=======
+
+#haalt alle activities per dag op
+def getActivitiesPerDag(day):
+>>>>>>> 0ce4665846b60a7db86cdaf1e9291cb1d0b95692
     dayList = []
     for timeslot in range(4):
         for roomslot in range(7):
@@ -218,6 +284,7 @@ def getPoints(timeTable, allCoursesScheduled):
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
+<<<<<<< HEAD
     
     mondayActivities = getActivitiesPerDay("mo")
     tuesdayActivities = getActivitiesPerDay("tu")
@@ -226,8 +293,12 @@ def getPoints(timeTable, allCoursesScheduled):
     fridayActivities = getActivitiesPerDay("fr")
     
     if AllCoursesScheduled:
+=======
+    if allCoursesScheduled:
+>>>>>>> 0ce4665846b60a7db86cdaf1e9291cb1d0b95692
         points = 1000
         points += coursesMaximallySpread()
+        print points
         points -= activityConflict()
         points -= overbooked()
         points -= personalScheduleConflict()
