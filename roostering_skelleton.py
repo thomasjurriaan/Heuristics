@@ -54,7 +54,8 @@ class Student(object):
         self.groups.append(group)
     def getGroup(self):
         return self.groups
-
+    def getGroups(self):
+        return self.groups
 
 
 class TimeTable(object):
@@ -214,7 +215,8 @@ def checkCount(count, numberOfActivities):
     elif numberOfActivities == 4:
         if count == [1,1,0,1,1]:
             return True
-       
+
+        
     return False
 
 def coursesMaximallySpread():
@@ -222,18 +224,12 @@ def coursesMaximallySpread():
     for c in courses:
         act = c.getActivities()
         count = [0,0,0,0,0]
-        counts = []
         for a in act:
             for g in a.getGroups():
-                newCount = count
                 timeSlot = g.getRoomSlot().getTimeSlot()
                 for i, d in enumerate(['mo','tu','we','th','fr']):
                     if timeSlot.getDay() == d:
-                        newCount[i] += 1
-                        counts.append(newCount)
-        print "=======Course========"
-        print "counts:  ",counts
-        print "newCount:  " ,count
+                        count[i] += 1
         if checkCount(count, sum(count)):
             bonus += 20
     return bonus
