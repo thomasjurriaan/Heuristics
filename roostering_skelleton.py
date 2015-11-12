@@ -214,6 +214,8 @@ def checkCount(count, numberOfActivities):
     elif numberOfActivities == 4:
         if count == [1,1,0,1,1]:
             return True
+
+        
     return False
 
 def coursesMaximallySpread():
@@ -279,7 +281,6 @@ def activityConflict():
         for course in cList:
             if cList.count(course) > 1:
                 if course not in checkList:
-                    print cList.count(course)
                     checkList.append(course)
                     mPoints -= cList.count(course)*10
     return mPoints
@@ -306,14 +307,11 @@ def getPoints(timeTable, allCoursesScheduled):
     if allCoursesScheduled:
         points = 1000
         points += coursesMaximallySpread()
-        print points
         points -= activityConflict()
         points -= overbooked()
         points -= personalScheduleConflict()
     else: points = None
-
-    # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + 
-
+    return points
 
 
 def bookRandomRoom(activity, randomRoomSlots, groups):
