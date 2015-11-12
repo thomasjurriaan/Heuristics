@@ -234,7 +234,7 @@ def overbooked():
     ts = mainTimeTable.getTimeSlots
     rs = []
     for t in ts:
-        try: rs.append(t.getRoomSlots)
+        try: rs.append(t.getRoomSlots)  
         except: pass
     for r in rs:
         saldo = len(r.getStudents) - r.getSize()
