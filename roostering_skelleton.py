@@ -387,14 +387,14 @@ if __name__ == '__main__':
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def objectToList(timeTable):
-    timeTableList = []
-    for t in timeTable.getTimeSlots():
+def tableToList():
+    data = []
+    for t in mainTimeTable.getTimeSlots():
         for r in t.getRoomSlots():
             if r.hasGroup():
                 group = r.getGroup()
                 students = [(s.getName(),s.getNr()) for s in group.getStudents()]
-                timeTableList.append({
+                data.append({
                     "startTime": 2*t.getTime(), #int of number of houres after 9 
                     "day": t.getDay(),
                     #"students": students, #Erg lange dictionary met dit erbij..
@@ -404,18 +404,66 @@ def objectToList(timeTable):
                     "roomName": r.getRoom(),
                     "roomSize": r.getSize()
                     })
-    return timeTableList
-                    
+    return data
 
-def exportTimeTable(timeTable, filename):
-    data = objectToList(timeTable)
-    with open("Visualisatie/"+filename, 'wb') as f:
+def studentToList(student):
+    data = []
+    for g in student.getGroups():
+        t = g.getTimeSlot()
+        r = g.getRoomSlot()
+        data.append({
+            "startTime": 2*t.getTime(), #int of number of houres after 9 
+            "day": t.getDay(),
+            "students": student,
+            "course": g.getActivity().getCourse().getName(),
+            "workType": g.getActivity().getType(),
+            "validity": str(g.isValid()),
+            "roomName": r.getRoom(),
+            "roomSize": r.getSize()
+            })
+    return data
+      
+def courseToList(course):
+    data = []
+    for a in course.getActivities():
+        for g in a.getGroups():
+            t = g.getTimeSlot()
+            r = g.getRoomSlot()
+            data.append({
+                "startTime": 2*t.getTime(), #int of number of houres after 9 
+                "day": t.getDay(),
+                "students": course.getStudents(),
+                "course": course.getName(),
+                "workType": a.getType(),
+                "validity": str(g.isValid()),
+                "roomName": r.getRoom(),
+                "roomSize": r.getSize()
+                })
+    return data
+
+
+def exportData(students, courses):
+    data = tableToList()
+    with open("Visualisatie/Data/main.json", 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')
+    for i, s in enumerate(students):
+        data = studentToList(s)
+        filename = "student"+str(i)
+        with open("Visualisatie/Data/"+filename, 'wb') as f:
+            json.dump(data, f, indent=True, encoding='latin1')
+    for i, c in enumerate(courses):
+        data = courseToList(c)
+        filename = "course"+str(i)
+        with open("Visualisatie/Data/"+filename, 'wb') as f:
+            json.dump(data, f, indent=True, encoding='latin1')
+                
     return
 
 def saveTimeTable(timeTable):
     filename = raw_input("Name your timetable json: ")+".json"
-    exportTimeTable(timeTable, filename)
+    data = tableToList(timeTable)
+    with open("Visualisatie/"+filename, 'wb') as f:
+        json.dump(data, f, indent=True, encoding='latin1')
     return
     
     

@@ -96,7 +96,7 @@ function addGroup(startTime, day, room, validity) {
     });
 };
 
-d3.json("test.json", function(json) {
+d3.json("Data/test.json", function(json) {
     for(var i = 0; i < json.length; i++) {
         addGroup(
             json[i].startTime, 
