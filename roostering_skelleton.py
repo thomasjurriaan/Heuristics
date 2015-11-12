@@ -233,13 +233,14 @@ def coursesMaximallySpread():
 
 def overbooked():
     malus = 0
-    ts = mainTimeTable.getTimeSlots
+    saldo = 0;
+    ts = mainTimeTable.getTimeSlots()
     rs = []
     for t in ts:
-        try: rs.append(t.getRoomSlots)
-        except: pass
+            rs += t.getRoomSlots()       
     for r in rs:
-        saldo = len(r.getStudents) - r.getSize()
+        if r.getStudents() != None:
+            saldo = len(r.getStudents()) - r.getSize()
         if saldo > 0:
             malus += saldo
     return malus
