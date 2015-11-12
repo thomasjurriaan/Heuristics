@@ -233,20 +233,30 @@ def coursesMaximallySpread():
 
 def overbooked():
     malus = 0
-    ts = mainTimeTable.getTimeSlots
+    saldo = 0;
+    ts = mainTimeTable.getTimeSlots()
     rs = []
     for t in ts:
-        try: rs.append(t.getRoomSlots)  
-        except: pass
+            rs += t.getRoomSlots()
     for r in rs:
-        saldo = len(r.getStudents) - r.getSize()
+        if r.getStudents() != None:
+            saldo = len(r.getStudents()) - r.getSize()
         if saldo > 0:
             malus += saldo
     return malus
 
 
 def personalScheduleConflict():
-    pass
+    score = 0
+    
+    # Loop over lijst met students heen
+    for s in students:
+        cList = []
+        for c in s.getGroup():
+            if c.getRoomSlot().timeSlot in cList:
+                score += 1
+            cList.append(c.getRoomSlot().timeSlot)
+    return score
 
 
 def activityConflict():
@@ -286,9 +296,6 @@ def getActivitiesPerDay(day):
             except: pass
     return aList
 
-
-def personalScheduleConflict():
-    return points
 
 
 def getPoints(timeTable, allCoursesScheduled):
