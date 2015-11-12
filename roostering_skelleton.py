@@ -405,7 +405,7 @@ def objectToList(timeTable):
                     #"students": students, #Erg lange dictionary met dit erbij..
                     "course": group.getActivity().getCourse().getName(),
                     "workType": group.getActivity().getType(),
-                    "validity": group.isValid(),
+                    "validity": str(group.isValid()),
                     "roomName": r.getRoom(),
                     "roomSize": r.getSize()
                     })
@@ -414,7 +414,7 @@ def objectToList(timeTable):
 
 def exportTimeTable(timeTable, filename):
     data = objectToList(timeTable)
-    with open("Data/"+filename, 'wb') as f:
+    with open("Visualisatie/"+filename, 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')
     return
 

@@ -66,7 +66,7 @@ function changeTimeDomain(timeDomainString) {
     gantt.redraw(groups);
 }   
 
-function addGroup(startTime, day,i) {
+function addGroup(startTime, day, room, validity) {
     // Adds a random group to the schedule
     if (day == "mo") {
         date = startMo;
@@ -83,23 +83,27 @@ function addGroup(startTime, day,i) {
     if (day == "fr") {
         date = startFr;
     }
+    if (validity == "True") {var n = 2;}
+    else {var n = 1;}
     var groupStatusKeys = Object.keys(groupStatus);
-    var groupStatusName = groupStatusKeys[1]//[Math.floor(Math.random() * groupStatusKeys.length)];
-    var groupName = groupNames[Math.floor(Math.random() * groupNames.length)];
+    var groupStatusName = groupStatusKeys[n];
 
-    console.log(9+startTime*2, day, d3.time.hour.offset(date, startTime*2))
-    // group is pushed to the schedule and the schedule is refreshed
     groups.push({
-    "startDate" : d3.time.hour.offset(date, startTime*2),
-    "endDate" : d3.time.hour.offset(date, startTime*2+2),
-    "taskName" : groupName,
+    "startDate" : d3.time.hour.offset(date, startTime),
+    "endDate" : d3.time.hour.offset(date, startTime+2),
+    "taskName" : room,
     "status" : groupStatusName
     });
-    gantt.redraw(groups);
 };
 
 d3.json("test.json", function(json) {
     for(var i = 0; i < json.length; i++) {
-        addGroup(json[i].startTime, json[i].day,i)
+        addGroup(
+            json[i].startTime, 
+            json[i].day,
+            json[i].roomName,
+            json[i].validity
+            )
     }
+    gantt.redraw(groups);
 })
