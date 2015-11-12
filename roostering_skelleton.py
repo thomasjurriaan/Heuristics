@@ -244,8 +244,10 @@ def overbooked():
             malus += saldo
     return malus
 
+
 def personalScheduleConflict():
     pass
+
 
 def activityConflict():
     #lijst met activiteiten
@@ -271,6 +273,8 @@ def activityConflict():
                     checkList.append(course)
                     mPoints -= cList.count(course)*10
     return mPoints
+
+
 #haalt alle activities per dag op. Input vb5. ("mo")
 def getActivitiesPerDay(day):
     aList = []
@@ -281,6 +285,11 @@ def getActivitiesPerDay(day):
                     aList.append(mainTimeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity())
             except: pass
     return aList
+
+
+def personalScheduleConflict():
+    return points
+
 
 def getPoints(timeTable, allCoursesScheduled):
     # Calculates the points of the timeTable
@@ -298,8 +307,7 @@ def getPoints(timeTable, allCoursesScheduled):
 
     # or: points = allCoursesSchudeled() + CoursesMaximallySpreaded() - (activityConflict() + overbooked() + 
 
-personalScheduleConflict())
-    return points
+
 
 def bookRandomRoom(activity, randomRoomSlots, groups):
     # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot, timeSlot)
