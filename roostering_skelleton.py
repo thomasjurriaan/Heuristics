@@ -247,7 +247,16 @@ def overbooked():
 
 
 def personalScheduleConflict():
-    pass
+    score = 0
+    
+    # Loop over lijst met students heen
+    for s in students:
+        cList = []
+        for c in s.getGroup():
+            if c.getRoomSlot().timeSlot in cList:
+                score += 1
+            cList.append(c.getRoomSlot().timeSlot)
+    return score
 
 
 def activityConflict():
@@ -287,9 +296,6 @@ def getActivitiesPerDay(day):
             except: pass
     return aList
 
-
-def personalScheduleConflict():
-    return points
 
 
 def getPoints(timeTable, allCoursesScheduled):
