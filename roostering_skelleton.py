@@ -470,8 +470,8 @@ def exportData(students, courses):
 def saveTimeTable(timeTable):
     filename = raw_input("Name your timetable json: ")+".json"
     print "Data is stored in .../visualisation/Data/"+filename+"..."
-    data = tableToList(timeTable)
-    with open("Visualisatie/"+filename, 'wb') as f:
+    data = tableToList()
+    with open("Visualisatie/Data/"+filename, 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')
     return
     
