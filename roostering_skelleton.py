@@ -1,5 +1,6 @@
 import json
 import random
+import math
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -179,14 +180,8 @@ class Group(object):
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Scheduling algorithms """""""""""""""""""""""""""""""""""
+"""""""""""""""  Counting points """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-# This function uses the Boolean allCoursesScheduled. 
-# It is instantiated as 'True' and set to 'False' when 
-# an activity cannot be scheduled in randomAlgorithm(). 
-
-
 
 ##def allCoursesScheduled():
 ##    # Deze functie wordt nu niet gebruikt..
@@ -213,9 +208,7 @@ def checkCount(count, numberOfActivities):
             return True
     elif numberOfActivities == 4:
         if count == [1,1,0,1,1]:
-            return True
-
-        
+            return True  
     return False
 
 def coursesMaximallySpread():
@@ -250,7 +243,6 @@ def overbooked():
 
 def personalScheduleConflict():
     score = 0
-    
     # Loop over lijst met students heen
     for s in students:
         cList = []
@@ -259,7 +251,6 @@ def personalScheduleConflict():
                 score += 1
             cList.append(c.getRoomSlot().timeSlot)
     return score
-
 
 def activityConflict():
     #lijst met activiteiten
@@ -270,8 +261,7 @@ def activityConflict():
     fridayActivities = getActivitiesPerDay("fr")
     allActivities = [mondayActivities, tuesdayActivities, wensdayActivities, thursdayActivities, fridayActivities]
     mPoints = 0
-    days = ["mo", "tu", "we", "th", "fr"]
-    
+    days = ["mo", "tu", "we", "th", "fr"]  
     for day in days:
         #lijst met courses
         cList = []
@@ -285,7 +275,6 @@ def activityConflict():
                     mPoints -= cList.count(course)*10
     return mPoints
 
-
 #haalt alle activities per dag op. Input vb5. ("mo")
 def getActivitiesPerDay(day):
     aList = []
@@ -296,8 +285,6 @@ def getActivitiesPerDay(day):
                     aList.append(mainTimeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity())
             except: pass
     return aList
-
-
 
 def getPoints(timeTable, allCoursesScheduled):
     # Calculates the points of the timeTable
@@ -313,68 +300,51 @@ def getPoints(timeTable, allCoursesScheduled):
     else: points = None
     return points
 
-# twee dingen mankeren nog: 1) hij komt niet door if statement heen en bookt dus niet en 
-# 2) er komen soms groepen activities binnen die wel in een vak passen
 
-# Takes an activity with more students than alowed per group and therefore creates and books multiple groups
-def split(activity,randomRoomSlots, groups):
-    numberOfGroups = len(activity.getCourse().getStudents()) / activity.getMaxStudents() + 1
-    print " number of groups: "
-    print numberOfGroups
-    for i in range(numberOfGroups):
-        numberOfStudents = len(activity.getCourse().getStudents()) / numberOfGroups
-        print "number of students: "
-        print numberOfStudents
-        print "max students: "
-        print activity.getMaxStudents()
-        print "groupnumber: "
-        print i
-        if i + 1 == numberOfGroups:
-            print "last group. "
-            for r in randomRoomSlots:
-                if ((not r.hasGroup()) and
-                r.getSize()*OVERBOOK >= numberOfStudents):
-                    print "going to book last group. "
-                    group = Group(activity, activity.getCourse().getStudents()[numberOfStudents * i:], activity.getMaxStudents(), r)
-                    groups.append(group)
-                    r.appointGroup(group)
-                    print len(group.getStudents())
-                    print "should"
-        else:
-            print "not last group. "
-            for r in randomRoomSlots:
-                if ((not r.hasGroup()) and
-                r.getSize()*OVERBOOK >= numberOfStudents):
-                    "going to book not last group. "
-                    group = Group(activity, activity.getCourse().getStudents()[numberOfStudents * i: numberOfStudents * (i + 1)], activity.getMaxStudents(), r)
-                    groups.append(group)
-                    r.appointGroup(group)
-                    print len(group.getStudents())
-                    print " + "
-    print "be equal to"
-    print len(activity.getCourse().getStudents())
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Random booking algorithm """""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-
-
-def bookRandomRoom(activity, randomRoomSlots, groups):
-    # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot)
-    if activity.getMaxStudents() < activity.getCourse().getStudents():
-        split(activity, randomRoomSlots, groups)
-
+def bookRandomRoom(activity, randomRoomSlots, students):
+    # Tries to book an activity in a room. If succeeded: returns the booked group
     for r in randomRoomSlots:
         if ((not r.hasGroup()) and
-            r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents())
+            r.getSize()*OVERBOOK >= len(students)
             ):
-                group = Group(activity, activity.getCourse().getStudents(),
-                              activity.getMaxStudents(), r)
-                groups.append(group)
+                group = Group(activity, students, activity.getMaxStudents(), r)
                 r.appointGroup(group)
-                return groups
+                return group
     else: raise StandardError("No room can be found for " +
                               activity.getCourse().getName())
 
+    
+def split(activity):
+    # Takes an activity with more students than alowed per group and returns lists of valid student groups
+    numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
+                               /float(activity.getMaxStudents()))
+    activityStudents = activity.getCourse().getStudents()
+    numberStud = len(activityStudents)/numberOfGroups
+    studentGroups = []
+    for i in range(int(numberOfGroups)):
+        newStudentGroup = activityStudents[int(i*numberStud):int((i+1)*numberStud)]
+        studentGroups.append(newStudentGroup)
+    return studentGroups
 
+
+def bookActivity(activity, randomRoomSlots):
+    # Splits activities in valid groups and tries to book them
+    if activity.getMaxStudents() < len(activity.getCourse().getStudents()):
+        studentGroups = split(activity)
+    else: studentGroups = [activity.getCourse().getStudents()]
+
+    groups = []
+    for g in studentGroups:
+        try:
+            newGroup = bookRandomRoom(activity, randomRoomSlots, g)
+            groups.append(newGroup)
+        except: pass
+    return groups
+        
 def randomAlgorithm(courses, timeTable):
     # Make list of random activities
     randomActivities = []
@@ -389,15 +359,13 @@ def randomAlgorithm(courses, timeTable):
     random.shuffle(randomRoomSlots)
     
     # Use bookRandomRoom to go from activities to groups and book those groups
-    allCoursesScheduled = True
     groups = []
     for activity in randomActivities:
-        try: groups = bookRandomRoom(activity, randomRoomSlots, groups)
-        except: allCoursesScheduled = False
+        newGroups = bookActivity(activity, randomRoomSlots)
+        groups += newGroups
 
     # The timeTable is updated and doesn't have to be returned explicitly
-    # allCoursesScheduled only returns False when bookRandomRoom returned an error
-    return groups, allCoursesScheduled 
+    return groups
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -428,7 +396,7 @@ if __name__ == '__main__':
         students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
 
     print "Creating random schedule, stored as 'mainTimeTable'."
-    groups, allCoursesScheduled = randomAlgorithm(courses, mainTimeTable)
+    groups = randomAlgorithm(courses, mainTimeTable)
     #getPoints(mainTimeTable, allCoursesScheduled)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
