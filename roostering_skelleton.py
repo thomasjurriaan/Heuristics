@@ -1,7 +1,6 @@
 import json
 import random
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -314,9 +313,55 @@ def getPoints(timeTable, allCoursesScheduled):
     else: points = None
     return points
 
+# twee dingen mankeren nog: 1) hij komt niet door if statement heen en bookt dus niet en 
+# 2) er komen soms groepen activities binnen die wel in een vak passen
+
+# Takes an activity with more students than alowed per group and therefore creates and books multiple groups
+def split(activity,randomRoomSlots, groups):
+    numberOfGroups = len(activity.getCourse().getStudents()) / activity.getMaxStudents() + 1
+    print " number of groups: "
+    print numberOfGroups
+    for i in range(numberOfGroups):
+        numberOfStudents = len(activity.getCourse().getStudents()) / numberOfGroups
+        print "number of students: "
+        print numberOfStudents
+        print "max students: "
+        print activity.getMaxStudents()
+        print "groupnumber: "
+        print i
+        if i + 1 == numberOfGroups:
+            print "last group. "
+            for r in randomRoomSlots:
+                if ((not r.hasGroup()) and
+                r.getSize()*OVERBOOK >= numberOfStudents):
+                    print "going to book last group. "
+                    group = Group(activity, activity.getCourse().getStudents()[numberOfStudents * i:], activity.getMaxStudents(), r)
+                    groups.append(group)
+                    r.appointGroup(group)
+                    print len(group.getStudents())
+                    print "should"
+        else:
+            print "not last group. "
+            for r in randomRoomSlots:
+                if ((not r.hasGroup()) and
+                r.getSize()*OVERBOOK >= numberOfStudents):
+                    "going to book not last group. "
+                    group = Group(activity, activity.getCourse().getStudents()[numberOfStudents * i: numberOfStudents * (i + 1)], activity.getMaxStudents(), r)
+                    groups.append(group)
+                    r.appointGroup(group)
+                    print len(group.getStudents())
+                    print " + "
+    print "be equal to"
+    print len(activity.getCourse().getStudents())
+
+
+
 
 def bookRandomRoom(activity, randomRoomSlots, groups):
-    # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot, timeSlot)
+    # Dit zijn de arguments van groups:(self, activity, students, maxStudents, roomSlot)
+    if activity.getMaxStudents() < activity.getCourse().getStudents():
+        split(activity, randomRoomSlots, groups)
+
     for r in randomRoomSlots:
         if ((not r.hasGroup()) and
             r.getSize()*OVERBOOK >= len(activity.getCourse().getStudents())
