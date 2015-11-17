@@ -121,20 +121,7 @@ class RoomSlot(object):
         if self.group == None:
             return None
         else: return self.group.getStudents()
-        
 
-##a = ["mo", "tu"]
-##b = ["we", "we", "we", "thu"]
-##c = ["fri", "thu", "thu", "thu"]
-##
-##courseList = []
-##for i in a:
-##    for j in b:
-##        for k in c:
-##            groupList = []
-##            groupList.extend([i,j,k])
-##            courseList.append(groupList)
-##print courseList
 
 class Course(object):
     def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
@@ -194,7 +181,7 @@ class Group(object):
 """""""""""""""  Counting points """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def allCoursesScheduled():
+def allCoursesScheduled(students):
     # Deze functie wordt nu niet gebruikt..
     for s in students:
         nrAct = 0
@@ -205,35 +192,6 @@ def allCoursesScheduled():
             return False
     return True
 
-##def checkCount(count, numberOfActivities):
-##    if numberOfActivities == 2:
-##        if count == [1,0,0,1,0] or count == [0,1,0,0,1] or count == [1,0,0,0,1]:
-##            return True
-##    elif numberOfActivities == 3:
-##        if count == [1,0,1,0,1]:
-##            return True
-##    elif numberOfActivities == 4:
-##        if count == [1,1,0,1,1]:
-##            return True  
-##    return False
-##
-##def coursesMaximallySpread():
-##    bonus = 0
-##    for c in courses:
-##        act = c.getActivities()
-##        count = [0,0,0,0,0]
-##        for a in act:
-##            for g in a.getGroups():
-##                timeSlot = g.getRoomSlot().getTimeSlot()
-##                for i, d in enumerate(['mo','tu','we','th','fr']):
-##                    if timeSlot.getDay() == d:
-##                        count[i] += 1
-##        if checkCount(count, sum(count)):
-##            bonus += 20
-##    return bonus
-##
-##def checkPoints(cDays):
-##    if len(cDays) == 2:
 
 def checkCount(aPoss, numberOfActivities):
     for c in aPoss:
@@ -286,13 +244,30 @@ def personalScheduleConflict():
     # Loop over lijst met students heen
     for s in students:
         cList = []
-        for c in s.getGroup():
+        for c in s.getGroups():
             if c.getRoomSlot().timeSlot in cList:
                 score += 1
             cList.append(c.getRoomSlot().timeSlot)
     return score
 
 def activityConflict():
+    points = 0
+    for c in courses:
+        cList = []
+        for a in c.getActivities():
+            L = []
+            for g in a.getGroups():
+                day = g.getRoomSlot().getTimeSlot().getDay()
+                L.append(day)
+            cList.append(L)
+        print cList
+        for e in cList[-1]:
+            for ee in cList[:-1]:
+                if e != ee:
+                    print "No malus"
+                    break
+        else: print "Malus!"
+    
     #lijst met activiteiten
     mondayActivities = getActivitiesPerDay("mo")
     tuesdayActivities = getActivitiesPerDay("tu")
@@ -312,7 +287,7 @@ def activityConflict():
             if cList.count(course) > 1:
                 if course not in checkList:
                     checkList.append(course)
-                    mPoints -= cList.count(course)*10
+                    mPoints += cList.count(course)*10
     return mPoints
 
 #haalt alle activities per dag op. Input vb5. ("mo")
@@ -407,6 +382,25 @@ def randomAlgorithm(courses, timeTable):
     # The timeTable is updated and doesn't have to be returned explicitly
     return groups
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Deterministic booking algorithm"""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+# SUCCES SJOERD :)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Hillclimbing algorithm """""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+# SUCCES THOMAS :)
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+# SUCCES JJ :p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
@@ -529,46 +523,3 @@ def saveTimeTable(timeTable):
     return
     
     
-##def generateAllChildren(parent, activity):
-##    # Returns a max of 5 timeTable indices
-##    days = ['mo','tu','we','th','fr']
-##    timeTables = []
-##    for d in days:
-##        try: timeTables.append(bookRoom(parent,activity,d))
-##        except: continue
-##    return timeTables
-##
-##MAXPOINTS=0
-##def roosterVolgendeActiviteit(activities,parentTimeTable):
-##    # The recursive function
-##    timeTables = generateAllChildren(parentTimeTable,activities[0])
-##    for t in timeTables:
-##        if len(activities)==0:
-##            points = getPoints(t)
-##            if points > maxPoints:
-##                maxPoints = points
-##                bestTimeTable = t
-##        else: roosterVolgendeActiviteit(activities[1:],t)
-##    return bestTimeTable
-##
-##def bookRoom(timeTable,activity,day):
-##    # Tries to book a room. Is no room suits the needs of the specific
-##    # course and activity, an Error is raised
-##    l = timeTable.getTimeSlots(day)
-##    rooms = l.getRoomSlots()
-##    course = activity.getCourse()
-##    for t in l:
-##        for r in rooms:
-##            if {
-##                (not r['course']) &
-##                (r['size'] <= activity.getMaxStudents()) &
-##                (r['size'] >= len(course.getStudents()))
-##                 } :
-##                l.book(course,r) #book neemt nu group en timeslot als arguments
-##                break
-##        break
-##    else: raise StandardError("No room can be found for "
-##                              + activity.getCourse().getName()
-##                              +" on day " + day)
-##
-##
