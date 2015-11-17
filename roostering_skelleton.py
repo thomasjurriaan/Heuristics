@@ -53,8 +53,6 @@ class Student(object):
         return course in self.courses
     def addGroup(self, group):
         self.groups.append(group)
-    def getGroup(self):
-        return self.groups
     def getGroups(self):
         return self.groups
 
@@ -125,18 +123,18 @@ class RoomSlot(object):
         else: return self.group.getStudents()
         
 
-a = ["mo", "tu"]
-b = ["we", "we", "we", "thu"]
-c = ["fri", "thu", "thu", "thu"]
-
-courseList = []
-for i in a:
-    for j in b:
-        for k in c:
-            groupList = []
-            groupList.extend([i,j,k])
-            courseList.append(groupList)
-print courseList
+##a = ["mo", "tu"]
+##b = ["we", "we", "we", "thu"]
+##c = ["fri", "thu", "thu", "thu"]
+##
+##courseList = []
+##for i in a:
+##    for j in b:
+##        for k in c:
+##            groupList = []
+##            groupList.extend([i,j,k])
+##            courseList.append(groupList)
+##print courseList
 
 class Course(object):
     def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
@@ -198,53 +196,44 @@ class Group(object):
 
 def allCoursesScheduled():
     # Deze functie wordt nu niet gebruikt..
-    activitiesToSchedule = []
-    for c in courses:
-        activitiesToSchedule.append(c.getActivities())
-
-    activitiesScheduled = []
-    for d in mainTimeTable.days():
-        activitiesScheduled += mainTimeTable.getActivitiesPerDay(d)
-
-    for a in activitiesToSchedule:
-        if a not in activitiesScheduled:
+    for s in students:
+        nrAct = 0
+        for c in s.getCourses():
+            nrAct += len(c.getActivities())
+        nrGr = len(s.getGroups())
+        if nrAct > nrGr:
             return False
-
     return True
 
-
-"""
-def checkCount(count, numberOfActivities):
-    if numberOfActivities == 2:
-        if count == [1,0,0,1,0] or count == [0,1,0,0,1] or count == [1,0,0,0,1]:
-            return True
-    elif numberOfActivities == 3:
-        if count == [1,0,1,0,1]:
-            return True
-    elif numberOfActivities == 4:
-        if count == [1,1,0,1,1]:
-            return True  
-    return False
-
-def coursesMaximallySpread():
-    bonus = 0
-    for c in courses:
-        act = c.getActivities()
-        count = [0,0,0,0,0]
-        for a in act:
-            for g in a.getGroups():
-                timeSlot = g.getRoomSlot().getTimeSlot()
-                for i, d in enumerate(['mo','tu','we','th','fr']):
-                    if timeSlot.getDay() == d:
-                        count[i] += 1
-        if checkCount(count, sum(count)):
-            bonus += 20
-    return bonus
-"""
-"""
-def checkPoints(cDays):
-    if len(cDays) == 2:
-"""
+##def checkCount(count, numberOfActivities):
+##    if numberOfActivities == 2:
+##        if count == [1,0,0,1,0] or count == [0,1,0,0,1] or count == [1,0,0,0,1]:
+##            return True
+##    elif numberOfActivities == 3:
+##        if count == [1,0,1,0,1]:
+##            return True
+##    elif numberOfActivities == 4:
+##        if count == [1,1,0,1,1]:
+##            return True  
+##    return False
+##
+##def coursesMaximallySpread():
+##    bonus = 0
+##    for c in courses:
+##        act = c.getActivities()
+##        count = [0,0,0,0,0]
+##        for a in act:
+##            for g in a.getGroups():
+##                timeSlot = g.getRoomSlot().getTimeSlot()
+##                for i, d in enumerate(['mo','tu','we','th','fr']):
+##                    if timeSlot.getDay() == d:
+##                        count[i] += 1
+##        if checkCount(count, sum(count)):
+##            bonus += 20
+##    return bonus
+##
+##def checkPoints(cDays):
+##    if len(cDays) == 2:
 
 def checkCount(aPoss, numberOfActivities):
     for c in aPoss:
@@ -269,7 +258,7 @@ def coursesMaximallySpread():
                 d = g.getRoomSlot().getTimeSlot().day
                 aDays.append(d)
             cDays.append(aDays)
-        "Cartesian product"
+        # Cartesian product
         aPoss = [list(v) for v in itertools.product(*cDays)]
         numberOfActivities = len(cDays)
         if checkCount(aPoss, numberOfActivities):
