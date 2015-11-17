@@ -1,6 +1,7 @@
 import json
 import random
 import math
+import itertools
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -122,8 +123,20 @@ class RoomSlot(object):
         if self.group == None:
             return None
         else: return self.group.getStudents()
+        
 
+a = ["mo", "tu"]
+b = ["we", "we", "we", "thu"]
+c = ["fri", "thu", "thu", "thu"]
 
+courseList = []
+for i in a:
+    for j in b:
+        for k in c:
+            groupList = []
+            groupList.extend([i,j,k])
+            courseList.append(groupList)
+print courseList
 
 class Course(object):
     def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
@@ -199,6 +212,8 @@ def allCoursesScheduled():
 
     return True
 
+
+"""
 def checkCount(count, numberOfActivities):
     if numberOfActivities == 2:
         if count == [1,0,0,1,0] or count == [0,1,0,0,1] or count == [1,0,0,0,1]:
@@ -225,7 +240,43 @@ def coursesMaximallySpread():
         if checkCount(count, sum(count)):
             bonus += 20
     return bonus
+"""
+"""
+def checkPoints(cDays):
+    if len(cDays) == 2:
+"""
 
+def checkCount(aPoss, numberOfActivities):
+    for c in aPoss:
+        if numberOfActivities == 2:
+            if "mo" and "thu" or "tu" and "fri" or "mo" and "fri" in c:
+                return True
+        elif numberOfActivities == 3:
+            if "mo" and "we" and "fri" in c:
+                return True
+        elif numberOfActivities == 4:
+            if "mo" and "tu" and "th" and "fr" in c:
+                return True
+        return False
+
+def coursesMaximallySpread():
+    bonus = 0
+    for c in courses:
+        cDays = []
+        for a in c.getActivities():
+            aDays = []
+            for g in a.getGroups():
+                d = g.getRoomSlot().getTimeSlot().day
+                aDays.append(d)
+            cDays.append(aDays)
+        "Cartesian product"
+        aPoss = [list(v) for v in itertools.product(*cDays)]
+        numberOfActivities = len(cDays)
+        if checkCount(aPoss, numberOfActivities):
+            bonus += 20
+    return bonus
+        
+    
 def overbooked():
     malus = 0
     saldo = 0;
