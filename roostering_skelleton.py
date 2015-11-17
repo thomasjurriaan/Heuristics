@@ -183,21 +183,21 @@ class Group(object):
 """""""""""""""  Counting points """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-##def allCoursesScheduled():
-##    # Deze functie wordt nu niet gebruikt..
-##    activitiesToSchedule = []
-##    for c in courses:
-##        activitiesToSchedule.append(c.getActivities())
-##
-##    activitiesScheduled = []
-##    for d in mainTimeTable.days():
-##        activitiesScheduled += mainTimeTable.getActivitiesPerDay(d)
-##
-##    for a in activitiesToSchedule:
-##        if a not in activitiesScheduled:
-##            return False
-##
-##    return True
+def allCoursesScheduled():
+    # Deze functie wordt nu niet gebruikt..
+    activitiesToSchedule = []
+    for c in courses:
+        activitiesToSchedule.append(c.getActivities())
+
+    activitiesScheduled = []
+    for d in mainTimeTable.days():
+        activitiesScheduled += mainTimeTable.getActivitiesPerDay(d)
+
+    for a in activitiesToSchedule:
+        if a not in activitiesScheduled:
+            return False
+
+    return True
 
 def checkCount(count, numberOfActivities):
     if numberOfActivities == 2:
