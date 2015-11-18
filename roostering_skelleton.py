@@ -414,8 +414,8 @@ def determisticSchnizlle(timeTable):
     courses = timeTable.getCourses()
 
     for c in courses:
-        
-
+        pass
+    return
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Hillclimbing algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
