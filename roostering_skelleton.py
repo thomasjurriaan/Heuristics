@@ -62,8 +62,8 @@ class TimeTable(object):
     def __init__(self):
         #include 4 empty time slots for every day of the week.
         l = []
-        days = ['mo','tu','we','th','fr']
-        for d in days:
+        self.days = ['mo','tu','we','th','fr']
+        for d in self.days:
             for t in range(4):
                 l.append(TimeSlot(d,t))
         self.timeSlots = l
@@ -82,9 +82,11 @@ class TimeTable(object):
         self.groups.append(group)
     def getGroups(self):
         return self.groups
-    def resetTimeSlot(self,i):
-        #When removing a booking from the schedual
-        self.timeSlots[i] = TimeSlot(i)
+    def resetTimeSlots(self):
+        self.timeSlots = []
+        for d in self.days:
+            for t in range(4):
+                self.timeSlots.append(TimeSlot(d,t))
     def getTimeSlots(self):
         return self.timeSlots
     def getDayTimeSlots(self, day):
@@ -197,6 +199,8 @@ class Group(object):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def allCoursesScheduled(timeTable):
+    if timeTable == None: return False
+    
     students = timeTable.getStudents()
     for s in students:
         nrAct = 0
@@ -381,14 +385,37 @@ def randomAlgorithm(timeTable):
 """""""""""""""  Deterministic booking algorithm"""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+def determisticSchnizlle(timeTable):
+    # Make list of random activities
+    courses = timeTable.getCourses()
+    randomActivities = []
+    for c in courses:
+        randomActivities += c.getActivities()
+    random.shuffle(randomActivities)
+    
+    # Make list of random timeslots
+    randomRoomSlots = []
+    for t in timeTable.getTimeSlots():
+        randomRoomSlots += t.getRoomSlots()
+    random.shuffle(randomRoomSlots)
+    
+    # Use bookRandomRoom to go from activities to groups and book those groups
+    for activity in randomActivities:
+        bookActivity(activity, randomRoomSlots, timeTable)
 
-# SUCCES SJOERD :)
+    # The timeTable is updated and doesn't have to be returned explicitly
+    return
+
+def determisticSchnizlle(timeTable):
+    # Make list of random activities
+    courses = timeTable.getCourses()
+
+    for c in courses:
+        
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-# SUCCES THOMAS :)
 
 def switch(timeTable, groupOne, groupTwo, groups):
     while(groupOne != groupTwo and groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
@@ -431,19 +458,58 @@ def hillclimbAlgorithm(timeTable, score, iterations):
     print scores
     print max(scores)
 
-
-
-
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# SUCCES JJ :p
+def selectParents(children):
+    bestP = 0.2
+    randomP = 0.05
+    
+    print "Picking parents..."
+    n = len(children)
+    children.sort(key=lambda x: getPoints(x))
+    
+    bestChildren = children[int(-bestP*n):]
+    restChildren = children[:int(-bestP*n)]
+    randomChildren = [
+        random.choice(restChildren) for i in range(int(randomP*n))
+        ]
+    return bestChildren + randomChildren
+
+def mutate(parents):
+    return parents
+
+def makeLove(parents):
+    print "Making new children..."
+    return parents
+
+def geneticAlgorithm(iterations = 1):
+    nrChilds = 100
+
+    print "================================="
+    print "Initiating genetic algorithm"
+    print "================================="
+    children = []
+    for i in range(nrChilds):
+        table = None
+        while not allCoursesScheduled(table):
+            table = createTimeTableInstance()
+            randomAlgorithm(table)
+        children.append(table)
+
+    for i in range(iterations):
+        print "Starting iteration ",i+1
+        parents = selectParents(children)
+        mutate(parents)
+        children = makeLove(parents)
+    
+    return max(children, key = lambda x: getPoints(x))
+    
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
+"""""""""""""""""""""  In
+itial functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
 def getData(filename):
