@@ -2,6 +2,7 @@ import json
 import random
 import math
 import itertools
+import copy
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -21,6 +22,7 @@ ROOMS = {
     "C1.112":60
     }
 OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
+ITERATIONS = 1000
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
@@ -55,7 +57,6 @@ class Student(object):
         self.groups.append(group)
     def getGroups(self):
         return self.groups
-
 
 class TimeTable(object):
     def __init__(self):
@@ -139,7 +140,6 @@ class RoomSlot(object):
             return None
         else: return self.group.getStudents()
 
-
 class Course(object):
     def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
         self.students = []
@@ -211,7 +211,6 @@ def allCoursesScheduled(timeTable):
             return False
     return True
 
-
 def checkCount(aPoss, numberOfActivities):
     for c in aPoss:
         if numberOfActivities == 2:
@@ -241,8 +240,7 @@ def coursesMaximallySpread(timeTable):
         numberOfActivities = len(cDays)
         if checkCount(aPoss, numberOfActivities):
             bonus += 20
-    return bonus
-        
+    return bonus      
     
 def overbooked(timeTable):
     malus = 0
@@ -257,7 +255,6 @@ def overbooked(timeTable):
         if saldo > 0:
             malus += saldo
     return malus
-
 
 def personalScheduleConflict(timeTable):
     students = timeTable.getStudents()
@@ -417,10 +414,49 @@ def determisticSchnizlle(timeTable):
         pass
     return
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Hillclimbing algorithm """""""""""""""""""""""""""""""""""""""
+""""""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-# SUCCES THOMAS :)
+def switch(timeTable, groupOne, groupTwo, groups):
+    while(groupOne != groupTwo and groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
+        groupTwo.getRoomSlot().getSize() < OVERBOOK * len(groupOne.getStudents())):
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+    roomSlotOne = groupOne.getRoomSlot()
+    groupTwo.getRoomSlot().appointGroup(groupOne)
+    roomSlotOne.appointGroup(groupTwo)
+
+def copyTimeTable(timeTable):
+    newTable = createTimeTableInstance()
+    groups = timeTable.getGroups()
+    for g in groups:
+        group = Group(g.getActivity(), g.getStudents(), g.getActivity().getMaxStudents(), g.getRoomSlot())
+        g.getRoomSlot().appointGroup(group)
+        newTable.addGroup(group)
+    return newTable
+
+
+def hillclimbAlgorithm(timeTable, score, iterations):
+    # switch random groups and run getPoints()
+    highestScore = score
+    currentTimeTable = timeTable
+    scores = []
+    groups = timeTable.getGroups()
+    for i in range(iterations):
+        nextTimeTable = copyTimeTable(currentTimeTable)
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+        switch(nextTimeTable, groupOne, groupTwo, groups)
+        currentScore = getPoints(nextTimeTable)
+        scores.append(currentScore)
+        if(currentScore > highestScore):
+            print "current score is higher than the highest score"
+            currentTimeTable = nextTimeTable
+        if(i % 10 == 0):
+            print "Current iteration: "
+            print i 
+    print scores
+    print max(scores)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
@@ -512,6 +548,14 @@ if __name__ == '__main__':
     randomAlgorithm(mainTimeTable)
     getPoints(mainTimeTable)
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def t():
+    henk = createTimeTableInstance()
+    randomAlgorithm(henk)
+    hillclimbAlgorithm(henk, getPoints(henk), 50)
+    return henk
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -598,7 +642,7 @@ def exportData(timeTable):
 def saveTimeTable(timeTable):
     filename = raw_input("Name your timetable json: ")+".json"
     print "Data is stored in .../visualisation/Data/"+filename+"..."
-    data = tableToList()
+    data = tableToList(timeTable)
     with open("Visualisatie/Data/"+filename, 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')
     return
