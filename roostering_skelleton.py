@@ -21,7 +21,7 @@ ROOMS = {
     "C1.112":60
     }
 OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
-HILLCLIMBERITERATIONS = 1000
+ITERATIONS = 1000
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
@@ -410,27 +410,37 @@ def randomAlgorithm(timeTable):
 # SUCCES SJOERD :)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Hillclimbing algorithm """"""""""""""""""""""""""""""""""
+""""""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # SUCCES THOMAS :)
 
-def switch(timeTable, groupOne, groupTwo):
-    if(groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
+def switch(timeTable, groupOne, groupTwo, groups):
+    while(groupOne != groupTwo and groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
         groupTwo.getRoomSlot().getSize() < OVERBOOK * len(groupOne.getStudents())):
-        roomSlotOne = groupOne.getRoomSlot()
-        groupTwo.getRoomSlot().appointGroup(groupOne)
-        roomSlotOne.appointGroup(groupTwo)
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+    roomSlotOne = groupOne.getRoomSlot()
+    groupTwo.getRoomSlot().appointGroup(groupOne)
+    roomSlotOne.appointGroup(groupTwo)
+    return timeTable
 
 def hillclimbAlgorithm(timeTable, score, iterations):
     # switch random groups and run getPoints()
-    groups = timeTable.getGroups()
     highestScore = score
+    currentTimeTable = timeTable
+
     for i in range(iterations):
+        groups = timeTable.getGroups()
+        print "here come the groups"
+        print(groups)
         groupOne = random.choice(groups)
         groupTwo = random.choice(groups)
-        if(groupOne != groupTwo):
-            switch(timeTable, groupOne, groupTwo, groups)
+        nextTimeTable = switch(timeTable, groupOne, groupTwo, groups)
+        if(nextTimeTable.getPoints() > highestScore):
+            currentTimeTable = nextTimeTable
+
+
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -478,6 +488,7 @@ if __name__ == '__main__':
     print "Creating random schedule, stored as 'mainTimeTable'."
     randomAlgorithm(mainTimeTable)
     getPoints(mainTimeTable)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
