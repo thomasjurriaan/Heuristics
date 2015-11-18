@@ -21,6 +21,7 @@ ROOMS = {
     "C1.112":60
     }
 OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
+HILLCLIMBERITERATIONS = 1000
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
@@ -388,10 +389,28 @@ def randomAlgorithm(timeTable):
 # SUCCES SJOERD :)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Hillclimbing algorithm """""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Hillclimbing algorithm """"""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # SUCCES THOMAS :)
+
+def switch(timeTable, groupOne, groupTwo):
+    if(groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
+        groupTwo.getRoomSlot().getSize() < OVERBOOK * len(groupOne.getStudents())):
+        roomSlotOne = groupOne.getRoomSlot()
+        groupTwo.getRoomSlot().appointGroup(groupOne)
+        roomSlotOne.appointGroup(groupTwo)
+
+def hillclimbAlgorithm(timeTable, score, iterations):
+    # switch random groups and run getPoints()
+    groups = timeTable.getGroups()
+    highestScore = score
+    for i in range(iterations):
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+        if(groupOne != groupTwo):
+            switch(timeTable, groupOne, groupTwo, groups)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
