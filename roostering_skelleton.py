@@ -61,11 +61,26 @@ class TimeTable(object):
     def __init__(self):
         #include 4 empty time slots for every day of the week.
         l = []
-        self.days = ['mo','tu','we','th','fr']
-        for d in self.days:
+        days = ['mo','tu','we','th','fr']
+        for d in days:
             for t in range(4):
                 l.append(TimeSlot(d,t))
         self.timeSlots = l
+        self.students = []
+        self.courses = []
+        self.groups = []
+    def addStudent(self, student):
+        self.students.append(student)
+    def getStudents(self):
+        return self.students
+    def addCourse(self, course):
+        self.courses.append(course)
+    def getCourses(self):
+        return self.courses
+    def addGroup(self, group):
+        self.groups.append(group)
+    def getGroups(self):
+        return self.groups
     def resetTimeSlot(self,i):
         #When removing a booking from the schedual
         self.timeSlots[i] = TimeSlot(i)
@@ -181,8 +196,8 @@ class Group(object):
 """""""""""""""  Counting points """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def allCoursesScheduled(students):
-    # Deze functie wordt nu niet gebruikt..
+def allCoursesScheduled(timeTable):
+    students = timeTable.getStudents()
     for s in students:
         nrAct = 0
         for c in s.getCourses():
@@ -206,7 +221,8 @@ def checkCount(aPoss, numberOfActivities):
                 return True
         return False
 
-def coursesMaximallySpread():
+def coursesMaximallySpread(timeTable):
+    courses = timeTable.getCourses()
     bonus = 0
     for c in courses:
         cDays = []
@@ -224,10 +240,10 @@ def coursesMaximallySpread():
     return bonus
         
     
-def overbooked():
+def overbooked(timeTable):
     malus = 0
     saldo = 0;
-    ts = mainTimeTable.getTimeSlots()
+    ts = timeTable.getTimeSlots()
     rs = []
     for t in ts:
             rs += t.getRoomSlots()
@@ -239,7 +255,8 @@ def overbooked():
     return malus
 
 
-def personalScheduleConflict():
+def personalScheduleConflict(timeTable):
+    students = timeTable.getStudents()
     score = 0
     # Loop over lijst met students heen
     for s in students:
@@ -250,7 +267,8 @@ def personalScheduleConflict():
             cList.append(c.getRoomSlot().timeSlot)
     return score
 
-def activityConflict():
+def activityConflict(timeTable):
+    courses = timeTable.getCourses()
     points = 0
     for c in courses:
         cList = []
@@ -261,57 +279,60 @@ def activityConflict():
                 L.append(day)
             cList.append(L)
         print cList
-        for e in cList[-1]:
-            for ee in cList[:-1]:
-                if e != ee:
-                    print "No malus"
+        for a in cList:
+            for aa in cList:
+                if a != aa:
+                    for g in a:
+                        for gg in aa:
+                            pass
+                    print "No malus for ",e," with ",ee
                     break
-        else: print "Malus!"
-    
-    #lijst met activiteiten
-    mondayActivities = getActivitiesPerDay("mo")
-    tuesdayActivities = getActivitiesPerDay("tu")
-    wensdayActivities = getActivitiesPerDay("we")
-    thursdayActivities = getActivitiesPerDay("th")
-    fridayActivities = getActivitiesPerDay("fr")
-    allActivities = [mondayActivities, tuesdayActivities, wensdayActivities, thursdayActivities, fridayActivities]
-    mPoints = 0
-    days = ["mo", "tu", "we", "th", "fr"]  
-    for day in days:
-        #lijst met courses
-        cList = []
-        for activity in getActivitiesPerDay(day):
-                  cList.append(activity.getCourse())
-        checkList = []
-        for course in cList:
-            if cList.count(course) > 1:
-                if course not in checkList:
-                    checkList.append(course)
-                    mPoints += cList.count(course)*10
-    return mPoints
+            else: print "Malus!"
+    return points
+##    
+##    #lijst met activiteiten
+##    mondayActivities = getActivitiesPerDay("mo")
+##    tuesdayActivities = getActivitiesPerDay("tu")
+##    wensdayActivities = getActivitiesPerDay("we")
+##    thursdayActivities = getActivitiesPerDay("th")
+##    fridayActivities = getActivitiesPerDay("fr")
+##    allActivities = [mondayActivities, tuesdayActivities, wensdayActivities, thursdayActivities, fridayActivities]
+##    mPoints = 0
+##    days = ["mo", "tu", "we", "th", "fr"]  
+##    for day in days:
+##        #lijst met courses
+##        cList = []
+##        for activity in getActivitiesPerDay(day):
+##                  cList.append(activity.getCourse())
+##        checkList = []
+##        for course in cList:
+##            if cList.count(course) > 1:
+##                if course not in checkList:
+##                    checkList.append(course)
+##                    mPoints += cList.count(course)*10
 
-#haalt alle activities per dag op. Input vb5. ("mo")
-def getActivitiesPerDay(day):
-    aList = []
-    for timeslot in range(4):
-        for roomslot in range(7):
-            try:
-                if(mainTimeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity() not in aList):
-                    aList.append(mainTimeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity())
-            except: pass
-    return aList
+##def getActivitiesPerDay(day, timeTable):
+##    #haalt alle activities per dag op. Input vb5. ("mo")
+##    aList = []
+##    for timeslot in range(4):
+##        for roomslot in range(7):
+##            try:
+##                if(timeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity() not in aList):
+##                    aList.append(timeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity())
+##            except: pass
+##    return aList
 
-def getPoints(timeTable, allCoursesScheduled):
+def getPoints(timeTable):
     # Calculates the points of the timeTable
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
     # 1 for each overbooked student, 10 for each double scedueled course on one day)
-    if allCoursesScheduled:
+    if allCoursesScheduled(timeTable):
         points = 1000
-        points += coursesMaximallySpread()
-        points -= activityConflict()
-        points -= overbooked()
-        points -= personalScheduleConflict()
+        points += coursesMaximallySpread(timeTable)
+        points -= activityConflict(timeTable)
+        points -= overbooked(timeTable)
+        points -= personalScheduleConflict(timeTable)
     else: points = None
     return points
 
@@ -320,7 +341,7 @@ def getPoints(timeTable, allCoursesScheduled):
 """""""""""""""  Random booking algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def bookRandomRoom(activity, randomRoomSlots, students):
+def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
     # Tries to book an activity in a room. If succeeded: returns the booked group
     for r in randomRoomSlots:
         if ((not r.hasGroup()) and
@@ -328,7 +349,8 @@ def bookRandomRoom(activity, randomRoomSlots, students):
             ):
                 group = Group(activity, students, activity.getMaxStudents(), r)
                 r.appointGroup(group)
-                return group
+                timeTable.addGroup(group)
+                return
     else: raise StandardError("No room can be found for " +
                               activity.getCourse().getName())
 
@@ -346,27 +368,25 @@ def split(activity):
     return studentGroups
 
 
-def bookActivity(activity, randomRoomSlots):
+def bookActivity(activity, randomRoomSlots, timeTable):
     # Splits activities in valid groups and tries to book them
     if activity.getMaxStudents() < len(activity.getCourse().getStudents()):
         studentGroups = split(activity)
     else: studentGroups = [activity.getCourse().getStudents()]
 
-    groups = []
     for g in studentGroups:
-        try:
-            newGroup = bookRandomRoom(activity, randomRoomSlots, g)
-            groups.append(newGroup)
+        try: bookRandomRoom(activity, randomRoomSlots, g, timeTable)
         except: pass
-    return groups
+    return
         
-def randomAlgorithm(courses, timeTable):
+def randomAlgorithm(timeTable):
     # Make list of random activities
+    courses = timeTable.getCourses()
     randomActivities = []
     for c in courses:
         randomActivities += c.getActivities()
     random.shuffle(randomActivities)
-
+    
     # Make list of random timeslots
     randomRoomSlots = []
     for t in timeTable.getTimeSlots():
@@ -374,13 +394,11 @@ def randomAlgorithm(courses, timeTable):
     random.shuffle(randomRoomSlots)
     
     # Use bookRandomRoom to go from activities to groups and book those groups
-    groups = []
     for activity in randomActivities:
-        newGroups = bookActivity(activity, randomRoomSlots)
-        groups += newGroups
+        bookActivity(activity, randomRoomSlots, timeTable)
 
     # The timeTable is updated and doesn't have to be returned explicitly
-    return groups
+    return
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -408,38 +426,47 @@ def randomAlgorithm(courses, timeTable):
 
 def getData(filename):
     """
-    Leest de json-file met de rooster data
-    Returnt een lijst van dictionaries
+    Reads the json-file with the schedule data
+    Returns a list of dictionaries
     """
     json_data=open(filename).read()
     return json.loads(json_data)
- 
-if __name__ == '__main__':
-    print "Creating data structure..."
-    mainTimeTable = TimeTable()
+
+def createTimeTableInstance():
+    print "Creating empty timetable structure..."
     studentData = getData(STUDENTS)
     courseData = getData(COURSES)
+    timeTable = TimeTable()
     students = []
     courses = []
     for c in courseData:
-        courses.append(Course(c['courseName'], c['lectures'], c['seminar'],
-                              c['maxStudSeminar'], c['practica'], c['maxStudPractica']))
-
+        course = Course(c['courseName'], c['lectures'], c['seminar'],
+                        c['maxStudSeminar'], c['practica'],
+                        c['maxStudPractica'])
+        courses.append(course)
+        timeTable.addCourse(course)
     for s in studentData[1:]:
-        #Function that makes student-instances
-        students.append(Student(s["firstName"],s["lastName"],s["nr"],s["courses"],courses))
-
+        student = Student(s["firstName"],s["lastName"],s["nr"],
+                          s["courses"],courses)
+        students.append(student)
+        timeTable.addStudent(student)
+        
+    return timeTable
+ 
+if __name__ == '__main__':
+    print "Welcome to Ultimate Scheduler 3000!"
+    mainTimeTable = createTimeTableInstance()
     print "Creating random schedule, stored as 'mainTimeTable'."
-    groups = randomAlgorithm(courses, mainTimeTable)
-    #getPoints(mainTimeTable, allCoursesScheduled)
+    randomAlgorithm(mainTimeTable)
+    getPoints(mainTimeTable)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def tableToList():
+def tableToList(timeTable):
     data = []
-    for t in mainTimeTable.getTimeSlots():
+    for t in timeTable.getTimeSlots():
         for r in t.getRoomSlots():
             if r.hasGroup():
                 group = r.getGroup()
@@ -493,19 +520,21 @@ def courseToList(course):
     return data
 
 
-def exportData(students, courses):
+def exportData(timeTable):
     print "Data is stored in .../visualisation/Data/."
     print "Saving main timetable..."
-    data = tableToList()
+    data = tableToList(timeTable)
     with open("Visualisatie/Data/main.json", 'wb') as f:
         json.dump(data, f, encoding='latin1')
     print "Saving timetables of "+str(len(students))+" students..."
+    students = timeTable.getStudents()
     for i, s in enumerate(students):
         data = studentToList(s)
         filename = "student"+str(i)+".json"
         with open("Visualisatie/Data/"+filename, 'wb') as f:
             json.dump(data, f, encoding='latin1')
     print "Saving timetables of "+str(len(courses))+" courses..."
+    courses = timeTable.getCourses()
     for i, c in enumerate(courses):
         data = courseToList(c)
         filename = "course"+str(i)+".json"
