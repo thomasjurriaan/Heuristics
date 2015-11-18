@@ -21,6 +21,7 @@ ROOMS = {
     "C1.112":60
     }
 OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
+HILLCLIMBERITERATIONS = 1000
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
@@ -257,70 +258,49 @@ def overbooked(timeTable):
 
 def personalScheduleConflict(timeTable):
     students = timeTable.getStudents()
-    score = 0
+    malus = 0
     # Loop over lijst met students heen
     for s in students:
         cList = []
         for c in s.getGroups():
-            if c.getRoomSlot().timeSlot in cList:
-                score += 1
-            cList.append(c.getRoomSlot().timeSlot)
-    return score
+            if c.getRoomSlot().getTimeSlot() in cList:
+                malus += 1
+            cList.append(c.getRoomSlot().getTimeSlot())
+    return malus
+
+##def activityConflict(timeTable):
+##    courses = timeTable.getCourses()
+##    points = 0
+##    for c in courses:
+##        cList = []
+##        for a in c.getActivities():
+##            L = []
+##            for g in a.getGroups():
+##                day = g.getRoomSlot().getTimeSlot().getDay()
+##                L.append(day)
+##            cList.append(L)
+##        print cList
+##        for i, a in enumerate(cList):
+##            for ii, aa in enumerate(cList):
+##                if ii > i:
+##                    l = [e for e in a if e not in aa]
+##                    l += [e for e in aa if e not in a]
+##                    if len(l) == 0: points += 10
+##    return points
 
 def activityConflict(timeTable):
     courses = timeTable.getCourses()
     points = 0
     for c in courses:
-        cList = []
+        nrAct = 0
+        days = []
         for a in c.getActivities():
-            L = []
+            nrAct += 1
             for g in a.getGroups():
                 day = g.getRoomSlot().getTimeSlot().getDay()
-                L.append(day)
-            cList.append(L)
-        print cList
-        for a in cList:
-            for aa in cList:
-                if a != aa:
-                    for g in a:
-                        for gg in aa:
-                            pass
-                    print "No malus for ",e," with ",ee
-                    break
-            else: print "Malus!"
+                days.append(day)
+        if nrAct > len(set(days)): points += 10
     return points
-##    
-##    #lijst met activiteiten
-##    mondayActivities = getActivitiesPerDay("mo")
-##    tuesdayActivities = getActivitiesPerDay("tu")
-##    wensdayActivities = getActivitiesPerDay("we")
-##    thursdayActivities = getActivitiesPerDay("th")
-##    fridayActivities = getActivitiesPerDay("fr")
-##    allActivities = [mondayActivities, tuesdayActivities, wensdayActivities, thursdayActivities, fridayActivities]
-##    mPoints = 0
-##    days = ["mo", "tu", "we", "th", "fr"]  
-##    for day in days:
-##        #lijst met courses
-##        cList = []
-##        for activity in getActivitiesPerDay(day):
-##                  cList.append(activity.getCourse())
-##        checkList = []
-##        for course in cList:
-##            if cList.count(course) > 1:
-##                if course not in checkList:
-##                    checkList.append(course)
-##                    mPoints += cList.count(course)*10
-
-##def getActivitiesPerDay(day, timeTable):
-##    #haalt alle activities per dag op. Input vb5. ("mo")
-##    aList = []
-##    for timeslot in range(4):
-##        for roomslot in range(7):
-##            try:
-##                if(timeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity() not in aList):
-##                    aList.append(timeTable.getDayTimeSlots(day)[timeslot].getRoomSlots()[roomslot].getGroup().getActivity())
-##            except: pass
-##    return aList
 
 def getPoints(timeTable):
     # Calculates the points of the timeTable
@@ -434,10 +414,28 @@ def determisticSchnizlle(timeTable):
         
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Hillclimbing algorithm """""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Hillclimbing algorithm """"""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 # SUCCES THOMAS :)
+
+def switch(timeTable, groupOne, groupTwo):
+    if(groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
+        groupTwo.getRoomSlot().getSize() < OVERBOOK * len(groupOne.getStudents())):
+        roomSlotOne = groupOne.getRoomSlot()
+        groupTwo.getRoomSlot().appointGroup(groupOne)
+        roomSlotOne.appointGroup(groupTwo)
+
+def hillclimbAlgorithm(timeTable, score, iterations):
+    # switch random groups and run getPoints()
+    groups = timeTable.getGroups()
+    highestScore = score
+    for i in range(iterations):
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+        if(groupOne != groupTwo):
+            switch(timeTable, groupOne, groupTwo, groups)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
