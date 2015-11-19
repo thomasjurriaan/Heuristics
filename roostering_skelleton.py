@@ -187,6 +187,7 @@ class Group(object):
         self.students = students
         self.maxStudents = maxStudents
         self.roomSlot = roomSlot
+        roomSlot.appointGroup(self)
         for s in students:
             s.addGroup(self)
         activity.addGroup(self)
@@ -221,10 +222,10 @@ def allCoursesScheduled(timeTable):
 def checkCount(aPoss, numberOfActivities):
     for c in aPoss:
         if numberOfActivities == 2:
-            if "mo" and "thu" or "tu" and "fri" or "mo" and "fri" in c:
+            if "mo" and "th" or "tu" and "fr" in c:
                 return True
         elif numberOfActivities == 3:
-            if "mo" and "we" and "fri" in c:
+            if "mo" and "we" and "fr" in c:
                 return True
         elif numberOfActivities == 4:
             if "mo" and "tu" and "th" and "fr" in c:
@@ -239,7 +240,7 @@ def coursesMaximallySpread(timeTable):
         for a in c.getActivities():
             aDays = []
             for g in a.getGroups():
-                d = g.getRoomSlot().getTimeSlot().day
+                d = g.getRoomSlot().getTimeSlot().getDay()
                 aDays.append(d)
             cDays.append(aDays)
         # Cartesian product
@@ -247,7 +248,7 @@ def coursesMaximallySpread(timeTable):
         numberOfActivities = len(cDays)
         if checkCount(aPoss, numberOfActivities):
             bonus += 20
-    return bonus      
+    return bonus
     
 def overbooked(timeTable):
     malus = 0
@@ -297,7 +298,7 @@ def personalScheduleConflict(timeTable):
 
 def activityConflict(timeTable):
     courses = timeTable.getCourses()
-    points = 0
+    malus = 0
     for c in courses:
         nrAct = 0
         days = []
@@ -306,8 +307,8 @@ def activityConflict(timeTable):
             for g in a.getGroups():
                 day = g.getRoomSlot().getTimeSlot().getDay()
                 days.append(day)
-        if nrAct > len(set(days)): points += 10
-    return points
+        if nrAct > len(set(days)): malus += 10
+    return malus
 
 def getPoints(timeTable):
     # Calculates the points of the timeTable
@@ -337,7 +338,6 @@ def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
             r.getSize()*OVERBOOK >= len(students)
             ):
                 group = Group(activity, students, activity.getMaxStudents(), r)
-                r.appointGroup(group)
                 timeTable.addGroup(group)
                 return
     else: raise StandardError("No room can be found for " +
@@ -428,6 +428,24 @@ def determisticSchnizlle(timeTable):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+def groupPoints(students, course, room):
+    for student in students:
+        pass #personalScheduleConflict
+    spreadBonusPoints(course)
+    spreadMalusPoints(course)
+    overbookMalusPoints(room)
+
+
+def pointsSaldo(group, newRoom):
+
+    students = group.getStudents()
+    course = group.getCourse()
+    originalRoom = group.getRoomSlot()
+    original = groupPoints(students, course, room)
+    new = groupPoints(students, course, newRoom)
+
+    return new - original
 
 def switch(timeTable, groupOne, groupTwo, groups):
     while(
