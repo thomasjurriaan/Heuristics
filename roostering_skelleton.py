@@ -146,13 +146,12 @@ class Course(object):
         self, courseName, lectures, seminar, maxseminar, practica, maxPractica
         ):
         self.students = []
-        self.lectures = [Activity("lecture",self) for i in range(lectures)]
-        self.seminar = [
-            Activity("seminar", self, maxseminar) for i in range(seminar)
-            ]
-        self.practica = [
-            Activity("practicum", self, maxPractica) for i in range(practica)
-            ]
+        self.lectures = [Activity("lecture"+str(i),self)
+                         for i in range(lectures)]
+        self.seminar = [Activity("seminar"+str(i), self, maxseminar)
+                        for i in range(seminar)]
+        self.practica = [Activity("practicum"+str(i), self, maxPractica)
+                         for i in range(practica)]
         self.courseName = courseName
     def addStudent(self,student):
         self.students.append(student)
@@ -164,7 +163,7 @@ class Course(object):
         return self.courseName
 
 class Activity(object):
-    def __init__(self, workType, course, maxStudents=float('inf')):
+    def __init__(self, workType, course, maxStudents = float('inf')):
         # Worktype is 'lecture', 'seminar' or 'practicum'
         self.type = workType
         self.course = course
@@ -195,10 +194,16 @@ class Group(object):
         return self.activity
     def getStudents(self):
         return self.students
+    def getMaxStudents(self):
+        return self.maxStudents
     def isValid(self):
         return len(self.students) <= self.maxStudents
     def getRoomSlot(self):
         return self.roomSlot
+    def newRoomSlot(self, roomSlot):
+        self.roomSlot.reset()
+        self.roomSlot = roomSlot
+        roomSlot.appointGroup(self)
 
 
 
@@ -327,7 +332,7 @@ def getPoints(timeTable):
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Random booking algorithm     """"""""""""""""""""""""""""
+"""""""""""""""  Random booking algorithm     """""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
@@ -350,6 +355,7 @@ def split(activity):
     numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
                                /float(activity.getMaxStudents()))
     activityStudents = activity.getCourse().getStudents()
+    random.shuffle(activityStudents)
     numberStud = len(activityStudents)/numberOfGroups
     studentGroups = []
     for i in range(int(numberOfGroups)):
@@ -513,14 +519,105 @@ def selectParents(children):
     return bestChildren + randomChildren
 
 def mutate(parents):
+    chanceToMutate = 0.35
+    mutationFactor = 0.06
+
+    print "Mutating parents..."
+    for p in parents:
+        if random.random() <= chanceToMutate:
+            freeSlots = []
+            # Free roomslots are listed
+            for t in p.getTimeSlots():
+                for r in t.getRoomSlots():
+                    if not r.hasGroup():
+                        freeSlots.append(r)
+            # Every group has a random chance to change roomslots
+            for g in p.getGroups():
+                if random.random() <= mutationFactor:
+                    for s in freeSlots:
+                        if not s.hasGroup():
+                            g.newRoomSlot(s)
+                            break
     return parents
 
-def makeLove(parents):
+def blindDate(p1, parents):
+    p2 = p1
+    while p2 == p1:
+        p2 = random.choice(parents)
+    return p2
+
+def freeRoomSlot(child, roomSlot):
+    roomName = roomSlot.getRoom()
+    time = roomSlot.getTimeSlot().getTime()
+    day = roomSlot.getTimeSlot().getDay()
+    for t in child.getTimeSlots():
+        if t.getDay() == day and t.getTime() == time:
+            for r in t.getRoomSlots():
+                if r.getRoom() == roomName:
+                    if not r.hasGroup():
+                        return r
+                    else: return False
+
+def bedRoom(p1, p2):
+    child = createTimeTableInstance()
+    c1 = p1.getCourses()
+    c2 = p2.getCourses()
+    badGroups = []
+    for i in range(len(c1)):
+        parentC = random.choice([c1[i], c2[i]])
+        for c in child.getCourses():
+            if c.getName() == parentC.getName():
+                course = c
+                break
+        groups = sum([a.getGroups() for a in parentC.getActivities()],[])
+        for parentG in groups:
+            activityName = parentG.getActivity().getType()
+            for a in course.getActivities():
+                if a.getType() == activityName:
+                    activity = a
+                    break
+            studentNames = [s.getName() for s in parentG.getStudents()]
+            students = [s for s in child.getStudents()
+                        if s.getName() in studentNames]
+            
+            room = freeRoomSlot(child, parentG.getRoomSlot())
+            if  room != False:
+                group = Group(
+                    activity, students, parentG.getMaxStudents(), room
+                    )
+                child.addGroup(group)
+            else:
+                badGroups.append([activity, students])
+
+    roomSlots = sum([t.getRoomSlots() for t in child.getTimeSlots()],[])
+    freeRoomSlots = [r for r in roomSlots if not r.hasGroup()]
+    random.shuffle(freeRoomSlots)
+    for g in badGroups:
+        try: bookRandomRoom(g[0], freeRoomSlots, g[1], child)
+        except:
+            print "Miscarriage..."
+            return None  
+    return child
+
+def makeLove(parents, n):
     print "Making new children..."
-    return parents
+    cpp = int(n/float(len(parents)))
+    children = []
+    for p1 in parents:
+        for i in range(cpp):
+            p2 = blindDate(p1, parents)
+            newChild = bedRoom(p1, p2)
+            if newChild != None: children.append(newChild)
+    while len(children) < n:
+        p1 = random.choice(parents)
+        p2 = blindDate(p1, parents)
+        newChild = bedRoom(p1, p2)
+        if newChild != None: children.append(newChild)
+        
+    return children
 
 def geneticAlgorithm(iterations = 1):
-    nrChilds = 100
+    nrChilds = 50
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -533,13 +630,17 @@ def geneticAlgorithm(iterations = 1):
             randomAlgorithm(table)
         children.append(table)
 
+    evolution = []
     for i in range(iterations):
-        print "Starting iteration ",i+1
+        print "\nStarting iteration ",i+1
+        print "Amount of children ",len(children)
         parents = selectParents(children)
         mutate(parents)
-        children = makeLove(parents)
-    
-    return max(children, key = lambda x: getPoints(x))
+        children = makeLove(parents, nrChilds)
+        bestChild = max(children, key = lambda x: getPoints(x))
+        evolution.append(getPoints(bestChild))
+        
+    return bestChild, evolution
     
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
