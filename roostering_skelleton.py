@@ -385,7 +385,7 @@ def bookActivity(activity, randomRoomSlots, timeTable):
 
     for g in studentGroups:
         try: bookRandomRoom(activity, randomRoomSlots, g, timeTable)
-        except: pass
+        except: break
     return
         
 def randomAlgorithm(timeTable):
@@ -637,7 +637,7 @@ def makeLove(parents, n):
     return children
 
 def geneticAlgorithm(iterations = 1):
-    nrChilds = 50
+    nrChilds = 80
 
     print "================================="
     print "Initiating genetic algorithm"
