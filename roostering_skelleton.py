@@ -335,12 +335,23 @@ def getPoints(timeTable):
 """""""""""""""  Random booking algorithm     """""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+def courseInTimeSlot(course, roomSlot):
+    timeSlot = roomSlot.getTimeSlot()
+    for r in timeSlot.getRoomSlots():
+        if r.hasGroup():
+            group = r.getGroup()
+            if course == group.getActivity().getCourse():
+                return True
+    return False
+            
+
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
     # Tries to book an activity in a room. If succeeded: returns the booked
     # group
     for r in randomRoomSlots:
         if ((not r.hasGroup()) and
-            r.getSize()*OVERBOOK >= len(students)
+            r.getSize()*OVERBOOK >= len(students) and
+            not courseInTimeSlot(activity.getCourse(), r)
             ):
                 group = Group(activity, students, activity.getMaxStudents(), r)
                 timeTable.addGroup(group)
@@ -504,25 +515,32 @@ def hillclimbAlgorithm(timeTable, score, iterations):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def selectParents(children):
-    bestP = 0.2
+    bestP = 0.25
     randomP = 0.05
     
     print "Picking parents..."
     n = len(children)
     children.sort(key=lambda x: getPoints(x))
-    
-    bestChildren = children[int(-bestP*n):]
+
+    parents = children[int(-bestP*n):]
     restChildren = children[:int(-bestP*n)]
     randomChildren = [
         random.choice(restChildren) for i in range(int(randomP*n))
         ]
-    return bestChildren + randomChildren
+    parents += randomChildren
+    child = None
+    while not allCoursesScheduled(child):
+        child = createTimeTableInstance()
+        randomAlgorithm(child)
+    parents.append(child)
+    
+    return parents
 
 def mutate(parents):
-    chanceToMutate = 0.35
-    mutationFactor = 0.06
+    chanceToMutate = 0.25
+    mutationFactor = 0.2
 
-    print "Mutating parents..."
+    print "\nMutating parents..."
     for p in parents:
         if random.random() <= chanceToMutate:
             freeSlots = []
@@ -546,7 +564,7 @@ def blindDate(p1, parents):
         p2 = random.choice(parents)
     return p2
 
-def freeRoomSlot(child, roomSlot):
+def freeRoomSlot(child, roomSlot, course):
     roomName = roomSlot.getRoom()
     time = roomSlot.getTimeSlot().getTime()
     day = roomSlot.getTimeSlot().getDay()
@@ -555,7 +573,9 @@ def freeRoomSlot(child, roomSlot):
             for r in t.getRoomSlots():
                 if r.getRoom() == roomName:
                     if not r.hasGroup():
-                        return r
+                        if not courseInTimeSlot(course, r):
+                            return r
+                        else: return False
                     else: return False
 
 def bedRoom(p1, p2):
@@ -580,7 +600,7 @@ def bedRoom(p1, p2):
             students = [s for s in child.getStudents()
                         if s.getName() in studentNames]
             
-            room = freeRoomSlot(child, parentG.getRoomSlot())
+            room = freeRoomSlot(child, parentG.getRoomSlot(), course)
             if  room != False:
                 group = Group(
                     activity, students, parentG.getMaxStudents(), room
@@ -631,16 +651,49 @@ def geneticAlgorithm(iterations = 1):
         children.append(table)
 
     evolution = []
-    for i in range(iterations):
-        print "\nStarting iteration ",i+1
+    overbookings = []
+    spread = []
+    personal = []
+    i = 0
+    while i < iterations:
+        i += 1
+        print "\n========================"
+        print "Starting iteration ",i
+        print "========================"
         print "Amount of children ",len(children)
         parents = selectParents(children)
+        print "Parent points this generation: "
+        for p in parents:
+            print getPoints(p),
         mutate(parents)
         children = makeLove(parents, nrChilds)
         bestChild = max(children, key = lambda x: getPoints(x))
         evolution.append(getPoints(bestChild))
+        overbookings.append(-overbooked(bestChild))
+        spread.append(coursesMaximallySpread(bestChild)
+                      - activityConflict(bestChild))
+        personal.append(-personalScheduleConflict(bestChild))
+
+        if i == iterations:
+            q = ""
+            while q != "Y" and q != "N":
+                w = ("You want to do another "
+                     +str(iterations)
+                     +" iterations? (Y/N)")
+                q = raw_input(w)
+            if q == "Y": iterations *= 2
+            else: break
         
-    return bestChild, evolution
+
+    print "\n======================"
+    print "Evolution review!"
+    print "======================"
+    print "Total score: \n",evolution
+    print "Overbookings: \n",overbookings
+    print "Personal conflicts: \n",personal
+    print "Spreadding points: \n",spread
+        
+    return bestChild
     
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
