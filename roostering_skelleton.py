@@ -737,12 +737,14 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
         mutate(parents)
         children = makeLove(parents, nrChilds)
         bestChild = max(children, key = lambda x: getPoints(x))
-        evolution.append(np.mean([getPoints(c) for c in children]))
-        overbookings.append(np.mean([overbooked(c) for c in children]))
-        spread.append(np.mean([
+        evolution.append(int(np.mean([getPoints(c) for c in children])))
+        overbookings.append(int(np.mean([overbooked(c) for c in children])))
+        spread.append(int(np.mean([
             coursesMaximallySpread(c) - activityConflict(c) for c in children
-            ]))
-        personal.append(np.mean([personalScheduleConflict(c) for c in children]))
+            ])))
+        personal.append(int(np.mean([
+            personalScheduleConflict(c) for c in children
+            ])))
 
         if i == iterations:
             q = ""
