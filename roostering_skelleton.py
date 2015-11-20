@@ -343,19 +343,24 @@ def courseInTimeSlot(course, roomSlot):
             if course == group.getActivity().getCourse():
                 return True
     return False
-            
+
+def roomIsValid(roomSlot, students, activity):
+    r = roomSlot
+    if (
+        not r.hasGroup() and
+        r.getSize()*OVERBOOK >= len(students) and
+        not courseInTimeSlot(activity.getCourse(), r)
+        ): return True
+    return False
 
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
     # Tries to book an activity in a room. If succeeded: returns the booked
     # group
     for r in randomRoomSlots:
-        if ((not r.hasGroup()) and
-            r.getSize()*OVERBOOK >= len(students) and
-            not courseInTimeSlot(activity.getCourse(), r)
-            ):
-                group = Group(activity, students, activity.getMaxStudents(), r)
-                timeTable.addGroup(group)
-                return
+        if roomIsValid(r, students, activity):
+            group = Group(activity, students, activity.getMaxStudents(), r)
+            timeTable.addGroup(group)
+            return
     else: raise StandardError("No room can be found for " +
                               activity.getCourse().getName())
 
@@ -514,7 +519,7 @@ def hillclimbAlgorithm(timeTable, score, iterations):
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def selectParents(children):
+def selectParents(children, acceptOutsider):
     bestP = 0.25
     randomP = 0.05
     
@@ -528,17 +533,20 @@ def selectParents(children):
         random.choice(restChildren) for i in range(int(randomP*n))
         ]
     parents += randomChildren
-    child = None
-    while not allCoursesScheduled(child):
-        child = createTimeTableInstance()
-        randomAlgorithm(child)
-    parents.append(child)
+    if acceptOutsider == True:
+        child = None
+        while not allCoursesScheduled(child):
+            child = createTimeTableInstance()
+            randomAlgorithm(child)
+        parents.append(child)
+    random.shuffle(parents)
     
     return parents
 
 def mutate(parents):
-    chanceToMutate = 0.25
-    mutationFactor = 0.2
+    chanceToMutate = 0.1
+    mutationFactor = 0.4
+    interchangeFactor = 0.4
 
     print "\nMutating parents..."
     for p in parents:
@@ -549,12 +557,28 @@ def mutate(parents):
                 for r in t.getRoomSlots():
                     if not r.hasGroup():
                         freeSlots.append(r)
-            # Every group has a random chance to change roomslots
-            for g in p.getGroups():
+            random.shuffle(freeSlots)
+            
+            for g1 in p.getGroups():
+                # Every group has a chance to change roomslots
                 if random.random() <= mutationFactor:
                     for s in freeSlots:
                         if not s.hasGroup():
-                            g.newRoomSlot(s)
+                            g1.newRoomSlot(s)
+                            break
+                # Every group had a change to swich places with other group
+                if random.random() <= interchangeFactor:
+                    groups2 = p.getGroups()
+                    random.shuffle(groups2)
+                    for g2 in groups2:
+                        room2 = g1.getRoomSlot()
+                        room1 = g2.getRoomSlot()
+                        if (roomIsValid(room1, g1.getStudents(),
+                                        g1.getActivity()) and
+                            roomIsValid(room2, g2.getStudents(),
+                                        g2.getActivity())):
+                            g1.newRoomSlot(room1)
+                            g2.newRoomSlot(room2)
                             break
     return parents
 
@@ -636,8 +660,8 @@ def makeLove(parents, n):
         
     return children
 
-def geneticAlgorithm(iterations = 1):
-    nrChilds = 80
+def geneticAlgorithm(iterations = 1, acceptOutsider = True):
+    nrChilds = 20
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -661,7 +685,7 @@ def geneticAlgorithm(iterations = 1):
         print "Starting iteration ",i
         print "========================"
         print "Amount of children ",len(children)
-        parents = selectParents(children)
+        parents = selectParents(children, acceptOutsider)
         print "Parent points this generation: "
         for p in parents:
             print getPoints(p),
@@ -670,8 +694,8 @@ def geneticAlgorithm(iterations = 1):
         bestChild = max(children, key = lambda x: getPoints(x))
         evolution.append(getPoints(bestChild))
         overbookings.append(-overbooked(bestChild))
-        spread.append(coursesMaximallySpread(bestChild)
-                      - activityConflict(bestChild))
+        spread.append((coursesMaximallySpread(bestChild),
+                      - activityConflict(bestChild)))
         personal.append(-personalScheduleConflict(bestChild))
 
         if i == iterations:
@@ -812,17 +836,17 @@ def exportData(timeTable):
     print "Data is stored in .../visualisation/Data/."
     print "Saving main timetable..."
     data = tableToList(timeTable)
-    with open("Visualisatie/Data/main.json", 'wb') as f:
-        json.dump(data, f, encoding='latin1')
-    print "Saving timetables of "+str(len(students))+" students..."
+##    with open("Visualisatie/Data/main.json", 'wb') as f:
+##        json.dump(data, f, encoding='latin1')
     students = timeTable.getStudents()
+    print "Saving timetables of "+str(len(students))+" students..."
     for i, s in enumerate(students):
         data = studentToList(s)
         filename = "student"+str(i)+".json"
         with open("Visualisatie/Data/"+filename, 'wb') as f:
             json.dump(data, f, encoding='latin1')
-    print "Saving timetables of "+str(len(courses))+" courses..."
     courses = timeTable.getCourses()
+    print "Saving timetables of "+str(len(courses))+" courses..."
     for i, c in enumerate(courses):
         data = courseToList(c)
         filename = "course"+str(i)+".json"
