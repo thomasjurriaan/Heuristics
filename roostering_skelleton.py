@@ -210,6 +210,7 @@ def allCoursesScheduled(timeTable):
         nrGr = len(s.getGroups())
         if nrAct > nrGr:
             return False
+    print "+1000"
     return True
 
 def checkCount(aPoss, numberOfActivities):
@@ -241,6 +242,7 @@ def coursesMaximallySpread(timeTable):
         numberOfActivities = len(cDays)
         if checkCount(aPoss, numberOfActivities):
             bonus += 20
+    print "courses maximally spread: +", bonus
     return bonus
     
 def overbooked(timeTable):
@@ -255,6 +257,7 @@ def overbooked(timeTable):
             saldo = len(r.getStudents()) - r.getSize()
         if saldo > 0:
             malus += saldo
+    print "overbooked: -", malus
     return malus
 
 def personalScheduleConflict(timeTable):
@@ -267,6 +270,7 @@ def personalScheduleConflict(timeTable):
             if c.getRoomSlot().getTimeSlot() in cList:
                 malus += 1
             cList.append(c.getRoomSlot().getTimeSlot())
+    print "studentroosterconflict: -", malus
     return malus
 
 ##def activityConflict(timeTable):
@@ -301,6 +305,7 @@ def activityConflict(timeTable):
                 day = g.getRoomSlot().getTimeSlot().getDay()
                 days.append(day)
         if nrAct > len(set(days)): malus += 10
+    print "te veel activiteiten: -", malus
     return malus
 
 def getPoints(timeTable):
