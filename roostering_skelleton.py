@@ -613,7 +613,7 @@ def mutate(parents):
     # Parents are mutated before coupling
     fsFactor = 0.02
     csFactor = 0.02
-    sFactor = 0.05
+    sFactor = 0.75
     
     print "\nMutating parents..."
     for p in parents:
@@ -655,7 +655,7 @@ def bedRoom(p1, p2):
         for c in child.getCourses():
             if c.getName() == parentC.getName():
                 course = c
-                break
+                break            
         groups = sum([a.getGroups() for a in parentC.getActivities()],[])
         for parentG in groups:
             activityName = parentG.getActivity().getType()
@@ -666,7 +666,6 @@ def bedRoom(p1, p2):
             studentNames = [s.getName() for s in parentG.getStudents()]
             students = [s for s in child.getStudents()
                         if s.getName() in studentNames]
-            
             room = freeRoomSlot(child, parentG.getRoomSlot(), course)
             if  room != False:
                 group = Group(
@@ -675,7 +674,7 @@ def bedRoom(p1, p2):
                 child.addGroup(group)
             else:
                 badGroups.append([activity, students])
-
+                
     # The algorithm tries to schedule the groups that didn't fit in their
     # original roomslot
     roomSlots = sum([t.getRoomSlots() for t in child.getTimeSlots()],[])
@@ -685,7 +684,7 @@ def bedRoom(p1, p2):
         try: bookRandomRoom(g[0], freeRoomSlots, g[1], child)
         except:
             print "Miscarriage..."
-            return None  
+            return None
     return child
 
 def makeLove(parents, n):
@@ -702,7 +701,6 @@ def makeLove(parents, n):
         p2 = blindDate(p1, parents)
         newChild = bedRoom(p1, p2)
         if newChild != None: children.append(newChild)
-        
     return children
 
 def geneticAlgorithm(iterations = 1, acceptOutsider = True):
@@ -723,6 +721,7 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
     overbookings = []
     spread = []
     personal = []
+    bestChildScore = 0
     i = 0
     while i < iterations:
         i += 1
@@ -736,7 +735,10 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
             print getPoints(p),
         mutate(parents)
         children = makeLove(parents, nrChilds)
-        bestChild = max(children, key = lambda x: getPoints(x))
+        maxChild = max(children, key = lambda x: getPoints(x))
+        if getPoints(maxChild) > bestChildScore:
+            bestChild = maxChild
+            bestChildScore = getPoints(maxChild)
         evolution.append(int(np.mean([getPoints(c) for c in children])))
         overbookings.append(int(np.mean([overbooked(c) for c in children])))
         spread.append(int(np.mean([
@@ -755,7 +757,6 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
                 q = raw_input(w)
             if q == "Y": iterations *= 2
             else: break
-        
 
     print "\n======================"
     print "Evolution review!"
@@ -781,7 +782,7 @@ def getData(filename):
     return json.loads(json_data)
 
 def createTimeTableInstance():
-    print "Creating empty timetable structure..."
+    print "Creating new timetable structure..."
     studentData = getData(STUDENTS)
     courseData = getData(COURSES)
     timeTable = TimeTable()
