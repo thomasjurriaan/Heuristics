@@ -3,12 +3,11 @@ import random
 import math
 import itertools
 import copy
-import numpy as np
+#import numpy as np
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 STUDENTS = 'students.json'
 COURSES = 'coursesInf.json'
@@ -215,7 +214,6 @@ class Group(object):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Counting points """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 def allCoursesScheduled(timeTable):
     if timeTable == None: return False
     
@@ -243,50 +241,64 @@ def checkCount(dList, nrAct):
             return True
     return False
 
+def spreadBonusPoints(c):
+    nrAct = len(c.getActivities())
+    if nrAct < 2 or nrAct > 4:
+        return 0
+    cDays = []
+    for a in c.getActivities():
+        aDays = []
+        for g in a.getGroups():
+            d = g.getRoomSlot().getTimeSlot().getDay()
+            aDays.append(d)
+        cDays.append(aDays)
+    # Cartesian product
+    aPoss = [list(v) for v in itertools.product(*cDays)]
+    if checkCount(aPoss, nrAct):
+        return 20
+    return 0
+
 def coursesMaximallySpread(timeTable):
     courses = timeTable.getCourses()
     bonus = 0
     for c in courses:
-        nrAct = len(c.getActivities())
-        if nrAct < 2 or nrAct > 4:
-            continue
-        cDays = []
-        for a in c.getActivities():
-            aDays = []
-            for g in a.getGroups():
-                d = g.getRoomSlot().getTimeSlot().getDay()
-                aDays.append(d)
-            cDays.append(aDays)
-        # Cartesian product
-        aPoss = [list(v) for v in itertools.product(*cDays)]
-        if checkCount(aPoss, nrAct):
-            bonus += 20
+        bonus += spreadBonusPoints(c)            
     return bonus
-    
+
+def overbookMalusPoints(r):
+    if (r.getStudents() != None):
+        saldo = len(r.getStudents()) - r.getSize()
+        if saldo > 0:
+            return saldo
+        else: return 0
+    else: return 0
+
 def overbooked(timeTable):
     malus = 0
     saldo = 0;
     ts = timeTable.getTimeSlots()
     rs = []
     for t in ts:
-            rs += t.getRoomSlots()
+        rs += t.getRoomSlots()
     for r in rs:
-        if r.getStudents() != None:
-            saldo = len(r.getStudents()) - r.getSize()
-        if saldo > 0:
-            malus += saldo
+        malus += overbookMalusPoints(r)
     return malus
+
+def studentMalusPoints(s):
+    individualMalus = 0
+    cList = []
+    for c in s.getGroups():
+        if c.getRoomSlot().getTimeSlot() in cList:
+            individualMalus += 1
+        cList.append(c.getRoomSlot().getTimeSlot())
+        return individualMalus
 
 def personalScheduleConflict(timeTable):
     students = timeTable.getStudents()
     malus = 0
     # Loop over lijst met students heen
     for s in students:
-        cList = []
-        for c in s.getGroups():
-            if c.getRoomSlot().getTimeSlot() in cList:
-                malus += 1
-            cList.append(c.getRoomSlot().getTimeSlot())
+        malus += studentMalusPoints(s)
     return malus
 
 ##def activityConflict(timeTable):
@@ -309,18 +321,23 @@ def personalScheduleConflict(timeTable):
 ##                    if len(l) == 0: points += 10
 ##    return points
 
+def spreadMalusPoints(c):
+    malus = 0
+    nrAct = 0
+    days = []
+    for a in c.getActivities():
+        nrAct += 1
+        for g in a.getGroups():
+            day = g.getRoomSlot().getTimeSlot().getDay()
+            days.append(day)
+    if nrAct > len(set(days)): malus += 10
+    return malus
+
 def activityConflict(timeTable):
     courses = timeTable.getCourses()
     malus = 0
     for c in courses:
-        nrAct = 0
-        days = []
-        for a in c.getActivities():
-            nrAct += 1
-            for g in a.getGroups():
-                day = g.getRoomSlot().getTimeSlot().getDay()
-                days.append(day)
-        if nrAct > len(set(days)): malus += 10
+        malus += spreadMalusPoints(c)
     return malus
 
 def getPoints(timeTable):
@@ -460,63 +477,52 @@ def determisticSchnizlle(timeTable):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def groupPoints(students, course, room):
+    saldo = 0
     for student in students:
-        pass #personalScheduleConflict
-    spreadBonusPoints(course)
-    spreadMalusPoints(course)
-    overbookMalusPoints(room)
-
+        saldo -= studentMalusPoints(student)
+    print "1: saldo  =  ", saldo
+    saldo += spreadBonusPoints(course)
+    print "2: saldo  =  ", saldo
+    saldo -= spreadMalusPoints(course)
+    print "3: saldo  =  ", saldo
+    saldo -= overbookMalusPoints(room)
+    print "4: saldo  =  ", saldo
+    return saldo
 
 def pointsSaldo(group, newRoom):
-
     students = group.getStudents()
-    course = group.getCourse()
+    course = group.getActivity().getCourse()
     originalRoom = group.getRoomSlot()
-    original = groupPoints(students, course, room)
+    original = groupPoints(students, course, originalRoom)
     new = groupPoints(students, course, newRoom)
-
     return new - original
 
 def switch(timeTable, groupOne, groupTwo, groups):
-    while(
-        groupOne != groupTwo and
-        groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
-        and
-        groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())
-          ):
-        groupOne = random.choice(groups)
-        groupTwo = random.choice(groups)
     roomSlotOne = groupOne.getRoomSlot()
     groupTwo.getRoomSlot().appointGroup(groupOne)
     roomSlotOne.appointGroup(groupTwo)
 
-def copyTimeTable(timeTable):
-    newTable = createTimeTableInstance()
-    groups = timeTable.getGroups()
-    for g in groups:
-        group = Group(g.getActivity(), g.getStudents(),
-                      g.getActivity().getMaxStudents(), g.getRoomSlot())
-        g.getRoomSlot().appointGroup(group)
-        newTable.addGroup(group)
-    return newTable
-
-
 def hillclimbAlgorithm(timeTable, score, iterations):
+    print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
-    highestScore = score
-    currentTimeTable = timeTable
+    highscore = 0
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
-        nextTimeTable = copyTimeTable(currentTimeTable)
         groupOne = random.choice(groups)
         groupTwo = random.choice(groups)
-        switch(nextTimeTable, groupOne, groupTwo, groups)
-        currentScore = getPoints(nextTimeTable)
-        scores.append(currentScore)
-        if(currentScore > highestScore):
+        while(groupOne != groupTwo and
+        groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
+        and groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
+            groupOne = random.choice(groups)
+            groupTwo = random.choice(groups)
+        #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
+        score = getPoints(timeTable)
+        if((score > highscore)):
             print "current score is higher than the highest score"
-            currentTimeTable = nextTimeTable
+            highscore = score
+            scores.append(highscore)
+        else: switch(timeTable, groupTwo, groupOne, groups)
         if(i % 10 == 0):
             print "Current iteration: "
             print i 
@@ -814,7 +820,7 @@ if __name__ == '__main__':
 def t():
     henk = createTimeTableInstance()
     randomAlgorithm(henk)
-    hillclimbAlgorithm(henk, getPoints(henk), 50)
+    hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS)
     return henk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
