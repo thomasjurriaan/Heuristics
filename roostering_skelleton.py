@@ -9,6 +9,13 @@ import copy
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+def getData(filename):
+    """
+    Reads the json-file with the schedule data
+    Returns a list of dictionaries
+    """
+    json_data=open(filename).read()
+    return json.loads(json_data)
 STUDENTS = 'students.json'
 COURSES = 'coursesInf.json'
 STUDENTDATA = getData(STUDENTS)
