@@ -3,6 +3,7 @@ import random
 import math
 import itertools
 import copy
+import numpy as np
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -41,7 +42,8 @@ class Student(object):
                     self.courses.append(e)
                     e.addStudent(self)
                     break
-            else: raise StandardError("Course " + c + " for student " + self.getName() + " does not exist")
+            else: raise StandardError("Course " + c + " for student " +
+                                      self.getName() + " does not exist")
         self.groups = []
     def getName(self):
         return self.firstName+' '+self.lastName
@@ -141,11 +143,16 @@ class RoomSlot(object):
         else: return self.group.getStudents()
 
 class Course(object):
-    def __init__(self, courseName, lectures, seminar, maxseminar, practica, maxPractica):
+    def __init__(
+        self, courseName, lectures, seminar, maxseminar, practica, maxPractica
+        ):
         self.students = []
-        self.lectures = [Activity("lecture",self) for i in range(lectures)]
-        self.seminar = [Activity("seminar", self, maxseminar) for i in range(seminar)]
-        self.practica = [Activity("practicum", self, maxPractica) for i in range(practica)]
+        self.lectures = [Activity("lecture"+str(i),self)
+                         for i in range(lectures)]
+        self.seminar = [Activity("seminar"+str(i), self, maxseminar)
+                        for i in range(seminar)]
+        self.practica = [Activity("practicum"+str(i), self, maxPractica)
+                         for i in range(practica)]
         self.courseName = courseName
     def addStudent(self,student):
         self.students.append(student)
@@ -157,7 +164,7 @@ class Course(object):
         return self.courseName
 
 class Activity(object):
-    def __init__(self, workType, course, maxStudents=float('inf')):
+    def __init__(self, workType, course, maxStudents = float('inf')):
         # Worktype is 'lecture', 'seminar' or 'practicum'
         self.type = workType
         self.course = course
@@ -188,10 +195,20 @@ class Group(object):
         return self.activity
     def getStudents(self):
         return self.students
+    def getMaxStudents(self):
+        return self.maxStudents
     def isValid(self):
         return len(self.students) <= self.maxStudents
     def getRoomSlot(self):
         return self.roomSlot
+    def newRoomSlot(self, roomSlot):
+        self.roomSlot.reset()
+        self.roomSlot = roomSlot
+        roomSlot.appointGroup(self)
+    def removeStudent(self, student):
+        self.students = [s for s in self.students if s != student]
+    def addStudent(self, student):
+        self.students.append(student)
 
 
 
@@ -213,23 +230,27 @@ def allCoursesScheduled(timeTable):
     print "+1000"
     return True
 
-def checkCount(aPoss, numberOfActivities):
-    for c in aPoss:
-        if numberOfActivities == 2:
-            if "mo" and "th" or "tu" and "fr" in c:
-                return True
-        elif numberOfActivities == 3:
-            if "mo" and "we" and "fr" in c:
-                return True
-        elif numberOfActivities == 4:
-            if "mo" and "tu" and "th" and "fr" in c:
-                return True
-        return False
+def checkCount(dList, nrAct):
+    L2 = [set(["mo", "th"]), set(["tu", "fr"])]
+    L3 = set(["mo", "we", "fr"])
+    L4 = set(["mo", "tu", "th", "fr"])
+        
+    for d in dList:
+        if nrAct == 2 and set(d) in L2:
+            return True
+        if nrAct == 3 and set(d) == L3:
+            return True
+        if nrAct == 4 and set(d) == L4:
+            return True
+    return False
 
 def coursesMaximallySpread(timeTable):
     courses = timeTable.getCourses()
     bonus = 0
     for c in courses:
+        nrAct = len(c.getActivities())
+        if nrAct < 2 or nrAct > 4:
+            continue
         cDays = []
         for a in c.getActivities():
             aDays = []
@@ -239,8 +260,7 @@ def coursesMaximallySpread(timeTable):
             cDays.append(aDays)
         # Cartesian product
         aPoss = [list(v) for v in itertools.product(*cDays)]
-        numberOfActivities = len(cDays)
-        if checkCount(aPoss, numberOfActivities):
+        if checkCount(aPoss, nrAct):
             bonus += 20
     print "courses maximally spread: +", bonus
     return bonus
@@ -312,7 +332,8 @@ def getPoints(timeTable):
     # Calculates the points of the timeTable
     # Looks for bonus points(20 for each maximally spreaded course)
     # Looks for malus points(1 for each student-specific conflict,
-    # 1 for each overbooked student, 10 for each double scedueled course on one day)
+    # 1 for each overbooked student, 10 for each double scedueled course
+    # on one day)
     if allCoursesScheduled(timeTable):
         points = 1000
         points += coursesMaximallySpread(timeTable)
@@ -324,31 +345,52 @@ def getPoints(timeTable):
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Random booking algorithm """""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Random booking algorithm     """""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+def courseInTimeSlot(course, roomSlot):
+    timeSlot = roomSlot.getTimeSlot()
+    for r in timeSlot.getRoomSlots():
+        if r.hasGroup():
+            group = r.getGroup()
+            if course == group.getActivity().getCourse():
+                return True
+    return False
+
+def roomIsValid(roomSlot, students, activity):
+    r = roomSlot
+    if (
+        not r.hasGroup() and
+        r.getSize()*OVERBOOK >= len(students) and
+        not courseInTimeSlot(activity.getCourse(), r)
+        ): return True
+    return False
+
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
-    # Tries to book an activity in a room. If succeeded: returns the booked group
+    # Tries to book an activity in a room. If succeeded: returns the booked
+    # group
     for r in randomRoomSlots:
-        if ((not r.hasGroup()) and
-            r.getSize()*OVERBOOK >= len(students)
-            ):
-                group = Group(activity, students, activity.getMaxStudents(), r)
-                timeTable.addGroup(group)
-                return
+        if roomIsValid(r, students, activity):
+            group = Group(activity, students, activity.getMaxStudents(), r)
+            timeTable.addGroup(group)
+            return
     else: raise StandardError("No room can be found for " +
                               activity.getCourse().getName())
 
     
 def split(activity):
-    # Takes an activity with more students than alowed per group and returns lists of valid student groups
+    # Takes an activity with more students than alowed per group and returns
+    #lists of valid student groups
     numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
                                /float(activity.getMaxStudents()))
     activityStudents = activity.getCourse().getStudents()
+    random.shuffle(activityStudents)
     numberStud = len(activityStudents)/numberOfGroups
     studentGroups = []
     for i in range(int(numberOfGroups)):
-        newStudentGroup = activityStudents[int(i*numberStud):int((i+1)*numberStud)]
+        newStudentGroup = activityStudents[
+            int(i*numberStud):int((i+1)*numberStud)
+            ]
         studentGroups.append(newStudentGroup)
     return studentGroups
 
@@ -361,7 +403,7 @@ def bookActivity(activity, randomRoomSlots, timeTable):
 
     for g in studentGroups:
         try: bookRandomRoom(activity, randomRoomSlots, g, timeTable)
-        except: pass
+        except: break
     return
         
 def randomAlgorithm(timeTable):
@@ -387,7 +429,7 @@ def randomAlgorithm(timeTable):
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Deterministic booking algorithm"""""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Deterministic booking algorithm"""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def determisticSchnizlle(timeTable):
@@ -441,8 +483,12 @@ def pointsSaldo(group, newRoom):
     return new - original
 
 def switch(timeTable, groupOne, groupTwo, groups):
-    while(groupOne != groupTwo and groupOne.getRoomSlot().getSize() < OVERBOOK * len(groupTwo.getStudents()) and
-        groupTwo.getRoomSlot().getSize() < OVERBOOK * len(groupOne.getStudents())):
+    while(
+        groupOne != groupTwo and
+        groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
+        and
+        groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())
+          ):
         groupOne = random.choice(groups)
         groupTwo = random.choice(groups)
     roomSlotOne = groupOne.getRoomSlot()
@@ -453,7 +499,8 @@ def copyTimeTable(timeTable):
     newTable = createTimeTableInstance()
     groups = timeTable.getGroups()
     for g in groups:
-        group = Group(g.getActivity(), g.getStudents(), g.getActivity().getMaxStudents(), g.getRoomSlot())
+        group = Group(g.getActivity(), g.getStudents(),
+                      g.getActivity().getMaxStudents(), g.getRoomSlot())
         g.getRoomSlot().appointGroup(group)
         newTable.addGroup(group)
     return newTable
@@ -485,30 +532,186 @@ def hillclimbAlgorithm(timeTable, score, iterations):
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def selectParents(children):
-    bestP = 0.2
+def selectParents(children, acceptOutsider):
+    # The surving parents-to-be are randomly selected from all childs
+    # It's possible to accept the introduction of an outsider every round
+    bestP = 0.25
     randomP = 0.05
     
     print "Picking parents..."
     n = len(children)
     children.sort(key=lambda x: getPoints(x))
-    
-    bestChildren = children[int(-bestP*n):]
+
+    parents = children[int(-bestP*n):]
     restChildren = children[:int(-bestP*n)]
     randomChildren = [
         random.choice(restChildren) for i in range(int(randomP*n))
         ]
-    return bestChildren + randomChildren
+    parents += randomChildren
+    if acceptOutsider == True:
+        child = None
+        while not allCoursesScheduled(child):
+            child = createTimeTableInstance()
+            randomAlgorithm(child)
+        parents.append(child)
+    random.shuffle(parents)
+    
+    return parents
 
+def freeSlotMutation(timeTable, factor):
+    freeSlots = []
+    # Free roomslots are listed
+    for t in timeTable.getTimeSlots():
+        for r in t.getRoomSlots():
+            if not r.hasGroup():
+                freeSlots.append(r)
+    random.shuffle(freeSlots)
+    
+    for g in timeTable.getGroups():
+        # Every group has a chance to change roomslots
+        if random.random() <= factor:
+            for s in freeSlots:
+                if not s.hasGroup():
+                    g.newRoomSlot(s)
+                    break
+    return
+
+def changeSlotMutation(timeTable, factor):
+    # Every group had a change to swich places with other group
+    for g1 in timeTable.getGroups():
+        if random.random() <= factor:
+            groups2 = timeTable.getGroups()
+            random.shuffle(groups2)
+            for g2 in groups2:
+                room1 = g1.getRoomSlot()
+                room2 = g2.getRoomSlot()
+                if (roomIsValid(room2, g1.getStudents(),
+                                g1.getActivity()) and
+                    roomIsValid(room1, g2.getStudents(),
+                                g2.getActivity())):
+                    g1.newRoomSlot(room2)
+                    g2.newRoomSlot(room1)
+                    break
+    return
+
+def studentMutation(timeTable, factor):
+    # Students can be made to swich workgroup with another student
+    activities = []
+    for g in timeTable.getGroups():
+        if len(g.getActivity().getGroups()) > 1:
+            activities.append(g.getActivity())
+    for a in activities:
+        if random.random() <= factor:
+            g1 = random.choice(a.getGroups())
+            g2 = g1
+            while g2 == g1:
+                g2 = random.choice(a.getGroups())
+            stud1 = random.choice(g1.getStudents())
+            stud2 = random.choice(g2.getStudents())
+            g1.removeStudent(stud1)
+            g2.removeStudent(stud2)
+            g1.addStudent(stud2)
+            g2.addStudent(stud1)
+    return  
+    
 def mutate(parents):
+    # Parents are mutated before coupling
+    fsFactor = 0.02
+    csFactor = 0.02
+    sFactor = 0.05
+    
+    print "\nMutating parents..."
+    for p in parents:
+        freeSlotMutation(p, fsFactor)
+        changeSlotMutation(p, csFactor)
+        studentMutation(p, sFactor)
     return parents
 
-def makeLove(parents):
+def blindDate(p1, parents):
+    # Parents are coupled
+    p2 = p1
+    while p2 == p1:
+        p2 = random.choice(parents)
+    return p2
+
+def freeRoomSlot(child, roomSlot, course):
+    # Checking for free roomslots
+    roomName = roomSlot.getRoom()
+    time = roomSlot.getTimeSlot().getTime()
+    day = roomSlot.getTimeSlot().getDay()
+    for t in child.getTimeSlots():
+        if t.getDay() == day and t.getTime() == time:
+            for r in t.getRoomSlots():
+                if r.getRoom() == roomName:
+                    if not r.hasGroup():
+                        if not courseInTimeSlot(course, r):
+                            return r
+                        else: return False
+                    else: return False
+
+def bedRoom(p1, p2):
+    # Making children with two parents. One child is returned
+    child = createTimeTableInstance()
+    c1 = p1.getCourses()
+    c2 = p2.getCourses()
+    badGroups = []
+    for i in range(len(c1)):
+        parentC = random.choice([c1[i], c2[i]])
+        for c in child.getCourses():
+            if c.getName() == parentC.getName():
+                course = c
+                break
+        groups = sum([a.getGroups() for a in parentC.getActivities()],[])
+        for parentG in groups:
+            activityName = parentG.getActivity().getType()
+            for a in course.getActivities():
+                if a.getType() == activityName:
+                    activity = a
+                    break
+            studentNames = [s.getName() for s in parentG.getStudents()]
+            students = [s for s in child.getStudents()
+                        if s.getName() in studentNames]
+            
+            room = freeRoomSlot(child, parentG.getRoomSlot(), course)
+            if  room != False:
+                group = Group(
+                    activity, students, parentG.getMaxStudents(), room
+                    )
+                child.addGroup(group)
+            else:
+                badGroups.append([activity, students])
+
+    # The algorithm tries to schedule the groups that didn't fit in their
+    # original roomslot
+    roomSlots = sum([t.getRoomSlots() for t in child.getTimeSlots()],[])
+    freeRoomSlots = [r for r in roomSlots if not r.hasGroup()]
+    random.shuffle(freeRoomSlots)
+    for g in badGroups:
+        try: bookRandomRoom(g[0], freeRoomSlots, g[1], child)
+        except:
+            print "Miscarriage..."
+            return None  
+    return child
+
+def makeLove(parents, n):
     print "Making new children..."
-    return parents
+    cpp = int(n/float(len(parents)))
+    children = []
+    for p1 in parents:
+        for i in range(cpp):
+            p2 = blindDate(p1, parents)
+            newChild = bedRoom(p1, p2)
+            if newChild != None: children.append(newChild)
+    while len(children) < n:
+        p1 = random.choice(parents)
+        p2 = blindDate(p1, parents)
+        newChild = bedRoom(p1, p2)
+        if newChild != None: children.append(newChild)
+        
+    return children
 
-def geneticAlgorithm(iterations = 1):
-    nrChilds = 100
+def geneticAlgorithm(iterations = 1, acceptOutsider = True):
+    nrChilds = 20
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -521,18 +724,57 @@ def geneticAlgorithm(iterations = 1):
             randomAlgorithm(table)
         children.append(table)
 
-    for i in range(iterations):
-        print "Starting iteration ",i+1
-        parents = selectParents(children)
+    evolution = []
+    overbookings = []
+    spread = []
+    personal = []
+    i = 0
+    while i < iterations:
+        i += 1
+        print "\n========================"
+        print "Starting iteration ",i
+        print "========================"
+        print "Amount of children ",len(children)
+        parents = selectParents(children, acceptOutsider)
+        print "Parent points this generation: "
+        for p in parents:
+            print getPoints(p),
         mutate(parents)
-        children = makeLove(parents)
-    
-    return max(children, key = lambda x: getPoints(x))
+        children = makeLove(parents, nrChilds)
+        bestChild = max(children, key = lambda x: getPoints(x))
+        evolution.append(int(np.mean([getPoints(c) for c in children])))
+        overbookings.append(int(np.mean([overbooked(c) for c in children])))
+        spread.append(int(np.mean([
+            coursesMaximallySpread(c) - activityConflict(c) for c in children
+            ])))
+        personal.append(int(np.mean([
+            personalScheduleConflict(c) for c in children
+            ])))
+
+        if i == iterations:
+            q = ""
+            while q != "Y" and q != "N":
+                w = ("You want to do another "
+                     +str(iterations)
+                     +" iterations? (Y/N)")
+                q = raw_input(w)
+            if q == "Y": iterations *= 2
+            else: break
+        
+
+    print "\n======================"
+    print "Evolution review!"
+    print "======================"
+    print "Total score: \n",evolution
+    print "Overbookings: \n",overbookings
+    print "Personal conflicts: \n",personal
+    print "Spreadding points: \n",spread
+        
+    return bestChild
     
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""  In
-itial functions """""""""""""""""""""""""""""""""
+"""""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
 def getData(filename):
@@ -569,7 +811,7 @@ if __name__ == '__main__':
     mainTimeTable = createTimeTableInstance()
     print "Creating random schedule, stored as 'mainTimeTable'."
     randomAlgorithm(mainTimeTable)
-    getPoints(mainTimeTable)
+    print "This timetable has",getPoints(mainTimeTable)," points."
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -589,9 +831,12 @@ def tableToList(timeTable):
         for r in t.getRoomSlots():
             if r.hasGroup():
                 group = r.getGroup()
-                students = [(s.getName(),s.getNr()) for s in group.getStudents()]
+                students = [
+                    (s.getName(),s.getNr()) for s in group.getStudents()
+                    ]
                 data.append({
-                    "startTime": 2*t.getTime(), #int of number of houres after 9 
+                    "startTime": 2*t.getTime(),
+                    #int of number of houres after 9 
                     "day": t.getDay(),
                     #"students": students, #Erg lange dictionary met dit erbij..
                     "course": group.getActivity().getCourse().getName(),
@@ -643,17 +888,17 @@ def exportData(timeTable):
     print "Data is stored in .../visualisation/Data/."
     print "Saving main timetable..."
     data = tableToList(timeTable)
-    with open("Visualisatie/Data/main.json", 'wb') as f:
-        json.dump(data, f, encoding='latin1')
-    print "Saving timetables of "+str(len(students))+" students..."
+##    with open("Visualisatie/Data/main.json", 'wb') as f:
+##        json.dump(data, f, encoding='latin1')
     students = timeTable.getStudents()
+    print "Saving timetables of "+str(len(students))+" students..."
     for i, s in enumerate(students):
         data = studentToList(s)
         filename = "student"+str(i)+".json"
         with open("Visualisatie/Data/"+filename, 'wb') as f:
             json.dump(data, f, encoding='latin1')
-    print "Saving timetables of "+str(len(courses))+" courses..."
     courses = timeTable.getCourses()
+    print "Saving timetables of "+str(len(courses))+" courses..."
     for i, c in enumerate(courses):
         data = courseToList(c)
         filename = "course"+str(i)+".json"
