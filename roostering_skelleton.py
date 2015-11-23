@@ -9,9 +9,18 @@ import numpy as np
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+def getData(filename):
+    """
+    Reads the json-file with the schedule data
+    Returns a list of dictionaries
+    """
+    json_data=open(filename).read()
+    return json.loads(json_data)
 
 STUDENTS = 'students.json'
 COURSES = 'coursesInf.json'
+STUDENTDATA = getData(STUDENTS)
+COURSEDATA = getData(COURSES)
 ROOMS = {
     #Room name, room for nr students"
     "A1.04":41,
@@ -22,6 +31,7 @@ ROOMS = {
     "C0.110":117,
     "C1.112":60
     }
+
 OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
 ITERATIONS = 1000
 
@@ -596,24 +606,25 @@ def studentMutation(timeTable, factor):
         if len(g.getActivity().getGroups()) > 1:
             activities.append(g.getActivity())
     for a in activities:
-        if random.random() <= factor:
-            g1 = random.choice(a.getGroups())
-            g2 = g1
-            while g2 == g1:
-                g2 = random.choice(a.getGroups())
-            stud1 = random.choice(g1.getStudents())
-            stud2 = random.choice(g2.getStudents())
-            g1.removeStudent(stud1)
-            g2.removeStudent(stud2)
-            g1.addStudent(stud2)
-            g2.addStudent(stud1)
-    return  
+        if random.random() <= math.sqrt(factor):
+            for g1 in a.getGroups():
+                if random.random() <= math.sqrt(factor):
+                    g2 = g1
+                    while g2 == g1:
+                        g2 = random.choice(a.getGroups())
+                    stud1 = random.choice(g1.getStudents())
+                    stud2 = random.choice(g2.getStudents())
+                    g1.removeStudent(stud1)
+                    g2.removeStudent(stud2)
+                    g1.addStudent(stud2)
+                    g2.addStudent(stud1)
+    return
     
 def mutate(parents):
     # Parents are mutated before coupling
     fsFactor = 0.02
     csFactor = 0.02
-    sFactor = 0.75
+    sFactor = 0.03
     
     print "\nMutating parents..."
     for p in parents:
@@ -646,16 +657,18 @@ def freeRoomSlot(child, roomSlot, course):
 
 def bedRoom(p1, p2):
     # Making children with two parents. One child is returned
+
     child = createTimeTableInstance()
     c1 = p1.getCourses()
     c2 = p2.getCourses()
     badGroups = []
+
     for i in range(len(c1)):
         parentC = random.choice([c1[i], c2[i]])
         for c in child.getCourses():
             if c.getName() == parentC.getName():
                 course = c
-                break            
+                break
         groups = sum([a.getGroups() for a in parentC.getActivities()],[])
         for parentG in groups:
             activityName = parentG.getActivity().getType()
@@ -673,8 +686,8 @@ def bedRoom(p1, p2):
                     )
                 child.addGroup(group)
             else:
-                badGroups.append([activity, students])
-                
+                badGroups.append([activity, students])                
+
     # The algorithm tries to schedule the groups that didn't fit in their
     # original roomslot
     roomSlots = sum([t.getRoomSlots() for t in child.getTimeSlots()],[])
@@ -704,7 +717,7 @@ def makeLove(parents, n):
     return children
 
 def geneticAlgorithm(iterations = 1, acceptOutsider = True):
-    nrChilds = 20
+    nrChilds = 50
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -735,6 +748,7 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
             print getPoints(p),
         mutate(parents)
         children = makeLove(parents, nrChilds)
+        
         maxChild = max(children, key = lambda x: getPoints(x))
         if getPoints(maxChild) > bestChildScore:
             bestChild = maxChild
@@ -747,24 +761,24 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
         personal.append(int(np.mean([
             personalScheduleConflict(c) for c in children
             ])))
-
         if i == iterations:
             q = ""
-            while q != "Y" and q != "N":
-                w = ("You want to do another "
-                     +str(iterations)
-                     +" iterations? (Y/N)")
-                q = raw_input(w)
-            if q == "Y": iterations *= 2
-            else: break
-
-    print "\n======================"
-    print "Evolution review!"
-    print "======================"
-    print "Total score: \n",evolution
-    print "Overbookings: \n",overbookings
-    print "Personal conflicts: \n",personal
-    print "Spreadding points: \n",spread
+            print "\n======================"
+            print "Evolution review!"
+            print "======================"
+            print "Total score: \n",evolution
+            print "Overbookings: \n",overbookings
+            print "Personal conflicts: \n",personal
+            print "Spreadding points: \n",spread
+            w = ("You want to do another "
+                 +str(iterations)
+                 +" iterations? (Y/N)")
+            q = raw_input(w)
+            if q == "Y":
+                iterations *= 2
+                continue
+            try: i += int(q)
+            except: break
         
     return bestChild
     
@@ -773,31 +787,19 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
 """""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
-def getData(filename):
-    """
-    Reads the json-file with the schedule data
-    Returns a list of dictionaries
-    """
-    json_data=open(filename).read()
-    return json.loads(json_data)
-
 def createTimeTableInstance():
     print "Creating new timetable structure..."
-    studentData = getData(STUDENTS)
-    courseData = getData(COURSES)
     timeTable = TimeTable()
-    students = []
     courses = []
-    for c in courseData:
+    for c in COURSEDATA:
         course = Course(c['courseName'], c['lectures'], c['seminar'],
                         c['maxStudSeminar'], c['practica'],
                         c['maxStudPractica'])
-        courses.append(course)
         timeTable.addCourse(course)
-    for s in studentData[1:]:
+        courses.append(course)
+    for s in STUDENTDATA[1:]:
         student = Student(s["firstName"],s["lastName"],s["nr"],
                           s["courses"],courses)
-        students.append(student)
         timeTable.addStudent(student)
         
     return timeTable
