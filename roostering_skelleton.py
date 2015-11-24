@@ -291,7 +291,7 @@ def studentMalusPoints(s):
         if c.getRoomSlot().getTimeSlot() in cList:
             individualMalus += 1
         cList.append(c.getRoomSlot().getTimeSlot())
-        return individualMalus
+    return individualMalus
 
 def personalScheduleConflict(timeTable):
     students = timeTable.getStudents()
@@ -475,6 +475,15 @@ def determisticSchnizlle(timeTable):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def selectGroups(groups):
+    groupOne = random.choice(groups)
+    groupTwo = random.choice(groups)
+    while(groupOne != groupTwo and
+    groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
+    and groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+    return groupOne, groupTwo
 
 def groupPoints(students, course, room):
     saldo = 0
@@ -502,7 +511,7 @@ def switch(timeTable, groupOne, groupTwo, groups):
     groupTwo.getRoomSlot().appointGroup(groupOne)
     roomSlotOne.appointGroup(groupTwo)
 
-def hillclimbAlgorithm(timeTable, score, iterations):
+"""def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
     highscore = 0
@@ -524,6 +533,25 @@ def hillclimbAlgorithm(timeTable, score, iterations):
             scores.append(highscore)
         else: switch(timeTable, groupTwo, groupOne, groups)
         if(i % 10 == 0):
+            print "Current iteration: "
+            print i 
+    print scores
+    print max(scores)"""
+
+def hillclimbAlgorithm(timeTable, score, iterations):
+    print "\n\n\n\n\n......................................................."
+    # switch random groups and run getPoints()
+    scores = []
+    groups = timeTable.getGroups()
+    for i in range(iterations):
+        groupOne, groupTwo = selectGroups(groups)
+        score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
+        if((score > 0)):
+            print "current score is higher than the highest score"
+            highscore = getPoints(timeTable)
+            scores.append(highscore)
+            switch(timeTable, groupOne, groupTwo, groups)
+        if(i % 50 == 0):
             print "Current iteration: "
             print i 
     print scores
