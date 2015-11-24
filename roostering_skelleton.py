@@ -251,7 +251,7 @@ def checkCount(dList, nrAct):
             return True
     return False
 
-def spreadBonusPoints(c):
+def spreadBonusPoints(c, r = None, group = None):
     nrAct = len(c.getActivities())
     if nrAct < 2 or nrAct > 4:
         return 0
@@ -259,7 +259,10 @@ def spreadBonusPoints(c):
     for a in c.getActivities():
         aDays = []
         for g in a.getGroups():
-            d = g.getRoomSlot().getTimeSlot().getDay()
+            if g == group and r != None:
+                d = r.getTimeSlot().getDay()
+            else:
+                d = g.getRoomSlot().getTimeSlot().getDay()
             aDays.append(d)
         cDays.append(aDays)
     # Cartesian product
@@ -331,14 +334,17 @@ def personalScheduleConflict(timeTable):
 ##                    if len(l) == 0: points += 10
 ##    return points
 
-def spreadMalusPoints(c):
+def spreadMalusPoints(c, r = None, group = None):
     malus = 0
     nrAct = 0
     days = []
     for a in c.getActivities():
         nrAct += 1
         for g in a.getGroups():
-            day = g.getRoomSlot().getTimeSlot().getDay()
+            if g == group and r != None:
+                day = r.getTimeSlot().getDay()
+            else:
+                day = g.getRoomSlot().getTimeSlot().getDay()
             days.append(day)
     if nrAct > len(set(days)): malus += 10
     return malus
@@ -495,26 +501,22 @@ def selectGroups(groups):
         groupTwo = random.choice(groups)
     return groupOne, groupTwo
 
-def groupPoints(students, course, room):
+def groupPoints(group, students, course, room):
     saldo = 0
     for student in students:
         saldo -= studentMalusPoints(student)
-    print "1: saldo  =  ", saldo
-    saldo += spreadBonusPoints(course)
-    print "2: saldo  =  ", saldo
-    saldo -= spreadMalusPoints(course)
-    print "3: saldo  =  ", saldo
+    saldo += spreadBonusPoints(course, room, group)
+    saldo -= spreadMalusPoints(course, room, group)
     saldo -= overbookMalusPoints(room)
-    print "4: saldo  =  ", saldo
     return saldo
 
 def pointsSaldo(group, newRoom):
     students = group.getStudents()
     course = group.getActivity().getCourse()
     originalRoom = group.getRoomSlot()
-    original = groupPoints(students, course, originalRoom)
-    new = groupPoints(students, course, newRoom)
-    return new - original
+    original = groupPoints(group, students, course, originalRoom)
+    new = groupPoints(group, students, course, newRoom)
+    return original - new
 
 def switch(timeTable, groupOne, groupTwo, groups):
     roomSlotOne = groupOne.getRoomSlot()
@@ -556,7 +558,8 @@ def hillclimbAlgorithm(timeTable, score, iterations):
     for i in range(iterations):
         groupOne, groupTwo = selectGroups(groups)
         score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
-        if((score > 0)):
+        print "score:  ",score
+        if score > 0:
             print "current score is higher than the highest score"
             highscore = getPoints(timeTable)
             scores.append(highscore)
