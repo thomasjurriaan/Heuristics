@@ -516,7 +516,7 @@ def pointsSaldo(group, newRoom):
     originalRoom = group.getRoomSlot()
     original = groupPoints(group, students, course, originalRoom)
     new = groupPoints(group, students, course, newRoom)
-    return original - new
+    return new - original
 
 def switch(timeTable, groupOne, groupTwo, groups):
     roomSlotOne = groupOne.getRoomSlot()
