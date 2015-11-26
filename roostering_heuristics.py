@@ -526,7 +526,7 @@ def pointsSaldo(group, newRoom):
     new = groupPoints(group, students, course, newRoom)
     return new - original
 
-def switch(timeTable, groupOne, groupTwo, groups):
+def switch(groupOne, groupTwo, groups):
     roomSlotOne = groupOne.getRoomSlot()
     groupTwo.getRoomSlot().appointGroup(groupOne)
     roomSlotOne.appointGroup(groupTwo)
@@ -538,14 +538,8 @@ def hillclimbAlgorithm(timeTable, score, iterations):
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
-        groupOne = random.choice(groups)
-        groupTwo = random.choice(groups)
-        while(groupOne != groupTwo and
-        groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
-        and groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
-            groupOne = random.choice(groups)
-            groupTwo = random.choice(groups)
-        switch(timeTable, groupOne, groupTwo, groups)
+        groupOne, groupTwo = selectGroups(groups)
+        switch(groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
         print score
@@ -878,7 +872,18 @@ def r():
         if i % 10 == 0 :
             print "iterations: ", i
     return list
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def h():
+    h = createTimeTableInstance()
+    randomAlgorithm(h)
+    print "eerste score: ",getPoints(h)
+    g = h.getGroups()
+    g1,g2 = selectGroups(g)
+    switch(g1,g2,g)
+    print "tweede score: ",getPoints(h)
+    print "naam groep 1: ",g1.getActivity().getCourse().getName()
+    print "naam groep 2: ",g2.getActivity().getCourse().getName()
+    return h, g1,g2,g
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
