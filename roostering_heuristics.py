@@ -3,6 +3,7 @@ import random
 import math
 import itertools
 import copy
+#import matplotlib.pyplot as plt
 #import numpy as np
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -530,6 +531,8 @@ def switch(groupOne, groupTwo, groups):
     roomSlotOne = groupOne.getRoomSlot()
     groupTwo.getRoomSlot().appointGroup(groupOne)
     roomSlotOne.appointGroup(groupTwo)
+    groupOne.newRoomSlot(groupTwo.getRoomSlot())
+    groupTwo.newRoomSlot(roomSlotOne)
 
 def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
@@ -542,19 +545,15 @@ def hillclimbAlgorithm(timeTable, score, iterations):
         switch(groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
-        print score
         if((score > highscore)):
-            print "current score is higher than the highest score"
             highscore = score
             scores.append(highscore)
         else: 
-            switch(timeTable, groupTwo, groupOne, groups)
-            print "terugveranderd: ",score
+            switch(groupTwo, groupOne, groups)
         if(i % 10 == 0):
             print "Current iteration: "
             print i 
-    print scores
-    print max(scores)
+    return scores
 
 '''def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
@@ -575,6 +574,36 @@ def hillclimbAlgorithm(timeTable, score, iterations):
             print i 
     print scores
     print max(scores)'''
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def simulatedAnnealing(timeTable, score, temperature = 10000, coolingRate = 20):
+    highscore = 0
+    scores = []
+    groups = timeTable.getGroups()
+    i = 0
+    while(temperature > 1):
+        if(i % 10 == 0):
+            print "Current iteration: "
+            print i 
+        oldscore = score
+        groupOne, groupTwo = selectGroups(groups)
+        switch(groupOne, groupTwo, groups)
+        #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
+        score = getPoints(timeTable)
+        print oldscore," ", score, " ", "temp: ", temperature
+        chance = math.exp((score - oldscore) / temperature)
+        print "chance: ", chance
+        if(chance > random.random()):
+            highscore = score
+            scores.append(highscore)
+        else: 
+            switch(groupTwo, groupOne, groups)
+            print "switched back"
+        i += 1
+        temperature -= coolingRate
+    return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
@@ -859,8 +888,12 @@ if __name__ == '__main__':
 def t():
     henk = createTimeTableInstance()
     randomAlgorithm(henk)
-    hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS)
-    return henk
+    scores = hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS)
+    #plt.plot(scores)
+    #plt.ylabel('points')
+    #plt.xlabel('iterations')
+    #plt.show()
+    return henk, scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def r():
@@ -884,6 +917,12 @@ def h():
     print "naam groep 1: ",g1.getActivity().getCourse().getName()
     print "naam groep 2: ",g2.getActivity().getCourse().getName()
     return h, g1,g2,g
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def s():
+    h = createTimeTableInstance()
+    randomAlgorithm(h)
+    scores = simulatedAnnealing(h,getPoints(h))
+    return h, scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
