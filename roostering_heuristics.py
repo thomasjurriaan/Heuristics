@@ -261,6 +261,7 @@ def spreadBonusPoints(c, r = None, group = None):
         for g in a.getGroups():
             if g == group and r != None:
                 d = r.getTimeSlot().getDay()
+                print "hello"
             else:
                 d = g.getRoomSlot().getTimeSlot().getDay()
             aDays.append(d)
@@ -343,6 +344,7 @@ def spreadMalusPoints(c, r = None, group = None):
         for g in a.getGroups():
             if g == group and r != None:
                 day = r.getTimeSlot().getDay()
+                print "goodday"
             else:
                 day = g.getRoomSlot().getTimeSlot().getDay()
             days.append(day)
@@ -407,7 +409,7 @@ def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
 
     
 def split(activity):
-    # Takes an activity with more students than alowed per group and returns
+    # Takes an activity with more students than allowed per group and returns
     #lists of valid student groups
     numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
                                /float(activity.getMaxStudents()))
@@ -501,13 +503,19 @@ def selectGroups(groups):
         groupTwo = random.choice(groups)
     return groupOne, groupTwo
 
+def hillOverbook(students, room):
+    saldo = len(students) - room.getSize()
+    if saldo > 0:
+        return saldo
+    else: return 0
+
 def groupPoints(group, students, course, room):
     saldo = 0
     for student in students:
         saldo -= studentMalusPoints(student)
     saldo += spreadBonusPoints(course, room, group)
     saldo -= spreadMalusPoints(course, room, group)
-    saldo -= overbookMalusPoints(room)
+    saldo -= hillOverbook(students, room)
     return saldo
 
 def pointsSaldo(group, newRoom):
@@ -523,7 +531,7 @@ def switch(timeTable, groupOne, groupTwo, groups):
     groupTwo.getRoomSlot().appointGroup(groupOne)
     roomSlotOne.appointGroup(groupTwo)
 
-"""def hillclimbAlgorithm(timeTable, score, iterations):
+def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
     highscore = 0
@@ -537,20 +545,24 @@ def switch(timeTable, groupOne, groupTwo, groups):
         and groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
             groupOne = random.choice(groups)
             groupTwo = random.choice(groups)
+        switch(timeTable, groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
+        print score
         if((score > highscore)):
             print "current score is higher than the highest score"
             highscore = score
             scores.append(highscore)
-        else: switch(timeTable, groupTwo, groupOne, groups)
+        else: 
+            switch(timeTable, groupTwo, groupOne, groups)
+            print "terugveranderd: ",score
         if(i % 10 == 0):
             print "Current iteration: "
             print i 
     print scores
-    print max(scores)"""
+    print max(scores)
 
-def hillclimbAlgorithm(timeTable, score, iterations):
+'''def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
     scores = []
@@ -568,7 +580,7 @@ def hillclimbAlgorithm(timeTable, score, iterations):
             print "Current iteration: "
             print i 
     print scores
-    print max(scores)
+    print max(scores)'''
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
@@ -855,6 +867,18 @@ def t():
     randomAlgorithm(henk)
     hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS)
     return henk
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def r():
+    list = []
+    for i in range(100):
+        henk = createTimeTableInstance()
+        randomAlgorithm(henk)
+        list.append((getPoints(henk)))
+        if i % 10 == 0 :
+            print "iterations: ", i
+    return list
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
