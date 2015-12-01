@@ -3,8 +3,8 @@ import random
 import math
 import itertools
 import copy
-#import matplotlib.pyplot as plt
-#import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -545,9 +545,9 @@ def hillclimbAlgorithm(timeTable, score, iterations):
         switch(groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
+        scores.append(score)
         if((score > highscore)):
             highscore = score
-            scores.append(highscore)
         else: 
             switch(groupTwo, groupOne, groups)
         if(i % 10 == 0):
@@ -578,22 +578,22 @@ def hillclimbAlgorithm(timeTable, score, iterations):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def simulatedAnnealing(timeTable, score, temperature = 10000, coolingRate = 20):
+def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002):
     highscore = 0
     scores = []
     groups = timeTable.getGroups()
     i = 0
     while(temperature > 1):
-        if(i % 10 == 0):
-            print "Current iteration: "
-            print i 
+        if(i % 50 == 0):
+            print "                 Current iteration: ", i
         oldscore = score
         groupOne, groupTwo = selectGroups(groups)
         switch(groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
         print oldscore," ", score, " ", "temp: ", temperature
-        chance = math.exp((score - oldscore) / temperature)
+        print "=", (oldscore - score) / temperature
+        chance = math.exp(float((score - oldscore) / temperature))
         print "chance: ", chance
         if(chance > random.random()):
             highscore = score
@@ -888,11 +888,11 @@ if __name__ == '__main__':
 def t():
     henk = createTimeTableInstance()
     randomAlgorithm(henk)
-    scores = hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS)
-    #plt.plot(scores)
-    #plt.ylabel('points')
-    #plt.xlabel('iterations')
-    #plt.show()
+    scores = hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS * 3)
+    plt.plot(scores)
+    plt.ylabel('points')
+    plt.xlabel('iterations')
+    plt.show()
     return henk, scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
