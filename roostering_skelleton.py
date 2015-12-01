@@ -3,8 +3,7 @@ import random
 import math
 import itertools
 import copy
-import matplotlib.pyplot as plt
-import numpy as np
+#import numpy as np
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -71,7 +70,7 @@ class Student(object):
         return self.groups
 
 class TimeTable(object):
-    def __init__(self, parents):
+    def __init__(self):
         #include 4 empty time slots for every day of the week.
         l = []
         self.days = ['mo','tu','we','th','fr']
@@ -82,7 +81,6 @@ class TimeTable(object):
         self.students = []
         self.courses = []
         self.groups = []
-        self.parents = parents
     def addStudent(self, student):
         self.students.append(student)
     def getStudents(self):
@@ -105,9 +103,7 @@ class TimeTable(object):
     def getDayTimeSlots(self, day):
         for n, d in enumerate(self.days):
             if day==d:
-                return self.timeSlots[(4*n):(4*n+4)]
-    def getParents(self):
-        return self.parents
+                return self.timeSlots[(4*n):(4*n+4)] 
 
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
@@ -224,6 +220,7 @@ class Group(object):
         self.students.append(student)
 
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Counting points """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -264,7 +261,6 @@ def spreadBonusPoints(c, r = None, group = None):
         for g in a.getGroups():
             if g == group and r != None:
                 d = r.getTimeSlot().getDay()
-                print "hello"
             else:
                 d = g.getRoomSlot().getTimeSlot().getDay()
             aDays.append(d)
@@ -347,7 +343,6 @@ def spreadMalusPoints(c, r = None, group = None):
         for g in a.getGroups():
             if g == group and r != None:
                 day = r.getTimeSlot().getDay()
-                print "goodday"
             else:
                 day = g.getRoomSlot().getTimeSlot().getDay()
             days.append(day)
@@ -412,7 +407,7 @@ def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
 
     
 def split(activity):
-    # Takes an activity with more students than allowed per group and returns
+    # Takes an activity with more students than alowed per group and returns
     #lists of valid student groups
     numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
                                /float(activity.getMaxStudents()))
@@ -506,19 +501,13 @@ def selectGroups(groups):
         groupTwo = random.choice(groups)
     return groupOne, groupTwo
 
-def hillOverbook(students, room):
-    saldo = len(students) - room.getSize()
-    if saldo > 0:
-        return saldo
-    else: return 0
-
 def groupPoints(group, students, course, room):
     saldo = 0
     for student in students:
         saldo -= studentMalusPoints(student)
     saldo += spreadBonusPoints(course, room, group)
     saldo -= spreadMalusPoints(course, room, group)
-    saldo -= hillOverbook(students, room)
+    saldo -= overbookMalusPoints(room)
     return saldo
 
 def pointsSaldo(group, newRoom):
@@ -529,35 +518,39 @@ def pointsSaldo(group, newRoom):
     new = groupPoints(group, students, course, newRoom)
     return new - original
 
-def switch(groupOne, groupTwo, groups):
+def switch(timeTable, groupOne, groupTwo, groups):
     roomSlotOne = groupOne.getRoomSlot()
     groupTwo.getRoomSlot().appointGroup(groupOne)
     roomSlotOne.appointGroup(groupTwo)
-    groupOne.newRoomSlot(groupTwo.getRoomSlot())
-    groupTwo.newRoomSlot(roomSlotOne)
 
-def hillclimbAlgorithm(timeTable, score, iterations):
+"""def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
     highscore = 0
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
-        groupOne, groupTwo = selectGroups(groups)
-        switch(groupOne, groupTwo, groups)
+        groupOne = random.choice(groups)
+        groupTwo = random.choice(groups)
+        while(groupOne != groupTwo and
+        groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
+        and groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
+            groupOne = random.choice(groups)
+            groupTwo = random.choice(groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
-        scores.append(score)
         if((score > highscore)):
+            print "current score is higher than the highest score"
             highscore = score
-        else: 
-            switch(groupTwo, groupOne, groups)
+            scores.append(highscore)
+        else: switch(timeTable, groupTwo, groupOne, groups)
         if(i % 10 == 0):
             print "Current iteration: "
             print i 
-    return scores
+    print scores
+    print max(scores)"""
 
-'''def hillclimbAlgorithm(timeTable, score, iterations):
+def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
     scores = []
@@ -575,37 +568,7 @@ def hillclimbAlgorithm(timeTable, score, iterations):
             print "Current iteration: "
             print i 
     print scores
-    print max(scores)'''
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002):
-    highscore = 0
-    scores = []
-    groups = timeTable.getGroups()
-    i = 0
-    while(temperature > 1):
-        if(i % 50 == 0):
-            print "                 Current iteration: ", i
-        oldscore = score
-        groupOne, groupTwo = selectGroups(groups)
-        switch(groupOne, groupTwo, groups)
-        #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
-        score = getPoints(timeTable)
-        print oldscore," ", score, " ", "temp: ", temperature
-        print "=", (oldscore - score) / temperature
-        chance = math.exp(float((score - oldscore) / temperature))
-        print "chance: ", chance
-        if(chance > random.random()):
-            highscore = score
-            scores.append(highscore)
-        else: 
-            switch(groupTwo, groupOne, groups)
-            print "switched back"
-        i += 1
-        temperature -= coolingRate
-    return scores
+    print max(scores)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
@@ -636,15 +599,6 @@ def selectParents(children, acceptOutsider):
     random.shuffle(parents)
     
     return parents
-
-def orphanator(parents):
-    factor = 0
-
-    survivors = []
-    for p in parents:
-        if random.random() > factor:
-            survivors.append(p)
-    return survivors
 
 def freeSlotMutation(timeTable, factor):
     freeSlots = []
@@ -705,40 +659,22 @@ def studentMutation(timeTable, factor):
     
 def mutate(parents):
     # Parents are mutated before coupling
-    fsFactor = 0.01
-    csFactor = 0.01
-    sFactor = 0.05
+    fsFactor = 0.02
+    csFactor = 0.02
+    sFactor = 0.03
     
-    print "Mutating offspring..."
+    print "\nMutating parents..."
     for p in parents:
         freeSlotMutation(p, fsFactor)
         changeSlotMutation(p, csFactor)
         studentMutation(p, sFactor)
     return parents
 
-def incestCheck(p1, p2):
-    if p1.getParents() == None or p2.getParents() == None:
-        return False
-    for gp1 in p1.getParents():
-        for gp2 in p2.getParents():
-            if gp1 == gp2 or gp1 == p2 or gp2 == p1:
-                return True
-    return False
-    
-def blindDate(p1, parents, incest):
+def blindDate(p1, parents):
     # Parents are coupled
     p2 = p1
-    if incest == False:
-        TO = 0
-        while incestCheck(p1, p2) or p1 == p2:
-            TO += 1
-            p2 = random.choice(parents)
-            if TO > 2* len(parents):
-                print "Time Out..."
-                break
-    else:
-        while p2 == p1:
-            p2 = random.choice(parents)
+    while p2 == p1:
+        p2 = random.choice(parents)
     return p2
 
 def freeRoomSlot(child, roomSlot, course):
@@ -759,16 +695,12 @@ def freeRoomSlot(child, roomSlot, course):
 def bedRoom(p1, p2):
     # Making children with two parents. One child is returned
 
-    child = createTimeTableInstance([p1, p2])
-    if len(p1.getCourses()) != len(p2.getCourses()):
-        raise StandardError("TimeTables are of different species")
-    badGroups = []
+    child = createTimeTableInstance()
     c1 = p1.getCourses()
     c2 = p2.getCourses()
+    badGroups = []
 
-    courseNr = range(len(c1))
-    random.shuffle(courseNr)
-    for i in courseNr:
+    for i in range(len(c1)):
         parentC = random.choice([c1[i], c2[i]])
         for c in child.getCourses():
             if c.getName() == parentC.getName():
@@ -791,7 +723,7 @@ def bedRoom(p1, p2):
                     )
                 child.addGroup(group)
             else:
-                badGroups.append([activity, students])
+                badGroups.append([activity, students])                
 
     # The algorithm tries to schedule the groups that didn't fit in their
     # original roomslot
@@ -805,24 +737,24 @@ def bedRoom(p1, p2):
             return None
     return child
 
-def makeLove(parents, n, incest):
-    print "\nMaking new children..."
+def makeLove(parents, n):
+    print "Making new children..."
     cpp = int(n/float(len(parents)))
     children = []
     for p1 in parents:
         for i in range(cpp):
-            p2 = blindDate(p1, parents, incest)
+            p2 = blindDate(p1, parents)
             newChild = bedRoom(p1, p2)
             if newChild != None: children.append(newChild)
     while len(children) < n:
         p1 = random.choice(parents)
-        p2 = blindDate(p1, parents, incest)
+        p2 = blindDate(p1, parents)
         newChild = bedRoom(p1, p2)
         if newChild != None: children.append(newChild)
     return children
 
-def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
-    nrChilds = 40
+def geneticAlgorithm(iterations = 1, acceptOutsider = True):
+    nrChilds = 50
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -851,10 +783,8 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
         print "Parent points this generation: "
         for p in parents:
             print getPoints(p),
-        offspring = makeLove(parents, nrChilds, allowIncest)
-        survivors = orphanator(parents)
-        mutate(offspring)
-        children = survivors + offspring
+        mutate(parents)
+        children = makeLove(parents, nrChilds)
         
         maxChild = max(children, key = lambda x: getPoints(x))
         if getPoints(maxChild) > bestChildScore:
@@ -894,9 +824,9 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
 """""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
-def createTimeTableInstance(parents = None):
+def createTimeTableInstance():
     print "Creating new timetable structure..."
-    timeTable = TimeTable(parents)
+    timeTable = TimeTable()
     courses = []
     for c in COURSEDATA:
         course = Course(c['courseName'], c['lectures'], c['seminar'],
@@ -923,41 +853,8 @@ if __name__ == '__main__':
 def t():
     henk = createTimeTableInstance()
     randomAlgorithm(henk)
-    scores = hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS * 3)
-    plt.plot(scores)
-    plt.ylabel('points')
-    plt.xlabel('iterations')
-    plt.show()
-    return henk, scores
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def r():
-    list = []
-    for i in range(100):
-        henk = createTimeTableInstance()
-        randomAlgorithm(henk)
-        list.append((getPoints(henk)))
-        if i % 10 == 0 :
-            print "iterations: ", i
-    return list
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def h():
-    h = createTimeTableInstance()
-    randomAlgorithm(h)
-    print "eerste score: ",getPoints(h)
-    g = h.getGroups()
-    g1,g2 = selectGroups(g)
-    switch(g1,g2,g)
-    print "tweede score: ",getPoints(h)
-    print "naam groep 1: ",g1.getActivity().getCourse().getName()
-    print "naam groep 2: ",g2.getActivity().getCourse().getName()
-    return h, g1,g2,g
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def s():
-    h = createTimeTableInstance()
-    randomAlgorithm(h)
-    scores = simulatedAnnealing(h,getPoints(h))
-    return h, scores
+    hillclimbAlgorithm(henk, getPoints(henk), ITERATIONS)
+    return henk
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
