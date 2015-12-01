@@ -3,8 +3,8 @@ import random
 import math
 import itertools
 import copy
-#import matplotlib.pyplot as plt
-#import numpy as np
+import matplotlib.pyplot as plt
+import numpy as np
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -71,7 +71,7 @@ class Student(object):
         return self.groups
 
 class TimeTable(object):
-    def __init__(self):
+    def __init__(self, parents):
         #include 4 empty time slots for every day of the week.
         l = []
         self.days = ['mo','tu','we','th','fr']
@@ -82,6 +82,7 @@ class TimeTable(object):
         self.students = []
         self.courses = []
         self.groups = []
+        self.parents = parents
     def addStudent(self, student):
         self.students.append(student)
     def getStudents(self):
@@ -104,7 +105,9 @@ class TimeTable(object):
     def getDayTimeSlots(self, day):
         for n, d in enumerate(self.days):
             if day==d:
-                return self.timeSlots[(4*n):(4*n+4)] 
+                return self.timeSlots[(4*n):(4*n+4)]
+    def getParents(self):
+        return self.parents
 
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
@@ -219,7 +222,6 @@ class Group(object):
         self.students = [s for s in self.students if s != student]
     def addStudent(self, student):
         self.students.append(student)
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -635,6 +637,15 @@ def selectParents(children, acceptOutsider):
     
     return parents
 
+def orphanator(parents):
+    factor = 0
+
+    survivors = []
+    for p in parents:
+        if random.random() > factor:
+            survivors.append(p)
+    return survivors
+
 def freeSlotMutation(timeTable, factor):
     freeSlots = []
     # Free roomslots are listed
@@ -694,22 +705,40 @@ def studentMutation(timeTable, factor):
     
 def mutate(parents):
     # Parents are mutated before coupling
-    fsFactor = 0.02
-    csFactor = 0.02
-    sFactor = 0.03
+    fsFactor = 0.01
+    csFactor = 0.01
+    sFactor = 0.05
     
-    print "\nMutating parents..."
+    print "Mutating offspring..."
     for p in parents:
         freeSlotMutation(p, fsFactor)
         changeSlotMutation(p, csFactor)
         studentMutation(p, sFactor)
     return parents
 
-def blindDate(p1, parents):
+def incestCheck(p1, p2):
+    if p1.getParents() == None or p2.getParents() == None:
+        return False
+    for gp1 in p1.getParents():
+        for gp2 in p2.getParents():
+            if gp1 == gp2 or gp1 == p2 or gp2 == p1:
+                return True
+    return False
+    
+def blindDate(p1, parents, incest):
     # Parents are coupled
     p2 = p1
-    while p2 == p1:
-        p2 = random.choice(parents)
+    if incest == False:
+        TO = 0
+        while incestCheck(p1, p2) or p1 == p2:
+            TO += 1
+            p2 = random.choice(parents)
+            if TO > 2* len(parents):
+                print "Time Out..."
+                break
+    else:
+        while p2 == p1:
+            p2 = random.choice(parents)
     return p2
 
 def freeRoomSlot(child, roomSlot, course):
@@ -730,12 +759,16 @@ def freeRoomSlot(child, roomSlot, course):
 def bedRoom(p1, p2):
     # Making children with two parents. One child is returned
 
-    child = createTimeTableInstance()
+    child = createTimeTableInstance([p1, p2])
+    if len(p1.getCourses()) != len(p2.getCourses()):
+        raise StandardError("TimeTables are of different species")
+    badGroups = []
     c1 = p1.getCourses()
     c2 = p2.getCourses()
-    badGroups = []
 
-    for i in range(len(c1)):
+    courseNr = range(len(c1))
+    random.shuffle(courseNr)
+    for i in courseNr:
         parentC = random.choice([c1[i], c2[i]])
         for c in child.getCourses():
             if c.getName() == parentC.getName():
@@ -758,7 +791,7 @@ def bedRoom(p1, p2):
                     )
                 child.addGroup(group)
             else:
-                badGroups.append([activity, students])                
+                badGroups.append([activity, students])
 
     # The algorithm tries to schedule the groups that didn't fit in their
     # original roomslot
@@ -772,24 +805,24 @@ def bedRoom(p1, p2):
             return None
     return child
 
-def makeLove(parents, n):
-    print "Making new children..."
+def makeLove(parents, n, incest):
+    print "\nMaking new children..."
     cpp = int(n/float(len(parents)))
     children = []
     for p1 in parents:
         for i in range(cpp):
-            p2 = blindDate(p1, parents)
+            p2 = blindDate(p1, parents, incest)
             newChild = bedRoom(p1, p2)
             if newChild != None: children.append(newChild)
     while len(children) < n:
         p1 = random.choice(parents)
-        p2 = blindDate(p1, parents)
+        p2 = blindDate(p1, parents, incest)
         newChild = bedRoom(p1, p2)
         if newChild != None: children.append(newChild)
     return children
 
-def geneticAlgorithm(iterations = 1, acceptOutsider = True):
-    nrChilds = 50
+def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
+    nrChilds = 40
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -818,8 +851,10 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
         print "Parent points this generation: "
         for p in parents:
             print getPoints(p),
-        mutate(parents)
-        children = makeLove(parents, nrChilds)
+        offspring = makeLove(parents, nrChilds, allowIncest)
+        survivors = orphanator(parents)
+        mutate(offspring)
+        children = survivors + offspring
         
         maxChild = max(children, key = lambda x: getPoints(x))
         if getPoints(maxChild) > bestChildScore:
@@ -859,9 +894,9 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True):
 """""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
-def createTimeTableInstance():
+def createTimeTableInstance(parents = None):
     print "Creating new timetable structure..."
-    timeTable = TimeTable()
+    timeTable = TimeTable(parents)
     courses = []
     for c in COURSEDATA:
         course = Course(c['courseName'], c['lectures'], c['seminar'],
