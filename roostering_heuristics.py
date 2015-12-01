@@ -614,19 +614,18 @@ def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002
 def selectParents(children, acceptOutsider):
     # The surving parents-to-be are randomly selected from all childs
     # It's possible to accept the introduction of an outsider every round
-    bestP = 0.25
-    randomP = 0.05
+    chance = 0.3
     
     print "Picking parents..."
-    n = len(children)
-    children.sort(key=lambda x: getPoints(x))
-
-    parents = children[int(-bestP*n):]
-    restChildren = children[:int(-bestP*n)]
-    randomChildren = [
-        random.choice(restChildren) for i in range(int(randomP*n))
-        ]
-    parents += randomChildren
+    scoreList = [getPoints(c) for c in children]
+    minScore = min(scoreList)
+    mean = np.mean(scoreList)
+    parents = []
+    for c in children:
+        factor = (getPoints(c) - minScore)/(mean - minScore)
+        if random.random() < factor*chance:
+            parents.append(c)
+    
     if acceptOutsider == True:
         child = None
         while not allCoursesScheduled(child):
@@ -636,15 +635,6 @@ def selectParents(children, acceptOutsider):
     random.shuffle(parents)
     
     return parents
-
-def orphanator(parents):
-    factor = 0
-
-    survivors = []
-    for p in parents:
-        if random.random() > factor:
-            survivors.append(p)
-    return survivors
 
 def freeSlotMutation(timeTable, factor):
     freeSlots = []
@@ -822,7 +812,7 @@ def makeLove(parents, n, incest):
     return children
 
 def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
-    nrChilds = 40
+    nrChilds = 20
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -851,10 +841,9 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
         print "Parent points this generation: "
         for p in parents:
             print getPoints(p),
-        offspring = makeLove(parents, nrChilds, allowIncest)
-        survivors = orphanator(parents)
+        offspring = makeLove(parents, nrChilds - len(parents), allowIncest)
         mutate(offspring)
-        children = survivors + offspring
+        children = parents + offspring
         
         maxChild = max(children, key = lambda x: getPoints(x))
         if getPoints(maxChild) > bestChildScore:
