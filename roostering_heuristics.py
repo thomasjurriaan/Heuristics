@@ -393,9 +393,9 @@ def courseInTimeSlot(course, roomSlot):
 def roomIsValid(roomSlot, students, activity):
     r = roomSlot
     if (
-        not r.hasGroup() and
-        r.getSize()*OVERBOOK >= len(students) and
-        not courseInTimeSlot(activity.getCourse(), r)
+        not r.hasGroup()
+        and r.getSize()*OVERBOOK >= len(students)
+        and not courseInTimeSlot(activity.getCourse(), r)
         ): return True
     return False
 
@@ -649,7 +649,7 @@ def freeSlotMutation(timeTable, factor):
         # Every group has a chance to change roomslots
         if random.random() <= factor:
             for s in freeSlots:
-                if not s.hasGroup():
+                if not s.hasGroup() and (s.getSize()*OVERBOOK >= len(g.getStudents())):
                     g.newRoomSlot(s)
                     break
     return
@@ -663,10 +663,8 @@ def changeSlotMutation(timeTable, factor):
             for g2 in groups2:
                 room1 = g1.getRoomSlot()
                 room2 = g2.getRoomSlot()
-                if (roomIsValid(room2, g1.getStudents(),
-                                g1.getActivity()) and
-                    roomIsValid(room1, g2.getStudents(),
-                                g2.getActivity())):
+                if (room1.getSize()*OVERBOOK >= len(g2.getStudents())
+                    and room2.getSize()*OVERBOOK >= len(g1.getStudents())):
                     g1.newRoomSlot(room2)
                     g2.newRoomSlot(room1)
                     break
@@ -697,7 +695,7 @@ def mutate(parents):
     # Parents are mutated before coupling
     fsFactor = 0.01
     csFactor = 0.01
-    sFactor = 0.05
+    sFactor = 0.03
     
     print "Mutating offspring..."
     for p in parents:
@@ -812,7 +810,7 @@ def makeLove(parents, n, incest):
     return children
 
 def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
-    nrChilds = 20
+    nrChilds = 30
 
     print "================================="
     print "Initiating genetic algorithm"
@@ -868,12 +866,12 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
             print "Spreadding points: \n",spread
             w = ("You want to do another "
                  +str(iterations)
-                 +" iterations? (Y/N)")
+                 +" iterations? (Y/N): ")
             q = raw_input(w)
             if q == "Y":
                 iterations *= 2
                 continue
-            try: i += int(q)
+            try: iterations += int(q)
             except: break
         
     return bestChild
