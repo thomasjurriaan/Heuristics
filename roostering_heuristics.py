@@ -6,6 +6,10 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 import cProfile
+<<<<<<< HEAD
+=======
+##import re
+>>>>>>> 4d7516e6078cf387cfb8b67fe6ca62bc9b655b74
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -48,13 +52,9 @@ class Student(object):
         # self.courses is een lijst van course class-instanties
         self.courses = []
         for c in courses:
-            for e in courseList:
-                if c == e.getName():
-                    self.courses.append(e)
-                    e.addStudent(self)
-                    break
-            else: raise StandardError("Course " + c + " for student " +
-                                      self.getName() + " does not exist")
+            courseObject = courseList[c]
+            self.courses.append(courseObject)
+            courseObject.addStudent(self)
         self.groups = []
     def getName(self):
         return self.firstName+' '+self.lastName
@@ -84,6 +84,7 @@ class TimeTable(object):
         self.courses = []
         self.groups = []
         self.parents = parents
+        self.points = None
     def addStudent(self, student):
         self.students.append(student)
     def getStudents(self):
@@ -109,6 +110,17 @@ class TimeTable(object):
                 return self.timeSlots[(4*n):(4*n+4)]
     def getParents(self):
         return self.parents
+    def setPoints(self):
+        self.points = getPoints(self)
+    def getPoints(self):
+        return self.points
+    def addPointers(self, courses, students):
+        self.studentPointers = students
+        self.coursePointers = courses
+    def getCoursePointers(self):
+        return self.coursePointers
+    def getStudentPointers(self):
+        return self.studentPointers
 
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
@@ -153,7 +165,7 @@ class RoomSlot(object):
         return self.group
     def getStudents(self):
         if self.group == None:
-            return None
+            return []
         else: return self.group.getStudents()
 
 class Course(object):
@@ -161,12 +173,25 @@ class Course(object):
         self, courseName, lectures, seminar, maxseminar, practica, maxPractica
         ):
         self.students = []
-        self.lectures = [Activity("lecture"+str(i),self)
-                         for i in range(lectures)]
-        self.seminar = [Activity("seminar"+str(i), self, maxseminar)
-                        for i in range(seminar)]
-        self.practica = [Activity("practicum"+str(i), self, maxPractica)
-                         for i in range(practica)]
+        self.actPointers = {}
+        self.lectures = []
+        self.seminar = []
+        self.practica = []
+        for i in range(lectures):
+            name = "lecture"+str(i)
+            act = Activity(name, self)
+            self.lectures.append(act)
+            self.actPointers[name] = act
+        for i in range(seminar):
+            name = "seminar"+str(i)
+            act = Activity(name, self, maxseminar)
+            self.seminar.append(act)
+            self.actPointers[name] = act
+        for i in range(practica):
+            name = "practicum"+str(i)
+            act = Activity(name, self, maxPractica)
+            self.practica.append(act)
+            self.actPointers[name] = act
         self.courseName = courseName
     def addStudent(self,student):
         self.students.append(student)
@@ -176,6 +201,8 @@ class Course(object):
         return self.students
     def getName(self):
         return self.courseName
+    def getPointers(self):
+        return self.actPointers
 
 class Activity(object):
     def __init__(self, workType, course, maxStudents = float('inf')):
@@ -318,7 +345,7 @@ def personalScheduleConflict(timeTable):
     for s in students:
         malus += studentMalusPoints(s)
     return malus
-
+                    
 ##def activityConflict(timeTable):
 ##    courses = timeTable.getCourses()
 ##    points = 0
@@ -393,18 +420,20 @@ def courseInTimeSlot(course, roomSlot):
 
 def roomIsValid(roomSlot, students, activity):
     r = roomSlot
+    course = activity.getCourse()
     if (
-        not r.hasGroup() and
-        r.getSize()*OVERBOOK >= len(students) and
-        not courseInTimeSlot(activity.getCourse(), r)
+        not r.hasGroup()
+        and r.getSize()*OVERBOOK >= students
+        and not courseInTimeSlot(course, r)
         ): return True
     return False
 
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
     # Tries to book an activity in a room. If succeeded: returns the booked
     # group
+    nrStudents = len(students)
     for r in randomRoomSlots:
-        if roomIsValid(r, students, activity):
+        if roomIsValid(r, nrStudents, activity):
             group = Group(activity, students, activity.getMaxStudents(), r)
             timeTable.addGroup(group)
             return
@@ -636,20 +665,23 @@ def simulatedAnnealing(timeTable, score, temperature = 20.0, coolingRate = 0.999
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def selectParents(children, acceptOutsider):
+def selectParents(children, acceptOutsider, chance):
     # The surving parents-to-be are randomly selected from all childs
     # It's possible to accept the introduction of an outsider every round
-    chance = 0.3
     
     print "Picking parents..."
-    scoreList = [getPoints(c) for c in children]
-    minScore = min(scoreList)
-    mean = np.mean(scoreList)
-    parents = []
-    for c in children:
-        factor = (getPoints(c) - minScore)/(mean - minScore)
-        if random.random() < factor*chance:
-            parents.append(c)
+##    scoreList = [c.getPoints() for c in children]
+##    minScore = min(scoreList)
+##    mean = sum(scoreList)/float(len(children))
+##    parents = []
+##    for c in children:
+##        factor = (c.getPoints() - minScore)/(mean - minScore)
+##        if random.random() < factor*chance:
+##            parents.append(c)
+    children.sort(key = lambda x: x.getPoints())
+    nr = int(chance*len(children))
+    parents = children[-nr:]
+    while(len(parents) < 3): parents.append(random.choice(children))
     
     if acceptOutsider == True:
         child = None
@@ -657,6 +689,7 @@ def selectParents(children, acceptOutsider):
             child = createTimeTableInstance()
             randomAlgorithm(child)
         parents.append(child)
+        child.setPoints()
     random.shuffle(parents)
     
     return parents
@@ -674,7 +707,7 @@ def freeSlotMutation(timeTable, factor):
         # Every group has a chance to change roomslots
         if random.random() <= factor:
             for s in freeSlots:
-                if not s.hasGroup():
+                if not s.hasGroup() and (s.getSize()*OVERBOOK >= len(g.getStudents())):
                     g.newRoomSlot(s)
                     break
     return
@@ -688,10 +721,8 @@ def changeSlotMutation(timeTable, factor):
             for g2 in groups2:
                 room1 = g1.getRoomSlot()
                 room2 = g2.getRoomSlot()
-                if (roomIsValid(room2, g1.getStudents(),
-                                g1.getActivity()) and
-                    roomIsValid(room1, g2.getStudents(),
-                                g2.getActivity())):
+                if (room1.getSize()*OVERBOOK >= len(g2.getStudents())
+                    and room2.getSize()*OVERBOOK >= len(g1.getStudents())):
                     g1.newRoomSlot(room2)
                     g2.newRoomSlot(room1)
                     break
@@ -718,11 +749,11 @@ def studentMutation(timeTable, factor):
                     g2.addStudent(stud1)
     return
     
-def mutate(parents):
+def mutate(parents, mutations):
     # Parents are mutated before coupling
-    fsFactor = 0.01
-    csFactor = 0.01
-    sFactor = 0.05
+    fsFactor = mutations[0]
+    csFactor = mutations[1]
+    sFactor = mutations[2]
     
     print "Mutating offspring..."
     for p in parents:
@@ -752,8 +783,12 @@ def blindDate(p1, parents, incest):
                 print "Time Out..."
                 break
     else:
+        i = 0
         while p2 == p1:
+            if i > 5* len(parents):
+                break
             p2 = random.choice(parents)
+            i += 1
     return p2
 
 def freeRoomSlot(child, roomSlot, course):
@@ -780,25 +815,22 @@ def bedRoom(p1, p2):
     badGroups = []
     c1 = p1.getCourses()
     c2 = p2.getCourses()
+    coursePointers = child.getCoursePointers()
+    studentPointers = child.getStudentPointers()
 
     courseNr = range(len(c1))
     random.shuffle(courseNr)
     for i in courseNr:
         parentC = random.choice([c1[i], c2[i]])
-        for c in child.getCourses():
-            if c.getName() == parentC.getName():
-                course = c
-                break
+        course = coursePointers[parentC.getName()]
         groups = sum([a.getGroups() for a in parentC.getActivities()],[])
         for parentG in groups:
             activityName = parentG.getActivity().getType()
-            for a in course.getActivities():
-                if a.getType() == activityName:
-                    activity = a
-                    break
-            studentNames = [s.getName() for s in parentG.getStudents()]
-            students = [s for s in child.getStudents()
-                        if s.getName() in studentNames]
+            actPointers = course.getPointers()
+            activity = actPointers[activityName]
+            students = [
+                studentPointers[s.getName()] for s in parentG.getStudents()
+                ]
             room = freeRoomSlot(child, parentG.getRoomSlot(), course)
             if  room != False:
                 group = Group(
@@ -818,6 +850,7 @@ def bedRoom(p1, p2):
         except:
             print "Miscarriage..."
             return None
+    child.setPoints()
     return child
 
 def makeLove(parents, n, incest):
@@ -836,19 +869,26 @@ def makeLove(parents, n, incest):
         if newChild != None: children.append(newChild)
     return children
 
-def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
-    nrChilds = 20
+def geneticAlgorithm(
+    iterations = 25, acceptOutsider = False, text = True, allowIncest = True, 
+    survivorFactor = 0.3, mutations = (0.01,0.01,0.02), nrChilds = 30
+    ):
 
     print "================================="
     print "Initiating genetic algorithm"
     print "================================="
-    children = []
-    for i in range(nrChilds):
+    tryChildren = []
+    for i in range(nrChilds*5):
+        if i % nrChilds == 0:
+            print i," timetables created..."
         table = None
         while not allCoursesScheduled(table):
             table = createTimeTableInstance()
             randomAlgorithm(table)
-        children.append(table)
+        tryChildren.append(table)
+        table.setPoints()
+    tryChildren.sort(key = lambda x: x.getPoints()) 
+    children = tryChildren[-nrChilds:]
 
     evolution = []
     overbookings = []
@@ -862,19 +902,19 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
         print "Starting iteration ",i
         print "========================"
         print "Amount of children ",len(children)
-        parents = selectParents(children, acceptOutsider)
+        parents = selectParents(children, acceptOutsider, survivorFactor)
         print "Parent points this generation: "
         for p in parents:
-            print getPoints(p),
+            print p.getPoints(),
         offspring = makeLove(parents, nrChilds - len(parents), allowIncest)
-        mutate(offspring)
+        mutate(offspring, mutations)
         children = parents + offspring
         
-        maxChild = max(children, key = lambda x: getPoints(x))
-        if getPoints(maxChild) > bestChildScore:
+        maxChild = max(children, key = lambda x: x.getPoints())
+        if maxChild.getPoints() > bestChildScore:
             bestChild = maxChild
-            bestChildScore = getPoints(maxChild)
-        evolution.append(int(np.mean([getPoints(c) for c in children])))
+            bestChildScore = maxChild.getPoints()
+        evolution.append(int(np.mean([c.getPoints() for c in children])))
         overbookings.append(int(np.mean([overbooked(c) for c in children])))
         spread.append(int(np.mean([
             coursesMaximallySpread(c) - activityConflict(c) for c in children
@@ -882,7 +922,7 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
         personal.append(int(np.mean([
             personalScheduleConflict(c) for c in children
             ])))
-        if i == iterations:
+        if i == iterations and text == True:
             q = ""
             print "\n======================"
             print "Evolution review!"
@@ -893,35 +933,79 @@ def geneticAlgorithm(iterations = 1, acceptOutsider = True, allowIncest = True):
             print "Spreadding points: \n",spread
             w = ("You want to do another "
                  +str(iterations)
-                 +" iterations? (Y/N)")
+                 +" iterations? (Y/N): ")
             q = raw_input(w)
             if q == "Y":
                 iterations *= 2
                 continue
-            try: i += int(q)
+            try: iterations += int(q)
             except: break
         
     return bestChild
-    
+
+scores = {}
+def tuneGA(iterations):
+    mutL = [
+       (0.0,0.0,0.0),
+       (0.005,0.0,0.0),
+       (0.01,0.0,0.0),
+       (0.025,0.0,0.0),
+       (0.25,0.0,0.0),
+       (0.0,0.005,0.0),
+       (0.0,0.01,0.0),
+       (0.0,0.025,0.0),
+       (0.0,0.25,0.0),
+       (0.0,0.0,0.005),
+       (0.0,0.0,0.01),
+       (0.0,0.0,0.025),
+       (0.0,0.0,0.25)
+       ]
+    for f in [0.15, 0.3, 0.5]:
+        scores['SURVIVOR-'+str(f)] = []
+        for i in range(iterations):
+            schedule = geneticAlgorithm(survivorFactor = f, text = False)
+            schedule.setPoints()
+            scores['SURVIVOR-'+str(f)].append(schedule.getPoints())
+    for m in mutL:
+        scores['MUTATION-'+str(m)] = []
+        for i in range(iterations):
+            schedule = geneticAlgorithm(text = False, mutations = m)
+            schedule.setPoints()
+            scores['MUTATION-'+str(m)].append(schedule.getPoints())
+    for b in [True, False]:
+        scores['INCEST-'+str(b)] = []
+        scores['OUTSIDER-'+str(b)] = []
+        for i in range(iterations):
+            schedule1 = geneticAlgorithm(text = False, allowIncest = b)
+            schedule2 = geneticAlgorithm(text = False, acceptOutsider = b)
+            schedule1.setPoints()
+            schedule2.setPoints()
+            scores['INCEST-'+str(b)].append(schedule1.getPoints())
+            scores['OUTSIDER-'+str(b)].append(schedule2.getPoints())
+    return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
 def createTimeTableInstance(parents = None):
-    print "Creating new timetable structure..."
     timeTable = TimeTable(parents)
-    courses = []
+    courses = {}
+    students = {}
     for c in COURSEDATA:
-        course = Course(c['courseName'], c['lectures'], c['seminar'],
+        cName = c['courseName']
+        course = Course(cName, c['lectures'], c['seminar'],
                         c['maxStudSeminar'], c['practica'],
                         c['maxStudPractica'])
         timeTable.addCourse(course)
-        courses.append(course)
+        courses[cName] = course
     for s in STUDENTDATA[1:]:
+        sName = s["firstName"]+' '+s["lastName"]
         student = Student(s["firstName"],s["lastName"],s["nr"],
                           s["courses"],courses)
+        students[sName] = student
         timeTable.addStudent(student)
+    timeTable.addPointers(courses, students)
         
     return timeTable
  
@@ -1075,5 +1159,7 @@ def saveTimeTable(timeTable):
     with open("Visualisatie/Data/"+filename, 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')
     return
-    
+
+
+##cProfile.run('geneticAlgorithm()')
     
