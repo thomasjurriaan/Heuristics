@@ -5,6 +5,7 @@ import itertools
 import copy
 import matplotlib.pyplot as plt
 import numpy as np
+import cProfile
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -539,7 +540,7 @@ def switch(groupOne, groupTwo, groups):
 def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
-    highscore = 0
+    highscore = score
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
@@ -547,11 +548,11 @@ def hillclimbAlgorithm(timeTable, score, iterations):
         switch(groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
-        scores.append(score)
         if((score > highscore)):
             highscore = score
         else: 
             switch(groupTwo, groupOne, groups)
+        scores.append(highscore)
         if(i % 10 == 0):
             print "Current iteration: "
             print i 
@@ -580,13 +581,14 @@ def hillclimbAlgorithm(timeTable, score, iterations):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002):
-    highscore = 0
+def simulatedAnnealing(timeTable, score, temperature = 20.0, coolingRate = 0.999):
+    highscore = score
     scores = []
+    chances = []
     groups = timeTable.getGroups()
     i = 0
-    while(temperature > 1):
-        if(i % 50 == 0):
+    while(temperature > 3):
+        if(i % 10 == 0):
             print "                 Current iteration: ", i
         oldscore = score
         groupOne, groupTwo = selectGroups(groups)
@@ -595,16 +597,39 @@ def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002
         score = getPoints(timeTable)
         print oldscore," ", score, " ", "temp: ", temperature
         print "=", (oldscore - score) / temperature
-        chance = math.exp(float((score - oldscore) / temperature))
+        rawchance = (math.exp((score - oldscore) / temperature))
+        if score - oldscore < 0:
+            chance = ((0.02 / ((oldscore - score))) + 0.98 * rawchance)
+        else:
+            chance = rawchance
         print "chance: ", chance
+        if chance < 1:
+            chances.append(chance)
         if(chance > random.random()):
             highscore = score
-            scores.append(highscore)
+            #scores.append(highscore)
         else: 
             switch(groupTwo, groupOne, groups)
+            score = oldscore
             print "switched back"
         i += 1
-        temperature -= coolingRate
+        scores.append(highscore)
+        temperature *= coolingRate
+    plt.plot(chances)
+    plt.ylabel('chance')
+    plt.xlabel('iterations')
+    plt.show()
+    plt.plot(scores)
+    plt.ylabel('points')
+    plt.xlabel('iterations')
+    plt.show()
+    while(True):
+        s = raw_input("would you like to run a hillclimber for 300 times? (y/n)")
+        if s == "n":
+            break
+        if s == "y":
+            print "initialize hillclimber..."
+            scores.append(hillclimbAlgorithm(timeTable, getPoints(timeTable), 300))
     return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -921,14 +946,16 @@ def t():
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def r():
-    list = []
+    scores = []
+    timetables = []
     for i in range(100):
         henk = createTimeTableInstance()
         randomAlgorithm(henk)
-        list.append((getPoints(henk)))
-        if i % 10 == 0 :
+        scores.append((getPoints(henk)))
+        timetables.append(henk)
+        if i % 10 == 0:
             print "iterations: ", i
-    return list
+    return timetables[scores.index(max(scores))]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def h():
     h = createTimeTableInstance()
@@ -947,6 +974,13 @@ def s():
     randomAlgorithm(h)
     scores = simulatedAnnealing(h,getPoints(h))
     return h, scores
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+def p():
+    timetable = r()
+    scores = simulatedAnnealing(timetable, getPoints(timetable))
+    return timetable, scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
