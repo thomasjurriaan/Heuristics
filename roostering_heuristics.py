@@ -288,7 +288,6 @@ def spreadBonusPoints(c, r = None, group = None):
         for g in a.getGroups():
             if g == group and r != None:
                 d = r.getTimeSlot().getDay()
-                print "hello"
             else:
                 d = g.getRoomSlot().getTimeSlot().getDay()
             aDays.append(d)
@@ -325,13 +324,15 @@ def overbooked(timeTable):
         malus += overbookMalusPoints(r)
     return malus
 
-def studentMalusPoints(s):
+def studentMalusPoints(s, originalRoom = None, newRoom = None):
     individualMalus = 0
     cList = []
-    for c in s.getGroups():
-        if c.getRoomSlot().getTimeSlot() in cList:
+    for g in s.getGroups():
+        if originalRoom != None and g == originalRoom.getGroup():
+            g = newRoom.getGroup()
+        if g.getRoomSlot().getTimeSlot() in cList:
             individualMalus += 1
-        cList.append(c.getRoomSlot().getTimeSlot())
+        cList.append(g.getRoomSlot().getTimeSlot())
     return individualMalus
 
 def personalScheduleConflict(timeTable):
@@ -371,7 +372,6 @@ def spreadMalusPoints(c, r = None, group = None):
         for g in a.getGroups():
             if g == group and r != None:
                 day = r.getTimeSlot().getDay()
-                print "goodday"
             else:
                 day = g.getRoomSlot().getTimeSlot().getDay()
             days.append(day)
@@ -538,34 +538,37 @@ def hillOverbook(students, room):
         return saldo
     else: return 0
 
-def groupPoints(group, students, course, room):
-    saldo = 0
+def groupPoints(group, students, course, room, newRoom):
+    studentMalus = 0
     for student in students:
-        saldo -= studentMalusPoints(student)
-    saldo += spreadBonusPoints(course, room, group)
-    saldo -= spreadMalusPoints(course, room, group)
-    saldo -= hillOverbook(students, room)
+        studentMalus += studentMalusPoints(student, room, newRoom)
+    bonus = spreadBonusPoints(course, newRoom, group)
+    spreadMalus = spreadMalusPoints(course, newRoom, group)
+    overbookMalus = hillOverbook(students, newRoom)
+    saldo = bonus - studentMalus - spreadMalus - overbookMalus
     return saldo
 
 def pointsSaldo(group, newRoom):
     students = group.getStudents()
     course = group.getActivity().getCourse()
     originalRoom = group.getRoomSlot()
-    original = groupPoints(group, students, course, originalRoom)
-    new = groupPoints(group, students, course, newRoom)
+    original = groupPoints(group, students, course, originalRoom, originalRoom)
+    new = groupPoints(group, students, course, originalRoom, newRoom)
     return new - original
 
 def switch(groupOne, groupTwo, groups):
     roomSlotOne = groupOne.getRoomSlot()
-    groupTwo.getRoomSlot().appointGroup(groupOne)
-    roomSlotOne.appointGroup(groupTwo)
-    groupOne.newRoomSlot(groupTwo.getRoomSlot())
+    roomSlotTwo = groupTwo.getRoomSlot()
+    groupOne.newRoomSlot(roomSlotTwo)
     groupTwo.newRoomSlot(roomSlotOne)
+    roomSlotOne.appointGroup(groupTwo)
+    roomSlotTwo.appointGroup(groupOne)
+    return
 
-def hillclimbAlgorithm(timeTable, score, iterations):
+"""def hillclimbAlgorithm(timeTable, score, iterations):
     print "\n\n\n\n\n......................................................."
     # switch random groups and run getPoints()
-    highscore = 0
+    highscore = score
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
@@ -573,46 +576,52 @@ def hillclimbAlgorithm(timeTable, score, iterations):
         switch(groupOne, groupTwo, groups)
         #score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
         score = getPoints(timeTable)
-        scores.append(score)
         if((score > highscore)):
             highscore = score
         else: 
             switch(groupTwo, groupOne, groups)
+        scores.append(highscore)
         if(i % 10 == 0):
             print "Current iteration: "
             print i 
-    return scores
+    return scores"""
 
-'''def hillclimbAlgorithm(timeTable, score, iterations):
-    print "\n\n\n\n\n......................................................."
+def hillclimbAlgorithm(timeTable, score, iterations = 1000):
     # switch random groups and run getPoints()
+    highscore = score
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
         groupOne, groupTwo = selectGroups(groups)
-        score = pointsSaldo(groupOne, groupTwo.getRoomSlot()) + pointsSaldo(groupTwo, groupOne.getRoomSlot())
-        print "score:  ",score
+        roomOne = groupOne.getRoomSlot()
+        roomTwo = groupTwo.getRoomSlot()
+        pointsSaldo1 = pointsSaldo(groupOne, groupTwo.getRoomSlot())
+        pointsSaldo2 = pointsSaldo(groupTwo, groupOne.getRoomSlot())
+        score = pointsSaldo1 + pointsSaldo2
         if score > 0:
-            print "current score is higher than the highest score"
             highscore = getPoints(timeTable)
-            scores.append(highscore)
-            switch(timeTable, groupOne, groupTwo, groups)
+            switch(groupOne, groupTwo, groups)
+        scores.append(highscore)
         if(i % 50 == 0):
             print "Current iteration: "
-            print i 
-    print scores
-    print max(scores)'''
+            print i ,
+    plt.plot(scores)
+    plt.ylabel('points')
+    plt.xlabel('iterations')
+    plt.show()
+    return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002):
-    highscore = 0
+"""def simulatedAnnealing(timeTable, score, temperature = 20.0, coolingRate = 0.999):
+    highscore = score
     scores = []
+    chances = []
     groups = timeTable.getGroups()
     i = 0
-    while(temperature > 1):
-        if(i % 50 == 0):
+    while(temperature > 3):
+        if(i % 10 == 0):
             print "                 Current iteration: ", i
         oldscore = score
         groupOne, groupTwo = selectGroups(groups)
@@ -621,16 +630,69 @@ def simulatedAnnealing(timeTable, score, temperature = 10.0, coolingRate = 0.002
         score = getPoints(timeTable)
         print oldscore," ", score, " ", "temp: ", temperature
         print "=", (oldscore - score) / temperature
-        chance = math.exp(float((score - oldscore) / temperature))
+        rawchance = (math.exp((score - oldscore) / temperature))
+        if score - oldscore < 0:
+            chance = ((0.02 / ((oldscore - score))) + 0.98 * rawchance)
+        else:
+            chance = rawchance
         print "chance: ", chance
+        if chance < 1:
+            chances.append(chance)
         if(chance > random.random()):
             highscore = score
-            scores.append(highscore)
+            #scores.append(highscore)
         else: 
             switch(groupTwo, groupOne, groups)
+            score = oldscore
             print "switched back"
         i += 1
-        temperature -= coolingRate
+        scores.append(highscore)
+        temperature *= coolingRate
+    plt.plot(chances)
+    plt.ylabel('chance')
+    plt.xlabel('iterations')
+    plt.show()
+    plt.plot(scores)
+    plt.ylabel('points')
+    plt.xlabel('iterations')
+    plt.show()
+    while(True):
+        s = raw_input("would you like to run a hillclimber for 300 times? (y/n)")
+        if s == "n":
+            break
+        if s == "y":
+            print "initialize hillclimber..."
+            scores.append(hillclimbAlgorithm(timeTable, getPoints(timeTable), 300))
+    return scores"""
+
+def simulatedAnnealing(timeTable, score, temperature = 15.0, coolingRate = 0.9995):
+    # switch random groups and run getPoints()
+    highscore = score
+    scores = []
+    groups = timeTable.getGroups()
+    i = 0
+    while(temperature > 0.5):
+        if(i % 100 == 0):
+            print "Current iteration:", i, "current temperature:",temperature
+        groupOne, groupTwo = selectGroups(groups)
+        pointsSaldo1 = pointsSaldo(groupOne, groupTwo.getRoomSlot())
+        pointsSaldo2 = pointsSaldo(groupTwo, groupOne.getRoomSlot())
+        score = pointsSaldo1 + pointsSaldo2
+        rawchance = math.exp(score / temperature)
+        if score < 0:
+            chance = 0.02 / score + 0.98 * rawchance
+        else:
+            chance = rawchance
+        if(chance > random.random()):
+            highscore = getPoints(timeTable)
+            switch(groupOne, groupTwo, groups)
+        scores.append(highscore)
+        i+=1
+        temperature *= coolingRate
+    plt.plot(scores)
+    plt.ylabel('points')
+    plt.xlabel('iterations')
+    plt.show()
     return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1038,14 +1100,16 @@ def t():
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def r():
-    list = []
+    scores = []
+    timetables = []
     for i in range(100):
         henk = createTimeTableInstance()
         randomAlgorithm(henk)
-        list.append((getPoints(henk)))
-        if i % 10 == 0 :
+        scores.append((getPoints(henk)))
+        timetables.append(henk)
+        if i % 10 == 0:
             print "iterations: ", i
-    return list
+    return timetables[scores.index(max(scores))]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def h():
     h = createTimeTableInstance()
@@ -1064,6 +1128,13 @@ def s():
     randomAlgorithm(h)
     scores = simulatedAnnealing(h,getPoints(h))
     return h, scores
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+def p():
+    timetable = r()
+    scores = simulatedAnnealing(timetable, getPoints(timetable))
+    return timetable, scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""" Exporting function """""""""""""""""""""""""""""""""
