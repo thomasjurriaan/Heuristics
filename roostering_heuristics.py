@@ -1050,7 +1050,7 @@ def geneticPopulations(nrPop, iterations):
     print "================================"
     print "\nMerging fittest individuals..."
     print "================================"
-    child = geneticAlgorithm(iterations, initChildren = children, mutations = (0.0,0.0,0.1)
+    child = geneticAlgorithm(iterations, initChildren = children, mutations = (0.0,0.0,0.1))
     return child
                         
 
