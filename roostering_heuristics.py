@@ -586,9 +586,9 @@ def switch(groupOne, groupTwo, groups):
             print i 
     return scores"""
 
-def hillclimbAlgorithm(timeTable, score, iterations = 1000):
+def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True):
     # switch random groups and run getPoints()
-    highscore = score
+    highscore = timeTable.getPoints()
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
@@ -603,13 +603,15 @@ def hillclimbAlgorithm(timeTable, score, iterations = 1000):
             switch(groupOne, groupTwo, groups)
         scores.append(highscore)
         if(i % 50 == 0):
-            print "Current iteration: "
-            print i ,
-    plt.plot(scores)
-    plt.ylabel('points')
-    plt.xlabel('iterations')
-    plt.show()
-    return scores
+            print "Current iteration: ",
+            print i
+    timeTable.setPoints()
+    if doPlot == True:
+        plt.plot(scores)
+        plt.ylabel('points')
+        plt.xlabel('iterations')
+        plt.show()
+    return
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
@@ -1050,7 +1052,9 @@ def geneticPopulations(nrPop, iterations):
     print "================================"
     print "\nMerging fittest individuals..."
     print "================================"
-    child = geneticAlgorithm(iterations, initChildren = children, mutations = (0.0,0.0,0.1))
+    child = geneticAlgorithm(
+        iterations, initChildren = children, mutations = (0.0,0.0,0.1)
+        )
     return child
                         
 
