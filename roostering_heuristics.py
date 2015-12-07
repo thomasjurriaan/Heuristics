@@ -6,7 +6,6 @@ import copy
 import matplotlib.pyplot as plt
 import numpy as np
 import cProfile
-##import re
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -587,9 +586,9 @@ def switch(groupOne, groupTwo, groups):
             print i 
     return scores"""
 
-def hillclimbAlgorithm(timeTable, score, iterations = 1000):
+def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True):
     # switch random groups and run getPoints()
-    highscore = score
+    highscore = timeTable.getPoints()
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
@@ -604,13 +603,15 @@ def hillclimbAlgorithm(timeTable, score, iterations = 1000):
             switch(groupOne, groupTwo, groups)
         scores.append(highscore)
         if(i % 50 == 0):
-            print "Current iteration: "
-            print i ,
-    plt.plot(scores)
-    plt.ylabel('points')
-    plt.xlabel('iterations')
-    plt.show()
-    return scores
+            print "Current iteration: ",
+            print i
+    timeTable.setPoints()
+    if doPlot == True:
+        plt.plot(scores)
+        plt.ylabel('points')
+        plt.xlabel('iterations')
+        plt.show()
+    return
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
@@ -700,7 +701,6 @@ def selectParents(children, acceptOutsider, chance):
     # The surving parents-to-be are randomly selected from all childs
     # It's possible to accept the introduction of an outsider every round
     
-    print "Picking parents..."
 ##    scoreList = [c.getPoints() for c in children]
 ##    minScore = min(scoreList)
 ##    mean = sum(scoreList)/float(len(children))
@@ -786,7 +786,6 @@ def mutate(parents, mutations):
     csFactor = mutations[1]
     sFactor = mutations[2]
     
-    print "Mutating offspring..."
     for p in parents:
         freeSlotMutation(p, fsFactor)
         changeSlotMutation(p, csFactor)
@@ -878,14 +877,11 @@ def bedRoom(p1, p2):
     random.shuffle(freeRoomSlots)
     for g in badGroups:
         try: bookRandomRoom(g[0], freeRoomSlots, g[1], child)
-        except:
-            print "Miscarriage..."
-            return None
+        except: return None
     child.setPoints()
     return child
 
 def makeLove(parents, n, incest):
-    print "\nMaking new children..."
     cpp = int(n/float(len(parents)))
     children = []
     for p1 in parents:
@@ -902,24 +898,27 @@ def makeLove(parents, n, incest):
 
 def geneticAlgorithm(
     iterations = 25, acceptOutsider = False, text = True, allowIncest = True, 
-    survivorFactor = 0.3, mutations = (0.01,0.01,0.02), nrChilds = 30
+    survivorFactor = 0.15, mutations = (0.01, 0.005, 0.025), nrChilds = 30,
+    initChildren = None
     ):
-
-    print "================================="
-    print "Initiating genetic algorithm"
-    print "================================="
-    tryChildren = []
-    for i in range(nrChilds*5):
-        if i % nrChilds == 0:
-            print i," timetables created..."
-        table = None
-        while not allCoursesScheduled(table):
-            table = createTimeTableInstance()
-            randomAlgorithm(table)
-        tryChildren.append(table)
-        table.setPoints()
-    tryChildren.sort(key = lambda x: x.getPoints()) 
-    children = tryChildren[-nrChilds:]
+    if text == True:
+        print "================================="
+        print "Initiating genetic algorithm"
+        print "================================="
+    if initChildren == None:
+        tryChildren = []
+        for i in range(nrChilds*5):
+            if i % nrChilds == 0 and text == True:
+                print i," timetables created..."
+            table = None
+            while not allCoursesScheduled(table):
+                table = createTimeTableInstance()
+                randomAlgorithm(table)
+            tryChildren.append(table)
+            table.setPoints()
+        tryChildren.sort(key = lambda x: x.getPoints()) 
+        children = tryChildren[-nrChilds:]
+    else: children = initChildren
 
     evolution = []
     overbookings = []
@@ -928,16 +927,21 @@ def geneticAlgorithm(
     bestChildScore = 0
     i = 0
     while i < iterations:
-        i += 1
-        print "\n========================"
-        print "Starting iteration ",i
-        print "========================"
-        print "Amount of children ",len(children)
+        if text == True: print "Picking parents..."
         parents = selectParents(children, acceptOutsider, survivorFactor)
-        print "Parent points this generation: "
-        for p in parents:
-            print p.getPoints(),
+        i += 1
+        if text == True:
+            print "\n========================"
+            print "Starting iteration ",i
+            print "========================"
+            print "Amount of children ",len(children)
+
+            print "Parent points this generation: "
+            for p in parents:
+                print p.getPoints(),
+            print "\nMaking new children..."
         offspring = makeLove(parents, nrChilds - len(parents), allowIncest)
+        if text == True: print "Mutating offspring..."
         mutate(offspring, mutations)
         children = parents + offspring
         
@@ -977,43 +981,78 @@ def geneticAlgorithm(
 scores = {}
 def tuneGA(iterations):
     mutL = [
-       (0.0,0.0,0.0),
-       (0.005,0.0,0.0),
-       (0.01,0.0,0.0),
-       (0.025,0.0,0.0),
-       (0.25,0.0,0.0),
-       (0.0,0.005,0.0),
-       (0.0,0.01,0.0),
-       (0.0,0.025,0.0),
-       (0.0,0.25,0.0),
-       (0.0,0.0,0.005),
-       (0.0,0.0,0.01),
-       (0.0,0.0,0.025),
-       (0.0,0.0,0.25)
+       (0.0, 0.005, 0.025),
+       (0.01, 0.005, 0.025),
+       (0.005, 0.005, 0.025),
+       (0.015, 0.005, 0.025),
+       (0.01, 0.000, 0.025),
+       (0.01, 0.01, 0.025),
+       (0.01, 0.015, 0.025),
+       (0.01, 0.02, 0.025),
+       (0.01, 0.005, 0.0),
+       (0.01, 0.005, 0.02),
+       (0.01, 0.005, 0.03),
+       (0.01, 0.005, 0.04),
+       (0.01, 0.005, 0.05)
        ]
-    for f in [0.15, 0.3, 0.5]:
+    print "============================"
+    print "Initiating tuning algorithm"
+    print "============================"
+    for f in [0.10, 0.15, 0.2, 0.025]:
+        print "Starting survival factor ",f
+        print "Attempt ",
         scores['SURVIVOR-'+str(f)] = []
         for i in range(iterations):
+            print i,
             schedule = geneticAlgorithm(survivorFactor = f, text = False)
             schedule.setPoints()
             scores['SURVIVOR-'+str(f)].append(schedule.getPoints())
+        print "\n",scores['SURVIVOR-'+str(f)]
     for m in mutL:
+        print "Starting mutation ",m
+        print "Attempt ",
         scores['MUTATION-'+str(m)] = []
         for i in range(iterations):
+            print i,
             schedule = geneticAlgorithm(text = False, mutations = m)
             schedule.setPoints()
             scores['MUTATION-'+str(m)].append(schedule.getPoints())
+        print "\n",scores['MUTATION-'+str(m)]
     for b in [True, False]:
+        print "Starting genetic variations on ",b
+        print "Attempt ",
         scores['INCEST-'+str(b)] = []
         scores['OUTSIDER-'+str(b)] = []
         for i in range(iterations):
+            print i,
             schedule1 = geneticAlgorithm(text = False, allowIncest = b)
             schedule2 = geneticAlgorithm(text = False, acceptOutsider = b)
             schedule1.setPoints()
             schedule2.setPoints()
             scores['INCEST-'+str(b)].append(schedule1.getPoints())
             scores['OUTSIDER-'+str(b)].append(schedule2.getPoints())
+        print "\nOutsider: ",scores['OUTSIDER-'+str(b)]
+        print "Incest: ",scores['INCEST-'+str(b)]
     return scores
+
+def geneticPopulations(nrPop, iterations):
+    children = []
+    print "========================================"
+    print "Initiating genetic populations programme"
+    print "========================================"
+    for i in range(nrPop):
+        print "Evolving population ",i+1,"..."
+        child = geneticAlgorithm(iterations, text = False)
+        print "Fittest individual has ",child.getPoints()," points."
+        children.append(child)
+    print "================================"
+    print "\nMerging fittest individuals..."
+    print "================================"
+    child = geneticAlgorithm(
+        iterations, initChildren = children, mutations = (0.0,0.0,0.1)
+        )
+    return child
+                        
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""  Initial functions """""""""""""""""""""""""""""""""
