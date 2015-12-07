@@ -666,13 +666,13 @@ def hillclimbAlgorithm(timeTable, score, iterations = 1000):
             scores.append(hillclimbAlgorithm(timeTable, getPoints(timeTable), 300))
     return scores"""
 
-def simulatedAnnealing(timeTable, score, temperature = 15.0, coolingRate = 0.9995):
+def simulatedAnnealing(timeTable, score, temperature = 30.0, coolingRate = 0.999):
     # switch random groups and run getPoints()
     highscore = score
     scores = []
     groups = timeTable.getGroups()
     i = 0
-    while(temperature > 0.5):
+    while(temperature > 0.05):
         if(i % 100 == 0):
             print "Current iteration:", i, "current temperature:",temperature
         groupOne, groupTwo = selectGroups(groups)
@@ -690,10 +690,6 @@ def simulatedAnnealing(timeTable, score, temperature = 15.0, coolingRate = 0.999
         scores.append(highscore)
         i+=1
         temperature *= coolingRate
-    plt.plot(scores)
-    plt.ylabel('points')
-    plt.xlabel('iterations')
-    plt.show()
     return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1066,27 +1062,39 @@ def t():
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def r():
     scores = []
-    timetables = []
-    for i in range(100):
+    none = 0.0
+    for i in range(500):
         henk = createTimeTableInstance()
         randomAlgorithm(henk)
-        scores.append((getPoints(henk)))
-        timetables.append(henk)
-        if i % 10 == 0:
+        score = getPoints(henk)
+        if score is not None:
+            scores.append(score)
+        else:
+            none += 1.0
+        if i % 50 == 0:
             print "iterations: ", i
-    return timetables[scores.index(max(scores))]
+    print scores
+    plt.hist(scores)
+    plt.show()
+    return scores, (none / 500)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-def h():
-    h = createTimeTableInstance()
-    randomAlgorithm(h)
-    print "eerste score: ",getPoints(h)
-    g = h.getGroups()
-    g1,g2 = selectGroups(g)
-    switch(g1,g2,g)
-    print "tweede score: ",getPoints(h)
-    print "naam groep 1: ",g1.getActivity().getCourse().getName()
-    print "naam groep 2: ",g2.getActivity().getCourse().getName()
-    return h, g1,g2,g
+def h(iterations = 10):
+    allscores = []
+    highscores = []
+    timetables = []
+    for i in range(iterations):
+        h = createTimeTableInstance()
+        randomAlgorithm(h)
+        scores = simulatedAnnealing(h,getPoints(h))
+        allscores.append(scores)
+        highscores.append(max(scores))
+        timetables.append(h)
+    print highscores
+    for s in allscores:
+        plt.plot(s)
+        plt.show
+    return highscores, allscores, timetables
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def s():
     h = createTimeTableInstance()
