@@ -522,6 +522,14 @@ def determisticSchnizlle(timeTable):
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+def checkChance(score, temp):
+    rawchance = math.exp(score / temperature)
+    if score < 0:
+        chance = 0.02 / score + 0.98 * rawchance
+    else:
+        chance = rawchance
+    return chance
+
 def selectGroups(groups):
     groupOne = random.choice(groups)
     groupTwo = random.choice(groups)
@@ -556,7 +564,7 @@ def pointsSaldo(group, newRoom):
     new = groupPoints(group, students, course, originalRoom, newRoom)
     return new - original
 
-def switchGroups(groupOne, groupTwo, groups):
+def switchGroups(groupOne, groupTwo):
     roomSlotOne = groupOne.getRoomSlot()
     roomSlotTwo = groupTwo.getRoomSlot()
     groupOne.newRoomSlot(roomSlotTwo)
@@ -565,16 +573,24 @@ def switchGroups(groupOne, groupTwo, groups):
     roomSlotTwo.appointGroup(groupOne)
     return
 
-def checkGroupSwitch(groups):
+def checkGroupSwitch(groups, sim = False, temp = None):
     groupOne, groupTwo = selectGroups(groups)
     roomOne = groupOne.getRoomSlot()
     roomTwo = groupTwo.getRoomSlot()
     pointsSaldo1 = pointsSaldo(groupOne, groupTwo.getRoomSlot())
     pointsSaldo2 = pointsSaldo(groupTwo, groupOne.getRoomSlot())
     score = pointsSaldo1 + pointsSaldo2
-    return score
+    if sim == True:
+        if checkChance(score,temp) > random.random():
+            switchGroups(GroupOne, GroupTwo)
+            return True
+        return False
+    if score > 0:
+        switchGroups(groupOne, groupTwo)
+        return True
+    return False
 
-def checkStudentSwitch(groups):
+def checkStudentSwitch(groups, sim = False, temp = None):
     score = 0
     random.shuffle(groups)
     for g in groups:
@@ -584,14 +600,23 @@ def checkStudentSwitch(groups):
     random.shuffle(actGroups)
     stud1 = random.choice(actGroups[0].getStudents())
     stud2 = random.choice(actGroups[1].getStudents())
-    score += studentMalusPoints(stud1, actGroups[0].getRoomSlot(), actGroups[1].getRoomSlot()) - 
-        studentMalusPoints(stud1, actGroups[0].getRoomSlot(), actGroups[0].getRoomSlot())
-    score += studentMalusPoints(stud2, actGroups[1].getRoomSlot(), actGroups[0].getRoomSlot()) - 
-        studentMalusPoints(stud1, actGroups[1].getRoomSlot(), actGroups[1].getRoomSlot())
-    print "student switch score:"),score
+    score += (
+        studentMalusPoints(stud1, actGroups[0].getRoomSlot(), actGroups[1].getRoomSlot()) 
+        - studentMalusPoints(stud1, actGroups[0].getRoomSlot(), actGroups[0].getRoomSlot())
+        )
+    score += (
+        studentMalusPoints(stud2, actGroups[1].getRoomSlot(), actGroups[0].getRoomSlot()) 
+        - studentMalusPoints(stud1, actGroups[1].getRoomSlot(), actGroups[1].getRoomSlot())
+        )
+    if sim == True:
+        if checkChance(score,temp) > random.random():
+            switchStudents(stud1,actGroups[0],stud2, actGroups[1])
+            return True
+        return False
     if score > 0:
         switchStudents(stud1,actGroups[0],stud2, actGroups[1])
-
+        return True
+    return False
 
 def switchStudents(stud1,g1,stud2,g2):
     g1.removeStudent(stud1)
@@ -599,18 +624,18 @@ def switchStudents(stud1,g1,stud2,g2):
     g1.addStudent(stud2)
     g2.addStudent(stud1)
 
-def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True):
+def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True, ):
     # switch random groups and run getPoints()
     highscore = timeTable.getPoints()
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
-        score = switchGroups()
-        if score > 0:
+        #if checkStudentSwitch(groups):
+            #highscore = getPoints(timeTable)
+        if checkGroupSwitch(groups):
             highscore = getPoints(timeTable)
-            switch(groupOne, groupTwo, groups)
         scores.append(highscore)
-        if(i % 50 == 0):
+        if(i % 100 == 0):
             print "Current iteration: ",
             print i
     timeTable.setPoints()
@@ -635,18 +660,10 @@ def simulatedAnnealing(timeTable, temperature = 15.0, coolingRate = 0.9995, endT
     while(temperature > endTemp):
         if(i % 100 == 0):
             print "Current iteration:", i, "current temperature:",temperature
-        groupOne, groupTwo = selectGroups(groups)
-        pointsSaldo1 = pointsSaldo(groupOne, groupTwo.getRoomSlot())
-        pointsSaldo2 = pointsSaldo(groupTwo, groupOne.getRoomSlot())
-        score = pointsSaldo1 + pointsSaldo2
-        rawchance = math.exp(score / temperature)
-        if score < 0:
-            chance = 0.02 / score + 0.98 * rawchance
-        else:
-            chance = rawchance
-        if(chance > random.random()):
+        if checkStudentSwitch(groups, True, temperature):
             highscore = getPoints(timeTable)
-            switch(groupOne, groupTwo, groups)
+        if(checkGroupSwitch(groups, True, temperature)):
+            highscore = getPoints(timeTable)
         scores.append(highscore)
         i+=1
         temperature *= coolingRate
