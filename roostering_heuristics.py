@@ -523,7 +523,7 @@ def determisticSchnizlle(timeTable):
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 def checkChance(score, temp):
-    rawchance = math.exp(score / temperature)
+    rawchance = math.exp(score / temp)
     if score < 0:
         chance = 0.02 / score + 0.98 * rawchance
     else:
@@ -582,7 +582,7 @@ def checkGroupSwitch(groups, sim = False, temp = None):
     score = pointsSaldo1 + pointsSaldo2
     if sim == True:
         if checkChance(score,temp) > random.random():
-            switchGroups(GroupOne, GroupTwo)
+            switchGroups(groupOne, groupTwo)
             return True
         return False
     if score > 0:
@@ -650,7 +650,7 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True, ):
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def simulatedAnnealing(timeTable, temperature = 15.0, coolingRate = 0.9995, endTemp = 0.05):
+def simulatedAnnealing(timeTable, temperature = 15.0, coolingRate = 0.9995, endTemp = 0.05, doPlot = True):
     # switch random groups and run getPoints()
     score = getPoints(timeTable)
     highscore = score
@@ -668,6 +668,11 @@ def simulatedAnnealing(timeTable, temperature = 15.0, coolingRate = 0.9995, endT
         i+=1
         temperature *= coolingRate
     timeTable.setPoints()
+    if doPlot == True:
+        plt.plot(scores)
+        plt.ylabel('points')
+        plt.xlabel('iterations')
+        plt.show()
     return
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
