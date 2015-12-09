@@ -876,13 +876,13 @@ def makeLove(parents, n, incest):
 def geneticAlgorithm(
     iterations = 25, acceptOutsider = False, text = True, allowIncest = True, 
     survivorFactor = 0.15, mutations = (0.01, 0.005, 0.025), nrChilds = 30,
-    initChildren = None
+    initParents = None
     ):
     if text == True:
         print "================================="
         print "Initiating genetic algorithm"
         print "================================="
-    if initChildren == None:
+    if initParents == None:
         tryChildren = []
         for i in range(nrChilds*5):
             if i % nrChilds == 0 and text == True:
@@ -895,7 +895,9 @@ def geneticAlgorithm(
             table.setPoints()
         tryChildren.sort(key = lambda x: x.getPoints()) 
         children = tryChildren[-nrChilds:]
-    else: children = initChildren
+        if text == True: print "Picking parents..."
+        parents = selectParents(children, acceptOutsider, survivorFactor)
+    else: parents = initParents
 
     evolution = []
     overbookings = []
@@ -904,14 +906,11 @@ def geneticAlgorithm(
     bestChildScore = 0
     i = 0
     while i < iterations:
-        if text == True: print "Picking parents..."
-        parents = selectParents(children, acceptOutsider, survivorFactor)
         i += 1
         if text == True:
             print "\n========================"
             print "Starting iteration ",i
             print "========================"
-            print "Amount of children ",len(children)
 
             print "Parent points this generation: "
             for p in parents:
@@ -921,6 +920,8 @@ def geneticAlgorithm(
         if text == True: print "Mutating offspring..."
         mutate(offspring, mutations)
         children = parents + offspring
+        if text == True: print "Picking new parents..."
+        parents = selectParents(children, acceptOutsider, survivorFactor)
         
         maxChild = max(children, key = lambda x: x.getPoints())
         if maxChild.getPoints() > bestChildScore:
@@ -972,43 +973,44 @@ def tuneGA(iterations):
        (0.01, 0.005, 0.04),
        (0.01, 0.005, 0.05)
        ]
+    
     print "============================"
     print "Initiating tuning algorithm"
     print "============================"
-    for f in [0.10, 0.15, 0.2, 0.025]:
-        print "Starting survival factor ",f
-        print "Attempt ",
-        scores['SURVIVOR-'+str(f)] = []
-        for i in range(iterations):
-            print i,
-            schedule = geneticAlgorithm(survivorFactor = f, text = False)
-            schedule.setPoints()
-            scores['SURVIVOR-'+str(f)].append(schedule.getPoints())
-        print "\n",scores['SURVIVOR-'+str(f)]
-    for m in mutL:
-        print "Starting mutation ",m
-        print "Attempt ",
-        scores['MUTATION-'+str(m)] = []
-        for i in range(iterations):
-            print i,
-            schedule = geneticAlgorithm(text = False, mutations = m)
-            schedule.setPoints()
-            scores['MUTATION-'+str(m)].append(schedule.getPoints())
-        print "\n",scores['MUTATION-'+str(m)]
-    for b in [True, False]:
+##    for f in [0.10, 0.15, 0.2, 0.025]:
+##        print "Starting survival factor ",f
+##        print "Attempt ",
+##        scores['SURVIVOR-'+str(f)] = []
+##        for i in range(iterations):
+##            print i,
+##            schedule = geneticAlgorithm(survivorFactor = f, text = False)
+##            schedule.setPoints()
+##            scores['SURVIVOR-'+str(f)].append(schedule.getPoints())
+##        print "\n",scores['SURVIVOR-'+str(f)]
+##    for m in mutL:
+##        print "Starting mutation ",m
+##        print "Attempt ",
+##        scores['MUTATION-'+str(m)] = []
+##        for i in range(iterations):
+##            print i,
+##            schedule = geneticAlgorithm(text = False, mutations = m)
+##            schedule.setPoints()
+##            scores['MUTATION-'+str(m)].append(schedule.getPoints())
+##        print "\n",scores['MUTATION-'+str(m)]
+    for b in [False, True]:
         print "Starting genetic variations on ",b
         print "Attempt ",
         scores['INCEST-'+str(b)] = []
-        scores['OUTSIDER-'+str(b)] = []
+##        scores['OUTSIDER-'+str(b)] = []
         for i in range(iterations):
             print i,
-            schedule1 = geneticAlgorithm(text = False, allowIncest = b)
-            schedule2 = geneticAlgorithm(text = False, acceptOutsider = b)
+            schedule1 = geneticAlgorithm(text = False, allowIncest = b, nrChilds=50)
+##            schedule2 = geneticAlgorithm(text = False, acceptOutsider = b)
             schedule1.setPoints()
-            schedule2.setPoints()
+##            schedule2.setPoints()
             scores['INCEST-'+str(b)].append(schedule1.getPoints())
-            scores['OUTSIDER-'+str(b)].append(schedule2.getPoints())
-        print "\nOutsider: ",scores['OUTSIDER-'+str(b)]
+##            scores['OUTSIDER-'+str(b)].append(schedule2.getPoints())
+##        print "\nOutsider: ",scores['OUTSIDER-'+str(b)]
         print "Incest: ",scores['INCEST-'+str(b)]
     return scores
 
@@ -1022,13 +1024,13 @@ def geneticPopulations(nrPop, iterations):
         child = geneticAlgorithm(iterations, text = False)
         print "Fittest individual has ",child.getPoints()," points."
         children.append(child)
+    print "\n================================"
+    print "Merging fittest individuals..."
     print "================================"
-    print "\nMerging fittest individuals..."
-    print "================================"
-    child = geneticAlgorithm(
-        iterations, initChildren = children, mutations = (0.0,0.0,0.1)
+    bestChild = geneticAlgorithm(
+        iterations, initParents = children, mutations = (0.0,0.0,0.025)
         )
-    return child
+    return bestChild
                         
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1217,7 +1219,3 @@ def saveTimeTable(timeTable):
     with open("Visualisatie/Data/"+filename, 'wb') as f:
         json.dump(data, f, indent=True, encoding='latin1')
     return
-
-
-##cProfile.run('geneticAlgorithm()')
-    
