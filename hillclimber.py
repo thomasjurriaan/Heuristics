@@ -78,8 +78,10 @@ def switchStudents(stud1,g1,stud2,g2):
     g2.removeStudent(stud2)
     g1.addStudent(stud2)
     g2.addStudent(stud1)
-    stud1.switchGroups(g1,g2)
-    stud2.switchGroups(g2,g1)
+    stud1.removeGroup(g1)
+    stud2.removeGroup(g2)
+    stud1.addGroup(g2)
+    stud2.addGroup(g1)
 
 def checkStudentSwitch(groups, sim = False, temp = None):
     score = 0
@@ -96,24 +98,35 @@ def checkStudentSwitch(groups, sim = False, temp = None):
     room2 = actGroups[1].getRoomSlot()
     score += (studentMalusPoints(stud1) 
         - studentMalusPoints(stud1, room1, room2))
-    print stud1.getName(),"had ", studentMalusPoints(stud1), "malusPoints"
-    print "en nu heeft hij er", studentMalusPoints(stud1, room1, room2)
-    print stud2.getName(), "had", studentMalusPoints(stud2), "malusPoints"
-    print "en nu heeft hij er", studentMalusPoints(stud2, room2,room1)
-    print "score na student 1: ", score
     score += (studentMalusPoints(stud2)
         - studentMalusPoints(stud2, room2, room1))
-    print "score na student 2: ",score
     if sim == True:
         if checkChance(score,temp) > random.random():
             switchStudents(stud1,actGroups[0],stud2, actGroups[1])
             return True
         return False
     if score > 0:
-        print "wisselen..."
         switchStudents(stud1,actGroups[0],stud2, actGroups[1])
-        return True, actGroups[0], actGroups[1]
-    return False, actGroups[0], actGroups[1]
+        return True
+    return False
+
+def freeSlotChange():
+    freeSlots = []
+    # Free roomslots are listed
+    for t in timeTable.getTimeSlots():
+        for r in t.getRoomSlots():
+            if not r.hasGroup():
+                freeSlots.append(r)
+    random.shuffle(freeSlots)
+    
+    for g in timeTable.getGroups():
+        for s in freeSlots:
+            if not s.hasGroup() and (s.getSize()*OVERBOOK >= len(g.getStudents())):
+                if pointsSaldo(g,s) > 0:
+                    g.newRoomSlot(s)
+                    return True
+                else: return False
+        
 
 def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 15, coolingRate = 0.9995, doPlot = True):
     # switch random groups and run getPoints()
@@ -126,22 +139,17 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 
                 highscore = getPoints(timeTable)
             if checkGroupSwitch(groups, True, temperature):
                 highscore = getPoints(timeTable)
-        else:
-            bool, g1, g2 = checkStudentSwitch(groups)
-            if bool:
-                print "-------groep 1 -------"
-                for s in g1.getStudents():
-                    print s.getName()
-                print "--------groep 2--------"
-                for s in g2.getStudents():
-                    print s.getName()
-                print "eerste highscore:", highscore
+            if freeSlotChange():
                 highscore = getPoints(timeTable)
-                print "highscore na wissel", highscore
-            #if checkGroupSwitch(groups):
-                #highscore = getPoints(timeTable)
+        else:
+            if checkStudentSwitch(groups):
+                highscore = getPoints(timeTable)
+            if checkGroupSwitch(groups):
+                highscore = getPoints(timeTable)
+            if freeSlotChange():
+                highscore = getPoints(timeTable)
         scores.append(highscore)
-        if(i % 100 == 0):
+        if(i % 250 == 0):
             print "Current iteration: ",
             print i
     timeTable.setPoints(getPoints(timeTable))
@@ -150,7 +158,7 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 
         plt.ylabel('points')
         plt.xlabel('iterations')
         plt.show()
-    return scores
+    return
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""

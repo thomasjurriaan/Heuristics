@@ -87,8 +87,10 @@ def studentMutation(timeTable, factor):
                     g2.removeStudent(stud2)
                     g1.addStudent(stud2)
                     g2.addStudent(stud1)
-                    stud1.switchGroups(g1,g2)
-                    stud2.switchGroups(g2,g1)
+                    stud1.removeGroup(g1)
+                    stud2.removeGroup(g2)
+                    stud1.addGroup(g2)
+                    stud2.addGroup(g1)
     return
     
 def mutate(parents, mutations):

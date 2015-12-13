@@ -57,10 +57,8 @@ class Student(object):
         return course in self.courses
     def addGroup(self, group):
         self.groups.append(group)
-    def switchGroups(self,group1, group2):
-        for g in self.groups:
-            if g == group1:
-                g = group2
+    def removeGroup(self, group):
+        self.groups = [g for g in self.groups if g != group]
     def getGroups(self):
         return self.groups
 
