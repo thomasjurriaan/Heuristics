@@ -57,10 +57,12 @@ class Student(object):
         return course in self.courses
     def addGroup(self, group):
         self.groups.append(group)
-    def switchGroups(self,group1, group2):
-        for g in self.groups:
+    def switchGroups(self, group1, group2):
+        for n, g in enumerate(self.groups):
             if g == group1:
-                g = group2
+                self.groups[n] = group2
+                break
+        else: raise StandardError("Groupswitch?!")
     def getGroups(self):
         return self.groups
 

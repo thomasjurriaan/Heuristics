@@ -148,7 +148,7 @@ def freeRoomSlot(child, roomSlot, course):
                     else: return False
 
 def bedRoom(p1, p2):
-    # Making children with two parents. One child is returned
+    # Making children by recombining two parents. One child is returned
 
     child = createTimeTableInstance([p1, p2])
     if len(p1.getCourses()) != len(p2.getCourses()):
