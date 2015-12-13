@@ -57,6 +57,10 @@ class Student(object):
         return course in self.courses
     def addGroup(self, group):
         self.groups.append(group)
+    def switchGroups(self,group1, group2):
+        for g in self.groups:
+            if g == group1:
+                g = group2
     def getGroups(self):
         return self.groups
 
@@ -237,16 +241,8 @@ class Group(object):
         roomSlot.appointGroup(self)
     def removeStudent(self, student):
         self.students = [s for s in self.students if s != student]
-        for s in self.students:
-            print s.getName()
-        print "\n\n"
     def addStudent(self, student):
-        self.students.append(student)
-        print "------------nu gaan we toevoegen---------"
-        for s in self.students:
-            print s.getName()
-        print "\n\n"
-                        
+        self.students.append(student)             
 
 
 

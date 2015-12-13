@@ -73,11 +73,20 @@ def checkGroupSwitch(groups, sim = False, temp = None):
         return True
     return False
 
+def switchStudents(stud1,g1,stud2,g2):
+    g1.removeStudent(stud1)
+    g2.removeStudent(stud2)
+    g1.addStudent(stud2)
+    g2.addStudent(stud1)
+    stud1.switchGroups(g1,g2)
+    stud2.switchGroups(g2,g1)
+
 def checkStudentSwitch(groups, sim = False, temp = None):
     score = 0
-    random.shuffle(groups)
-    for g in groups:
-        actGroups = g.getActivity().getGroups()
+    group = None
+    while(True):
+        group = random.choice(groups)
+        actGroups = group.getActivity().getGroups()
         if len(actGroups) > 1:
             break
     random.shuffle(actGroups)
@@ -89,10 +98,12 @@ def checkStudentSwitch(groups, sim = False, temp = None):
         - studentMalusPoints(stud1, room1, room2))
     print stud1.getName(),"had ", studentMalusPoints(stud1), "malusPoints"
     print "en nu heeft hij er", studentMalusPoints(stud1, room1, room2)
+    print stud2.getName(), "had", studentMalusPoints(stud2), "malusPoints"
+    print "en nu heeft hij er", studentMalusPoints(stud2, room2,room1)
     print "score na student 1: ", score
-    score += (studentMalusPoints(stud1)
+    score += (studentMalusPoints(stud2)
         - studentMalusPoints(stud2, room2, room1))
-    print "score na student 2: ", stud2.getName(),score
+    print "score na student 2: ",score
     if sim == True:
         if checkChance(score,temp) > random.random():
             switchStudents(stud1,actGroups[0],stud2, actGroups[1])
@@ -101,14 +112,8 @@ def checkStudentSwitch(groups, sim = False, temp = None):
     if score > 0:
         print "wisselen..."
         switchStudents(stud1,actGroups[0],stud2, actGroups[1])
-        return True
-    return False
-
-def switchStudents(stud1,g1,stud2,g2):
-    g1.removeStudent(stud1)
-    g2.removeStudent(stud2)
-    g1.addStudent(stud2)
-    g2.addStudent(stud1)
+        return True, actGroups[0], actGroups[1]
+    return False, actGroups[0], actGroups[1]
 
 def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 15, coolingRate = 0.9995, doPlot = True):
     # switch random groups and run getPoints()
@@ -122,12 +127,19 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 
             if checkGroupSwitch(groups, True, temperature):
                 highscore = getPoints(timeTable)
         else:
-            #if checkStudentSwitch(groups):
-                #print "eerste highscore:", highscore
-                #highscore = getPoints(timeTable)
-                #print "highscore na wissel", highscore
-            if checkGroupSwitch(groups):
+            bool, g1, g2 = checkStudentSwitch(groups)
+            if bool:
+                print "-------groep 1 -------"
+                for s in g1.getStudents():
+                    print s.getName()
+                print "--------groep 2--------"
+                for s in g2.getStudents():
+                    print s.getName()
+                print "eerste highscore:", highscore
                 highscore = getPoints(timeTable)
+                print "highscore na wissel", highscore
+            #if checkGroupSwitch(groups):
+                #highscore = getPoints(timeTable)
         scores.append(highscore)
         if(i % 100 == 0):
             print "Current iteration: ",
