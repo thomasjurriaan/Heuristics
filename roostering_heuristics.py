@@ -5,10 +5,8 @@ import cProfile
 
 if __name__ == '__main__':
     print "Welcome to Ultimate Scheduler 3000!\n"
-##    mainTimeTable = createTimeTableInstance()
-##    print "Creating random schedule, stored as 'mainTimeTable'."
-##    randomAlgorithm(mainTimeTable)
-##    print "This timetable has",getPoints(mainTimeTable)," points."
+
+def testGeneticAlgorithm():
     print "========================="
     print "Testing genetic algorithm"
     print "========================="
@@ -24,3 +22,14 @@ if __name__ == '__main__':
         except:
             print "Memory error?.."
         print "\n"
+
+def printhillclimber(iterations = 50, hilliterations = 25000):
+	randomscores = []
+	scores = []
+	highscores = []
+	for i in range(iterations):
+		h = createTimeTableInstance()
+		randomAlgorithm(h)
+		randomscores.append(getPoints(h))
+		scores.append(hillclimbAlgorithm(h, hilliterations, doPlot = False))
+	return randomscores, scores, highscores

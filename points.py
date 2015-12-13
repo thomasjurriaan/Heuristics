@@ -83,7 +83,7 @@ def studentMalusPoints(s, originalRoom = None, newRoom = None):
     individualMalus = 0
     cList = []
     for g in s.getGroups():
-        if originalRoom != None and g == originalRoom.getGroup():
+        if newRoom != None and g == originalRoom.getGroup():
             g = newRoom.getGroup()
         if g.getRoomSlot().getTimeSlot() in cList:
             individualMalus += 1

@@ -73,50 +73,73 @@ def checkGroupSwitch(groups, sim = False, temp = None):
         return True
     return False
 
+def switchStudents(stud1,g1,stud2,g2):
+    g1.removeStudent(stud1)
+    g2.removeStudent(stud2)
+    g1.addStudent(stud2)
+    g2.addStudent(stud1)
+    stud1.switchGroups(g1,g2)
+    stud2.switchGroups(g2,g1)
+
 def checkStudentSwitch(groups, sim = False, temp = None):
     score = 0
-    random.shuffle(groups)
-    for g in groups:
-        actGroups = g.getActivity().getGroups()
+    group = None
+    while(True):
+        group = random.choice(groups)
+        actGroups = group.getActivity().getGroups()
         if len(actGroups) > 1:
             break
     random.shuffle(actGroups)
     stud1 = random.choice(actGroups[0].getStudents())
+    room1 = actGroups[0].getRoomSlot()
     stud2 = random.choice(actGroups[1].getStudents())
-    score += (
-        studentMalusPoints(stud1, actGroups[0].getRoomSlot(), actGroups[1].getRoomSlot()) 
-        - studentMalusPoints(stud1, actGroups[0].getRoomSlot(), actGroups[0].getRoomSlot())
-        )
-    score += (
-        studentMalusPoints(stud2, actGroups[1].getRoomSlot(), actGroups[0].getRoomSlot()) 
-        - studentMalusPoints(stud1, actGroups[1].getRoomSlot(), actGroups[1].getRoomSlot())
-        )
+    room2 = actGroups[1].getRoomSlot()
+    score += (studentMalusPoints(stud1) 
+        - studentMalusPoints(stud1, room1, room2))
+    print stud1.getName(),"had ", studentMalusPoints(stud1), "malusPoints"
+    print "en nu heeft hij er", studentMalusPoints(stud1, room1, room2)
+    print stud2.getName(), "had", studentMalusPoints(stud2), "malusPoints"
+    print "en nu heeft hij er", studentMalusPoints(stud2, room2,room1)
+    print "score na student 1: ", score
+    score += (studentMalusPoints(stud2)
+        - studentMalusPoints(stud2, room2, room1))
+    print "score na student 2: ",score
     if sim == True:
         if checkChance(score,temp) > random.random():
             switchStudents(stud1,actGroups[0],stud2, actGroups[1])
             return True
         return False
     if score > 0:
+        print "wisselen..."
         switchStudents(stud1,actGroups[0],stud2, actGroups[1])
-        return True
-    return False
+        return True, actGroups[0], actGroups[1]
+    return False, actGroups[0], actGroups[1]
 
-def switchStudents(stud1,g1,stud2,g2):
-    g1.removeStudent(stud1)
-    g2.removeStudent(stud2)
-    g1.addStudent(stud2)
-    g2.addStudent(stud1)
-
-def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True, ):
+def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 15, coolingRate = 0.9995, doPlot = True):
     # switch random groups and run getPoints()
-    highscore = timeTable.getPoints()
+    highscore = getPoints(timeTable)
     scores = []
     groups = timeTable.getGroups()
     for i in range(iterations):
-        #if checkStudentSwitch(groups):
-            #highscore = getPoints(timeTable)
-        if checkGroupSwitch(groups):
-            highscore = getPoints(timeTable)
+        if sim == True:
+            if checkStudentSwitch(groups, True, temperature):
+                highscore = getPoints(timeTable)
+            if checkGroupSwitch(groups, True, temperature):
+                highscore = getPoints(timeTable)
+        else:
+            bool, g1, g2 = checkStudentSwitch(groups)
+            if bool:
+                print "-------groep 1 -------"
+                for s in g1.getStudents():
+                    print s.getName()
+                print "--------groep 2--------"
+                for s in g2.getStudents():
+                    print s.getName()
+                print "eerste highscore:", highscore
+                highscore = getPoints(timeTable)
+                print "highscore na wissel", highscore
+            #if checkGroupSwitch(groups):
+                #highscore = getPoints(timeTable)
         scores.append(highscore)
         if(i % 100 == 0):
             print "Current iteration: ",
@@ -127,13 +150,13 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, doPlot = True, ):
         plt.ylabel('points')
         plt.xlabel('iterations')
         plt.show()
-    return
+    return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-def simulatedAnnealing(timeTable, temperature = 15.0, coolingRate = 0.9995, endTemp = 0.05, doPlot = True):
+def simulatedAnnealing(timeTable, temperature = 15.0, coolingRate = 0.9995, doPlot = True):
     # switch random groups and run getPoints()
     score = getPoints(timeTable)
     highscore = score
