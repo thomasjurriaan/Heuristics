@@ -5,6 +5,9 @@ from randomalgorithm import *
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ONE_PERCENT = 0.01
+EIGHTY_PERCENT = 0.8
+
 def checkChance(score, temp):
     rawchance = math.exp(score / temp)
     if score < 0:
@@ -15,13 +18,13 @@ def checkChance(score, temp):
 
 def selectGroups(groups):
     groupOne = random.choice(groups)
-    groupTwo = random.choice(groups)
-    while(groupOne != groupTwo and
-    groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupTwo.getStudents())
-    and groupTwo.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
+    groupONE = random.choice(groups)
+    while(groupOne != groupONE and
+    groupOne.getRoomSlot().getSize() < OVERBOOK*len(groupONE.getStudents())
+    and groupONE.getRoomSlot().getSize() < OVERBOOK*len(groupOne.getStudents())):
         groupOne = random.choice(groups)
-        groupTwo = random.choice(groups)
-    return groupOne, groupTwo
+        groupONE = random.choice(groups)
+    return groupOne, groupONE
 
 def hillOverbook(students, room):
     saldo = len(students) - room.getSize()
@@ -47,29 +50,29 @@ def pointsSaldo(group, newRoom):
     new = groupPoints(group, students, course, originalRoom, newRoom)
     return new - original
 
-def switchGroups(groupOne, groupTwo):
+def switchGroups(groupOne, groupONE):
     roomSlotOne = groupOne.getRoomSlot()
-    roomSlotTwo = groupTwo.getRoomSlot()
-    groupOne.newRoomSlot(roomSlotTwo)
-    groupTwo.newRoomSlot(roomSlotOne)
-    roomSlotOne.appointGroup(groupTwo)
-    roomSlotTwo.appointGroup(groupOne)
+    roomSlotONE = groupONE.getRoomSlot()
+    groupOne.newRoomSlot(roomSlotONE)
+    groupONE.newRoomSlot(roomSlotOne)
+    roomSlotOne.appointGroup(groupONE)
+    roomSlotONE.appointGroup(groupOne)
     return
 
 def checkGroupSwitch(groups, sim = False, temp = None):
-    groupOne, groupTwo = selectGroups(groups)
+    groupOne, groupONE = selectGroups(groups)
     roomOne = groupOne.getRoomSlot()
-    roomTwo = groupTwo.getRoomSlot()
-    pointsSaldo1 = pointsSaldo(groupOne, groupTwo.getRoomSlot())
-    pointsSaldo2 = pointsSaldo(groupTwo, groupOne.getRoomSlot())
+    roomONE = groupONE.getRoomSlot()
+    pointsSaldo1 = pointsSaldo(groupOne, groupONE.getRoomSlot())
+    pointsSaldo2 = pointsSaldo(groupONE, groupOne.getRoomSlot())
     score = pointsSaldo1 + pointsSaldo2
     if sim == True:
         if checkChance(score,temp) > random.random():
-            switchGroups(groupOne, groupTwo)
+            switchGroups(groupOne, groupONE)
             return True
         return False
     if score > 0:
-        switchGroups(groupOne, groupTwo)
+        switchGroups(groupOne, groupONE)
         return True
     return False
 
@@ -110,7 +113,7 @@ def checkStudentSwitch(groups, sim = False, temp = None):
         return True
     return False
 
-def freeSlotChange():
+def freeSlotChange(timeTable):
     freeSlots = []
     # Free roomslots are listed
     for t in timeTable.getTimeSlots():
@@ -130,28 +133,43 @@ def freeSlotChange():
 
 def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 15, coolingRate = 0.9995, doPlot = True):
     # switch random groups and run getPoints()
-    highscore = getPoints(timeTable)
+    initialScore = getPoints(timeTable)
+    highscore = initialScore
     scores = []
     groups = timeTable.getGroups()
-    for i in range(iterations):
-        if sim == True:
+    i = 0
+    if sim == True:
+        while temperature > 0.1:
             if checkStudentSwitch(groups, True, temperature):
                 highscore = getPoints(timeTable)
             if checkGroupSwitch(groups, True, temperature):
                 highscore = getPoints(timeTable)
             if freeSlotChange():
                 highscore = getPoints(timeTable)
-        else:
+            scores.append(highscore)
+            if(i % 250 == 0):
+                print "Current iteration: ",
+                print i
+            temperature *= coolingRate
+            i += 1
+    else:
+        growth = 1
+        while growth > ONE_PERCENT:
             if checkStudentSwitch(groups):
                 highscore = getPoints(timeTable)
             if checkGroupSwitch(groups):
                 highscore = getPoints(timeTable)
-            if freeSlotChange():
+            if freeSlotChange(timeTable):
                 highscore = getPoints(timeTable)
-        scores.append(highscore)
-        if(i % 250 == 0):
-            print "Current iteration: ",
-            print i
+            scores.append(highscore)
+            i += 1
+            if(i % 100 == 0):
+                print "Current iteration: ",
+                print i
+                growth = float(highscore - scores[int(i * EIGHTY_PERCENT)]) / float(highscore - initialScore) 
+                print "growth:",growth
+                print "highscore:",highscore,"\n--------------"
+
     timeTable.setPoints(getPoints(timeTable))
     if doPlot == True:
         plt.plot(scores)

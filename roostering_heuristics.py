@@ -6,6 +6,12 @@ import cProfile
 if __name__ == '__main__':
     print "Welcome to Ultimate Scheduler 3000!\n"
 
+def r():
+	hendrik = createTimeTableInstance()
+	randomAlgorithm(hendrik)
+	print "Dit rooster heeft", getPoints(hendrik), "punten."
+	return hendrik
+
 def testGeneticAlgorithm():
     print "========================="
     print "Testing genetic algorithm"
