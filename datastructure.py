@@ -237,8 +237,15 @@ class Group(object):
         roomSlot.appointGroup(self)
     def removeStudent(self, student):
         self.students = [s for s in self.students if s != student]
+        for s in self.students:
+            print s.getName()
+        print "\n\n"
     def addStudent(self, student):
         self.students.append(student)
+        print "------------nu gaan we toevoegen---------"
+        for s in self.students:
+            print s.getName()
+        print "\n\n"
                         
 
 
