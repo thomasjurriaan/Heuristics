@@ -212,7 +212,7 @@ def makeLove(parents, n, incest):
 def geneticAlgorithm(
     iterations = 25, acceptOutsider = False, text = True, allowIncest = True, 
     survivorFactor = 0.15, mutations = (0.01, 0.005, 0.025), nrChilds = 30,
-    initParents = None
+    initParents = None, goToMax = False
     ):
     if text == True:
         print "================================="
@@ -241,8 +241,10 @@ def geneticAlgorithm(
     personal = []
     bestChildScore = 0
     i = 0
-    while i < iterations:
+    n = 0
+    while i < iterations or goToMax:
         i += 1
+        n += 1
         if text == True:
             print "\n========================"
             print "Starting iteration ",i
@@ -263,6 +265,7 @@ def geneticAlgorithm(
         if maxChild.getPoints() > bestChildScore:
             bestChild = maxChild
             bestChildScore = maxChild.getPoints()
+            n = 0
         evolution.append(int(np.mean([c.getPoints() for c in children])))
         overbookings.append(int(np.mean([overbooked(c) for c in children])))
         spread.append(int(np.mean([
@@ -271,7 +274,9 @@ def geneticAlgorithm(
         personal.append(int(np.mean([
             personalScheduleConflict(c) for c in children
             ])))
-        if i == iterations and text == True:
+        if n > 20:
+            goToMax = False
+        if i >= iterations and text == True and goToMax == False:
             q = ""
             print "\n======================"
             print "Evolution review!"
@@ -281,11 +286,11 @@ def geneticAlgorithm(
             print "Personal conflicts: \n",personal
             print "Spreadding points: \n",spread
             w = ("You want to do another "
-                 +str(iterations)
+                 +str(i)
                  +" iterations? (Y/N): ")
             q = raw_input(w)
             if q == "Y":
-                iterations *= 2
+                iterations = i*2
                 continue
             try: iterations += int(q)
             except: break
