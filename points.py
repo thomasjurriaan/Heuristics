@@ -81,13 +81,16 @@ def overbooked(timeTable):
 
 def studentMalusPoints(s, originalRoom = None, newRoom = None):
     individualMalus = 0
+    rList = []
     cList = []
     for g in s.getGroups():
-        if newRoom != None and g == originalRoom.getGroup():
-            g = newRoom.getGroup()
-        if g.getRoomSlot().getTimeSlot() in cList:
+        rList.append(g.getRoomSlot())
+    for r in rList:
+        if newRoom != None and r == originalRoom:
+            r = newRoom
+        if r.getTimeSlot() in cList:
             individualMalus += 1
-        cList.append(g.getRoomSlot().getTimeSlot())
+        cList.append(r.getTimeSlot())
     return individualMalus
 
 def personalScheduleConflict(timeTable):
