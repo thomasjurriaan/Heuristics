@@ -1,24 +1,34 @@
 import numpy as np
 from randomalgorithm import *
 from deterministic import *
+import matplotlib.pyplot as plt
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Genetic algorithm """""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def selectParents(children, acceptOutsider, chance):
-    # The surving parents-to-be are randomly selected from all childs
-    # It's possible to accept the introduction of an outsider every round
+    """
+    Subfunction of geneticAlgorithm()
     
+    The surving parents-to-be are selected from the best childs
+    It's possible to accept the introduction of an outsider every round
+    """
+
+####    # Function to choose parents with chance proportional to their points
+####    # This function had a negative effect on the evolution of the population
 ##    scoreList = [c.getPoints() for c in children]
-##    minScore = min(scoreList)
 ##    mean = sum(scoreList)/float(len(children))
+##    smoothness = 18.0
 ##    parents = []
 ##    for c in children:
-##        factor = (c.getPoints() - minScore)/(mean - minScore)
+##        # This function is used in Fermi-Dirac statistic. The function behaves
+##        # like a step function from 0 to 100% for a smoothness near 0
+##        factor = 2/(math.exp((mean - c.getPoints())/smoothness) + 1)
 ##        if random.random() < factor*chance:
 ##            parents.append(c)
-    children.sort(key = lambda x: x.getPoints())
+
+    children.sort(key = lambda x: x.getPoints()) #Children are sorted on points
     nr = int(chance*len(children))
     parents = children[-nr:]
     while(len(parents) < 3): parents.append(random.choice(children))
@@ -35,6 +45,11 @@ def selectParents(children, acceptOutsider, chance):
     return parents
 
 def freeSlotMutation(timeTable, factor):
+    """
+    Subfunction of mutate()
+    
+    Moves groups to new, free roomslots
+    """
     freeSlots = []
     # Free roomslots are listed
     for t in timeTable.getTimeSlots():
@@ -47,14 +62,22 @@ def freeSlotMutation(timeTable, factor):
         # Every group has a chance to change roomslots
         if random.random() <= factor:
             for s in freeSlots:
-                if not s.hasGroup() and (s.getSize()*OVERBOOK >= len(g.getStudents())):
+                if (not s.hasGroup()
+                    and (s.getSize()*OVERBOOK >= len(g.getStudents()))
+                         ):
                     g.newRoomSlot(s)
                     break
     return
 
 def changeSlotMutation(timeTable, factor):
-    # Every group had a change to swich places with other group
+    """
+    Subfunction of mutate()
+    
+    Switches groups with each others timeslots
+    """
+
     for g1 in timeTable.getGroups():
+        # Every group had a change to swich places with other groups
         if random.random() <= factor:
             groups2 = timeTable.getGroups()
             random.shuffle(groups2)
@@ -69,7 +92,11 @@ def changeSlotMutation(timeTable, factor):
     return
 
 def studentMutation(timeTable, factor):
-    # Students can be made to swich workgroup with another student
+    """
+    Subfunction of mutate()
+    
+    Switches students from one group to another
+    """
     activities = []
     for g in timeTable.getGroups():
         if len(g.getActivity().getGroups()) > 1:
@@ -83,6 +110,7 @@ def studentMutation(timeTable, factor):
                         g2 = random.choice(a.getGroups())
                     stud1 = random.choice(g1.getStudents())
                     stud2 = random.choice(g2.getStudents())
+                    # The data structure is updated
                     g1.removeStudent(stud1)
                     g2.removeStudent(stud2)
                     g1.addStudent(stud2)
@@ -94,7 +122,17 @@ def studentMutation(timeTable, factor):
     return
     
 def mutate(parents, mutations):
-    # Parents are mutated before coupling
+    """
+    Subfunction of geneticAlgorithm()
+    
+    Function that mutates an existing timetable
+    There are three mutations:
+        - move groups to free roomslot
+        - switch the roomslot of two groups
+        - switch two students of the same activity
+
+    The variable 'mutations' is a tuple of three floats
+    """
     fsFactor = mutations[0]
     csFactor = mutations[1]
     sFactor = mutations[2]
@@ -103,9 +141,15 @@ def mutate(parents, mutations):
         freeSlotMutation(p, fsFactor)
         changeSlotMutation(p, csFactor)
         studentMutation(p, sFactor)
-    return parents
+    return
 
 def incestCheck(p1, p2):
+    """
+    Subfunction of blindDate()
+    
+    The user can request to make sure there are nog parent-parent matches
+    where the parents are (half)brothers/-sisters or parent-child related
+    """
     if p1.getParents() == None or p2.getParents() == None:
         return False
     for gp1 in p1.getParents():
@@ -115,27 +159,36 @@ def incestCheck(p1, p2):
     return False
     
 def blindDate(p1, parents, incest):
-    # Parents are coupled
+    """
+    Subfunction of makeLove()
+    
+    A match for a parent is returned
+    Incest can be forbidden
+    """
     p2 = p1
+    if len(parents) == 1:
+        # There must be another parent
+        return p2
     if incest == False:
         TO = 0
         while incestCheck(p1, p2) or p1 == p2:
             TO += 1
             p2 = random.choice(parents)
             if TO > 2* len(parents):
+                #Sometimes the entire population is related
                 print "Time Out..."
                 break
     else:
-        i = 0
         while p2 == p1:
-            if i > 5* len(parents):
-                break
             p2 = random.choice(parents)
-            i += 1
     return p2
 
 def freeRoomSlot(child, roomSlot, course):
-    # Checking for free roomslots
+    """
+    Subfunction of geneticAlgorithm()
+    
+    Checks is roomslot is free to use for a course
+    """
     roomName = roomSlot.getRoom()
     time = roomSlot.getTimeSlot().getTime()
     day = roomSlot.getTimeSlot().getDay()
@@ -149,9 +202,70 @@ def freeRoomSlot(child, roomSlot, course):
                         else: return False
                     else: return False
 
-def bedRoom(p1, p2):
-    # Making children by recombining two parents. One child is returned
+def groupPoints(group):
+    """
+    Subfunction of coursePoints()
+    
+    Counts the malus points of the student and overbook points of a group
+    """
+    students = group.getStudents()
+    room = group.getRoomSlot()
+    studentMalus = 0
+    for student in students:
+        studentMalus += studentMalusPoints(student)
+    overbookMalus = overbookMalusPoints(room)
+    return studentMalus + overbookMalus
 
+def coursePoints(course):
+    """
+    Subfunction of chooseCourse()
+    
+    Counts all the fitness-points of a group
+    """
+    groups = sum([a.getGroups() for a in course.getActivities()],[])
+    groupMalusPoints = 0
+    for g in groups:
+        groupMalusPoints += groupPoints(g)
+    bonusPoints = spreadBonusPoints(course)
+    malusPoints = spreadMalusPoints(course)
+    points = bonusPoints - malusPoints - groupMalusPoints
+    return points
+
+def chooseCourse(c1, c2):
+    """
+    Subfunction of bedroom()
+    
+    On the basis of the total points of two courses, some courses have a
+    higher chance to be picked for recombination. This is a heuristic addition.
+    c1 and c2 are the two parent courses. The chosen course is returned
+    """
+    smoothness = 5.0
+    points1 = coursePoints(c1)
+    points2 = coursePoints(c2)
+    mean = (points1 + points2)/2.0
+    course = c1
+    low = points1
+    if points2 < points1:
+        course = c2
+        low = points2
+    # The following function is known from Fermi-Dirac statistics. The function
+    # behaves like a step function from 0 to 100% for a smoothness near 0
+    chance = 1/(math.exp(abs(mean - low)/smoothness) + 1)
+    if random.random() > chance:
+        if course == c1:
+            course = c2
+        else: course = c1    
+    return course
+
+def bedRoom(p1, p2):
+    """
+    Subfunction of makeLove()
+    
+    You know what's going on here...
+    Two parents take some time and return a child
+    """
+
+    # Empty timetable instance is created
     child = createTimeTableInstance([p1, p2])
     if len(p1.getCourses()) != len(p2.getCourses()):
         raise StandardError("TimeTables are of different species")
@@ -164,7 +278,11 @@ def bedRoom(p1, p2):
     courseNr = range(len(c1))
     random.shuffle(courseNr)
     for i in courseNr:
-        parentC = random.choice([c1[i], c2[i]])
+        # The timetables are recombined by choosing courses of both timetables
+        # The courses are a 29th part of the genes of each timetable and are
+        # chosen because the Building Block Hypothesis requests large building
+        # blocks, large sections of genes
+        parentC = chooseCourse(c1[i], c2[i])
         course = coursePointers[parentC.getName()]
         groups = sum([a.getGroups() for a in parentC.getActivities()],[])
         for parentG in groups:
@@ -195,6 +313,12 @@ def bedRoom(p1, p2):
     return child
 
 def makeLove(parents, n, incest):
+    """
+    Subfunction of geneticAlgorithm()
+    
+    Matches parents and sends them to the bedroom(), returns children
+    """
+    
     cpp = int(n/float(len(parents)))
     children = []
     for p1 in parents:
@@ -214,11 +338,25 @@ def geneticAlgorithm(
     survivorFactor = 0.15, mutations = (0.01, 0.005, 0.025), nrChilds = 30,
     initParents = None, goToMax = False
     ):
+    """
+    The actual algorithm
+        - An outsider can be added to the parents each generation
+        - The output of text can be blocked
+        - Incest can be forbidden
+        - Initial parents can be presented to evolve, instead of random parents
+        - goToMax will make the evolution continue until no improvements are
+            found for 20 generations
+
+    The algorithm returns the best child. This does not have to be the last
+    generation.
+    """
+        
     if text == True:
         print "================================="
         print "Initiating genetic algorithm"
         print "================================="
     if initParents == None:
+        # A number of random parents is created and the best are selected
         tryChildren = []
         for i in range(nrChilds*5):
             if i % nrChilds == 0 and text == True:
@@ -235,6 +373,7 @@ def geneticAlgorithm(
         parents = selectParents(children, acceptOutsider, survivorFactor)
     else: parents = initParents
 
+    bestEvolution = []
     evolution = []
     overbookings = []
     spread = []
@@ -254,18 +393,23 @@ def geneticAlgorithm(
             for p in parents:
                 print p.getPoints(),
             print "\nMaking new children..."
+        # The offspring of the parents is created, mutated and new parents are
+        # selected
         offspring = makeLove(parents, nrChilds - len(parents), allowIncest)
         if text == True: print "Mutating offspring..."
         mutate(offspring, mutations)
         children = parents + offspring
         if text == True: print "Picking new parents..."
         parents = selectParents(children, acceptOutsider, survivorFactor)
-        
+
+        # The children are sorted on fitness. The evolution of all fitness
+        # parameters is monitored
         maxChild = max(children, key = lambda x: x.getPoints())
         if maxChild.getPoints() > bestChildScore:
             bestChild = maxChild
             bestChildScore = maxChild.getPoints()
             n = 0
+        bestEvolution.append(int(bestChildScore))
         evolution.append(int(np.mean([c.getPoints() for c in children])))
         overbookings.append(int(np.mean([overbooked(c) for c in children])))
         spread.append(int(np.mean([
@@ -276,6 +420,7 @@ def geneticAlgorithm(
             ])))
         if n > 20:
             goToMax = False
+        # The evolution is displayed and more iterations can be done
         if i >= iterations and text == True and goToMax == False:
             q = ""
             print "\n======================"
@@ -285,90 +430,12 @@ def geneticAlgorithm(
             print "Overbookings: \n",overbookings
             print "Personal conflicts: \n",personal
             print "Spreadding points: \n",spread
-            w = ("You want to do another "
-                 +str(i)
-                 +" iterations? (Y/N): ")
+            w = ("You want to do another " + str(i) + " iterations? (Y/N): ")
             q = raw_input(w)
             if q == "Y":
                 iterations = i*2
                 continue
             try: iterations += int(q)
             except: break
-        
-    return bestChild
 
-scores = {}
-def tuneGA(iterations):
-    mutL = [
-       (0.0, 0.005, 0.025),
-       (0.01, 0.005, 0.025),
-       (0.005, 0.005, 0.025),
-       (0.015, 0.005, 0.025),
-       (0.01, 0.000, 0.025),
-       (0.01, 0.01, 0.025),
-       (0.01, 0.015, 0.025),
-       (0.01, 0.02, 0.025),
-       (0.01, 0.005, 0.0),
-       (0.01, 0.005, 0.02),
-       (0.01, 0.005, 0.03),
-       (0.01, 0.005, 0.04),
-       (0.01, 0.005, 0.05)
-       ]
-    
-    print "============================"
-    print "Initiating tuning algorithm"
-    print "============================"
-##    for f in [0.10, 0.15, 0.2, 0.025]:
-##        print "Starting survival factor ",f
-##        print "Attempt ",
-##        scores['SURVIVOR-'+str(f)] = []
-##        for i in range(iterations):
-##            print i,
-##            schedule = geneticAlgorithm(survivorFactor = f, text = False)
-##            schedule.setPoints(getPoints(schedule))
-##            scores['SURVIVOR-'+str(f)].append(schedule.getPoints())
-##        print "\n",scores['SURVIVOR-'+str(f)]
-##    for m in mutL:
-##        print "Starting mutation ",m
-##        print "Attempt ",
-##        scores['MUTATION-'+str(m)] = []
-##        for i in range(iterations):
-##            print i,
-##            schedule = geneticAlgorithm(text = False, mutations = m)
-##            schedule.setPoints(getPoints(schedule))
-##            scores['MUTATION-'+str(m)].append(schedule.getPoints())
-##        print "\n",scores['MUTATION-'+str(m)]
-    for b in [False, True]:
-        print "Starting genetic variations on ",b
-        print "Attempt ",
-        scores['INCEST-'+str(b)] = []
-##        scores['OUTSIDER-'+str(b)] = []
-        for i in range(iterations):
-            print i,
-            schedule1 = geneticAlgorithm(text = False, allowIncest = b, nrChilds=50)
-##            schedule2 = geneticAlgorithm(text = False, acceptOutsider = b)
-            schedule1.setPoints(getPoints(schedule1))
-##            schedule2.setPoints(getPoints(schedule1))
-            scores['INCEST-'+str(b)].append(schedule1.getPoints())
-##            scores['OUTSIDER-'+str(b)].append(schedule2.getPoints())
-##        print "\nOutsider: ",scores['OUTSIDER-'+str(b)]
-        print "Incest: ",scores['INCEST-'+str(b)]
-    return scores
-
-def geneticPopulations(nrPop, iterations):
-    children = []
-    print "========================================"
-    print "Initiating genetic populations programme"
-    print "========================================"
-    for i in range(nrPop):
-        print "Evolving population ",i+1,"..."
-        child = geneticAlgorithm(iterations, text = False)
-        print "Fittest individual has ",child.getPoints()," points."
-        children.append(child)
-    print "\n================================"
-    print "Merging fittest individuals..."
-    print "================================"
-    bestChild = geneticAlgorithm(
-        iterations, initParents = children, mutations = (0.0,0.0,0.025)
-        )
     return bestChild
