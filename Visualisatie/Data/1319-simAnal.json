@@ -2,253 +2,19 @@
  {
   "validity": "True", 
   "roomName": "B0.201", 
-  "course": "Zoeken sturen en bewegen", 
-  "startTime": 0, 
-  "day": "mo", 
-  "roomSize": 48, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Webprogrammeren en databases", 
-  "startTime": 0, 
-  "day": "mo", 
-  "roomSize": 20, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Kansrekenen 2", 
-  "startTime": 0, 
-  "day": "mo", 
-  "roomSize": 117, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Project Numerical Recipes", 
-  "startTime": 0, 
-  "day": "mo", 
-  "roomSize": 41, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Data Mining", 
-  "startTime": 0, 
-  "day": "mo", 
-  "roomSize": 22, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Moderne Databases", 
-  "startTime": 0, 
-  "day": "mo", 
-  "roomSize": 56, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Advanced Heuristics", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 48, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 20, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Software engineering", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 117, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Calculus 2", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 41, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Informatie- en organisatieontwerp", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 22, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Interactie-ontwerp", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 60, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
   "course": "Programmeren in Java 2", 
-  "startTime": 2, 
-  "day": "mo", 
-  "roomSize": 56, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Algoritmen en complexiteit", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 48, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Informatie- en organisatieontwerp", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 20, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Compilerbouw", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 117, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Calculus 2", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 41, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Zoeken sturen en bewegen", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 22, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Reflectie op de digitale cultuur", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 60, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Lineaire Algebra", 
-  "startTime": 4, 
-  "day": "mo", 
-  "roomSize": 56, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Machine Learning", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 48, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Bioinformatica", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 20, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Software engineering", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 117, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Technology for games", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 41, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 22, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Heuristieken 1", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 60, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 6, 
-  "day": "mo", 
-  "roomSize": 56, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Compilerbouw practicum", 
   "startTime": 0, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 48, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Zoeken sturen en bewegen", 
+  "startTime": 0, 
+  "day": "mo", 
+  "roomSize": 20, 
   "workType": "practicum0"
  }, 
  {
@@ -256,52 +22,52 @@
   "roomName": "C0.110", 
   "course": "Databases 2", 
   "startTime": 0, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 117, 
   "workType": "lecture0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.04", 
-  "course": "Software engineering", 
+  "course": "Technology for games", 
   "startTime": 0, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 41, 
-  "workType": "practicum0"
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.06", 
-  "course": "Collectieve Intelligentie", 
+  "course": "Heuristieken 1", 
   "startTime": 0, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 22, 
-  "workType": "practicum0"
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "C1.112", 
-  "course": "Algoritmen en complexiteit", 
+  "course": "Programmeren in Java 2", 
   "startTime": 0, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 60, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.10", 
-  "course": "Informatie- en organisatieontwerp", 
+  "course": "Project Genetic Algorithms", 
   "startTime": 0, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 56, 
-  "workType": "seminar0"
+  "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "B0.201", 
-  "course": "Heuristieken 2", 
+  "course": "Collectieve Intelligentie", 
   "startTime": 2, 
-  "day": "tu", 
+  "day": "mo", 
   "roomSize": 48, 
   "workType": "seminar0"
  }, 
@@ -310,6 +76,195 @@
   "roomName": "A1.08", 
   "course": "Moderne Databases", 
   "startTime": 2, 
+  "day": "mo", 
+  "roomSize": 20, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 2, 
+  "day": "mo", 
+  "roomSize": 117, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Programmeren in Java 2", 
+  "startTime": 2, 
+  "day": "mo", 
+  "roomSize": 41, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Architectuur en computerorganisatie", 
+  "startTime": 2, 
+  "day": "mo", 
+  "roomSize": 22, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Bioinformatica", 
+  "startTime": 2, 
+  "day": "mo", 
+  "roomSize": 60, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Webprogrammeren en databases", 
+  "startTime": 2, 
+  "day": "mo", 
+  "roomSize": 56, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Interactie-ontwerp", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 48, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 20, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Software engineering", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 117, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Heuristieken 2", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 41, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Informatie- en organisatieontwerp", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 22, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 60, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Compilerbouw", 
+  "startTime": 4, 
+  "day": "mo", 
+  "roomSize": 56, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Algoritmen en complexiteit", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 48, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Data Mining", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 20, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Moderne Databases", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 117, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Software engineering", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 41, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Compilerbouw practicum", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 22, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Advanced Heuristics", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 60, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Reflectie op de digitale cultuur", 
+  "startTime": 6, 
+  "day": "mo", 
+  "roomSize": 56, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Heuristieken 1", 
+  "startTime": 0, 
+  "day": "tu", 
+  "roomSize": 48, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Programmeren in Java 2", 
+  "startTime": 0, 
   "day": "tu", 
   "roomSize": 20, 
   "workType": "practicum0"
@@ -318,24 +273,60 @@
   "validity": "True", 
   "roomName": "C0.110", 
   "course": "Compilerbouw", 
-  "startTime": 2, 
+  "startTime": 0, 
   "day": "tu", 
   "roomSize": 117, 
-  "workType": "lecture1"
+  "workType": "lecture0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.04", 
-  "course": "Data Mining", 
-  "startTime": 2, 
+  "course": "Autonomous Agents 2", 
+  "startTime": 0, 
   "day": "tu", 
   "roomSize": 41, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Webprogrammeren en databases", 
+  "startTime": 0, 
+  "day": "tu", 
+  "roomSize": 60, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Bioinformatica", 
+  "startTime": 0, 
+  "day": "tu", 
+  "roomSize": 56, 
   "workType": "lecture1"
  }, 
  {
   "validity": "True", 
-  "roomName": "A1.06", 
+  "roomName": "C0.110", 
   "course": "Collectieve Intelligentie", 
+  "startTime": 2, 
+  "day": "tu", 
+  "roomSize": 117, 
+  "workType": "lecture2"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Advanced Heuristics", 
+  "startTime": 2, 
+  "day": "tu", 
+  "roomSize": 41, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Data Mining", 
   "startTime": 2, 
   "day": "tu", 
   "roomSize": 22, 
@@ -344,80 +335,26 @@
  {
   "validity": "True", 
   "roomName": "C1.112", 
-  "course": "Bioinformatica", 
-  "startTime": 2, 
-  "day": "tu", 
-  "roomSize": 60, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Netwerken en systeembeveiliging", 
-  "startTime": 2, 
-  "day": "tu", 
-  "roomSize": 56, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Bioinformatica", 
-  "startTime": 4, 
-  "day": "tu", 
-  "roomSize": 48, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Data Mining", 
-  "startTime": 4, 
-  "day": "tu", 
-  "roomSize": 20, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Moderne Databases", 
-  "startTime": 4, 
-  "day": "tu", 
-  "roomSize": 117, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Heuristieken 2", 
-  "startTime": 4, 
-  "day": "tu", 
-  "roomSize": 41, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Architectuur en computerorganisatie", 
-  "startTime": 4, 
-  "day": "tu", 
-  "roomSize": 60, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
   "course": "Programmeren in Java 2", 
-  "startTime": 4, 
+  "startTime": 2, 
+  "day": "tu", 
+  "roomSize": 60, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Machine Learning", 
+  "startTime": 2, 
   "day": "tu", 
   "roomSize": 56, 
-  "workType": "practicum0"
+  "workType": "lecture1"
  }, 
  {
   "validity": "True", 
   "roomName": "B0.201", 
   "course": "Collectieve Intelligentie", 
-  "startTime": 6, 
+  "startTime": 4, 
   "day": "tu", 
   "roomSize": 48, 
   "workType": "practicum0"
@@ -425,134 +362,116 @@
  {
   "validity": "True", 
   "roomName": "A1.08", 
-  "course": "Webprogrammeren en databases", 
-  "startTime": 6, 
+  "course": "Bioinformatica", 
+  "startTime": 4, 
   "day": "tu", 
   "roomSize": 20, 
-  "workType": "practicum0"
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "C0.110", 
+  "course": "Kansrekenen 2", 
+  "startTime": 4, 
+  "day": "tu", 
+  "roomSize": 117, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Informatie- en organisatieontwerp", 
+  "startTime": 4, 
+  "day": "tu", 
+  "roomSize": 22, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Lineaire Algebra", 
+  "startTime": 4, 
+  "day": "tu", 
+  "roomSize": 60, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 4, 
+  "day": "tu", 
+  "roomSize": 56, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
   "course": "Calculus 2", 
   "startTime": 6, 
   "day": "tu", 
-  "roomSize": 117, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 6, 
-  "day": "tu", 
-  "roomSize": 41, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Reflectie op de digitale cultuur", 
-  "startTime": 6, 
-  "day": "tu", 
-  "roomSize": 22, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Netwerken en systeembeveiliging", 
-  "startTime": 6, 
-  "day": "tu", 
-  "roomSize": 60, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Informatie- en organisatieontwerp", 
-  "startTime": 6, 
-  "day": "tu", 
-  "roomSize": 56, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Bioinformatica", 
-  "startTime": 0, 
-  "day": "we", 
   "roomSize": 48, 
   "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Bioinformatica", 
-  "startTime": 0, 
-  "day": "we", 
-  "roomSize": 20, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 0, 
-  "day": "we", 
-  "roomSize": 117, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Algoritmen en complexiteit", 
-  "startTime": 0, 
-  "day": "we", 
-  "roomSize": 41, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 0, 
-  "day": "we", 
-  "roomSize": 22, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Webprogrammeren en databases", 
-  "startTime": 0, 
-  "day": "we", 
-  "roomSize": 60, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Technology for games", 
-  "startTime": 0, 
-  "day": "we", 
-  "roomSize": 56, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Bioinformatica", 
-  "startTime": 2, 
-  "day": "we", 
-  "roomSize": 48, 
-  "workType": "lecture0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.08", 
   "course": "Data Mining", 
-  "startTime": 2, 
+  "startTime": 6, 
+  "day": "tu", 
+  "roomSize": 20, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 6, 
+  "day": "tu", 
+  "roomSize": 117, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Bioinformatica", 
+  "startTime": 6, 
+  "day": "tu", 
+  "roomSize": 22, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Compilerbouw practicum", 
+  "startTime": 6, 
+  "day": "tu", 
+  "roomSize": 60, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Compilerbouw", 
+  "startTime": 6, 
+  "day": "tu", 
+  "roomSize": 56, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Bioinformatica", 
+  "startTime": 0, 
+  "day": "we", 
+  "roomSize": 48, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Heuristieken 2", 
+  "startTime": 0, 
   "day": "we", 
   "roomSize": 20, 
   "workType": "seminar0"
@@ -560,52 +479,106 @@
  {
   "validity": "True", 
   "roomName": "C0.110", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 0, 
+  "day": "we", 
+  "roomSize": 117, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Compilerbouw", 
+  "startTime": 0, 
+  "day": "we", 
+  "roomSize": 41, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Webprogrammeren en databases", 
+  "startTime": 0, 
+  "day": "we", 
+  "roomSize": 22, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 0, 
+  "day": "we", 
+  "roomSize": 60, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Moderne Databases", 
+  "startTime": 0, 
+  "day": "we", 
+  "roomSize": 56, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 2, 
+  "day": "we", 
+  "roomSize": 48, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Data Mining", 
+  "startTime": 2, 
+  "day": "we", 
+  "roomSize": 117, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Technology for games", 
+  "startTime": 2, 
+  "day": "we", 
+  "roomSize": 41, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Programmeren in Java 2", 
+  "startTime": 2, 
+  "day": "we", 
+  "roomSize": 22, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Bioinformatica", 
+  "startTime": 2, 
+  "day": "we", 
+  "roomSize": 60, 
+  "workType": "lecture2"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
   "course": "Analysemethoden en -technieken", 
   "startTime": 2, 
   "day": "we", 
-  "roomSize": 117, 
+  "roomSize": 56, 
   "workType": "lecture0"
  }, 
  {
   "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Project Numerical Recipes", 
-  "startTime": 2, 
-  "day": "we", 
-  "roomSize": 41, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 2, 
-  "day": "we", 
-  "roomSize": 22, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 2, 
-  "day": "we", 
-  "roomSize": 60, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Moderne Databases", 
-  "startTime": 2, 
-  "day": "we", 
-  "roomSize": 56, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
   "roomName": "B0.201", 
-  "course": "Technology for games", 
+  "course": "Algoritmen en complexiteit", 
   "startTime": 4, 
   "day": "we", 
   "roomSize": 48, 
@@ -613,9 +586,63 @@
  }, 
  {
   "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Project Numerical Recipes", 
+  "roomName": "C0.110", 
+  "course": "Reflectie op de digitale cultuur", 
   "startTime": 4, 
+  "day": "we", 
+  "roomSize": 117, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 4, 
+  "day": "we", 
+  "roomSize": 41, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Moderne Databases", 
+  "startTime": 4, 
+  "day": "we", 
+  "roomSize": 22, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Technology for games", 
+  "startTime": 4, 
+  "day": "we", 
+  "roomSize": 60, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Calculus 2", 
+  "startTime": 4, 
+  "day": "we", 
+  "roomSize": 56, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Reflectie op de digitale cultuur", 
+  "startTime": 6, 
+  "day": "we", 
+  "roomSize": 48, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Netwerken en systeembeveiliging", 
+  "startTime": 6, 
   "day": "we", 
   "roomSize": 20, 
   "workType": "practicum0"
@@ -623,9 +650,63 @@
  {
   "validity": "True", 
   "roomName": "C0.110", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 4, 
+  "course": "Moderne Databases", 
+  "startTime": 6, 
   "day": "we", 
+  "roomSize": 117, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Webprogrammeren en databases", 
+  "startTime": 6, 
+  "day": "we", 
+  "roomSize": 41, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Informatie- en organisatieontwerp", 
+  "startTime": 6, 
+  "day": "we", 
+  "roomSize": 22, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Software engineering", 
+  "startTime": 6, 
+  "day": "we", 
+  "roomSize": 60, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 6, 
+  "day": "we", 
+  "roomSize": 56, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Databases 2", 
+  "startTime": 0, 
+  "day": "th", 
+  "roomSize": 48, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Data Mining", 
+  "startTime": 0, 
+  "day": "th", 
   "roomSize": 117, 
   "workType": "practicum0"
  }, 
@@ -633,142 +714,205 @@
   "validity": "True", 
   "roomName": "A1.04", 
   "course": "Software engineering", 
-  "startTime": 4, 
-  "day": "we", 
+  "startTime": 0, 
+  "day": "th", 
   "roomSize": 41, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.06", 
-  "course": "Zoeken sturen en bewegen", 
-  "startTime": 4, 
-  "day": "we", 
+  "course": "Project Numerical Recipes", 
+  "startTime": 0, 
+  "day": "th", 
   "roomSize": 22, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "C1.112", 
+  "course": "Architectuur en computerorganisatie", 
+  "startTime": 0, 
+  "day": "th", 
+  "roomSize": 60, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Interactie-ontwerp", 
+  "startTime": 0, 
+  "day": "th", 
+  "roomSize": 56, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Informatie- en organisatieontwerp", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 48, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 20, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Bioinformatica", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 117, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Algoritmen en complexiteit", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 41, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Netwerken en systeembeveiliging", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 22, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Heuristieken 2", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 60, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Heuristieken 1", 
+  "startTime": 2, 
+  "day": "th", 
+  "roomSize": 56, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 4, 
+  "day": "th", 
+  "roomSize": 48, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Netwerken en systeembeveiliging", 
+  "startTime": 4, 
+  "day": "th", 
+  "roomSize": 20, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C0.110", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 4, 
+  "day": "th", 
+  "roomSize": 117, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
   "course": "Project Genetic Algorithms", 
   "startTime": 4, 
-  "day": "we", 
-  "roomSize": 60, 
+  "day": "th", 
+  "roomSize": 41, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Compilerbouw", 
+  "roomName": "A1.06", 
+  "course": "Moderne Databases", 
   "startTime": 4, 
-  "day": "we", 
+  "day": "th", 
+  "roomSize": 22, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Webprogrammeren en databases", 
+  "startTime": 4, 
+  "day": "th", 
+  "roomSize": 60, 
+  "workType": "seminar0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.10", 
+  "course": "Bioinformatica", 
+  "startTime": 4, 
+  "day": "th", 
   "roomSize": 56, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 6, 
-  "day": "we", 
-  "roomSize": 48, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
   "roomName": "A1.08", 
-  "course": "Data Mining", 
+  "course": "Zoeken sturen en bewegen", 
   "startTime": 6, 
-  "day": "we", 
+  "day": "th", 
   "roomSize": 20, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "C0.110", 
+  "course": "Compilerbouw", 
+  "startTime": 6, 
+  "day": "th", 
+  "roomSize": 117, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.06", 
   "course": "Reflectie op de digitale cultuur", 
   "startTime": 6, 
-  "day": "we", 
-  "roomSize": 117, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 6, 
-  "day": "we", 
-  "roomSize": 41, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Moderne Databases", 
-  "startTime": 6, 
-  "day": "we", 
+  "day": "th", 
   "roomSize": 22, 
-  "workType": "practicum0"
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "C1.112", 
-  "course": "Compilerbouw", 
+  "course": "Calculus 2", 
   "startTime": 6, 
-  "day": "we", 
+  "day": "th", 
   "roomSize": 60, 
   "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.10", 
-  "course": "Databases 2", 
+  "course": "Data Mining", 
   "startTime": 6, 
-  "day": "we", 
-  "roomSize": 56, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Heuristieken 1", 
-  "startTime": 0, 
-  "day": "th", 
-  "roomSize": 48, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Lineaire Algebra", 
-  "startTime": 0, 
-  "day": "th", 
-  "roomSize": 117, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Heuristieken 1", 
-  "startTime": 0, 
-  "day": "th", 
-  "roomSize": 41, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Algoritmen en complexiteit", 
-  "startTime": 0, 
-  "day": "th", 
-  "roomSize": 22, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Machine Learning", 
-  "startTime": 0, 
   "day": "th", 
   "roomSize": 56, 
   "workType": "lecture0"
@@ -776,72 +920,18 @@
  {
   "validity": "True", 
   "roomName": "B0.201", 
-  "course": "Interactie-ontwerp", 
-  "startTime": 2, 
-  "day": "th", 
-  "roomSize": 48, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Advanced Heuristics", 
-  "startTime": 2, 
-  "day": "th", 
-  "roomSize": 20, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Programmeren in Java 2", 
-  "startTime": 2, 
-  "day": "th", 
-  "roomSize": 41, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 2, 
-  "day": "th", 
-  "roomSize": 22, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Collectieve Intelligentie", 
-  "startTime": 2, 
-  "day": "th", 
-  "roomSize": 60, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Moderne Databases", 
-  "startTime": 2, 
-  "day": "th", 
-  "roomSize": 56, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Compilerbouw practicum", 
-  "startTime": 4, 
-  "day": "th", 
-  "roomSize": 48, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
   "course": "Informatie- en organisatieontwerp", 
-  "startTime": 4, 
-  "day": "th", 
+  "startTime": 0, 
+  "day": "fr", 
+  "roomSize": 48, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
+  "course": "Moderne Databases", 
+  "startTime": 0, 
+  "day": "fr", 
   "roomSize": 20, 
   "workType": "seminar0"
  }, 
@@ -849,168 +939,60 @@
   "validity": "True", 
   "roomName": "C0.110", 
   "course": "Kansrekenen 2", 
-  "startTime": 4, 
-  "day": "th", 
+  "startTime": 0, 
+  "day": "fr", 
   "roomSize": 117, 
   "workType": "lecture0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.04", 
-  "course": "Netwerken en systeembeveiliging", 
-  "startTime": 4, 
-  "day": "th", 
+  "course": "Zoeken sturen en bewegen", 
+  "startTime": 0, 
+  "day": "fr", 
   "roomSize": 41, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.06", 
-  "course": "Data Mining", 
-  "startTime": 4, 
-  "day": "th", 
+  "course": "Autonomous Agents 2", 
+  "startTime": 0, 
+  "day": "fr", 
   "roomSize": 22, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Compilerbouw", 
-  "startTime": 4, 
-  "day": "th", 
-  "roomSize": 56, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Webprogrammeren en databases", 
-  "startTime": 6, 
-  "day": "th", 
-  "roomSize": 48, 
-  "workType": "lecture0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Bioinformatica", 
-  "startTime": 6, 
-  "day": "th", 
-  "roomSize": 20, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C0.110", 
-  "course": "Netwerken en systeembeveiliging", 
-  "startTime": 6, 
-  "day": "th", 
-  "roomSize": 117, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Compilerbouw practicum", 
-  "startTime": 6, 
-  "day": "th", 
-  "roomSize": 22, 
-  "workType": "practicum0"
+  "workType": "lecture1"
  }, 
  {
   "validity": "True", 
   "roomName": "C1.112", 
-  "course": "Bioinformatica", 
-  "startTime": 6, 
-  "day": "th", 
+  "course": "Data Mining", 
+  "startTime": 0, 
+  "day": "fr", 
   "roomSize": 60, 
-  "workType": "practicum0"
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.10", 
-  "course": "Reflectie op de digitale cultuur", 
-  "startTime": 6, 
-  "day": "th", 
+  "course": "Advanced Heuristics", 
+  "startTime": 0, 
+  "day": "fr", 
   "roomSize": 56, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 48, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Programmeren in Java 2", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 20, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
-  "roomName": "C0.110", 
+  "roomName": "B0.201", 
+  "course": "Collectieve Intelligentie", 
+  "startTime": 2, 
+  "day": "fr", 
+  "roomSize": 48, 
+  "workType": "practicum0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.08", 
   "course": "Project Genetic Algorithms", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 117, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.04", 
-  "course": "Calculus 2", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 41, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Informatie- en organisatieontwerp", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 22, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Databases 2", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 60, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.10", 
-  "course": "Webprogrammeren en databases", 
-  "startTime": 0, 
-  "day": "fr", 
-  "roomSize": 56, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "B0.201", 
-  "course": "Data Mining", 
-  "startTime": 2, 
-  "day": "fr", 
-  "roomSize": 48, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "A1.08", 
-  "course": "Programmeren in Java 2", 
   "startTime": 2, 
   "day": "fr", 
   "roomSize": 20, 
@@ -1019,7 +1001,7 @@
  {
   "validity": "True", 
   "roomName": "C0.110", 
-  "course": "Architectuur en computerorganisatie", 
+  "course": "Calculus 2", 
   "startTime": 2, 
   "day": "fr", 
   "roomSize": 117, 
@@ -1027,44 +1009,53 @@
  }, 
  {
   "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Autonomous Agents 2", 
-  "startTime": 2, 
-  "day": "fr", 
-  "roomSize": 22, 
-  "workType": "lecture1"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
+  "roomName": "A1.04", 
   "course": "Algoritmen en complexiteit", 
   "startTime": 2, 
   "day": "fr", 
-  "roomSize": 60, 
+  "roomSize": 41, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
+  "roomName": "A1.06", 
+  "course": "Machine Learning", 
+  "startTime": 2, 
+  "day": "fr", 
+  "roomSize": 22, 
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Informatie- en organisatieontwerp", 
+  "startTime": 2, 
+  "day": "fr", 
+  "roomSize": 60, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
   "roomName": "A1.10", 
-  "course": "Bioinformatica", 
+  "course": "Project Numerical Recipes", 
   "startTime": 2, 
   "day": "fr", 
   "roomSize": 56, 
-  "workType": "lecture2"
+  "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "B0.201", 
-  "course": "Moderne Databases", 
+  "course": "Project Numerical Recipes", 
   "startTime": 4, 
   "day": "fr", 
   "roomSize": 48, 
-  "workType": "seminar0"
+  "workType": "practicum0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.08", 
-  "course": "Webprogrammeren en databases", 
+  "course": "Compilerbouw practicum", 
   "startTime": 4, 
   "day": "fr", 
   "roomSize": 20, 
@@ -1073,16 +1064,16 @@
  {
   "validity": "True", 
   "roomName": "C0.110", 
-  "course": "Compilerbouw", 
+  "course": "Software engineering", 
   "startTime": 4, 
   "day": "fr", 
   "roomSize": 117, 
-  "workType": "lecture0"
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.04", 
-  "course": "Software engineering", 
+  "course": "Databases 2", 
   "startTime": 4, 
   "day": "fr", 
   "roomSize": 41, 
@@ -1090,35 +1081,35 @@
  }, 
  {
   "validity": "True", 
-  "roomName": "A1.06", 
-  "course": "Advanced Heuristics", 
-  "startTime": 4, 
-  "day": "fr", 
-  "roomSize": 22, 
-  "workType": "practicum0"
- }, 
- {
-  "validity": "True", 
   "roomName": "C1.112", 
-  "course": "Data Mining", 
+  "course": "Webprogrammeren en databases", 
   "startTime": 4, 
   "day": "fr", 
   "roomSize": 60, 
-  "workType": "lecture0"
+  "workType": "lecture1"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.10", 
-  "course": "Programmeren in Java 2", 
+  "course": "Data Mining", 
   "startTime": 4, 
   "day": "fr", 
   "roomSize": 56, 
-  "workType": "practicum0"
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "B0.201", 
+  "course": "Algoritmen en complexiteit", 
+  "startTime": 6, 
+  "day": "fr", 
+  "roomSize": 48, 
+  "workType": "seminar0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.08", 
-  "course": "Technology for games", 
+  "course": "Bioinformatica", 
   "startTime": 6, 
   "day": "fr", 
   "roomSize": 20, 
@@ -1127,37 +1118,46 @@
  {
   "validity": "True", 
   "roomName": "C0.110", 
-  "course": "Collectieve Intelligentie", 
+  "course": "Reflectie op de digitale cultuur", 
   "startTime": 6, 
   "day": "fr", 
   "roomSize": 117, 
-  "workType": "lecture2"
+  "workType": "lecture0"
+ }, 
+ {
+  "validity": "True", 
+  "roomName": "A1.04", 
+  "course": "Technology for games", 
+  "startTime": 6, 
+  "day": "fr", 
+  "roomSize": 41, 
+  "workType": "lecture0"
  }, 
  {
   "validity": "True", 
   "roomName": "A1.06", 
-  "course": "Heuristieken 2", 
+  "course": "Netwerken en systeembeveiliging", 
   "startTime": 6, 
   "day": "fr", 
   "roomSize": 22, 
-  "workType": "seminar0"
- }, 
- {
-  "validity": "True", 
-  "roomName": "C1.112", 
-  "course": "Project Genetic Algorithms", 
-  "startTime": 6, 
-  "day": "fr", 
-  "roomSize": 60, 
   "workType": "practicum0"
  }, 
  {
   "validity": "True", 
+  "roomName": "C1.112", 
+  "course": "Lineaire Algebra", 
+  "startTime": 6, 
+  "day": "fr", 
+  "roomSize": 60, 
+  "workType": "lecture1"
+ }, 
+ {
+  "validity": "True", 
   "roomName": "A1.10", 
-  "course": "Reflectie op de digitale cultuur", 
+  "course": "Compilerbouw", 
   "startTime": 6, 
   "day": "fr", 
   "roomSize": 56, 
-  "workType": "lecture0"
+  "workType": "practicum0"
  }
 ]

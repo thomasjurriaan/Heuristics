@@ -5,8 +5,6 @@ from randomalgorithm import *
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""" Hillclimbing algorithm """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-ONE_PERCENT = 0.01
-EIGHTY_PERCENT = 0.8
 
 def checkChance(score, temp):
     rawchance = math.exp(score / temp)
@@ -131,7 +129,7 @@ def freeSlotChange(timeTable):
                 else: return False
         
 
-def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 15, coolingRate = 0.9995, doPlot = True):
+def hillclimbAlgorithm(timeTable, perc_of_iter = 0.7, perc_of_score = 0.01, sim = False, temperature = 15,minTemp = 0.1, coolingRate = 0.9995, doPlot = True):
     # switch random groups and run getPoints()
     initialScore = getPoints(timeTable)
     highscore = initialScore
@@ -139,22 +137,22 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 
     groups = timeTable.getGroups()
     i = 0
     if sim == True:
-        while temperature > 0.1:
+        while temperature > minTemp:
             if checkStudentSwitch(groups, True, temperature):
                 highscore = getPoints(timeTable)
             if checkGroupSwitch(groups, True, temperature):
                 highscore = getPoints(timeTable)
-            if freeSlotChange():
+            if freeSlotChange(timeTable):
                 highscore = getPoints(timeTable)
             scores.append(highscore)
-            if(i % 250 == 0):
+            if(i % 1000 == 0):
                 print "Current iteration: ",
                 print i
             temperature *= coolingRate
             i += 1
     else:
         growth = 1
-        while growth > ONE_PERCENT:
+        while growth > perc_of_score:
             if checkStudentSwitch(groups):
                 highscore = getPoints(timeTable)
             if checkGroupSwitch(groups):
@@ -163,12 +161,10 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 
                 highscore = getPoints(timeTable)
             scores.append(highscore)
             i += 1
-            if(i % 100 == 0):
-                print "Current iteration: ",
-                print i
-                growth = float(highscore - scores[int(i * EIGHTY_PERCENT)]) / float(highscore - initialScore) 
-                print "growth:",growth
-                print "highscore:",highscore,"\n--------------"
+            if i % 100 == 0:
+                growth = float(highscore - scores[int(i * perc_of_iter)]) / float(highscore - initialScore)
+                if i % 1000 == 0:
+                    print "Current iteration: ", i
 
     timeTable.setPoints(getPoints(timeTable))
     if doPlot == True:
@@ -176,7 +172,7 @@ def hillclimbAlgorithm(timeTable, iterations = 1000, sim = False, temperature = 
         plt.ylabel('points')
         plt.xlabel('iterations')
         plt.show()
-    return
+    return scores
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Simulated annealing   """""""""""""""""""""""""""""""""""

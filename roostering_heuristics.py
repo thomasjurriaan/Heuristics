@@ -9,7 +9,6 @@ if __name__ == '__main__':
 def r():
 	hendrik = createTimeTableInstance()
 	randomAlgorithm(hendrik)
-	print "Dit rooster heeft", getPoints(hendrik), "punten."
 	return hendrik
 
 def testGeneticAlgorithm():
@@ -29,13 +28,35 @@ def testGeneticAlgorithm():
             print "Memory error?.."
         print "\n"
 
-def printhillclimber(iterations = 50, hilliterations = 25000):
-	randomscores = []
-	scores = []
-	highscores = []
-	for i in range(iterations):
-		h = createTimeTableInstance()
-		randomAlgorithm(h)
-		randomscores.append(getPoints(h))
-		scores.append(hillclimbAlgorithm(h, hilliterations, doPlot = False))
-	return randomscores, scores, highscores
+def hillandsimresults():
+    hillscores = []
+    maxhill = []
+    simscores = []
+    maxsim = []
+    for i in range(50):
+        main = r()
+        while getPoints(main) == None:
+            main = r()
+        hillscore = hillclimbAlgorithm(main, 0.7, doPlot=False)
+        hillscores.append(hillscore)
+        while getPoints(main) == None:
+            main = r()
+        simscores.append(hillclimbAlgorithm(main, sim = True, doPlot = False))
+        print "iteration:", i
+    for s in hillscores:
+        maxhill.append(max(s))
+    for s in simscores:
+        maxsim.append(max(s))
+    return hillscores, simscores, maxhill, maxsim
+
+def randomresults(iterations = 1000):
+    scores = []
+    for i in range(iterations):
+        main = r()
+        score = getPoints(main)
+        while score == None:
+            main = r()
+            score = getPoints(main)
+        scores += score
+    return score
+
