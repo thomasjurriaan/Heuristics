@@ -107,3 +107,18 @@ d3.json("Data/main.json", function(json) {
     }
     gantt.redraw(groups);
 })
+
+function fillTable(filename) {
+    groups = []
+    d3.json(filename, function(json) {
+    for(var i = 0; i < json.length; i++) {
+        addGroup(
+            json[i].startTime, 
+            json[i].day,
+            json[i].roomName,
+            json[i].validity
+            )
+        }
+    gantt.redraw(groups);
+    })
+}
