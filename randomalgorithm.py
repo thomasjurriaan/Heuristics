@@ -6,6 +6,13 @@ from datastructure import *
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def courseInTimeSlot(course, roomSlot):
+    """
+    Subfunction of roomIsValid()
+
+    Checks if another activity of the same course is allready in this timeslot.
+    Courses shouldn't be able to book multiple activities in the same timeslot.
+    Returns a boolean
+    """
     timeSlot = roomSlot.getTimeSlot()
     for r in timeSlot.getRoomSlots():
         if r.hasGroup():
@@ -15,6 +22,12 @@ def courseInTimeSlot(course, roomSlot):
     return False
 
 def roomIsValid(roomSlot, students, activity):
+    """
+    Subfunction of bookRandomRoom()
+
+    Checks if a room is suited for an activity.
+    Returns a boolean
+    """
     r = roomSlot
     course = activity.getCourse()
     if (
@@ -25,8 +38,11 @@ def roomIsValid(roomSlot, students, activity):
     return False
 
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
-    # Tries to book an activity in a room. If succeeded: returns the booked
-    # group
+    """
+    Subfunction of bookActivity()
+
+    Tries to book an activity in a room. If this fails an error is raised.
+    """
     nrStudents = len(students)
     for r in randomRoomSlots:
         if roomIsValid(r, nrStudents, activity):
@@ -38,8 +54,13 @@ def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
 
     
 def split(activity):
-    # Takes an activity with more students than allowed per group and returns
-    #lists of valid student groups
+    """
+    Subfunction of bookActivity()
+
+    Takes an activity with more students than allowed per group and returns
+    lists of valid student groups.
+    Returns multiple lists of student-instances.
+    """
     numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
                                /float(activity.getMaxStudents()))
     activityStudents = activity.getCourse().getStudents()
@@ -55,7 +76,12 @@ def split(activity):
 
 
 def bookActivity(activity, randomRoomSlots, timeTable):
-    # Splits activities in valid groups and tries to book them
+    """
+    Subfunction of randomAlgorithm()
+    
+    It takes in an random activity and a shuffled list of roomslots, then
+    tries to book the activity in the first suiting roomslot.
+    """
     if activity.getMaxStudents() < len(activity.getCourse().getStudents()):
         studentGroups = split(activity)
     else: studentGroups = [activity.getCourse().getStudents()]
@@ -66,6 +92,10 @@ def bookActivity(activity, randomRoomSlots, timeTable):
     return
         
 def randomAlgorithm(timeTable):
+    """
+    The actual algoritm. It takes in an empty timetable-instance and fills it
+    with groups, depending on the demands of the activities in the schedule.
+    """
     # Make list of random activities
     courses = timeTable.getCourses()
     randomActivities = []
