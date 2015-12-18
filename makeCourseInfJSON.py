@@ -1,3 +1,15 @@
+"""***********************************************************************
+* makeCourseInfJSON.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* Converts course information saved in CSV format to JSON format. Outputs
+* converted data into coursesInf.json found in the same directory as this
+* file. 
+*
+***********************************************************************"""
+
 import json
 import itertools
 

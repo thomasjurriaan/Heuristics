@@ -1,9 +1,23 @@
+"""***********************************************************************
+* randomalgorithm.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* This file contains the functions and the algorithme responsible for creating
+* a timetable randomly a.k.a. the random algorithm. 
+*
+***********************************************************************"""
+
+
 from points import *
 from datastructure import *
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Random booking algorithm     """""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 def courseInTimeSlot(course, roomSlot):
     """
@@ -21,6 +35,7 @@ def courseInTimeSlot(course, roomSlot):
                 return True
     return False
 
+
 def roomIsValid(roomSlot, students, activity):
     """
     Subfunction of bookRandomRoom()
@@ -36,6 +51,7 @@ def roomIsValid(roomSlot, students, activity):
         and not courseInTimeSlot(course, r)
         ): return True
     return False
+
 
 def bookRandomRoom(activity, randomRoomSlots, students, timeTable):
     """
@@ -90,6 +106,7 @@ def bookActivity(activity, randomRoomSlots, timeTable):
         try: bookRandomRoom(activity, randomRoomSlots, g, timeTable)
         except: break
     return
+
         
 def randomAlgorithm(timeTable):
     """

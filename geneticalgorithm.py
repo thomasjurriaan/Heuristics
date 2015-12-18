@@ -1,3 +1,14 @@
+"""***********************************************************************
+* geneticalgorithm.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* Contains the genetic algorithme and its fellow functions. Need to be called
+* from the main file: roostering_heuristics.py. 
+*
+***********************************************************************"""
+
 import numpy as np
 from randomalgorithm import *
 from deterministic import *

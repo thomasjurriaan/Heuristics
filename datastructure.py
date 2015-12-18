@@ -16,11 +16,11 @@ import json
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+"""
+Reads the json-file with the schedule data
+Returns a list of dictionaries
+"""
 def getData(filename):
-    """
-    Reads the json-file with the schedule data
-    Returns a list of dictionaries
-    """
     json_data=open(filename).read()
     return json.loads(json_data)
 STUDENTS = 'students.json'

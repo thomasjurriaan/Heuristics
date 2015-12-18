@@ -1,3 +1,15 @@
+"""***********************************************************************
+* makeStudentJSON.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* makeStudentJson.py converts the student data which is saved in a csv file
+* to JSON format. The ouput of this can be found in students.json
+*
+***********************************************************************"""
+
+
 import json
 
 FILE = 'studenten_roostering.csv'

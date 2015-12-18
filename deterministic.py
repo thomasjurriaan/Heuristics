@@ -1,31 +1,30 @@
+"""***********************************************************************
+* deterministic.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* Contains all contents needed for the deterministic algorithm
+*
+***********************************************************************"""
+
 from points import *
 from datastructure import *
 from exportfunctions import *
 from randomalgorithm import *
 import operator
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""  Deterministic booking algorithm"""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""
-def split(activity):
-    # Takes an activity with more students than allowed per group and returns
-    #lists of valid student groups
-    numberOfGroups = math.ceil(len(activity.getCourse().getStudents())
-                               /float(activity.getMaxStudents()))
-    activityStudents = activity.getCourse().getStudents()
-    random.shuffle(activityStudents)
-    numberStud = len(activityStudents)/numberOfGroups
-    studentGroups = []
-    for i in range(int(numberOfGroups)):
-        newStudentGroup = activityStudents[
-            int(i*numberStud):int((i+1)*numberStud)
-            ]
-        studentGroups.append(newStudentGroup)
-    return studentGroups
-"""
+
 
 def deterministic(timeTable):
+    """
+    Deterministische algoritme. Hieronder staan een aantal lijsten die als
+    input kunnen worden gebruikt voor de while loop. 
+    """
     # dictionary voor roomslots
     sortedRoomSlotsDict = {
         'mo' :[],
@@ -101,28 +100,7 @@ def deterministic(timeTable):
         randomRoomSlots += t.getRoomSlots()
     random.shuffle(randomRoomSlots)
 
-    """
-    # booking
-    for course in sortCourses:
-        activities = course.getActivities()
-        for amount in pointDict:
-            if amount == len(course.getActivities()):
-                count = 0
-                for activity in activities:
-                    day = pointDict[amount][count]
-                    count += 1
-                    print activity
-                    try: bookActivity(activity, randomRoomSlots, timeTable)
-                    except: break
-    print getPoints(timeTable)
 
-    return
-    """
-
-
-    # Stack
-    #
-    #random.shuffle(activityList)
     bestScore = 0
     count = 0
     stack = [[["mo", activityList[0]]]]
@@ -141,18 +119,14 @@ def deterministic(timeTable):
             # Book Parent
             if depthBookActivity(parent[1], sortedRoomSlotsDict[parent[0]], sortedRoomSlotsList, timeTable) != False:
                 bookedActivities.append(parent)
-                #print "***** BOOKED *****"
                 # Maak children van parent
                 try:
                     children = generateAllChildren(parent[1], activityList)
                     stack.append(children)
-                    #print "made children"
                 except:
-                    #print "made no children"
-                    # TODO: Calculeer maxpoints en vergelijk timetable met eerder resultaat
+                    # Calculeer maxpoints en vergelijk timetable met eerder resultaat
                     currentScore = getPointsDeterministic(timeTable)
                     count += 1
-                    #print currentScore
                     lBookedActivity = bookedActivities.pop()
                     if currentScore > bestScore: bestScore = currentScore
                     if count > 1000:
@@ -160,23 +134,6 @@ def deterministic(timeTable):
                         print bestScore
                     deleteActivity(lBookedActivity[1], timeTable)
 
-    # Poging 3
-"""
-    stack = sortCourses
-    while stack != []:
-        c = stack.pop()
-        activities = p.getActivities()
-        for activity in activities:
-            if len(activities) = 2:
-                depthBookActivity(activity, sortedRoomSlots)
-            if len(activities) = 3:
-                #
-            if len(activities) = 4:
-                #
-            if len(activities) = 5:
-                #
-        
-"""
 
 def deleteActivity(activity, timeTable):
     for group in activity.getGroups():

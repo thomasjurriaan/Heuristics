@@ -1,3 +1,14 @@
+"""***********************************************************************
+* points.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* Contains all functions responsible for computing the value of a timetable
+* instance. 
+*
+***********************************************************************"""
+
 import random
 import math
 import itertools
@@ -7,6 +18,13 @@ import itertools
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 def allCoursesScheduled(timeTable):
+    """
+    subfunction of getPoints()
+    
+    Checks whether the timetable is satisfying the hard constraint: fill
+    out the timetable completely with all activities devided in groups if
+    necessary. 
+    """
     if timeTable == None: return False
     
     students = timeTable.getStudents()
@@ -21,6 +39,11 @@ def allCoursesScheduled(timeTable):
     return True
 
 def checkCount(dList, nrAct):
+    """
+    subfunction of spreadBonusPoints()
+
+    Checks it contains the right amount of days to give bonuspoints
+    """
     L2 = [set(["mo", "th"]), set(["tu", "fr"])]
     L3 = set(["mo", "we", "fr"])
     L4 = set(["mo", "tu", "th", "fr"])
@@ -35,6 +58,12 @@ def checkCount(dList, nrAct):
     return False
 
 def spreadBonusPoints(c, r = None, group = None):
+    """
+    subfunction of coursesMaximallySpread()
+
+    Calculates if a course has the right spread in order to
+    get bonus points
+    """
     nrAct = len(c.getActivities())
     if nrAct < 2 or nrAct > 4:
         return 0
@@ -55,6 +84,12 @@ def spreadBonusPoints(c, r = None, group = None):
     return 0
 
 def coursesMaximallySpread(timeTable):
+    """
+    subfunction of getPoints()
+
+    Calculates all bonuspoints of each course and returns total value
+    of all courses in the timeTable. Yeyaa
+    """
     courses = timeTable.getCourses()
     bonus = 0
     for c in courses:
@@ -62,6 +97,12 @@ def coursesMaximallySpread(timeTable):
     return bonus
 
 def overbookMalusPoints(r):
+    """
+    subfunction of overBookMalusPoints
+
+    Checks for a room if it's overbooked and returns a int value
+    which represents the maluspoints for the overbooking
+    """
     if (r.getStudents() != None):
         saldo = len(r.getStudents()) - r.getSize()
         if saldo > 0:
@@ -70,6 +111,12 @@ def overbookMalusPoints(r):
     else: return 0
 
 def overbooked(timeTable):
+    """
+    subfunction of getPoints()
+
+    Checks with function overBookMalusPoints() the maluspoints for
+    each roomslot in the timeTable and returns the total value
+    """
     malus = 0
     saldo = 0;
     ts = timeTable.getTimeSlots()
@@ -81,6 +128,13 @@ def overbooked(timeTable):
     return malus
 
 def studentMalusPoints(s, originalRoom = None, newRoom = None):
+    """
+    subfunction of personalScheduleConflict()
+
+    Checks per student whether he has a personal schedule conflict.
+    A personal schedule conflict is when the student has two different
+    activities as the same time. Returns the maluspoints per student
+    """
     individualMalus = 0
     rList = []
     cList = []
@@ -95,6 +149,12 @@ def studentMalusPoints(s, originalRoom = None, newRoom = None):
     return individualMalus
 
 def personalScheduleConflict(timeTable):
+    """
+    subfunction of getPoints()
+
+    Returns total value of all personal schedule conflicts in a
+    timeTable
+    """
     students = timeTable.getStudents()
     malus = 0
     # Loop over lijst met students heen
@@ -105,6 +165,12 @@ def personalScheduleConflict(timeTable):
 
 
 def spreadMalusPoints(c, r = None, group = None):
+    """
+    subfunction of activityConflict()
+
+    Check whether two groups are scheduled at the same time
+    Returns value per conflict
+    """
     malus = 0
     nrAct = 0
     days = []
@@ -120,6 +186,9 @@ def spreadMalusPoints(c, r = None, group = None):
     return malus
 
 def activityConflict(timeTable):
+    """
+    Returns total value of all schedule conflicts of a timeTable
+    """
     courses = timeTable.getCourses()
     malus = 0
     for c in courses:
@@ -142,6 +211,10 @@ def getPoints(timeTable):
     return points
 
 def getPointsDeterministic(timeTable):
+    """
+    same as getPoints() but does not use the allCoursesScheduled() to check
+    whether a timeTable is complete. 
+    """
     points = 1000
     points += coursesMaximallySpread(timeTable)
     points -= activityConflict(timeTable)
