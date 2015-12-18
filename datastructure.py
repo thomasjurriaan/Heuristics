@@ -1,4 +1,16 @@
+"""***********************************************************************
+* datastructure.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* Contains the global structure: all classes, import of data and create
+* timetable instance which will be used as init in roostering_heuristics.py
+*
+***********************************************************************"""
+
 import json
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Global Variables """""""""""""""""""""""""""""""""
@@ -26,19 +38,22 @@ ROOMS = {
     "C1.112":60
     }
 
-OVERBOOK = 1.2 # Rooms can be overbooked by this percentage
+# Rooms can be overbooked by this percentage
+OVERBOOK = 1.2
 ITERATIONS = 1000
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""" Data Structure """""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 class Student(object):
     def __init__(self, firstName, lastName, studntNr, courses, courseList):
         self.firstName = firstName
         self.lastName = lastName
         self.nr = studntNr
-        # self.courses is een lijst van course class-instanties
+        # self.courses is a list of course class-instances
         self.courses = []
         for c in courses:
             courseObject = courseList[c]
@@ -48,12 +63,11 @@ class Student(object):
     def getName(self):
         return self.firstName+' '+self.lastName
     def getNr(self):
-        #python cant return int??
         return self.nr
     def getCourses(self):
         return self.courses
     def doesCourse(self, course):
-        #check of course wel een class-instance is?
+        #check if course is a class-instance
         return course in self.courses
     def addGroup(self, group):
         self.groups.append(group)
@@ -67,6 +81,7 @@ class Student(object):
         self.groups = [g for g in self.groups if g != group]
     def getGroups(self):
         return self.groups
+
 
 class TimeTable(object):
     def __init__(self, parents):
@@ -119,6 +134,7 @@ class TimeTable(object):
     def getStudentPointers(self):
         return self.studentPointers
 
+
 class TimeSlot(object):
     # Each timeslot-instance contains 7 available rooms
     def __init__(self, day, time):
@@ -139,6 +155,7 @@ class TimeSlot(object):
         return str(2*self.time+9)+"h till "+str(2*self.time+11)+"h."
     def getRoomSlots(self):
         return self.roomSlots
+
     
 class RoomSlot(object):
     def __init__(self, room, size, timeSlot):
@@ -164,6 +181,7 @@ class RoomSlot(object):
         if self.group == None:
             return []
         else: return self.group.getStudents()
+
 
 class Course(object):
     def __init__(
@@ -200,6 +218,9 @@ class Course(object):
         return self.courseName
     def getPointers(self):
         return self.actPointers
+    def getNumberOfStudents(self):
+        return len(self.students)
+
 
 class Activity(object):
     def __init__(self, workType, course, maxStudents = float('inf')):
@@ -218,6 +239,7 @@ class Activity(object):
         self.groups.append(group)
     def getGroups(self):
         return self.groups
+
 
 class Group(object):
     def __init__(self, activity, students, maxStudents, roomSlot):
@@ -249,12 +271,15 @@ class Group(object):
         self.students.append(student)             
 
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""  Initiate functions """""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""    
 
+
 def createTimeTableInstance(parents = None):
+    """
+    Converts data to class objects and saves it in the timetable instance
+    """
     timeTable = TimeTable(parents)
     courses = {}
     students = {}

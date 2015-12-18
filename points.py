@@ -16,6 +16,7 @@ def allCoursesScheduled(timeTable):
             nrAct += len(c.getActivities())
         nrGr = len(s.getGroups())
         if nrAct > nrGr:
+            print nrAct, nrGr
             return False
     return True
 
@@ -101,25 +102,7 @@ def personalScheduleConflict(timeTable):
         malus += studentMalusPoints(s)
     return malus
                     
-##def activityConflict(timeTable):
-##    courses = timeTable.getCourses()
-##    points = 0
-##    for c in courses:
-##        cList = []
-##        for a in c.getActivities():
-##            L = []
-##            for g in a.getGroups():
-##                day = g.getRoomSlot().getTimeSlot().getDay()
-##                L.append(day)
-##            cList.append(L)
-##        print cList
-##        for i, a in enumerate(cList):
-##            for ii, aa in enumerate(cList):
-##                if ii > i:
-##                    l = [e for e in a if e not in aa]
-##                    l += [e for e in aa if e not in a]
-##                    if len(l) == 0: points += 10
-##    return points
+
 
 def spreadMalusPoints(c, r = None, group = None):
     malus = 0
@@ -157,3 +140,12 @@ def getPoints(timeTable):
         points -= personalScheduleConflict(timeTable)
     else: points = None
     return points
+
+def getPointsDeterministic(timeTable):
+    points = 1000
+    points += coursesMaximallySpread(timeTable)
+    points -= activityConflict(timeTable)
+    points -= overbooked(timeTable)
+    points -= personalScheduleConflict(timeTable)
+    return points
+

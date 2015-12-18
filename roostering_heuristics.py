@@ -1,3 +1,15 @@
+"""***********************************************************************
+* roostering_heuristics.py
+*
+* Heuristieken
+* Daan van den Berg
+*
+* Mainfile in which you can call the algorithms to optimize the
+* timetable produced by the init function or find the best timetable
+* the deterministic way
+*
+***********************************************************************"""
+
 from hillclimber import *
 from geneticalgorithm import *
 from exportfunctions import *
@@ -49,6 +61,10 @@ def hillandsimresults():
         maxsim.append(max(s))
     return hillscores, simscores, maxhill, maxsim
 
+def runDeterministic():
+    timeTable = createTimeTableInstance()
+    deterministic(timeTable)
+    
 def randomresults(iterations = 1000):
     scores = []
     for i in range(iterations):
